@@ -1,4 +1,6 @@
 @import "../../static/style/variable.scss";
+@import "../../static/style/mixin.scss";
+
 
 .feed {
     border-width: 0 1px;
@@ -6,6 +8,7 @@
     border-style: solid;
 
     &__header {
+        @include background($background-color: $white);
         border-bottom: 1px solid $light-gray;
         position: sticky;
         top: 0;
@@ -14,6 +17,10 @@
     }
     
     &__tweetbox {
+        border-bottom: 1px solid $light-gray;
+    }
+    
+    &__post {
         border-bottom: 1px solid $light-gray;
     }
 

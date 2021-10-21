@@ -5,6 +5,7 @@
 }
 
 .feed__header {
+  background-color: #ffffff;
   border-bottom: 1px solid #eff3f4;
   position: -webkit-sticky;
   position: sticky;
@@ -14,6 +15,10 @@
 }
 
 .feed__tweetbox {
+  border-bottom: 1px solid #eff3f4;
+}
+
+.feed__post {
   border-bottom: 1px solid #eff3f4;
 }
 /*# sourceMappingURL=Feed.module.css.map */

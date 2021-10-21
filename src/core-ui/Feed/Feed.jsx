@@ -1,6 +1,7 @@
 import React from "react";
 
 import TweetContainer from "core-ui/Tweet/TweetContainer.jsx";
+import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer.jsx";
 
 import styles from "./Feed.module.css";
 
@@ -14,6 +15,9 @@ function Feed() {
 			{/* Tweet box */}
 			<div className={styles["feed__tweetbox"]}>
 				<TweetContainer />
+			</div>
+			<div className={styles.feed__post}>
+				<FeedPostContainer />
 			</div>
 		</div>
 	);

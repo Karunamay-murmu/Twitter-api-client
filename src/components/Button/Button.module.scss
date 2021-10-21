@@ -9,9 +9,6 @@
     @include text($size: 1rem, $color: $white);
     @include buttonBackground();
     @include textBold();
-    width: 100%;
-    height: 100%;
     border-radius: 10rem;
     cursor: pointer;
-
 }

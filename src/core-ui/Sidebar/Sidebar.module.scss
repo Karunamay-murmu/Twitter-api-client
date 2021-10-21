@@ -10,13 +10,11 @@
     }
 
     &--tweet-btn {
-        @include flex();
+        @include flex($justify: center, $align: center);
+        @include padding($left: 2rem, $right: 2rem);
         width: 90%;
         height: 3.25rem;
-        button {
-            @include padding($left: 2rem, $right: 2rem);
-            background-color: $primary-blue;
-            font-size: 1.0625rem;
-        }
+        background-color: $primary-blue;
+        font-size: 1.0625rem;
     }
 }

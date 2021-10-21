@@ -21,7 +21,7 @@
     background-color: $background-color;
 }
 
-@mixin text($size: 1rem, $color: $primary-dark) {
+@mixin text($size: .875rem, $color: $primary-dark) {
     font-size: $size;
     color: $color;
 }
@@ -43,7 +43,7 @@
     font-weight: $weight;
 }
 
-@mixin transition($duration:150ms, $property: all, $delay: null, $timing-function: ease-in-out) {
+@mixin transition($duration:200ms, $property: all, $delay: null, $timing-function: ease-in-out) {
     transition-delay: $delay;
     transition-duration: $duration;
     transition-property: $property;
@@ -55,21 +55,36 @@
     outline: none;
 }
 
-@mixin buttonBackground($background-color: $primary-dark){
+@mixin buttonBackground($background-color: $primary-dark) {
     background-color: $background-color;
 }
 
-@mixin padding($top: null, $left: null, $bottom: null, $right: null) {
-    padding-top: $top;
-    padding-bottom: $bottom;
-    padding-right: $right;
-    padding-left: $left;
+@mixin background($background-color: null) {
+    background-color: $background-color;
 }
 
-@mixin margin($top: 1rem, $left: 1rem, $bottom: 1rem, $right: 1rem) {
-    margin-top: $top;
-    margin-bottom: $bottom;
-    margin-right: $right;
-    margin-left: $left;
+@mixin padding($padding: null, $top: null, $left: null, $bottom: null, $right: null) {
+    @if $padding {
+        padding: $padding;
+    }
+
+    @else {
+        padding-top: $top;
+        padding-bottom: $bottom;
+        padding-right: $right;
+        padding-left: $left;
+    }
 }
 
+@mixin margin($margin: null, $top: null, $left: null, $bottom: null, $right: null) {
+    @if $margin {
+        margin: $margin;
+    }
+
+    @else {
+        margin-top: $top;
+        margin-bottom: $bottom;
+        margin-right: $right;
+        margin-left: $left;
+    }
+}

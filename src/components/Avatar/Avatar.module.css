@@ -1,0 +1,13 @@
+.avatar__wrapper {
+  width: 3rem;
+  height: 3rem;
+}
+
+.avatar__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=Avatar.module.css.map */

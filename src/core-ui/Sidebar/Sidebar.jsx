@@ -30,11 +30,11 @@ const Sidebar = () => {
 				<MenuItemContainer Icon={PersonOutlineRoundedIcon} text="Profile" />
 				<MenuItemContainer Icon={MoreHorizRoundedIcon} text="More" />
 			</div>
-			<div className={styles["sidebar--tweet-btn"]} >
-				<Button attributes={{
-					title: "Tweet"
-				}} text="Tweet">Tweet</Button>
-			</div>
+			{/* <div  > */}
+			<Button className={styles["sidebar--tweet-btn"]} attributes={{
+				title: "Tweet"
+			}} text="Tweet">Tweet</Button>
+			{/* </div> */}
 		</div>
 	);
 };

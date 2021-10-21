@@ -8,13 +8,16 @@ import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 
 import InputContainer from "components/Input/InputContainer.jsx";
 import Button from "components/Button/Button.jsx";
+import Avatar from "components/Avatar/Avatar.jsx";
 
 import styles from "./Tweet.module.css";
 
 function Tweet() {
 	return (
 		<div className={styles.tweet}>
-			<div className={styles.tweet__avatar}>Avatar</div>
+			<div className={styles.tweet__avatar}>
+				<Avatar />
+			</div>
 			<div className={styles.tweet__wrapper}>
 				<InputContainer className={styles.tweet__input} tag="textarea" attributes={{
 					placeholder: "What's happening?",
@@ -27,11 +30,21 @@ function Tweet() {
 				</div>
 				<div className={styles.tweet__footer}>
 					<div className={styles.tweet__options}>
-						<ImageOutlinedIcon className={styles["tweet__options--icon"]} />
-						<GifOutlinedIcon className={styles["tweet__options--icon"]} />
-						<PollOutlinedIcon className={styles["tweet__options--icon"]} />
-						<EmojiEmotionsOutlinedIcon className={styles["tweet__options--icon"]} />
-						<ScheduleOutlinedIcon className={styles["tweet__options--icon"]} />
+						<div className={styles.tweet__options__icon__wrapper}>
+							<ImageOutlinedIcon className={styles["tweet__options--icon"]} />
+						</div>
+						<div className={styles.tweet__options__icon__wrapper}>
+							<GifOutlinedIcon className={styles["tweet__options--icon"]} />
+						</div>
+						<div className={styles.tweet__options__icon__wrapper}>
+							<PollOutlinedIcon className={styles["tweet__options--icon"]} />
+						</div>
+						<div className={styles.tweet__options__icon__wrapper}>
+							<EmojiEmotionsOutlinedIcon className={styles["tweet__options--icon"]} />
+						</div>
+						<div className={styles.tweet__options__icon__wrapper}>
+							<ScheduleOutlinedIcon className={styles["tweet__options--icon"]} />
+						</div>
 					</div>
 					<Button className={styles.tweet__btn}>Tweet</Button>
 				</div>
