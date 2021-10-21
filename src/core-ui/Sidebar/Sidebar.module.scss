@@ -1,0 +1,22 @@
+@import "../../static/style/mixin.scss";
+
+
+.sidebar {
+    @include flex($direction: column);
+    margin-top: 1rem;
+
+    &--logo {
+        padding: 0 .75rem;
+    }
+
+    &--tweet-btn {
+        @include flex();
+        width: 90%;
+        height: 3.25rem;
+        button {
+            @include padding($left: 2rem, $right: 2rem);
+            background-color: $primary-blue;
+            font-size: 1.0625rem;
+        }
+    }
+}

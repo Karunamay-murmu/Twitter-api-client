@@ -1,0 +1,7 @@
+@import "../../static/style/mixin.scss";
+
+
+.input {
+    @include input();
+    
+}

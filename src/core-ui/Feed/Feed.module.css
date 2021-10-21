@@ -1,0 +1,19 @@
+.feed {
+  border-width: 0 1px;
+  border-color: #eff3f4;
+  border-style: solid;
+}
+
+.feed__header {
+  border-bottom: 1px solid #eff3f4;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: .75rem 0;
+}
+
+.feed__tweetbox {
+  border-bottom: 1px solid #eff3f4;
+}
+/*# sourceMappingURL=Feed.module.css.map */

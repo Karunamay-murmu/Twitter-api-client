@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,KAAK,CAAC;EACF,YAAY,EAAE,KAAK;EACnB,YAAY,ECGH,OAAkB;EDF3B,YAAY,EAAE,KAAK;CActB;;AAZI,AAAD,aAAS,CAAC;EACN,aAAa,EAAE,GAAG,CAAC,KAAK,CCDnB,OAAkB;EDEvB,QAAQ,EAAE,MAAM;EAChB,GAAG,EAAE,CAAC;EACN,OAAO,EAAE,EAAE;EACX,OAAO,EAAE,QAAQ;CACpB;;AAEA,AAAD,eAAW,CAAC;EACR,aAAa,EAAE,GAAG,CAAC,KAAK,CCTnB,OAAkB;CDU1B",
+    "sources": [
+        "Feed.module.scss",
+        "../../static/style/variable.scss"
+    ],
+    "names": [],
+    "file": "Feed.module.css"
+}

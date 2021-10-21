@@ -1,0 +1,50 @@
+.menu__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition-duration: 150ms;
+          transition-duration: 150ms;
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
+  border-radius: 10rem;
+  cursor: pointer;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  padding: .75rem;
+  margin: .5rem 0;
+}
+
+.menu__wrapper:hover {
+  background-color: #e6e7e7;
+}
+
+.menu__text {
+  font-size: 1.25rem;
+  color: #0f1419;
+  margin: 0 1rem;
+  line-height: 1.25;
+}
+
+.menu__icon {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  fill: #0f1419 !important;
+}
+
+.menu--active {
+  font-weight: 700;
+}
+/*# sourceMappingURL=MenuItem.module.css.map */
