@@ -95,8 +95,7 @@
         border-radius: 50%;
         cursor: pointer;
         
-        
-        &:hover {
+        &:hover, &--active {
             background-color: $primary-blue-alpha-1;
             svg {
                 @include icon($width: 1.171875rem, $color: $primary-blue)

@@ -70,8 +70,8 @@
       -ms-flex-align: center;
           align-items: center;
   margin-left: 0.2rem;
-  -webkit-transition-duration: 150ms;
-          transition-duration: 150ms;
+  -webkit-transition-duration: 200ms;
+          transition-duration: 200ms;
   -webkit-transition-property: all;
   transition-property: all;
   -webkit-transition-timing-function: ease-in-out;

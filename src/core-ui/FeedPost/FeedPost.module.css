@@ -182,11 +182,11 @@
   cursor: pointer;
 }
 
-.post__icon__wrapper:hover {
+.post__icon__wrapper:hover, .post__icon__wrapper--active {
   background-color: rgba(29, 155, 240, 0.1);
 }
 
-.post__icon__wrapper:hover svg {
+.post__icon__wrapper:hover svg, .post__icon__wrapper--active svg {
   width: 1.17188rem !important;
   height: 1.17188rem !important;
   fill: #1d9bf0 !important;

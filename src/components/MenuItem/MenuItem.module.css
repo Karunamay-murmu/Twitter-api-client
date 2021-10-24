@@ -12,8 +12,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-transition-duration: 150ms;
-          transition-duration: 150ms;
+  -webkit-transition-duration: 200ms;
+          transition-duration: 200ms;
   -webkit-transition-property: background-color;
   transition-property: background-color;
   -webkit-transition-timing-function: ease-in-out;
@@ -33,7 +33,7 @@
 
 .menu__text {
   font-size: 1.25rem;
-  color: #0f1419;
+  color: #0f1719;
   margin: 0 1rem;
   line-height: 1.25;
 }
@@ -41,7 +41,7 @@
 .menu__icon {
   width: 1.5rem !important;
   height: 1.5rem !important;
-  fill: #0f1419 !important;
+  fill: #0f1719 !important;
 }
 
 .menu--active {

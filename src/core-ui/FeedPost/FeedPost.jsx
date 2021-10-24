@@ -8,20 +8,20 @@ import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 
 import Avatar from "components/Avatar/Avatar";
-// import ima
+import OptionCardContainer from "components/OptionCard/OptionCardContainer";
 
 import styles from "./FeedPost.module.css";
 
-function FeedPost(
-	{
+const FeedPost = React.forwardRef((props, ref) => {
+	const {
 		displayName,
 		username,
 		verified = true,
 		text,
-		// 	image,
-		// 	avatar
-	}
-) {
+		options,
+		showOptions,
+		showOptionsActive
+	} = props;
 	return (
 		<div className={styles.post__wrapper}>
 			<div className={styles.post__avatar}>
@@ -34,8 +34,8 @@ function FeedPost(
 						{verified && <VerifiedRoundedIcon className={`${styles.post__user__verified}`} />}
 						<span className={styles.post__user__username}>{username || "@username"}</span>
 					</div>
-					<div className={`${styles.post__icon__wrapper}`}>
-						<MoreHorizRoundedIcon className={styles["post__header__more-icon"]} />
+					<div className={`${styles.post__icon__wrapper} ${showOptionsActive && styles["post__icon__wrapper--active"]}`}>
+						<MoreHorizRoundedIcon onClick={showOptions} className={`${styles["post__header__more-icon"]}`} />
 					</div>
 				</div>
 				<div className={styles.post__content}>
@@ -71,15 +71,21 @@ function FeedPost(
 					</div>
 				</div>
 			</div>
+			<OptionCardContainer options={options} ref={ref} />
 		</div>
 	);
-}
+});
+
+FeedPost.displayName = "FeedPost";
 
 FeedPost.propTypes = {
 	username: PropTypes.string.isRequired,
 	displayName: PropTypes.string.isRequired,
 	verified: PropTypes.bool,
 	text: PropTypes.string,
+	options: PropTypes.object,
+	showOptions: PropTypes.func,
+	showOptionsActive: PropTypes.bool,
 };
 
 export default FeedPost;
