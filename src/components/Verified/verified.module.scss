@@ -1,0 +1,15 @@
+@import "../../static/style/mixin.scss";
+@import "../../static/style/variable.scss";
+
+
+.verified {
+    &__wrapper {
+        @include flex();
+        margin: 0 2px;
+    }
+
+    &__icon {
+        @include icon($width: 1.171875rem, $color: $primary-blue);
+    }
+
+}

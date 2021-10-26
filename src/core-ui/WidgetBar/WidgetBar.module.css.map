@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,UAAU,CAAC;ECoEH,OAAO,EDnEgB,IAAI;CAGlC",
+    "sources": [
+        "WidgetBar.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
+    ],
+    "names": [],
+    "file": "WidgetBar.module.css"
+}

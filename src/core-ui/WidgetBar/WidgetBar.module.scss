@@ -1,0 +1,8 @@
+@import "../../static/style/mixin.scss";
+
+
+.widgetBar {
+    @include padding($padding: 1rem);
+    
+
+}

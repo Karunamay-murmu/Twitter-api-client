@@ -1,0 +1,18 @@
+@import "../../static/style/mixin.scss";
+
+
+.btn {
+
+    &__wrapper {
+
+
+    }
+
+    &__btn {
+        @include padding($left: 1rem, $right: 1rem);
+        height: 2rem;
+        font-size: .875rem;
+        line-height: .875rem;
+    }
+
+}

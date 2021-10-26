@@ -1,0 +1,27 @@
+@import "../../static/style/mixin.scss";
+
+
+.widget {
+
+    &__wrapper {
+        @include flex($direction: column);
+        background-color: $light-gray-2;
+        border-radius: 1rem;
+        margin: 1rem 0;
+    }
+
+    &__header, &__body, &__footer {
+        @include flex();
+        @include padding($padding: 1rem);
+        width: 100%;
+    }
+    
+    &__header {
+        @include text($size: 1.25rem);
+        @include textBold($weight: 800);
+        line-height: 1.25rem;
+    }
+    
+
+}
+

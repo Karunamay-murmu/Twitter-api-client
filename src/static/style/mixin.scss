@@ -92,3 +92,14 @@
         margin-left: $left;
     }
 }
+
+@mixin meta($font-size: .9375rem, $color: $gray){
+    font-size: $font-size;
+    color: $color;
+}
+
+@mixin title($font-size: .9375rem, $color: $primary-dark, $weight: 700) {
+    font-size: $font-size;
+    color: $color;
+    font-weight: $weight;
+}

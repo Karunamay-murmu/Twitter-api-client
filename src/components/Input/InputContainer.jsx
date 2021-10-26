@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Input from "components/Input/Input.jsx";
 
 function InputContainer(props) {
+	const [input, setInput] = useState("");
+	const onInputChange = (e) => {
+		setInput(e.target.value);
+	};
 	return (
-		<Input {...props} />
+		<Input {...props} value={input} onInputChange={onInputChange} />
 	);
 }
 

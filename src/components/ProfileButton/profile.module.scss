@@ -1,0 +1,32 @@
+@import "../../static/style/mixin.scss";
+
+.profile {
+
+    &__avatar {
+        margin-right: .75rem;
+    }
+
+    &__wrapper {
+        @include flex($align: center);
+        width: 100%;
+    }
+    
+    &__disname {
+        @include flex($align: center);
+        @include title();
+    }
+
+    &__username {
+        @include meta();
+    }
+    
+    &__info {
+        @include flex($justify: space-between, $align: center);
+        width: 100%;
+    }
+    
+    &__userinfo {
+        @include flex($direction: column);
+    }
+
+}

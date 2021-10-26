@@ -34,8 +34,8 @@ const FeedPost = React.forwardRef((props, ref) => {
 						{verified && <VerifiedRoundedIcon className={`${styles.post__user__verified}`} />}
 						<span className={styles.post__user__username}>{username || "@username"}</span>
 					</div>
-					<div className={`${styles.post__icon__wrapper} ${showOptionsActive && styles["post__icon__wrapper--active"]}`}>
-						<MoreHorizRoundedIcon onClick={showOptions} className={`${styles["post__header__more-icon"]}`} />
+					<div onClick={showOptions} className={`${styles.post__icon__wrapper} ${showOptionsActive && styles["post__icon__wrapper--active"]}`}>
+						<MoreHorizRoundedIcon className={`${styles["post__header__more-icon"]}`} />
 					</div>
 				</div>
 				<div className={styles.post__content}>

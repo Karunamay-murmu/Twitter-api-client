@@ -10,7 +10,6 @@
     }
 
     &--tweet-btn {
-        @include flex($justify: center, $align: center);
         @include padding($left: 2rem, $right: 2rem);
         width: 90%;
         height: 3.25rem;

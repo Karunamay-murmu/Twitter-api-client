@@ -5,9 +5,9 @@ import DefaultAvatar from "assets/avatar.jpg";
 
 import styles from "./Avatar.module.css";
 
-function Avatar({ image }) {
+function Avatar({ image, className }) {
 	return (
-		<div className={styles.avatar__wrapper}>
+		<div className={`${styles.avatar__wrapper} ${className}`}>
 			<img className={styles.avatar__img} src={image ?? DefaultAvatar} alt="" />
 		</div>
 	);
@@ -15,6 +15,7 @@ function Avatar({ image }) {
 
 Avatar.propTypes = {
 	image: PropTypes.string,
+	className: PropTypes.string,
 };
 
 export default Avatar;

@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAKK,AAAD,gBAAU,CAAC;EC8BX,OAAO,EAAE,IAAI;EACb,cAAc,ED9BgB,MAAM;EC+BpC,eAAe,EAHoB,UAAU;EAI7C,WAAW,EAJ4C,UAAU;ED3B7D,gBAAgB,EECT,OAAkB;EFAzB,aAAa,EAAE,IAAI;EACnB,MAAM,EAAE,MAAM;CACjB;;AAEA,AAAD,eAAS,EAAG,aAAM,EAAG,eAAQ,CAAC;ECuB9B,OAAO,EAAE,IAAI;EACb,cAAc,EAFM,GAAG;EAGvB,eAAe,EAHoB,UAAU;EAI7C,WAAW,EAJ4C,UAAU;EAqC7D,OAAO,EDzDoB,IAAI;EAC/B,KAAK,EAAE,IAAI;CACd;;AAEA,AAAD,eAAS,CAAC;ECMV,SAAS,EDLgB,OAAO;ECMhC,KAAK,ECzBM,OAAe;ED0C1B,WAAW,EDtBoB,GAAG;EAC9B,WAAW,EAAE,OAAO;CACvB",
+    "sources": [
+        "widget.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
+    ],
+    "names": [],
+    "file": "widget.module.css"
+}

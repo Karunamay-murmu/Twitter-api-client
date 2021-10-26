@@ -5,7 +5,6 @@ import styles from "./Button.module.css";
 
 
 function Button({ children, className, attributes, ...otherProps }) {
-	console.log(attributes);
 	return (
 		<button type="button" className={`${className} ${styles.button}`} {...attributes} {...otherProps}>
 			<span>{children}</span>
