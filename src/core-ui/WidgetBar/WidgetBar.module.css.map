@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAGA,AAAA,UAAU,CAAC;ECoEH,OAAO,EDnEgB,IAAI;CAGlC",
+    "mappings": "AAKK,AAAD,kBAAS,CAAC;EACN,MAAM,EAAE,QAAQ;EAChB,OAAO,EAAE,YAAY;EACrB,OAAO,EAAE,EAAE;EACX,QAAQ,EAAE,MAAM;EAChB,GAAG,EAAE,CAAC;EACN,gBAAgB,EENhB,OAAO;CFOV;;AAEA,AAAD,gBAAO,CAAC;ECyDJ,OAAO,EDxDoB,IAAI;CAClC",
     "sources": [
         "WidgetBar.module.scss",
         "../../static/style/mixin.scss",

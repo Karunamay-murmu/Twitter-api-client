@@ -1,0 +1,6 @@
+@import "../../static/style/mixin.scss";
+
+
+.name {
+    @include meta();
+}

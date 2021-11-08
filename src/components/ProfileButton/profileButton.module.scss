@@ -7,10 +7,12 @@
     }
 
     &__wrapper {
-        @include flex($align: center);
+        @include flex($justify: space-between, $align: center);
         width: 100%;
+        cursor: pointer;
+        padding: 1rem;
     }
-    
+
     &__disname {
         @include flex($align: center);
         @include title();
@@ -19,12 +21,11 @@
     &__username {
         @include meta();
     }
-    
+
     &__info {
-        @include flex($justify: space-between, $align: center);
-        width: 100%;
+        @include flex($align: center);
     }
-    
+
     &__userinfo {
         @include flex($direction: column);
     }

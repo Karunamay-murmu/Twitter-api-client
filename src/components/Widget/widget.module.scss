@@ -8,11 +8,12 @@
         background-color: $light-gray-2;
         border-radius: 1rem;
         margin: 1rem 0;
+        overflow: hidden;
     }
 
-    &__header, &__body, &__footer {
+    &__header, &__footer {
         @include flex();
-        @include padding($padding: 1rem);
+        padding: 1rem;
         width: 100%;
     }
     
@@ -21,7 +22,20 @@
         @include textBold($weight: 800);
         line-height: 1.25rem;
     }
-    
+
+    &__body {
+        width: 100%;
+    }
+
+    &__body > div , &__footer {
+        &:hover {
+            background-color: $light-gray;
+        }
+    }
+
+    &__footer {
+        color: $primary-blue;
+    }
 
 }
 

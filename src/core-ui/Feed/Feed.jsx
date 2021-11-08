@@ -18,6 +18,9 @@ function Feed() {
 			</div>
 			<div className={styles.feed__post}>
 				<FeedPostContainer />
+				<FeedPostContainer />
+				<FeedPostContainer />
+				<FeedPostContainer />
 			</div>
 		</div>
 	);

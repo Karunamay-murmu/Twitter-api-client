@@ -3,7 +3,7 @@
 
 .searchbar {
 
-    @include padding($padding: .75rem);
+    @include padding($padding: .563rem);
     @include background($background-color: $light-gray);
     border-radius: 10rem;
 

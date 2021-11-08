@@ -10,13 +10,15 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  cursor: pointer;
+  padding: 1rem;
 }
 
 .profile__disname {
@@ -51,13 +53,12 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100%;
 }
 
 .profile__userinfo {
@@ -75,4 +76,4 @@
       -ms-flex-align: start;
           align-items: flex-start;
 }
-/*# sourceMappingURL=profile.module.css.map */
+/*# sourceMappingURL=profileButton.module.css.map */

@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,KAAK,CAAC;ECkGF,SAAS,EADY,SAAQ;EAE7B,KAAK,ECtGM,OAAe;EDuG1B,WAAW,EAHoD,GAAG;CD/FrE",
+    "sources": [
+        "displayName.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
+    ],
+    "names": [],
+    "file": "displayName.module.css"
+}

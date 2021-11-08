@@ -11,7 +11,7 @@ function Widget({ header, children }) {
 				{children}
 			</div>
 			<footer className={styles.widget__footer}>
-				show more
+				Show more
 			</footer>
 		</div>
 	);

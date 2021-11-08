@@ -1,4 +1,14 @@
-.widgetBar {
+.widgetBar__header {
+  height: 3.375rem;
+  padding: .375rem 1rem;
+  z-index: 10;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+}
+
+.widgetBar__body {
   padding: 1rem;
 }
 /*# sourceMappingURL=WidgetBar.module.css.map */

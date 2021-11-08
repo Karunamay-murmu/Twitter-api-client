@@ -1,0 +1,51 @@
+@import "../../static/style/mixin.scss";
+
+
+.profile {
+
+    div {
+        width: 100%;
+    }
+
+    &__wrapper {
+        @include flex($direction: column);
+        padding: 1rem;
+        box-shadow: 0px 0px 15px rgba(101, 119, 134, .2), 0px 0px 3px 1px rgba(101, 119, 134, .15);
+        border-radius: 1rem;
+        width: 18.75rem;
+
+    }
+
+    &__avatar {
+        @include flex($justify: space-between);
+        width: 100%;
+    }
+
+    &__info {
+        @include flex($direction: column);
+        margin: 1rem 0 0 0;
+    }
+
+    &__bio {
+        @include text($size: .9375rem);
+        @include flex();
+        text-align: left;
+        margin: 1rem 0;
+    }
+
+    &__follower-info {
+        @include flex();
+    }
+
+    &__follower {
+        @include meta();
+        margin: 0 2rem 0 0;
+
+        &--count {
+            @include textBold();
+            color: $primary-dark;
+            margin: 0 5px 0 0;
+        }
+    }
+
+}

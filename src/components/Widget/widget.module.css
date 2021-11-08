@@ -15,9 +15,10 @@
   background-color: #f7f9f9;
   border-radius: 1rem;
   margin: 1rem 0;
+  overflow: hidden;
 }
 
-.widget__header, .widget__body, .widget__footer {
+.widget__header, .widget__footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -40,5 +41,17 @@
   color: #0f1719;
   font-weight: 800;
   line-height: 1.25rem;
+}
+
+.widget__body {
+  width: 100%;
+}
+
+.widget__body > div:hover, .widget__footer:hover {
+  background-color: #eff3f4;
+}
+
+.widget__footer {
+  color: #1d9bf0;
 }
 /*# sourceMappingURL=widget.module.css.map */
