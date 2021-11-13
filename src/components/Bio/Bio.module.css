@@ -1,0 +1,21 @@
+.bio {
+  font-size: 0.9375rem;
+  color: #0f1719;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  text-align: left;
+  margin: 1rem 0;
+  text-transform: title;
+}
+/*# sourceMappingURL=Bio.module.css.map */

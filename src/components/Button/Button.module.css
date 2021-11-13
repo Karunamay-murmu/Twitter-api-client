@@ -14,11 +14,15 @@
           align-items: center;
   border: none;
   outline: none;
-  font-size: 1rem;
+  font-size: 0.875rem;
   color: #ffffff;
   background-color: #0f1719;
   font-weight: 700;
   border-radius: 10rem;
   cursor: pointer;
+}
+
+.button span {
+  line-height: 1;
 }
 /*# sourceMappingURL=Button.module.css.map */

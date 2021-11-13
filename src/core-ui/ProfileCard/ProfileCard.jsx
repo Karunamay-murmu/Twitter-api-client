@@ -5,6 +5,8 @@ import Avatar from "components/Avatar/Avatar.jsx";
 import FollowButtonContainer from "components/FollowButton/FollowButtonContainer.jsx";
 import DisplayName from "components/DisplayName/DisplayName.jsx";
 import Username from "components/Username/Username.jsx";
+import FollowInfo from "components/FollowInfo/FollowInfo.jsx";
+import Bio from "components/Bio/Bio.jsx";
 
 import styles from "./profilecard.module.css";
 
@@ -19,11 +21,8 @@ function ProfileCard({ displayName="DisplayName", username="Username", bio="Risk
 				<DisplayName name={displayName} />
 				<Username name={username} />
 			</div>
-			<div className={styles.profile__bio}>{bio}</div>
-			<div className={styles["profile__follower-info"]}>
-				<div className={styles.profile__follower}><span className={styles["profile__follower--count"]}>{following}</span>Following</div>
-				<div className={styles.profile__follower}><span className={styles["profile__follower--count"]}>{followers}</span>Followers</div>
-			</div>
+			<Bio bio={bio} />
+			<FollowInfo following={following} followers={followers}/>
 		</div>
 	);
 }

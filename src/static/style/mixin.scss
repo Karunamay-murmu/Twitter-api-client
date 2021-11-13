@@ -103,3 +103,15 @@
     color: $color;
     font-weight: $weight;
 }
+
+@mixin mainGridWrapper() {
+    display: grid;
+    grid-template-columns: 246px 598px 348px;
+    grid-gap: 1.375rem;
+}
+
+@mixin link() {
+    text-decoration: none;
+    color: $primary-blue;
+    font-size: .935rem;
+}

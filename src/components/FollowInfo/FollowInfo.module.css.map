@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,OAAO,CAAC;ECgCJ,OAAO,EAAE,IAAI;EACb,cAAc,EAFM,GAAG;EAGvB,eAAe,EAHoB,UAAU;EAI7C,WAAW,EAJ4C,UAAU;CDjBpE;;AAXI,AAAD,gBAAU,CAAC;EC0FX,SAAS,EADW,SAAQ;EAE5B,KAAK,ECxFF,OAAO;EFDN,MAAM,EAAE,UAAU;CACrB;;AAEA,AAAD,cAAQ,CAAC;EC+BT,WAAW,EADS,GAAG;ED5BnB,KAAK,EEbE,OAAe;EFctB,MAAM,EAAE,SAAS;CACpB",
+    "sources": [
+        "FollowInfo.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
+    ],
+    "names": [],
+    "file": "FollowInfo.module.css"
+}

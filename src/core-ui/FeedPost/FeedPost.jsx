@@ -22,6 +22,7 @@ const FeedPost = React.forwardRef((props, ref) => {
 		showOptions,
 		showOptionsActive
 	} = props;
+	console.log(options);
 	return (
 		<div className={styles.post__wrapper}>
 			<div className={styles.post__avatar}>

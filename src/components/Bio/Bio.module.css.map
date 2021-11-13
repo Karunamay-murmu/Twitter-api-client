@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,IAAI,CAAC;ECqBD,SAAS,EDpBY,SAAQ;ECqB7B,KAAK,ECzBM,OAAe;EDmC1B,OAAO,EAAE,IAAI;EACb,cAAc,EAFM,GAAG;EAGvB,eAAe,EAHoB,UAAU;EAI7C,WAAW,EAJ4C,UAAU;ED5BjE,UAAU,EAAE,IAAI;EAChB,MAAM,EAAE,MAAM;EACd,cAAc,EAAE,KAAK;CACxB",
+    "sources": [
+        "Bio.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
+    ],
+    "names": [],
+    "file": "Bio.module.css"
+}

@@ -6,9 +6,12 @@
 .button {
     @include flex($justify: center, $align: center);
     @include noBorder();
-    @include text($size: 1rem, $color: $white);
+    @include text($size: .875rem, $color: $white);
     @include buttonBackground();
     @include textBold();
     border-radius: 10rem;
     cursor: pointer;
+    span {
+        line-height: 1;
+    }
 }

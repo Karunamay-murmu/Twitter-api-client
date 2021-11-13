@@ -11,6 +11,7 @@
     &__wrapper {
         @include padding($top: 1rem, $bottom: .5rem, $left: 1rem, $right: 1rem);
         @include flex();
+        position: relative;
 
         &:hover {
             background-color: $light-gray

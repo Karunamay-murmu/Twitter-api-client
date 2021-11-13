@@ -1,0 +1,18 @@
+@import "../../static/style/mixin.scss";
+
+
+.follow {
+    @include flex();
+
+    &__wrapper {
+        @include meta();
+        margin: 0 2rem 0 0;
+    }
+
+    &--count {
+        @include textBold();
+        color: $primary-dark;
+        margin: 0 5px 0 0;
+    }
+
+}
