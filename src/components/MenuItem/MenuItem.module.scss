@@ -27,7 +27,13 @@
     }
 
     &--active {
-        @include textBold();
+        background-color: $primary-blue-alpha-1;
+        svg {
+            fill: $primary-blue !important;
+        }
+        p {
+            color: $primary-blue;
+        }
     }
 
 }

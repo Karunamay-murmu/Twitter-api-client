@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import SearchIcon from "@mui/icons-material/Search";
@@ -12,16 +13,18 @@ import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 
 import MenuItemContainer from "components/MenuItem/MenuItemContainer.jsx";
 import Button from "components/Button/Button.jsx";
+import OptionCardContainer from "components/OptionCard/OptionCardContainer";
 
 import styles from "./Sidebar.module.css";
 
-const Sidebar = () => {
+const Sidebar = React.forwardRef(({ options, showMoreOption, showCard }, ref) => {
+	console.log(showMoreOption);
 	return (
 		<div className={styles.sidebar}>
 			<div className={styles.sidebar__logo}>
 				<TwitterIcon className="logo" id="id_logo" />
 			</div>
-			<div className={styles.sidebar__menu}>
+			<>
 				<NavLink to="/" className={({ isActive }) => `${styles.link} ${isActive ? "active" : ""}`}>
 					<MenuItemContainer Icon={HomeRoundedIcon} text="Home" />
 				</NavLink>
@@ -43,15 +46,28 @@ const Sidebar = () => {
 				<NavLink to="/username" className={({ isActive }) => `${styles.link} ${isActive ? "active" : ""}`}>
 					<MenuItemContainer Icon={PersonOutlineRoundedIcon} text="Profile" />
 				</NavLink>
-				<MenuItemContainer Icon={MoreHorizRoundedIcon} text="More" />
-			</div>
-			{/* <div  > */}
+				<div onClick={showCard} className={`${styles.sidebar__options} ${showMoreOption && styles.sidebar__options__active}`}>
+					<MenuItemContainer Icon={MoreHorizRoundedIcon} text="More" active={showMoreOption} />
+					<div className={styles.sidebar__options__wrapper}>
+						{showMoreOption && <OptionCardContainer options={options} ref={ref} />}
+					</div>
+				</div>
+			</>
 			<Button className={styles["sidebar--tweet-btn"]} attributes={{
 				title: "Tweet"
 			}} text="Tweet">Tweet</Button>
-			{/* </div> */}
+
 		</div>
 	);
+});
+
+
+Sidebar.displayName = "Sidebar";
+
+Sidebar.propTypes = {
+	options: PropTypes.arrayOf(PropTypes.object),
+	showMoreOption: PropTypes.bool,
+	showCard: PropTypes.func
 };
 
 export default Sidebar;

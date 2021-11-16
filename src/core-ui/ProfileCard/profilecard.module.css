@@ -59,7 +59,7 @@
 
 .profile__bio {
   font-size: 0.9375rem;
-  color: #0f1719;
+  color: #0f1419;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -101,7 +101,7 @@
 
 .profile__follower--count {
   font-weight: 700;
-  color: #0f1719;
+  color: #0f1419;
   margin: 0 5px 0 0;
 }
 /*# sourceMappingURL=profilecard.module.css.map */

@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
-import Post from "core-ui/FeedPost/FeedPost.jsx";
+import FeedPost from "core-ui/FeedPost/FeedPost.jsx";
 
 function FeedPostContainer() {
 	const [open, setOpen] = useState(false);
@@ -12,14 +12,10 @@ function FeedPostContainer() {
 		"tag": "p"
 	}];
 
-	useEffect(() => {
-		open && (optionsCard.current.style.display = "initial") || (optionsCard.current.style.display = "none");
-	}, [open]);
-
 	const showOptions = () => setOpen(prev => !prev);
 
 	return (
-		<Post
+		<FeedPost
 			options={options ?? null}
 			showOptions={showOptions}
 			ref={optionsCard}

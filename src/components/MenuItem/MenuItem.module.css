@@ -33,7 +33,7 @@
 
 .menu__text {
   font-size: 1.25rem;
-  color: #0f1719;
+  color: #0f1419;
   margin: 0 1rem;
   line-height: 1.25;
 }
@@ -41,10 +41,18 @@
 .menu__icon {
   width: 1.5rem !important;
   height: 1.5rem !important;
-  fill: #0f1719 !important;
+  fill: #0f1419 !important;
 }
 
 .menu--active {
-  font-weight: 700;
+  background-color: rgba(29, 155, 240, 0.1);
+}
+
+.menu--active svg {
+  fill: #1d9bf0 !important;
+}
+
+.menu--active p {
+  color: #1d9bf0;
 }
 /*# sourceMappingURL=MenuItem.module.css.map */

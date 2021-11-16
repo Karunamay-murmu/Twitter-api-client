@@ -16,6 +16,19 @@
         background-color: $primary-blue;
         font-size: 1.0625rem;
     }
+    
+    &__options {
+        position: relative;
+        &__wrapper {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+        }
+        &__active {
+            border-color:  $primary-blue-alpha-1;
+        }
+
+    }
 }
 
 .link {

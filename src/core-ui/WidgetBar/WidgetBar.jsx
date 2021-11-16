@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import SearchContainer from "components/Search/SearchContainer.jsx";
 import WidgetContainer from "components/Widget/WidgetContainer.jsx";
@@ -24,10 +23,5 @@ function WidgetBar() {
 		</div>
 	);
 }
-
-WidgetBar.propTypes = {
-	widgetHeader: PropTypes.string.isRequired,
-	children: PropTypes.node.isRequired,
-};
 
 export default WidgetBar;

@@ -14,10 +14,10 @@ import styles from "./FeedPost.module.css";
 
 const FeedPost = React.forwardRef((props, ref) => {
 	const {
-		displayName,
-		username,
+		displayName = "Karunamay Murmu",
+		username = "username",
 		verified = true,
-		text,
+		text = "Risk management, be ready to enjoy the best case, be ready to handle the worst case. Don’t invest more than you can lose.",
 		options,
 		showOptions,
 		showOptionsActive
@@ -31,16 +31,19 @@ const FeedPost = React.forwardRef((props, ref) => {
 			<div className={styles.post__body}>
 				<div className={styles.post__header}>
 					<div className={styles.post__header__info}>
-						<span className={styles.post__user__displayName}>{displayName || "Karunamay Murmu"}</span>
+						<span className={styles.post__user__displayName}>{displayName}</span>
 						{verified && <VerifiedRoundedIcon className={`${styles.post__user__verified}`} />}
-						<span className={styles.post__user__username}>{username || "@username"}</span>
+						<span className={styles.post__user__username}>{username}</span>
 					</div>
 					<div onClick={showOptions} className={`${styles.post__icon__wrapper} ${showOptionsActive && styles["post__icon__wrapper--active"]}`}>
 						<MoreHorizRoundedIcon className={`${styles["post__header__more-icon"]}`} />
 					</div>
+					<div className={styles.post__options__wrapper}>
+						{showOptionsActive && <OptionCardContainer options={options} ref={ref} />}
+					</div>
 				</div>
 				<div className={styles.post__content}>
-					<p className={styles.post__text}>{text || "Risk management, be ready to enjoy the best case, be ready to handle the worst case. Don’t invest more than you can lose."}</p>
+					<p className={styles.post__text}>{text}</p>
 					<div className={styles.post__image__wrapper}>
 						{/* <img src={Image} alt="" /> */}
 					</div>
@@ -72,7 +75,6 @@ const FeedPost = React.forwardRef((props, ref) => {
 					</div>
 				</div>
 			</div>
-			<OptionCardContainer options={options} ref={ref} />
 		</div>
 	);
 });

@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAGA,AAAA,KAAK,CAAC;EC6FF,SAAS,EADW,SAAQ;EAE5B,KAAK,ECxFF,OAAO;CFJb",
+    "mappings": "AAGA,AAAA,KAAK,CAAC;EC6FF,SAAS,EADW,SAAQ;EAE5B,KAAK,ECvFF,OAAO;CFLb",
     "sources": [
         "username.module.scss",
         "../../static/style/mixin.scss",

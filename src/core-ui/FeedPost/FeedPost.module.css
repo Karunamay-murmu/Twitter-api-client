@@ -61,6 +61,7 @@
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  position: relative;
 }
 
 .post__header__info {
@@ -195,7 +196,7 @@
 
 .post__user__displayName {
   font-size: 0.9375rem;
-  color: #0f1719;
+  color: #0f1419;
   font-weight: 700;
 }
 
@@ -208,5 +209,11 @@
 .post__user__username {
   font-size: 0.9375rem;
   color: #536471;
+}
+
+.post__options__wrapper {
+  position: absolute;
+  top: 3rem;
+  right: 0;
 }
 /*# sourceMappingURL=FeedPost.module.css.map */

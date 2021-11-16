@@ -3,15 +3,11 @@
   border-radius: 0.5rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-  position: absolute;
-  top: 3.75rem;
-  right: 1rem;
   -webkit-box-shadow: 0px 0px 15px rgba(101, 119, 134, 0.2), 0px 0px 3px 1px rgba(101, 119, 134, 0.15);
           box-shadow: 0px 0px 15px rgba(101, 119, 134, 0.2), 0px 0px 3px 1px rgba(101, 119, 134, 0.15);
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  display: none;
 }
 
 .card__item {
@@ -29,6 +25,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: pointer;
 }
 
 .card__item:hover {
@@ -37,7 +34,7 @@
 
 .card__item__text {
   font-size: 0.9375rem;
-  color: #0f1719;
+  color: #0f1419;
 }
 
 .card__item__icon__wrapper {
@@ -60,6 +57,6 @@
 .card__item__icon {
   width: 18.75px !important;
   height: 18.75px !important;
-  fill: #0f1719 !important;
+  fill: #0f1419 !important;
 }
 /*# sourceMappingURL=OptionCard.module.css.map */

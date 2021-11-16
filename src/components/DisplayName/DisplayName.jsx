@@ -5,7 +5,7 @@ import Verified from "components/Verified/Verified.jsx";
 
 import styles from "./displayName.module.css";
 
-function DisplayName({ name, verified, className }) {
+function DisplayName({ name, verified=false, className }) {
 	return (
 		<div className={`${styles.name} ${className}`}>
 			{name||"Larunamay"}

@@ -13,8 +13,8 @@ function FollowInfo({ following, followers }) {
 }
 
 FollowInfo.propTypes = {
-	following: PropTypes.number.isRequired,
-	followers: PropTypes.number.isRequired
+	following: PropTypes.string.isRequired,
+	followers: PropTypes.string.isRequired
 };
 
 
