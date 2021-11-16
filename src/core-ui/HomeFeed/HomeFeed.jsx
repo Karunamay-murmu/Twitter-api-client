@@ -3,7 +3,7 @@ import React from "react";
 import TweetContainer from "core-ui/Tweet/TweetContainer.jsx";
 import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer.jsx";
 
-import styles from "./Feed.module.css";
+import styles from "./HomeFeed.module.css";
 
 function Feed() {
 	return (

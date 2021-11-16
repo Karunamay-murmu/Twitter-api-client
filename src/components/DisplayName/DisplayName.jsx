@@ -8,7 +8,7 @@ import styles from "./displayName.module.css";
 function DisplayName({ name, verified, className }) {
 	return (
 		<div className={`${styles.name} ${className}`}>
-			{name}
+			{name||"Larunamay"}
 			{verified &&
 				<span>
 					<Verified />

@@ -2,9 +2,9 @@ import React from "react";
 
 import Profile from "core-ui/Profile/Profile.jsx";
 
-function ProfileContainer() {
+function ProfileContainer(props) {
 	return (
-		<Profile />
+		<Profile {...props} />
 	);
 }
 

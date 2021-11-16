@@ -1,8 +1,0 @@
-.wrapper {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 246px 598px 348px;
-      grid-template-columns: 246px 598px 348px;
-  grid-gap: 1.375rem;
-}
-/*# sourceMappingURL=ProfilePage.module.css.map */

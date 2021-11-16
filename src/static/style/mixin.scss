@@ -55,7 +55,7 @@
     outline: none;
 }
 
-@mixin borderRadius($value: .5rem){
+@mixin borderRadius($value: .5rem) {
     border-radius: $value;
 }
 
@@ -93,7 +93,7 @@
     }
 }
 
-@mixin meta($font-size: .9375rem, $color: $gray){
+@mixin meta($font-size: .9375rem, $color: $gray) {
     font-size: $font-size;
     color: $color;
 }
@@ -114,4 +114,14 @@
     text-decoration: none;
     color: $primary-blue;
     font-size: .935rem;
+}
+
+@mixin feedHeader () {
+    background-color: $white;
+    border-bottom: 1px solid $light-gray;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 0 1rem;
+    min-height: 3.375rem;
 }

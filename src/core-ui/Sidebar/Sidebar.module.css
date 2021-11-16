@@ -15,7 +15,7 @@
   margin-top: 1rem;
 }
 
-.sidebar--logo {
+.sidebar__logo {
   padding: 0 .75rem;
 }
 
@@ -26,5 +26,14 @@
   height: 3.25rem;
   background-color: #1d9bf0;
   font-size: 1.0625rem;
+}
+
+.link {
+  text-decoration: none;
+  display: block;
+}
+
+.active {
+  background-color: #1d9bf0;
 }
 /*# sourceMappingURL=Sidebar.module.css.map */

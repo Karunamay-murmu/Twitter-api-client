@@ -5,7 +5,7 @@
     @include flex($direction: column);
     margin-top: 1rem;
 
-    &--logo {
+    &__logo {
         padding: 0 .75rem;
     }
 
@@ -17,3 +17,13 @@
         font-size: 1.0625rem;
     }
 }
+
+.link {
+    text-decoration: none;
+    display: block;
+}
+
+.active {
+    background-color: $primary-blue;
+}
+
