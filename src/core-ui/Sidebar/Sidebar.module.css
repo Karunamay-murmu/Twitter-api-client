@@ -1,4 +1,8 @@
 .sidebar {
+  margin-top: 1rem;
+}
+
+.sidebar__wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12,7 +16,10 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  margin-top: 1rem;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1rem;
+  width: 100%;
 }
 
 .sidebar__logo {

@@ -2,8 +2,13 @@
 
 
 .sidebar {
-    @include flex($direction: column);
-    margin-top: 1rem;
+    margin-top: 1rem;    
+    &__wrapper {
+        @include flex($direction: column);
+        position: sticky;
+        top: 1rem;
+        width: 100%;
+    }
 
     &__logo {
         padding: 0 .75rem;
