@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGK,AAAD,gBAAS,CAAC;EACN,YAAY,EAAE,MAAM;CACvB;;AAEA,AAAD,cAAO,CAAC;EC4BR,OAAO,EAAE,IAAI;EACb,cAAc,EAFM,GAAG;EAGvB,eAAe,EAHoB,UAAU;EAI7C,WAAW,ED9Be,MAAM;CAC/B;;AAEA,AAAD,kBAAW,CAAC;ECwBZ,OAAO,EAAE,IAAI;EACb,cAAc,EDxBgB,MAAM;ECyBpC,eAAe,EAHoB,UAAU;EAI7C,WAAW,EAJ4C,UAAU;CDrBhE",
+    "sources": [
+        "ProfileBasicInfo.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
+    ],
+    "names": [],
+    "file": "ProfileBasicInfo.module.css"
+}

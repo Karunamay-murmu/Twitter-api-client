@@ -1,0 +1,46 @@
+@import "../../static/style/mixin.scss";
+
+.feed {
+    &__header {
+        @include feedHeader();
+        @include flex($align: center);
+
+        &__wrapper {
+            @include flex($align:center);
+        }
+    }
+
+    &__back {
+        width: 2rem;
+        height: 2rem;
+        position: relative;
+        margin: 0 1rem 0 0;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $hover;
+        }
+
+        &__icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &__title {
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    &__meta {
+        @include meta($font-size: .8125rem);
+    }
+
+    &__info {
+        @include flex($direction: column);
+    }
+
+}

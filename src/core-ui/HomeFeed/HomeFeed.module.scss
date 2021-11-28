@@ -3,10 +3,6 @@
 
 
 .feed {
-    border-width: 0 1px;
-    border-color: $light-gray;
-    border-style: solid;
-
     &__header {
         @include background($background-color: $white);
         border-bottom: 1px solid $light-gray;

@@ -1,0 +1,16 @@
+@import "../../static/style/mixin.scss";
+
+.profile {
+    &__avatar {
+        margin-right: .75rem;
+    }
+
+    &__info {
+        @include flex($align: center);
+    }
+
+    &__userinfo {
+        @include flex($direction: column);
+    }
+
+}

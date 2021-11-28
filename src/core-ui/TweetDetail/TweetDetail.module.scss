@@ -1,0 +1,11 @@
+@import "../../static/style/mixin.scss";
+
+
+.tweet {
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 1rem;
+    }
+}

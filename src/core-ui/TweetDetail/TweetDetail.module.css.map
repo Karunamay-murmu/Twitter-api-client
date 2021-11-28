@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAIK,AAAD,eAAU,CAAC;EACP,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,IAAI;CAChB",
+    "sources": [
+        "TweetDetail.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
+    ],
+    "names": [],
+    "file": "TweetDetail.module.css"
+}

@@ -5,7 +5,7 @@ import styles from "./username.module.css";
 
 function Username({ name }) {
 	return (
-		<div className={styles.name}>@{name}</div>
+		<div className={styles.name}>@{name||"username"}</div>
 	);
 }
 

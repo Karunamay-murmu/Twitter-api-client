@@ -1,5 +1,5 @@
 import React from "react";
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import SidebarContainer from "core-ui/Sidebar/SidebarContainer.jsx";
 // import HomeFeed from "core-ui/HomeFeed/HomeFeed.jsx";
@@ -11,7 +11,9 @@ function Home() {
 	return (
 		<div className={styles.home}>
 			<SidebarContainer />
-			<Outlet />
+			<div className={styles.home__outlet}>
+				<Outlet />
+			</div>
 			<WidgetBar />
 		</div>
 	);
