@@ -1,0 +1,22 @@
+@import "../../static/style/mixin.scss";
+
+
+.stats {
+    &__wrapper {
+        @include flex();
+        padding: 1rem 0;
+        border-bottom: 1px solid $light-gray;
+
+    }
+
+    &__data {
+        @include meta();
+        margin: 0 1rem 0 0;
+
+        span {
+            @include text();
+            @include textBold();
+        }
+    }
+
+}

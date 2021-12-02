@@ -10,6 +10,10 @@ function FeedPostContainer() {
 		"text": "Unfollow Animae & manga",
 		"Icon": ErrorOutlineIcon,
 		"tag": "p"
+	}, {
+		"text": "Unfollow Animae & manga",
+		"Icon": ErrorOutlineIcon,
+		"tag": "p"
 	}];
 
 	const showOptions = () => setOpen(prev => !prev);

@@ -6,8 +6,6 @@ import ProfileFeedContainer from "core-ui/ProfileFeed/ProfileFeedContainer.jsx";
 import TweetDetailContainer from "core-ui/TweetDetail/TweetDetailContainer";
 import HomeFeed from "core-ui/HomeFeed/HomeFeed.jsx";
 
-import "./App.css";
-
 function App() {
 	return (
 		<div className="App">

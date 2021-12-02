@@ -8,4 +8,25 @@
         width: 100%;
         padding: 1rem;
     }
+
+    &__profile {
+        @include flex($justify: space-between);
+    }
+
+    &__content {
+        @include text($size: 1.4375rem);
+        margin: 1rem 0 0 0;
+        &__wrapper {}
+    }
+
+    &__date {
+        @include flex($align: center);
+        @include meta();
+        padding: 1rem 0;
+        border-bottom: 1px solid $light-gray;
+        .dot {
+            margin: 0 .5rem;
+        }
+    }
+
 }

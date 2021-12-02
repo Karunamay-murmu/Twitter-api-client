@@ -1,0 +1,40 @@
+@import "../../static/style/mixin.scss";
+
+
+.more {
+
+    &__container {
+        position: relative;
+    }
+
+    &__icon {
+        @include icon($width: 1.171875rem, $color: $gray);
+
+        &__wrapper {
+            @include transition();
+            padding: .5rem;
+            width: 2.171875rem;
+            height: 2.171875rem;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &--active,
+            &:hover {
+                background-color: $primary-blue-alpha-1;
+
+                svg {
+                    fill: $primary-blue !important;
+                }
+            }
+        }
+    }
+
+    &__options {
+        &__wrapper {
+            position: absolute;
+            top: 3rem;
+            right: 0;
+        }
+    }
+
+}

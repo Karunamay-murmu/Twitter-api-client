@@ -9,4 +9,50 @@
   width: 100%;
   padding: 1rem;
 }
+
+.tweet__profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.tweet__content {
+  font-size: 1.4375rem;
+  color: #0f1419;
+  margin: 1rem 0 0 0;
+}
+
+.tweet__date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.9375rem;
+  color: #536471;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eff3f4;
+}
+
+.tweet__date .dot {
+  margin: 0 .5rem;
+}
 /*# sourceMappingURL=TweetDetail.module.css.map */

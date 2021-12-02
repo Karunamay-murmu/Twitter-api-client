@@ -23,7 +23,8 @@ const OptionCardContainer = React.forwardRef(({ options }, ref) => {
 OptionCardContainer.displayName = "OptionCardContainer";
 
 OptionCardContainer.propTypes = {
-	options: PropTypes.array.isRequired
+	options: PropTypes.arrayOf(PropTypes.object).isRequired,
+
 };
 
 export default OptionCardContainer;
