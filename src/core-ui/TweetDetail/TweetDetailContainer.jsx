@@ -1,16 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PersonRemoveAlt1OutlinedIcon from "@mui/icons-material/PersonRemoveAlt1Outlined";
+import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import VolumeOffOutlinedIcon from "@mui/icons-material/VolumeOffOutlined";
+import BlockIcon from "@mui/icons-material/Block";
+import CodeIcon from "@mui/icons-material/Code";
+import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import TweetDetail from "core-ui/TweetDetail/TweetDetail";
 
-function TweetDetailContainer({ follow, ...props }) {
+function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props }) {
 
 	const moreOptions = [
 		{
-			"text": `${follow ? "unfollow" : "follow"} @${props.username}`,
-			"Icon": PersonRemoveAlt1OutlinedIcon,
-
+			"text": `${isFollowing ? "Unfollow" : "Follow"} @${username}`,
+			"Icon": PersonAddAltOutlinedIcon,
+		},
+		{
+			"text": `Add/remove @${username} from Lists`,
+			"Icon": ListAltOutlinedIcon,
+		}, {
+			"text": `Mute @${username}`,
+			"Icon": VolumeOffOutlinedIcon,
+		}, {
+			"text": "Mute this conversation",
+			"Icon": VolumeOffOutlinedIcon,
+		}
+		, {
+			"text": `Block @${username}`,
+			"Icon": BlockIcon,
+		}
+		, {
+			"text": "Embed Tweet",
+			"Icon": CodeIcon,
+		}
+		, {
+			"text": "Report Tweet",
+			"Icon": FlagOutlinedIcon,
 		}
 	];
 
@@ -22,7 +48,7 @@ function TweetDetailContainer({ follow, ...props }) {
 
 TweetDetailContainer.propTypes = {
 	username: PropTypes.string.isRequired,
-	follow: PropTypes.bool.isRequired,
+	isFollowing: PropTypes.bool.isRequired,
 };
 
 export default TweetDetailContainer;

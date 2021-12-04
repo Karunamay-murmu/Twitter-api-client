@@ -6,6 +6,7 @@ import ProfileBasicInfo from "components/ProfileBasicInfo/ProfileBasicInfo";
 import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
 import TweetStats from "components/TweetStats/TweetStats";
 import TweetActionBarContainer from "components/TweetActionBar/TweetActionBarContainer";
+import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
 
 import styles from "./TweetDetail.module.css";
 
@@ -29,6 +30,9 @@ function TweetDetail({ displayName, username, moreOptions, tweet, reTweets, like
 					<TweetStats reTweets={reTweets} quoteTweets={quoteTweets} likes={likes} />
 				</div>
 				<TweetActionBarContainer />
+			</div>
+			<div>
+				<FeedPostContainer />
 			</div>
 		</div>
 	);

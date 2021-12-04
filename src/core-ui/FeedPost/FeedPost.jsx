@@ -5,24 +5,20 @@ import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
-import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
+import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
 
 import Avatar from "components/Avatar/Avatar";
-import OptionCardContainer from "components/OptionCard/OptionCardContainer";
 
 import styles from "./FeedPost.module.css";
 
-const FeedPost = React.forwardRef((props, ref) => {
+const FeedPost = React.forwardRef((props) => {
 	const {
 		displayName = "Karunamay Murmu",
 		username = "username",
 		verified = true,
 		text = "Risk management, be ready to enjoy the best case, be ready to handle the worst case. Don’t invest more than you can lose.",
-		options,
-		showOptions,
-		showOptionsActive
+		moreOptions,
 	} = props;
-	console.log(options);
 	return (
 		<div className={styles.post__wrapper}>
 			<div className={styles.post__avatar}>
@@ -35,12 +31,7 @@ const FeedPost = React.forwardRef((props, ref) => {
 						{verified && <VerifiedRoundedIcon className={`${styles.post__user__verified}`} />}
 						<span className={styles.post__user__username}>{username}</span>
 					</div>
-					<div onClick={showOptions} className={`${styles.post__icon__wrapper} ${showOptionsActive && styles["post__icon__wrapper--active"]}`}>
-						<MoreHorizRoundedIcon className={`${styles["post__header__more-icon"]}`} />
-					</div>
-					<div className={styles.post__options__wrapper}>
-						{showOptionsActive && <OptionCardContainer options={options} ref={ref} />}
-					</div>
+					<MoreOptionContainer moreOptions={moreOptions}/>
 				</div>
 				<div className={styles.post__content}>
 					<p className={styles.post__text}>{text}</p>
@@ -86,8 +77,7 @@ FeedPost.propTypes = {
 	displayName: PropTypes.string.isRequired,
 	verified: PropTypes.bool,
 	text: PropTypes.string,
-	options: PropTypes.object,
-	showOptions: PropTypes.func,
+	moreOptions: PropTypes.object,
 	showOptionsActive: PropTypes.bool,
 };
 

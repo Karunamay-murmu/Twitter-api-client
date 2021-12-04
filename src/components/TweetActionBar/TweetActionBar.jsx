@@ -4,21 +4,22 @@ import AutorenewRoundedIcon from "@mui/icons-material/AutorenewRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 
+import styles from "./TweetActionBar.module.css";
 
 function TweetActionBar() {
 	return (
-		<div>
-			<div>
-				<ChatBubbleOutlineRoundedIcon />
+		<div className={styles.tweetaction__wrapper}>
+			<div className={styles.tweetaction__icon__wrapper} title="Reply">
+				<ChatBubbleOutlineRoundedIcon className={styles.tweetaction__icon}/>
 			</div>
-			<div>
-				<AutorenewRoundedIcon />
+			<div className={styles.tweetaction__icon__wrapper} title="Retweets">
+				<AutorenewRoundedIcon className={styles.tweetaction__icon}/>
 			</div>
-			<div>
-				<FavoriteBorderRoundedIcon />
+			<div className={styles.tweetaction__icon__wrapper} title="Like">
+				<FavoriteBorderRoundedIcon className={styles.tweetaction__icon}/>
 			</div>
-			<div>
-				<FileUploadOutlinedIcon />
+			<div className={styles.tweetaction__icon__wrapper} title="Share">
+				<FileUploadOutlinedIcon className={styles.tweetaction__icon}/>
 			</div>
 		</div>
 	);
