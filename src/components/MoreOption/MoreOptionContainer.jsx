@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuid } from "uuid";
 
 import MoreOption from "components/MoreOption/MoreOption";
+import { open, close } from "redux/actionCreator";
 
 function MoreOptionContainer(props) {
-	const [cardOpen, setCardOpen] = React.useState(false);
-	const showCardOptions = () => setCardOpen(prev => !prev);
+	const [cardId,] = useState(uuid());
+	const dispatch = useDispatch();
+	const { currentCardId, isOpen } = useSelector((state) => state.more);
+
+	const showCardOptions = (e) => {
+		const openCardId = e.target.dataset.cardId;
+		(!isOpen || openCardId !== currentCardId) ? dispatch(open({ id: openCardId })) : dispatch(close());
+	};
 
 	return (
-		<MoreOption cardOpen={cardOpen} showCard={showCardOptions} {...props}/>
+		<MoreOption cardOpen={isOpen} cardId={cardId} currentCardId={currentCardId} showCard={showCardOptions} {...props} />
 	);
 }
 

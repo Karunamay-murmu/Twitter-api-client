@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import VolumeOffOutlinedIcon from "@mui/icons-material/VolumeOffOutlined";
@@ -9,8 +8,6 @@ import CodeIcon from "@mui/icons-material/Code";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import FeedPost from "core-ui/FeedPost/FeedPost.jsx";
-
-// isFollowing, username, ...
 
 function FeedPostContainer({ isFollowing, username, ...props }) {
 	const moreOptions = [
