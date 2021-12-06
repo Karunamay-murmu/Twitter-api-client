@@ -11,6 +11,8 @@
     @include textBold();
     border-radius: 10rem;
     cursor: pointer;
+    padding: 0 1rem;
+    height: 2rem;
     span {
         line-height: 1;
     }

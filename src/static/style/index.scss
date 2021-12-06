@@ -15,6 +15,10 @@
     font-family: 'Inter', sans-serif;
 }
 
+html {
+    position: relative;
+}
+
 body {
     max-width: 1300px;
     width: 100%;
@@ -30,4 +34,14 @@ code {
 
 .logo {
     @include icon($width: 2rem, $height: 2rem, $color: $primary-blue);
+}
+
+#modal {
+    @include flex($justify: center, $align: center);
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // width: 100vw;
+    // height: 100vh;
+    // z-index: 100;
 }

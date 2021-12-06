@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
 import MoreOption from "components/MoreOption/MoreOption";
-import { open, close } from "redux/actionCreator";
+import { open, close } from "redux/slice/moreSlice";
 
 function MoreOptionContainer(props) {
 	const [cardId,] = useState(uuid());

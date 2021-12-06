@@ -30,6 +30,7 @@
     width: $width !important;
     height: $width !important;
     fill: $color !important;
+    pointer-events: none;
 }
 
 @mixin flex($direction: row, $justify: flex-start, $align: flex-start) {

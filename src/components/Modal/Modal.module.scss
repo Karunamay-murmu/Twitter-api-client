@@ -1,0 +1,60 @@
+@import "../../static/style/mixin.scss";
+
+
+.modal {
+    @include flex($justify: center, $align: center);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+
+
+    &__wrapper {
+        @include flex($direction: column);
+        background-color: #fff;
+        width: 600px;
+        border-radius: 1rem;
+    }
+
+    &__header {
+        @include flex($align: center);
+        width: 100%;
+        padding: .8rem;
+    }
+
+    &__close {
+        &__icon {
+            @include icon($width: 1.5rem);
+        }
+
+        &__wrapper {
+            @include flex($align: center, $justify: center);
+            width: 2.125rem;
+            height: 2.125rem;
+            border-radius: 50%;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $hover;
+            }
+
+        }
+    }
+
+    &__title {
+        &__wrapper {
+            flex-grow: 1;
+            margin-left: 1.5rem
+        }
+
+        &__text {
+            @include flex();
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: $primary-dark;
+        }
+    }
+}

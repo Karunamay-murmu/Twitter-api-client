@@ -88,6 +88,7 @@
   width: 1.17188rem !important;
   height: 1.17188rem !important;
   fill: #536471 !important;
+  pointer-events: none;
 }
 
 .post__content {
@@ -110,7 +111,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 0.8rem;
   margin-left: -0.5rem;
   max-width: 26.5625rem;
   width: 100%;
@@ -143,6 +143,7 @@
   width: 1.17188rem !important;
   height: 1.17188rem !important;
   fill: #1d9bf0 !important;
+  pointer-events: none;
 }
 
 .post__footer__analytics--reply:hover span, .post__footer__analytics--share:hover span, .post__footer__analytics--retweet:hover span, .post__footer__analytics--like:hover span {
@@ -157,6 +158,7 @@
   width: 1.17188rem !important;
   height: 1.17188rem !important;
   fill: #536471 !important;
+  pointer-events: none;
 }
 
 .post__icon__wrapper {
@@ -192,6 +194,7 @@
   width: 1.17188rem !important;
   height: 1.17188rem !important;
   fill: #1d9bf0 !important;
+  pointer-events: none;
 }
 
 .post__user__displayName {
@@ -204,6 +207,7 @@
   width: 1.17188rem !important;
   height: 1.17188rem !important;
   fill: #1d9bf0 !important;
+  pointer-events: none;
 }
 
 .post__user__username {

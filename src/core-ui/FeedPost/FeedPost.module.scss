@@ -51,7 +51,7 @@
 
     &__footer {
         @include flex($align: center, $justify: space-between);
-        @include margin($left: -.5rem, $top: .8rem);
+        margin-left: -0.5rem;
         max-width: 26.5625rem;
         width: 100%;
 

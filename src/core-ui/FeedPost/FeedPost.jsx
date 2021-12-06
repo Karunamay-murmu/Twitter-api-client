@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import VerifiedRoundedIcon from "@mui/icons-material/VerifiedRounded";
-import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
-import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
+// import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
+// import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
+// import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+// import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
 import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
 
 import Avatar from "components/Avatar/Avatar";
+import FeedTweetActionBar from "components/FeedTweetActionBar/FeedTweetActionBar";
 
 import styles from "./FeedPost.module.css";
 
@@ -31,7 +32,7 @@ const FeedPost = React.forwardRef((props) => {
 						{verified && <VerifiedRoundedIcon className={`${styles.post__user__verified}`} />}
 						<span className={styles.post__user__username}>{username}</span>
 					</div>
-					<MoreOptionContainer moreOptions={moreOptions}/>
+					<MoreOptionContainer moreOptions={moreOptions} />
 				</div>
 				<div className={styles.post__content}>
 					<p className={styles.post__text}>{text}</p>
@@ -40,30 +41,31 @@ const FeedPost = React.forwardRef((props) => {
 					</div>
 				</div>
 				<div className={styles.post__footer}>
-					<div className={`${styles.post__footer__analytics} ${styles["post__footer__analytics--reply"]}`}>
+					<FeedTweetActionBar />
+					{/* <div className={`${styles.post__footer__analytics} ${styles["post__footer__analytics--reply"]}`} title="Reply">
 						<div className={`${styles.post__icon__wrapper}`}>
 							<ChatBubbleOutlineRoundedIcon className={styles.post__footer__icon} />
 						</div>
 						<span>4.9K</span>
 					</div>
-					<div className={`${styles.post__footer__analytics} ${styles["post__footer__analytics--retweet"]}`}>
+					<div className={`${styles.post__footer__analytics} ${styles["post__footer__analytics--retweet"]}`} title="Retweets">
 						<div className={`${styles.post__icon__wrapper}`}>
 							<RepeatRoundedIcon className={styles.post__footer__icon} />
 						</div>
 						<span>59</span>
 					</div>
-					<div className={`${styles.post__footer__analytics} ${styles["post__footer__analytics--like"]}`}>
+					<div className={`${styles.post__footer__analytics} ${styles["post__footer__analytics--like"]}`} title="Like">
 						<div className={`${styles.post__icon__wrapper}`}>
 							<FavoriteBorderRoundedIcon className={styles.post__footer__icon} />
 						</div>
 						<span>1.1M</span>
 					</div>
-					<div className={`${styles.post__footer__analytics} ${styles["post__footer__analytics--share"]}`}>
+					<div className={`${styles.post__footer__analytics} ${styles["post__footer__analytics--share"]}`} title="Share">
 						<div className={`${styles.post__icon__wrapper}`}>
 							<IosShareRoundedIcon className={styles.post__footer__icon} />
 						</div>
 						<span>5</span>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>

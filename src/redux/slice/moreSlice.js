@@ -5,7 +5,7 @@ const initialState = {
 	isOpen: false,
 };
 
-export const more = createSlice({
+const more = createSlice({
 	name: "more",
 	initialState,
 	reducers: {
@@ -20,4 +20,8 @@ export const more = createSlice({
 		},
 	}
 });
+
+export const { open, close } = more.actions;
+
+export default more.reducer;
 

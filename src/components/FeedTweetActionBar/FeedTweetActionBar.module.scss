@@ -1,0 +1,61 @@
+@import "../../static/style/mixin.scss";
+
+
+.actionbar {
+    &__wrapper {
+        @include flex($align: center, $justify: space-between);
+        max-width: 26.5625rem;
+        width: 100%;
+    }
+
+    &__analytics {
+        @include flex($align: center);
+        @include text($size: .8125rem, $color: $gray);
+        cursor: pointer;
+
+
+        &--reply,
+        &--share,
+        &--retweet,
+        &--like {
+            &:hover {
+                div {
+                    background-color: $primary-blue-alpha-1;
+
+                    svg {
+                        @include icon($color: $primary-blue, $width: 1.171875rem);
+                    }
+                }
+
+                span {
+                    color: $primary-blue;
+                }
+            }
+        }
+
+        span {
+            @include margin($left: .25rem);
+        }
+    }
+
+    &__icon {
+        @include icon($width: 1.171875rem, $color: $gray);
+
+        &__wrapper {
+            @include flex();
+            @include padding($padding: .5rem);
+            @include transition();
+            border-radius: 50%;
+            cursor: pointer;
+
+            &:hover,
+            &--active {
+                background-color: $primary-blue-alpha-1;
+
+                svg {
+                    @include icon($width: 1.171875rem, $color: $primary-blue)
+                }
+            }
+        }
+    }
+}

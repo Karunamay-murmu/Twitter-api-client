@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import App from "./App";
+// import ModalContainer from "components/Modal/Modal";
 import Store from "redux/store";
 
 import "./static/style/index.css";
@@ -14,6 +15,7 @@ ReactDOM.render(
 		<BrowserRouter>
 			<Provider store={Store}>
 				<App />
+				{/* <ModalContainer /> */}
 			</Provider>
 		</BrowserRouter>
 	</React.StrictMode>,
