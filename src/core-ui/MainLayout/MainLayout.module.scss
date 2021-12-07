@@ -1,0 +1,8 @@
+@import "../../static/style/mixin.scss";
+
+
+.main {
+    @include mainGridWrapper();
+    height: inherit;
+    width: inherit;
+}

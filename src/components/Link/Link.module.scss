@@ -1,0 +1,46 @@
+@import "../../static/style/mixin.scss";
+
+
+.link {
+    display: block;
+
+    &__wrapper {
+        @include link($color: $primary-dark);
+        @include flex($align: center);
+        padding: .75rem 1rem;
+        width: 100%;
+    }
+
+    &__icon {
+        // @include icon($width: 1.171875rem);
+
+        &__wrapper {
+            @include flex($align: center, $justify: center);
+            width: 3rem;
+            height: 3rem;
+            margin-right: 1rem;
+        }
+    }
+
+
+    &__title {
+        &__wrapper {
+            @include flex($direction: column, $justify: space-between);
+            flex-grow: 1;
+        }
+    }
+
+    &__info {
+        @include meta($font-size: .8125rem);
+    }
+
+    &:hover,
+    &--active {
+        background-color: $light-gray;
+    }
+
+    &--active {
+        border-right: 2px solid $primary-blue;
+    }
+
+}

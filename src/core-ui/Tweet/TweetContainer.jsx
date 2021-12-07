@@ -2,9 +2,9 @@ import React from "react";
 
 import Tweet from "core-ui/Tweet/Tweet.jsx";
 
-function TweetContainer() {
+function TweetContainer(props) {
 	return (
-		<Tweet />
+		<Tweet {...props} />
 	);
 }
 

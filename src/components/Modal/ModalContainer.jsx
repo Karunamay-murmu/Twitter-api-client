@@ -1,17 +1,15 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { closeModal } from "redux/slice/modalSlice";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 import Modal from "components/Modal/Modal";
 
 function ModalContainer(props) {
 	const { isOpen } = useSelector(state => state.modal);
-	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const onCloseModal = () => {
-		if (isOpen) {
-			dispatch(closeModal());
-		}
+		isOpen && navigate(-1);
 	};
 
 	return (

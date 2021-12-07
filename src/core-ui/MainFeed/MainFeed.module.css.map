@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,KAAK,CAAC;EACF,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,WAAW;EAClC,QAAQ,EAAE,QAAQ;CAQrB;;AANI,AAAD,cAAU,CAAC;EACP,YAAY,EAAE,KAAK;EACnB,YAAY,EEFP,OAAkB;EFGvB,YAAY,EAAE,KAAK;CACtB",
+    "sources": [
+        "MainFeed.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
+    ],
+    "names": [],
+    "file": "MainFeed.module.css"
+}

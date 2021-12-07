@@ -107,14 +107,15 @@
 
 @mixin mainGridWrapper() {
     display: grid;
-    grid-template-columns: 246px 598px 348px;
+    grid-template-columns: 251px 968px;
+    // grid-template-columns: 246px 598px 348px;
     grid-gap: 1.375rem;
 }
 
-@mixin link() {
+@mixin link($color: $primary-blue) {
     text-decoration: none;
-    color: $primary-blue;
-    font-size: .935rem;
+    color: $color;
+    font-size: .9375rem;
 }
 
 @mixin feedHeader () {

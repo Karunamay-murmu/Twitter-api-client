@@ -1,0 +1,47 @@
+.setting__wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 390px 600px;
+      grid-template-columns: 390px 600px;
+  height: 100%;
+}
+
+.setting__navigation {
+  border: 1px solid #eff3f4;
+  width: 24.375rem;
+}
+
+.setting__detail {
+  border-width: 0 1px 0 0;
+  border-style: solid;
+  border-color: #eff3f4;
+}
+
+.setting__link {
+  text-decoration: none;
+  color: #0f1419;
+  font-size: .9375rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .75rem 1rem;
+}
+
+.setting__link:hover, .setting__link--active {
+  background-color: #eff3f4;
+}
+
+.setting__link--active {
+  border-right: 2px solid #1d9bf0;
+}
+/*# sourceMappingURL=SettingLayout.module.css.map */

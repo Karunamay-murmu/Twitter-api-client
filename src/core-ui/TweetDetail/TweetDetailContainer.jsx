@@ -8,6 +8,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import TweetDetail from "core-ui/TweetDetail/TweetDetail";
+import MainFeedContainer from "core-ui/MainFeed/MainFeedContainer";
 
 function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props }) {
 
@@ -15,8 +16,7 @@ function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props })
 		{
 			"text": `${isFollowing ? "Unfollow" : "Follow"} @${username}`,
 			"Icon": PersonAddAltOutlinedIcon,
-		},
-		{
+		}, {
 			"text": `Add/remove @${username} from Lists`,
 			"Icon": ListAltOutlinedIcon,
 		}, {
@@ -41,7 +41,9 @@ function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props })
 	];
 
 	return (
-		<TweetDetail moreOptions={moreOptions} {...props} />
+		<MainFeedContainer>
+			<TweetDetail moreOptions={moreOptions} {...props} />
+		</MainFeedContainer>
 	);
 }
 

@@ -115,12 +115,13 @@
   width: 1.17188rem !important;
   height: 1.17188rem !important;
   fill: #536471 !important;
+  pointer-events: none;
   margin-right: .25rem;
 }
 
 .link {
   text-decoration: none;
   color: #1d9bf0;
-  font-size: .935rem;
+  font-size: .9375rem;
 }
 /*# sourceMappingURL=Profile.module.css.map */

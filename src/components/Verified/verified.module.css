@@ -19,5 +19,6 @@
   width: 1.17188rem !important;
   height: 1.17188rem !important;
   fill: #1d9bf0 !important;
+  pointer-events: none;
 }
 /*# sourceMappingURL=verified.module.css.map */

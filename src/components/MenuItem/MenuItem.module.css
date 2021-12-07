@@ -42,6 +42,7 @@
   width: 1.5rem !important;
   height: 1.5rem !important;
   fill: #0f1419 !important;
+  pointer-events: none;
 }
 
 .menu--active {

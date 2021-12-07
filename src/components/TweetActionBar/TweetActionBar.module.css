@@ -19,6 +19,7 @@
   width: 1.40625rem !important;
   height: 1.40625rem !important;
   fill: #536471 !important;
+  pointer-events: none;
 }
 
 .tweetaction__icon__wrapper {

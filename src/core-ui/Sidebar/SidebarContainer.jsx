@@ -5,6 +5,7 @@ import OfflineBoltOutlinedIcon from "@mui/icons-material/OfflineBoltOutlined";
 import TopicOutlinedIcon from "@mui/icons-material/TopicOutlined";
 
 import Sidebar from "core-ui/Sidebar/Sidebar.jsx";
+import { SETTINGS_ROUTE } from "routes/routes";
 
 const SidebarContainer = () => {
 	const [open, setOpen] = React.useState(false);
@@ -18,6 +19,7 @@ const SidebarContainer = () => {
 		}, {
 			"text": "Settings and privacy",
 			"Icon": SettingsOutlinedIcon,
+			"href": SETTINGS_ROUTE,
 		}, {
 			"text": "Help Center",
 			"Icon": HelpOutlineOutlinedIcon,

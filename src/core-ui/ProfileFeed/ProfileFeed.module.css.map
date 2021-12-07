@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAEA,AAEQ,QAFA,CAEC,YAAO,CAAC;EACL,SAAS,EAAE,OAAO;CACrB;;AAJT,AAMQ,QANA,CAMC,WAAM,CAAC;ECwFZ,SAAS,EDvFyB,SAAQ;ECwF1C,KAAK,ECvFF,OAAO;CFAL",
+    "mappings": "AAEA,AAEQ,QAFA,CAEC,YAAO,CAAC;EACL,SAAS,EAAE,OAAO;CACrB;;AAJT,AAMQ,QANA,CAMC,WAAM,CAAC;ECyFZ,SAAS,EDxFyB,SAAQ;ECyF1C,KAAK,ECxFF,OAAO;CFAL",
     "sources": [
         "ProfileFeed.module.scss",
         "../../static/style/mixin.scss",

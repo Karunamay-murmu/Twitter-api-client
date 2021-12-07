@@ -1,0 +1,15 @@
+@import "../../static/style/mixin.scss";
+
+
+.setting {
+
+    &__wrapper {
+        width: 100%;
+    }
+
+    &__desc {
+        @include meta($font-size: .8125rem);
+        padding: .75rem 1rem;
+    }
+
+}

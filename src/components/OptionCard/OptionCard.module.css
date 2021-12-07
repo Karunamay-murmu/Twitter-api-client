@@ -58,5 +58,6 @@
   width: 18.75px !important;
   height: 18.75px !important;
   fill: #0f1419 !important;
+  pointer-events: none;
 }
 /*# sourceMappingURL=OptionCard.module.css.map */

@@ -35,6 +35,7 @@
   width: 1.5rem !important;
   height: 1.5rem !important;
   fill: #536471 !important;
+  pointer-events: none;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
 }

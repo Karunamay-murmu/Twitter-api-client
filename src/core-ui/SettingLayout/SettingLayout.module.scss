@@ -1,0 +1,39 @@
+@import "../../static/style/mixin.scss";
+
+.setting {
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 390px 600px;
+        height: 100%;
+
+    }
+
+    &__navigation {
+        border: 1px solid $light-gray;
+        width: 24.375rem;
+    }
+
+    &__detail {
+        border-width: 0 1px 0 0;
+        border-style: solid;
+        border-color: $light-gray;
+    }
+
+    &__link {
+        @include link($color: $primary-dark);
+        @include flex($justify: space-between, $align: center);
+        padding: .75rem 1rem;
+
+        &:hover,
+        &--active {
+            background-color: $light-gray;
+        }
+
+        &--active {
+            border-right: 2px solid $primary-blue;
+        }
+
+    }
+
+}

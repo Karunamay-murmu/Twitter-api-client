@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import GifOutlinedIcon from "@mui/icons-material/GifOutlined";
 import PollOutlinedIcon from "@mui/icons-material/PollOutlined";
@@ -12,7 +13,7 @@ import Avatar from "components/Avatar/Avatar.jsx";
 
 import styles from "./Tweet.module.css";
 
-function Tweet() {
+function Tweet({ inputPlaceholder = "What's happening?", inputRow = "2" }) {
 	return (
 		<div className={styles.tweet}>
 			<div className={styles.tweet__avatar}>
@@ -20,8 +21,8 @@ function Tweet() {
 			</div>
 			<div className={styles.tweet__wrapper}>
 				<InputContainer className={styles.tweet__input} tag="textarea" attributes={{
-					placeholder: "What's happening?",
-					rows: "2",
+					placeholder: inputPlaceholder,
+					rows: inputRow,
 					name: "tweet"
 				}} />
 				<div className={styles.tweet__privacy}>
@@ -52,5 +53,10 @@ function Tweet() {
 		</div>
 	);
 }
+
+Tweet.propTypes = {
+	inputPlaceholder: PropTypes.string,
+	inputRow: PropTypes.string
+};
 
 export default Tweet;

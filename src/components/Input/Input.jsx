@@ -6,8 +6,8 @@ import styles from "./Input.module.css";
 function Input({ tag, className, attributes, value, onInputChange, ...otherProps }) {
 	return (
 		tag === "input"
-			? <input className={`${styles.input} ${className}`} {...attributes} {...otherProps} value={value} onChange={onInputChange}/>
-			: <textarea className={`${styles.input} ${className}`} {...attributes} {...otherProps} value={value} onChange={onInputChange}/>
+			? <input className={`${styles.input} ${className}`} {...attributes} {...otherProps} value={value} onChange={onInputChange} />
+			: <textarea className={`${styles.input} ${className}`} {...attributes} {...otherProps} value={value} onChange={onInputChange} />
 	);
 }
 

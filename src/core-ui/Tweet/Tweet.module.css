@@ -88,6 +88,7 @@
   width: 1.25rem !important;
   height: 1.25rem !important;
   fill: #1d9bf0 !important;
+  pointer-events: none;
 }
 
 .tweet__footer {
@@ -120,8 +121,7 @@
 }
 
 .tweet__input {
-  padding-top: 1rem;
-  padding-left: 1rem;
+  padding: 1.75rem 0 0 1rem;
   font-size: 1.25rem;
   min-height: 3.125rem;
   height: auto;
@@ -154,6 +154,7 @@
   width: 1rem !important;
   height: 1rem !important;
   fill: #1d9bf0 !important;
+  pointer-events: none;
   margin-right: .25rem;
 }
 

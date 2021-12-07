@@ -23,6 +23,7 @@
         @include flex($align: center);
         width: 100%;
         padding: .8rem;
+        border-bottom: 1px solid $light-gray;
     }
 
     &__close {
@@ -56,5 +57,9 @@
             font-weight: 600;
             color: $primary-dark;
         }
+    }
+
+    &__body {
+        width: 100%;
     }
 }

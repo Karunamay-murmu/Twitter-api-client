@@ -54,7 +54,7 @@
     }
 
     &__input {
-        @include padding($top: 1rem, $left: 1rem);
+        padding: 1.75rem 0 0 1rem;
         font-size: 1.25rem;
         min-height: 3.125rem;
         height: auto;
