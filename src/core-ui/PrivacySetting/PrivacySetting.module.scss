@@ -1,0 +1,17 @@
+@import "../../static/style/mixin.scss";
+
+
+.link {
+
+    &__header {
+        font-weight: 700;
+        &__wrapper {
+            padding: .75rem 1rem;
+        }
+    }
+
+    &__wrapper {
+        padding: 0 0 .5rem 0;
+    }
+
+}

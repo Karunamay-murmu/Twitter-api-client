@@ -4,6 +4,10 @@
 .link {
     display: block;
 
+    &__header {
+        
+    }
+
     &__wrapper {
         @include link($color: $primary-dark);
         @include flex($align: center);
@@ -12,8 +16,6 @@
     }
 
     &__icon {
-        // @include icon($width: 1.171875rem);
-
         &__wrapper {
             @include flex($align: center, $justify: center);
             width: 3rem;

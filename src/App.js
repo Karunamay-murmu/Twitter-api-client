@@ -9,8 +9,9 @@ import HomeFeed from "core-ui/HomeFeed/HomeFeed.jsx";
 // import TweetContainer from "core-ui/Tweet/TweetContainer";
 import TweetModal from "core-ui/TweetModal/TweetModal";
 import MainLayout from "core-ui/MainLayout/MainLayout.jsx";
-import SettingLayout from "core-ui/SettingLayout/SettingLayout";
+import SettingLayoutContainer from "core-ui/SettingLayout/SettingLayoutContainer";
 import AccountSettingContainer from "core-ui/AccountSetting/AccountSettingContainer";
+import PrivacySettingContainer from "core-ui/PrivacySetting/PrivacySettingContainer";
 
 
 function App() {
@@ -24,8 +25,9 @@ function App() {
 					<Route index element={<HomeFeed />} />
 					<Route path=":username" element={<ProfileFeedContainer />} />
 					<Route path=":username/status/:tweetId" element={<TweetDetailContainer />} />
-					<Route path="settings" element={<SettingLayout />}>
-						<Route index path="account" element={<AccountSettingContainer />} />
+					<Route path="settings" element={<SettingLayoutContainer />}>
+						<Route path="account" element={<AccountSettingContainer />} />
+						<Route path="privacy_and_safety" element={<PrivacySettingContainer />} />
 					</Route>
 				</Route>
 			</Routes>

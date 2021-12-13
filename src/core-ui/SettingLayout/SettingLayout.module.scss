@@ -10,8 +10,9 @@
     }
 
     &__navigation {
-        border: 1px solid $light-gray;
-        width: 24.375rem;
+        border-width: 0 1px;
+        border-style: solid;
+        border-color: $light-gray;
     }
 
     &__detail {
