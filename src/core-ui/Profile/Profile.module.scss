@@ -34,11 +34,7 @@
     }
 
     &__edit {
-        height: 2.25rem;
-        padding:0 1rem;
-        background-color: $white;
-        color: $primary-dark;
-        border: 1px solid $gray;
+        @include buttonLink();
 
         &:hover {
             background-color: $hover;

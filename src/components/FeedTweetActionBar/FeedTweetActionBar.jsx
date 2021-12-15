@@ -1,21 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 
-import ModalContainer from "components/Modal/ModalContainer";
-import TweetContainer from "core-ui/Tweet/TweetContainer";
+// import ModalContainer from "components/Modal/ModalContainer";
+// import TweetContainer from "core-ui/Tweet/TweetContainer";
 
 import styles from "./FeedTweetActionBar.module.css";
 
 function FeedTweetActionBar({
-	isModalOpen,
+	// isModalOpen,
 	// handleModalOpen,
 	tweetId,
-	modalId
+	// modalId
 }) {
 	const location = useLocation();
 	// console.log(location);
@@ -48,7 +48,7 @@ function FeedTweetActionBar({
 					<span>5</span>
 				</div>
 			</div>
-			{
+			{/* {
 				isModalOpen && (modalId === tweetId) &&
 				<Routes>
 					<Route path="/compose/tweet" element={
@@ -57,7 +57,7 @@ function FeedTweetActionBar({
 						</ModalContainer>
 					} />
 				</Routes>
-			}
+			} */}
 		</>
 	);
 }

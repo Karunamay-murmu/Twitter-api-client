@@ -1,27 +1,28 @@
 import React from "react";
-import { useLocation } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+// import { useLocation } from "react-router";
+// import { useSelector, useDispatch } from "react-redux";
 
 import ModalContainer from "components/Modal/ModalContainer";
 import TweetContainer from "core-ui/Tweet/TweetContainer";
-import { openModal, closeModal } from "redux/slice/modalSlice";
+// import { openModal, closeModal } from "redux/slice/modalSlice";
+import withModal from "hoc/withModal";
 
 
 function TweetModal() {
-	const { isOpen } = useSelector(state => state.modal);
-	const dispatch = useDispatch();
-	const location = useLocation();
+	// const { isOpen } = useSelector(state => state.modal);
+	// const dispatch = useDispatch();
+	// const location = useLocation();
 
-	console.log(location);
+	// console.log(location);
 
-	React.useEffect(() => {
-		if (!isOpen) {
-			dispatch(openModal({ id: location.state.tweetId, location: location.pathname }));
-		}
-		return () => {
-			dispatch(closeModal());
-		};
-	}, []);
+	// React.useEffect(() => {
+	// 	if (!isOpen) {
+	// 		dispatch(openModal({ id: location.state.tweetId, location: location.pathname }));
+	// 	}
+	// 	return () => {
+	// 		dispatch(closeModal());
+	// 	};
+	// }, []);
 
 	return (
 		<ModalContainer emptyHeaderBtn emptyHeaderText>
@@ -31,4 +32,4 @@ function TweetModal() {
 }
 
 
-export default TweetModal;
+export default withModal(TweetModal);

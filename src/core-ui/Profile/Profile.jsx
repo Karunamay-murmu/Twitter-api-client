@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 
@@ -8,8 +9,7 @@ import DisplayName from "components/DisplayName/DisplayName";
 import Username from "components/Username/Username";
 import Bio from "components/Bio/Bio.jsx";
 import FollowInfo from "components/FollowInfo/FollowInfo.jsx";
-import Button from "components/Button/Button.jsx";
-import ModalContainer from "components/Modal/ModalContainer";
+import { EDIT_PROFILE } from "routes/routes";
 
 import styles from "./Profile.module.css";
 
@@ -21,8 +21,7 @@ function Profile({
 	location = "LOCATION",
 	following,
 	followers,
-	editProfile,
-	isModalOpen
+	routeLocation
 }) {
 	return (
 		<>
@@ -51,20 +50,15 @@ function Profile({
 							</div>
 							<FollowInfo following={following} followers={followers} />
 						</div>
-						<Button className={styles.profile__edit} attributes={{
+						<Link to={EDIT_PROFILE} state={{ background: routeLocation }} className={styles.profile__edit} attributes={{
 							title: "Edit Profile",
 							"aira-label": "Edit Profile",
-						}} onClick={editProfile}>
+						}}>
 							Edit Profile
-						</Button>
+						</Link>
 					</div>
 				</div>
 			</div>
-			{isModalOpen &&
-				<ModalContainer>
-					modal
-				</ModalContainer>
-			}
 		</>
 
 	);
@@ -80,7 +74,8 @@ Profile.propTypes = {
 	following: PropTypes.number.isRequired,
 	followers: PropTypes.number.isRequired,
 	editProfile: PropTypes.func.isRequired,
-	isModalOpen: PropTypes.bool
+	isModalOpen: PropTypes.bool,
+	routeLocation: PropTypes.string,
 };
 
 

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "AccountSetting.module.scss"
+    ],
+    "names": [],
+    "file": "AccountSetting.module.css"
+}

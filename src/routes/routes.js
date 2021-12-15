@@ -6,3 +6,6 @@ export const NOTIFICATIONS_ROUTE = "/settings/notifications";
 export const ACCESSIBILITY_DISPLAY_AND_LANGUAGE_ROUTE = "/settings/accessibility_display_and_language";
 export const ADDITIONAL_RESOURCES_ROUTE = "/settings/additional_resources";
 
+
+export const EDIT_PROFILE = `${SETTINGS_ROUTE}/edit_profile`;
+

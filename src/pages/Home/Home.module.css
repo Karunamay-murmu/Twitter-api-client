@@ -1,8 +1,8 @@
 .home {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 246px 968px;
-      grid-template-columns: 246px 968px;
+  -ms-grid-columns: 251px 968px;
+      grid-template-columns: 251px 968px;
   grid-gap: 1.375rem;
 }
 
