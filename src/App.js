@@ -1,12 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Routes, Route, useLocation } from "react-router-dom";
 
-// import Home from "pages/Home/Home.jsx";
 import ProfileFeedContainer from "core-ui/ProfileFeed/ProfileFeedContainer.jsx";
 import TweetDetailContainer from "core-ui/TweetDetail/TweetDetailContainer";
 import HomeFeed from "core-ui/HomeFeed/HomeFeed.jsx";
-// import ModalContainer from "components/Modal/ModalContainer";
-// import TweetContainer from "core-ui/Tweet/TweetContainer";
 import TweetModal from "core-ui/TweetModal/TweetModal";
 import EditProfileModal from "core-ui/EditProfileModal/EditProfileModal";
 import MainLayout from "core-ui/MainLayout/MainLayout.jsx";
@@ -15,14 +13,17 @@ import AccountSettingContainer from "core-ui/AccountSetting/AccountSettingContai
 import PrivacySettingContainer from "core-ui/PrivacySetting/PrivacySettingContainer";
 
 
-// import { EDIT_PROFILE } from "routes/routes";
-
 function App() {
+	const { isOpen } = useSelector(state => state.modal);
 	const location = useLocation();
 	const background = location.state && location.state.background;
-	console.log(background);
+
+	const style = {
+		overflow: isOpen ? "hidden" : "inherit"
+	};
+
 	return (
-		<div className="app">
+		<div className="app" style={style}>
 			<Routes location={background || location} >
 				<Route path="/" element={<MainLayout />}>
 					<Route index element={<HomeFeed />} />
@@ -38,7 +39,7 @@ function App() {
 				background &&
 				<Routes>
 					<Route path="compose/tweet" element={<TweetModal />} />
-					<Route path="settings/edit_profile" element={<EditProfileModal />}/>
+					<Route path="settings/edit_profile" element={<EditProfileModal />} />
 				</Routes>
 			}
 		</div>

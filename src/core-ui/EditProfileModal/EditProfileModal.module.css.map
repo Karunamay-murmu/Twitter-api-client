@@ -1,8 +1,10 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAEA,AAAA,MAAM,CAAC;EACH,MAAM,EAAE,KAAK;EACb,UAAU,EAAE,MAAM;EAClB,eAAe,EAAE,MAAM;CAc1B;;AAjBD,AAKI,MALE,AAKD,mBAAmB,CAAC;EACjB,KAAK,EAAE,KAAK;EACZ,gBAAgB,EEJhB,OAAO;EFKP,uBAAuB,EAAE,IAAI;EAC7B,0BAA0B,EAAE,IAAI;CACnC;;AAVL,AAYI,MAZE,AAYD,yBAAyB,CAAC;EACvB,aAAa,EAAE,IAAI;EACnB,gBAAgB,EENjB,OAAO;CFOT",
     "sources": [
-        "EditProfileModal.module.scss"
+        "EditProfileModal.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
     ],
     "names": [],
     "file": "EditProfileModal.module.css"

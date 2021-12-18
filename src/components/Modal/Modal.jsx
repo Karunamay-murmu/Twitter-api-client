@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
@@ -7,10 +8,21 @@ import Button from "components/Button/Button";
 
 import styles from "./Modal.module.css";
 
-function Modal({ children, title = "MODAL_TITLE", btnText = "BUTTON_TEXT", closeModal, emptyHeaderText=false, emptyHeaderBtn=false }) {
+function Modal({ className="", children, title = "MODAL_TITLE", btnText = "BUTTON_TEXT", closeModal, emptyHeaderText = false, emptyHeaderBtn = false }) {
+	const { isOpen } = useSelector(state => state.modal);
+	const style = isOpen ? {
+		position: "absolute",
+		top: "0",
+		left: "0",
+		bottom: "0",
+		right: "0",
+		zIndex: "100",
+		width: "100%",
+		height: "100%",
+	} : {};
 	return ReactDOM.createPortal(
-		<div className={styles.modal}>
-			<div className={styles.modal__wrapper}>
+		<div className={styles.modal} style={style}>
+			<div className={`${styles.modal__wrapper} ${className}`}>
 				<div className={styles.modal__header}>
 					<div className={styles.modal__close__wrapper} onClick={closeModal}>
 						<CloseRoundedIcon className={styles.modal__close__icon} />
@@ -29,7 +41,6 @@ function Modal({ children, title = "MODAL_TITLE", btnText = "BUTTON_TEXT", close
 							</Button>
 						</div>
 					}
-
 				</div>
 				<div className={styles.modal__body}>{children}</div>
 			</div>
@@ -44,7 +55,8 @@ Modal.propTypes = {
 	btnText: PropTypes.string,
 	closeModal: PropTypes.func.isRequired,
 	emptyHeaderText: PropTypes.bool,
-	emptyHeaderBtn: PropTypes.bool
+	emptyHeaderBtn: PropTypes.bool,
+	className: PropTypes.string
 
 };
 

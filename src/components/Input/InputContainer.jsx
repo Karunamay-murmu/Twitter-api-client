@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 import Input from "components/Input/Input.jsx";
 
-function InputContainer(props) {
+function InputContainer({ handleInputError, value, restrictInputChange = false, ...props }) {
 	const [input, setInput] = useState("");
 	const onInputChange = (e) => {
-		setInput(e.target.value);
+		!restrictInputChange && setInput(e.target.value);
+		handleInputError(e.target);
 	};
+	useEffect(() => {
+		setInput(value);
+	}, [value]);
 	return (
 		<Input {...props} value={input} onInputChange={onInputChange} />
 	);
 }
+
+InputContainer.propTypes = {
+	value: PropTypes.string,
+	handleInputError: PropTypes.func,
+	restrictInputChange: PropTypes.bool,
+};
 
 export default InputContainer;
