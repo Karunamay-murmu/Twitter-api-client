@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
 
 import InputBoxContainer from "components/InputBox/InputBoxContainer";
+import Avatar from "components/Avatar/Avatar";
 
 import styles from "./ProfileEditForm.module.css";
 
 function ProfileEditForm(props) {
 	return (
 		<div className={styles.form__wrapper}>
-			<form action="" className={styles.form}>
+			<form action="" className={styles.form} encType="multipart/form-data">
 				<div className={styles.form__input__wrapper}>
 					<InputBoxContainer
 						label="cover_photo"
@@ -22,10 +23,11 @@ function ProfileEditForm(props) {
 						}}
 						{...props}
 					>
-						<CameraAltOutlinedIcon />
+						<img className={styles.image_placeholder} id="id_cover_photo_placeholder" src="" alt="" srcSet="" />
+						<CameraAltOutlinedIcon className={styles.image_picker} />
 					</InputBoxContainer>
 				</div>
-				<div className={styles.form__input__wrapper}>
+				<div className={`${styles.form__input__wrapper} ${styles.form__input__wrapper__profile__photo}`}>
 					<InputBoxContainer
 						label="profile_photo"
 						tag="input"
@@ -37,7 +39,8 @@ function ProfileEditForm(props) {
 						}}
 						{...props}
 					>
-						<CameraAltOutlinedIcon />
+						<Avatar image={props.profile_image} className={styles.image_placeholder} />
+						<CameraAltOutlinedIcon className={styles.image_picker} />
 					</InputBoxContainer>
 				</div>
 				<div className={styles.form__input__wrapper}>
@@ -114,6 +117,7 @@ ProfileEditForm.propTypes = {
 	getInputDetails: PropTypes.func,
 	error: PropTypes.object,
 	inputLength: PropTypes.string,
+	profile_image: PropTypes.string,
 };
 
 export default ProfileEditForm;

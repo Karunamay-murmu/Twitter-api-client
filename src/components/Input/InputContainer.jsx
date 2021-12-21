@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 import Input from "components/Input/Input.jsx";
 
-function InputContainer({ handleInputError, value, restrictInputChange = false, ...props }) {
+function InputContainer({ handleInputData, value, restrictInputChange = false, ...props }) {
 	const [input, setInput] = useState("");
 	const onInputChange = (e) => {
 		!restrictInputChange && setInput(e.target.value);
-		handleInputError(e.target);
+		handleInputData(e);
 	};
 	useEffect(() => {
 		setInput(value);
@@ -19,7 +19,7 @@ function InputContainer({ handleInputError, value, restrictInputChange = false, 
 
 InputContainer.propTypes = {
 	value: PropTypes.string,
-	handleInputError: PropTypes.func,
+	handleInputData: PropTypes.func,
 	restrictInputChange: PropTypes.bool,
 };
 

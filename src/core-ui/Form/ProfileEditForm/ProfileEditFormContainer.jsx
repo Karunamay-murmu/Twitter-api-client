@@ -1,24 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ProfileEditForm from "core-ui/Form/ProfileEditForm/ProfileEditForm";
 
 function ProfileEditFormContainer(props) {
-	// const errorObj = {
-	// 	hasError: false,
-	// 	message: "",
-	// 	name: null,
-	// 	id: null,
-	// 	type: ""
-	// };
-	// const [error, setError] = useState(errorObj);
-	// // const [inputLength, setInputLength] = useState(0);
+	const [profile_image, setProfileImage] = useState(null);
 
-	// const handleInputError = (error) => {
-	// 	setError(error);
-	// };
+	const getInputDetails = (element) => {
+		console.log(element);
+		setProfileImage(element.value);
+	};
+
 
 	return (
-		<ProfileEditForm {...props} />
+		<ProfileEditForm getInputDetails={getInputDetails} profile_image={profile_image} {...props} />
 	);
 }
 

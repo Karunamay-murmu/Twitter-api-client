@@ -5,14 +5,18 @@
 }
 
 .modal::-webkit-scrollbar {
-  width: .5rem;
-  background-color: #ffffff;
+  width: 1rem;
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
 
 .modal::-webkit-scrollbar-thumb {
   border-radius: 1rem;
-  background-color: #536471;
+  background-color: #657786;
+  background-clip: padding-box;
+}
+
+.modal::-webkit-resizer {
+  display: auto;
 }
 /*# sourceMappingURL=EditProfileModal.module.css.map */

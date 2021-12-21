@@ -17,8 +17,7 @@ function InputBoxContainer(props) {
 	const [showMaxLength, setShowMaxLength] = useState(false);
 
 	const handleInputError = (element) => {
-		const { name, id, value } = element;
-		setInputLength(value.length);
+		const { name, id } = element;
 		if (element.required && !element.value) {
 			setError({
 				hasError: true,
@@ -29,8 +28,14 @@ function InputBoxContainer(props) {
 		} else {
 			setError(errorObj);
 		}
-		inputLength > Number(props.maxLength) ? setRestrictInputChange(true) : setRestrictInputChange(false);
+	};
 
+	const handleInputData = (event) => {
+		const { target } = event;
+		handleInputError(target);
+		setInputLength(target.value.length);
+		inputLength > Number(props.maxLength) ? setRestrictInputChange(true) : setRestrictInputChange(false);
+		props.getInputDetails(target);
 	};
 
 	const onInputFocusIn = () => setShowMaxLength(true);
@@ -38,7 +43,7 @@ function InputBoxContainer(props) {
 
 	return (
 		<InputBox
-			handleInputError={handleInputError}
+			handleInputData={handleInputData}
 			showMaxLength={showMaxLength}
 			restrictInputChange={restrictInputChange}
 			onInputFocusIn={onInputFocusIn}
@@ -52,6 +57,7 @@ function InputBoxContainer(props) {
 
 InputBoxContainer.propTypes = {
 	maxLength: PropTypes.string,
+	getInputDetails: PropTypes.func,
 };
 
 

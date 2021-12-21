@@ -8,7 +8,7 @@ import styles from "./InputBox.module.css";
 function InputBox({ label, value = "", error: { hasError, message }, showMaxLength, maxLength, length = value.length, children, ...props }) {
 	return (
 		<div className={styles.input}>
-			<div className={`${styles.input__group} ${hasError ? styles["input__group--error"] : ""}`}>
+			<div className={`${styles.input__group}${hasError ? " "+styles["input__group--error"] : ""}`} id={`id_group_${label}`}>
 				<InputContainer
 					id={`id_${label}`}
 					className={styles.input__field}

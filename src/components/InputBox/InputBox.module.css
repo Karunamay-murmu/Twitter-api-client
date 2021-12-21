@@ -13,6 +13,8 @@
       -ms-flex-align: start;
           align-items: flex-start;
   padding: .75rem 1rem;
+  width: 100%;
+  height: 100%;
 }
 
 .input__group {
@@ -28,6 +30,7 @@
           box-shadow: 0 0 0 1px #cfd9de;
   border-radius: .25rem;
   width: 100%;
+  height: 100%;
   overflow: hidden;
   position: relative;
 }
@@ -101,9 +104,10 @@
 
 .input__field {
   padding: 1.75rem .5rem .5rem .5rem;
+  height: 100%;
 }
 
-.input__field:not(textarea) {
+.input__field:not(textarea):not([type="file"]) {
   height: 3.5rem;
 }
 
@@ -150,7 +154,7 @@
   color: #1d9bf0;
 }
 
-.input__field:not(:placeholder-shown) ~ .input__label__wrapper > .input__label {
+.input__field:not(:placeholder-shown):not([type="file"]) ~ .input__label__wrapper > .input__label {
   top: .5rem;
   font-size: 0.8125rem;
   -webkit-transform: none;
@@ -165,31 +169,5 @@ textarea.input__field {
   width: 100%;
   height: 100%;
   resize: none;
-}
-
-.input__field[type="file"] {
-  height: 12rem;
-  visibility: hidden;
-}
-
-.input__field[id="id_cover_photo"] ~ .input__label__wrapper > .input__label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
 }
 /*# sourceMappingURL=InputBox.module.css.map */

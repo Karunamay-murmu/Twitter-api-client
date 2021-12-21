@@ -52,7 +52,11 @@
           align-items: center;
   width: 100%;
   padding: .8rem;
-  border-bottom: 1px solid #eff3f4;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 10;
 }
 
 .modal__close__icon {

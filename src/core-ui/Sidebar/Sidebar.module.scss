@@ -2,7 +2,11 @@
 
 
 .sidebar {
-    margin-top: 1rem;    
+    margin-top: 1rem;
+    position: sticky;
+    top: 1rem;
+
+
     &__wrapper {
         @include flex($direction: column);
         position: sticky;
@@ -20,6 +24,7 @@
         height: 3.25rem;
         background-color: $primary-blue;
         font-size: 1.0625rem;
+        margin-top: 1.5rem;
     }
     
     &__options {
