@@ -1,16 +1,16 @@
-.searchbar {
+.search__bar {
   padding: 0.563rem;
   background-color: #eff3f4;
   border-radius: 10rem;
 }
 
-.searchbar:focus-within {
+.search__bar:focus-within {
   background-color: #ffffff;
   -webkit-box-shadow: 0 0 0 1px #1d9bf0;
           box-shadow: 0 0 0 1px #1d9bf0;
 }
 
-.searchbar__wrapper {
+.search__bar__wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -26,17 +26,42 @@
           align-items: center;
 }
 
-.searchbar__wrapper input {
+.search__bar__wrapper input {
   font-size: 1rem;
   line-height: 1rem;
 }
 
-.searchbar__icon {
+.search__bar__icon {
   width: 1.5rem !important;
   height: 1.5rem !important;
   fill: #536471 !important;
   pointer-events: none;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
+}
+
+.search__suggestion {
+  -webkit-box-shadow: 0px 0px 15px rgba(101, 119, 134, 0.2), 0px 0px 3px 1px rgba(101, 119, 134, 0.15);
+          box-shadow: 0px 0px 15px rgba(101, 119, 134, 0.2), 0px 0px 3px 1px rgba(101, 119, 134, 0.15);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 100%;
+  font-size: 0.9375rem;
+  color: #536471;
+  margin-top: 1rem;
 }
 /*# sourceMappingURL=Search.module.css.map */

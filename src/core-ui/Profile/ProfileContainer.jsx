@@ -11,8 +11,6 @@ function ProfileContainer(props) {
 	const dispatch = useDispatch();
 	const location = useLocation();
 
-	console.log(location);
-
 	const onEditProfile = () => {
 		if (!isOpen) {
 			dispatch(openModal({ id: uuid() }));

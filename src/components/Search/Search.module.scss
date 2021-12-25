@@ -1,29 +1,36 @@
 @import "../../static/style/mixin.scss";
 
 
-.searchbar {
+.search {
+    &__bar {
+        @include padding($padding: .563rem);
+        @include background($background-color: $light-gray);
+        border-radius: 10rem;
 
-    @include padding($padding: .563rem);
-    @include background($background-color: $light-gray);
-    border-radius: 10rem;
+        &:focus-within {
+            background-color: $white;
+            box-shadow: 0 0 0 1px $primary-blue;
+        }
 
-    &:focus-within {
-        background-color: $white;
-        box-shadow: 0 0 0 1px $primary-blue;
-    }
+        &__wrapper {
+            @include flex($align: center);
+            input {
+                font-size: 1rem;
+                line-height: 1rem;
+            }
+        }
 
-    &__wrapper {
-        @include flex($align: center);
-        input {
-            font-size: 1rem;
-            line-height: 1rem;
+        &__icon {
+            @include icon($width: 1.5rem, $color: $gray);
+            @include margin($left: .5rem, $right: .5rem);
+
         }
     }
 
-    &__icon {
-        @include icon($width: 1.5rem, $color: $gray);
-        @include margin($left: .5rem, $right: .5rem);
-
+    &__suggestion {
+        @include card();
+        @include meta();
+        margin-top: 1rem;
     }
 
 }
