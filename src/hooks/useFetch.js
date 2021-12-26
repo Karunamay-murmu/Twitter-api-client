@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -9,49 +9,38 @@ import getEndpoint from "api/endpoints";
 const BASE_URL = process.env.REACT_APP_TWITTER_API_BASE_URL;
 console.log(BASE_URL);
 
-const useFetch = (type) => {
-
-	const [fetchStart, setFetchStart] = useState(false);
+const useFetch = () => {
+	const [url, setUrl] = useState(null);
 	const { data, isLoading, error, status } = useSelector(state => state.api);
 	const dispatch = useDispatch();
 
 	const CancelToken = axios.CancelToken;
 	const source = CancelToken.source();
 
-	const url = getEndpoint(type);
+	const options = useMemo(() => {
+		return {
+			baseURL: BASE_URL,
+			url,
+			method: "GET",
+			mode: "cors",
+			timeout: 1000,
+			cancelToken: source.token,
+		};
+	}, [url]);
 
-	const options = {
-		baseURL: BASE_URL,
-		url,
-		method: "GET",
-		mode: "cors",
-		headers: {
-			"Content-Type": "application/json",
-			"Access-Control-Allow-Origin": "*",
-			"Authorization": `Bearer ${process.env.REACT_APP_TWITTER_BEARER_TOKEN}`,
-		},
-		timeout: 1000,
-		responseType: "json",
-		responseEncoding: "utf8",
-		xsrfCookieName: "XSRF-TOKEN",
-		xsrfHeaderName: "X-XSRF-TOKEN",
-		cancelToken: source.token,
-	};
-
-	const doFetch = (urlSuffix, obj = {}) => {
-		setFetchStart(true);
-		options.url = options.url + urlSuffix;
+	const doFetch = (urlType, urlParam = null, obj = {}) => {
 		Object.keys(obj).map(key => {
 			options[key] = obj[key];
 		});
-		console.log(options);
+		setUrl(BASE_URL + getEndpoint(urlType) + urlParam);
 	};
 
 	useEffect(() => {
-		if (!fetchStart) {
+		if (!url) {
 			return;
 		}
 		const fetchData = async () => {
+			console.log(options);
 			dispatch(apiCallStart({
 				url: options.url,
 				method: options.method,
@@ -60,7 +49,8 @@ const useFetch = (type) => {
 			}));
 			try {
 				const response = await axios.request(options);
-				dispatch(apiCallSuccess(response));
+				console.log(response);
+				dispatch(apiCallSuccess(response.data.data));
 			} catch (error) {
 				if (axios.isCancel(error)) {
 					dispatch(apiCallFailure(error.message));
@@ -83,7 +73,7 @@ const useFetch = (type) => {
 		return () => {
 			source.cancel();
 		};
-	}, [fetchStart]);
+	}, [url]);
 
 	const api = {
 		data,
