@@ -28,10 +28,10 @@ function ProfileCard({ displayName="DisplayName", username="Username", bio="Risk
 }
 
 ProfileCard.propTypes = {
-	displayName: PropTypes.string.isRequired,
-	username: PropTypes.string.isRequired,
-	following: PropTypes.number.isRequired,
-	followers: PropTypes.number.isRequired,
+	displayName: PropTypes.string,
+	username: PropTypes.string,
+	following: PropTypes.number,
+	followers: PropTypes.number,
 	bio: PropTypes.string
 };
 

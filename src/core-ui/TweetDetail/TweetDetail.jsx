@@ -39,13 +39,13 @@ function TweetDetail({ displayName, username, moreOptions, tweet, reTweets, like
 }
 
 TweetDetail.propTypes = {
-	displayName: PropTypes.string.isRequired,
-	username: PropTypes.string.isRequired,
+	displayName: PropTypes.string,
+	username: PropTypes.string,
 	moreOptions: PropTypes.arrayOf(PropTypes.object),
-	tweet: PropTypes.object.isRequired,
-	reTweets: PropTypes.number.isRequired,
-	likes: PropTypes.number.isRequired,
-	quoteTweets: PropTypes.number.isRequired
+	tweet: PropTypes.object,
+	reTweets: PropTypes.number,
+	likes: PropTypes.number,
+	quoteTweets: PropTypes.number
 };
 
 export default TweetDetail;

@@ -10,7 +10,9 @@ function InputContainer({ handleInputData, value, restrictInputChange = false, .
 		handleInputData(e);
 	};
 	useEffect(() => {
-		setInput(value);
+		if (value) {
+			setInput(value);
+		}
 	}, [value]);
 	return (
 		<Input {...props} value={input} onInputChange={onInputChange} />

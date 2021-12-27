@@ -64,9 +64,8 @@ function FeedTweetActionBar({
 
 FeedTweetActionBar.propTypes = {
 	// handleModalOpen: PropTypes.func.isRequired,
-	tweetId: PropTypes.string.isRequired,
-	isModalOpen: PropTypes.bool.isRequired,
-	modalId: PropTypes.string.isRequired
+	tweetId: PropTypes.string,
+	isModalOpen: PropTypes.bool,
 };
 
 export default FeedTweetActionBar;

@@ -57,12 +57,12 @@ const FeedPost = React.forwardRef((props) => {
 FeedPost.displayName = "FeedPost";
 
 FeedPost.propTypes = {
-	tweetId: PropTypes.string.isRequired,
-	username: PropTypes.string.isRequired,
-	displayName: PropTypes.string.isRequired,
+	tweetId: PropTypes.string,
+	username: PropTypes.string,
+	displayName: PropTypes.string,
 	verified: PropTypes.bool,
 	text: PropTypes.string,
-	moreOptions: PropTypes.object,
+	moreOptions: PropTypes.array,
 	showOptionsActive: PropTypes.bool,
 };
 

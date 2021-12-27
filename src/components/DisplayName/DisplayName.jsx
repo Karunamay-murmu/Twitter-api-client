@@ -19,8 +19,8 @@ function DisplayName({ name, verified=false, className }) {
 }
 
 DisplayName.propTypes = {
-	name: PropTypes.string.isRequired,
-	verified: PropTypes.bool.isRequired,
+	name: PropTypes.string,
+	verified: PropTypes.bool,
 	className: PropTypes.string
 };
 

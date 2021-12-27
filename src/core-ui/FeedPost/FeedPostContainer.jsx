@@ -52,8 +52,8 @@ function FeedPostContainer({ isFollowing, username, ...props }) {
 }
 
 FeedPostContainer.propTypes = {
-	isFollowing: PropTypes.bool.isRequired,
-	username: PropTypes.string.isRequired,
+	isFollowing: PropTypes.bool,
+	username: PropTypes.string,
 };
 
 export default FeedPostContainer;

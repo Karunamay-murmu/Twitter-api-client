@@ -52,7 +52,7 @@ function Profile({ profile, routeLocation }) {
 									</a>
 								</div>
 							</div>
-							<FollowInfo following={following_count} followers={followers_count} />
+							<FollowInfo following={`${following_count}`} followers={followers_count} />
 						</div>
 						<Link to={EDIT_PROFILE} state={{ background: routeLocation }} className={styles.profile__edit} attributes={{
 							title: "Edit Profile",
@@ -80,7 +80,7 @@ Profile.propTypes = {
 	// editProfile: PropTypes.func,
 	// isModalOpen: PropTypes.bool,
 
-	routeLocation: PropTypes.string,
+	routeLocation: PropTypes.object,
 	profile: PropTypes.object,
 };
 

@@ -21,7 +21,7 @@ function FeedTweetActionBarContainer({ tweetId, ...props }) {
 }
 
 FeedTweetActionBarContainer.propTypes = {
-	tweetId: PropTypes.string.isRequired,
+	tweetId: PropTypes.string,
 };
 
 export default FeedTweetActionBarContainer;

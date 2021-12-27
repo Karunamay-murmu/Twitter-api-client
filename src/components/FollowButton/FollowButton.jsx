@@ -19,8 +19,8 @@ function FollowButton({ isFollowing, user }) {
 }
 
 FollowButton.propTypes = {
-	isFollowing: PropTypes.bool.isRequired,
-	user: PropTypes.object.isRequired
+	isFollowing: PropTypes.bool,
+	user: PropTypes.object
 };
 
 export default FollowButton;

@@ -49,8 +49,8 @@ function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props })
 
 
 TweetDetailContainer.propTypes = {
-	username: PropTypes.string.isRequired,
-	isFollowing: PropTypes.bool.isRequired,
+	username: PropTypes.string,
+	isFollowing: PropTypes.bool,
 };
 
 export default TweetDetailContainer;

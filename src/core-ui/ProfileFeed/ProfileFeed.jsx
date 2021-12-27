@@ -31,8 +31,8 @@ function ProfileFeed({ username, tweetcount, ...props }) {
 }
 
 ProfileFeed.propTypes = {
-	username: PropTypes.string.isRequired,
-	tweetcount: PropTypes.string.isRequired,
+	username: PropTypes.string,
+	tweetcount: PropTypes.string,
 };
 
 
