@@ -11,7 +11,7 @@ console.log(BASE_URL);
 
 const useFetch = () => {
 	const [url, setUrl] = useState(null);
-	const { data, isLoading, error, status } = useSelector(state => state.api);
+	let { data, isLoading, error, status } = useSelector(state => state.api);
 	const dispatch = useDispatch();
 
 	const CancelToken = axios.CancelToken;
@@ -23,7 +23,7 @@ const useFetch = () => {
 			url,
 			method: "GET",
 			mode: "cors",
-			timeout: 1000,
+			timeout: 10000,
 			cancelToken: source.token,
 		};
 	}, [url]);
@@ -55,14 +55,6 @@ const useFetch = () => {
 				if (axios.isCancel(error)) {
 					dispatch(apiCallFailure(error.message));
 				} else {
-					// let errorObj;
-					// if (error.response) {
-					// 	errorObj = error.response;
-					// } else if (error.request) {
-					// 	errorObj = error.request;
-					// }
-					// else {
-					// }
 					dispatch(apiCallFailure(error.message));
 				}
 			} finally {

@@ -13,16 +13,20 @@ import { EDIT_PROFILE } from "routes/routes";
 
 import styles from "./Profile.module.css";
 
-function Profile({
-	username = "USERNAME",
-	displayName = "DISPLAY_NAME",
-	bio = "BIO",
-	website = "WEBSITE.COM",
-	location = "LOCATION",
-	following,
-	followers,
-	routeLocation
-}) {
+function Profile({ profile, routeLocation }) {
+	let {
+		name,
+		location,
+		username,
+		verified,
+		url,
+		description,
+		public_metrics: {
+			followers_count,
+			following_count,
+		},
+	} = profile;
+
 	return (
 		<>
 			<div className={styles.profile}>
@@ -33,9 +37,9 @@ function Profile({
 							<div className={styles.profile__avatar__container}>
 								<Avatar className={styles.profile__avatar} />
 							</div>
-							<DisplayName name={displayName} className={styles.profile__displayName} />
+							<DisplayName name={name} verified={verified} className={styles.profile__displayName} />
 							<Username name={username} />
-							<Bio bio={bio} />
+							<Bio bio={description} />
 							<div className={styles.profile__extra}>
 								<div className={styles.profile__extra__container}>
 									<LocationOnOutlinedIcon className={styles.icon} />
@@ -43,12 +47,12 @@ function Profile({
 								</div>
 								<div className={styles.profile__extra__container}>
 									<LanguageOutlinedIcon className={styles.icon} />
-									<a href={website} target="_blank" rel="noopener noreferrer" className={styles.link}>
-										{website}
+									<a href={url} target="_blank" rel="noopener noreferrer" className={styles.link}>
+										{url}
 									</a>
 								</div>
 							</div>
-							<FollowInfo following={following} followers={followers} />
+							<FollowInfo following={following_count} followers={followers_count} />
 						</div>
 						<Link to={EDIT_PROFILE} state={{ background: routeLocation }} className={styles.profile__edit} attributes={{
 							title: "Edit Profile",
@@ -66,16 +70,18 @@ function Profile({
 
 
 Profile.propTypes = {
-	username: PropTypes.string.isRequired,
-	displayName: PropTypes.string.isRequired,
-	bio: PropTypes.string,
-	website: PropTypes.string,
-	location: PropTypes.string,
-	following: PropTypes.number.isRequired,
-	followers: PropTypes.number.isRequired,
-	editProfile: PropTypes.func.isRequired,
-	isModalOpen: PropTypes.bool,
+	// username: PropTypes.string,
+	// name: PropTypes.string,
+	// description: PropTypes.string,
+	// url: PropTypes.string,
+	// location: PropTypes.string,
+	// following_count: PropTypes.number,
+	// followers_count: PropTypes.number,
+	// editProfile: PropTypes.func,
+	// isModalOpen: PropTypes.bool,
+
 	routeLocation: PropTypes.string,
+	profile: PropTypes.object,
 };
 
 
