@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SearchIcon from "@mui/icons-material/Search";
+import { Link } from "react-router-dom";
 
 import InputContainer from "components/Input/InputContainer";
 // import OptionCardContainer from "components/OptionCard/OptionCardContainer";
 
 import styles from "./Search.module.css";
 
-function Search({ showSuggestion, handleSubmitSearchQuery, ...props }) {
+function Search({ showSuggestion, handleSubmitSearchQuery, query, ...props }) {
 	return (
 		<div className={styles.search}>
 			<div className={styles.search__bar}>
@@ -27,7 +28,18 @@ function Search({ showSuggestion, handleSubmitSearchQuery, ...props }) {
 				</form>
 			</div>
 			{showSuggestion && <div className={styles.search__suggestion}>
-				<span>Try searching for people, topics or keywords</span>
+				<div className={styles.search__suggestion__list}>
+					{
+						query ?
+							<>
+								<div className={styles.search__suggestion__list__item}>Search for &#34;{query}&#34;</div>
+								<Link to={`/${query}`} className={styles.search__suggestion__list__item}>Go to @{query}</Link>
+							</>
+
+							:
+							<div className={styles.search__suggestion__list__item}>Try searching for people, topics or keywords</div>
+					}
+				</div>
 			</div>}
 		</div>
 	);
@@ -36,6 +48,8 @@ function Search({ showSuggestion, handleSubmitSearchQuery, ...props }) {
 Search.propTypes = {
 	showSuggestion: PropTypes.bool,
 	handleSubmitSearchQuery: PropTypes.func,
+	query: PropTypes.string,
+	queryChanging: PropTypes.bool
 };
 
 export default Search;

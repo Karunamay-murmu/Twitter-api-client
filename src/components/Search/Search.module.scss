@@ -28,9 +28,21 @@
     }
 
     &__suggestion {
-        @include card();
-        @include meta();
+        @include flex();
         margin-top: 1rem;
+        
+        &__list {
+            @include flex($direction: column);
+            @include listWrapper();
+            width: 100%;
+            
+            &__item {
+                @include meta();
+                @include listItem();
+            }
+
+        }
+
     }
 
 }

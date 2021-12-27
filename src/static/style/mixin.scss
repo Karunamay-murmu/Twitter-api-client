@@ -150,3 +150,24 @@
     padding: 1rem;
     width: 100%;
 }
+
+@mixin listWrapper(){
+    @include flex($direction: column, $justify: space-between);
+    @include boxShadow();
+    padding: .25rem 0;
+    width: 100%;
+    background-color: $white;
+    border-radius: .5rem;
+}
+
+@mixin listItem(){
+    @include flex($direction: row, $justify: space-between);
+    width: 100%;
+    padding: 1rem;
+
+    &:hover {
+        background-color: $light-gray;
+        cursor: pointer;
+    }
+
+}

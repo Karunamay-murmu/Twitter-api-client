@@ -28,7 +28,7 @@ const useFetch = () => {
 		};
 	}, [url]);
 
-	const doFetch = (urlType, urlParam = null, obj = {}) => {
+	const doFetch = (urlType, urlParam = "", obj = {}) => {
 		Object.keys(obj).map(key => {
 			options[key] = obj[key];
 		});
