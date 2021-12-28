@@ -14,7 +14,6 @@
     &__info {
         @include flex($direction: column);
         flex: 1;
-        margin-top: 4.1675rem;
     }
 
     &__extra {
@@ -34,8 +33,13 @@
     }
 
     &__edit {
-        @include buttonLink();
+        
+        &__wrapper {
+            @include flex($align: center, $justify: flex-end);
+            padding: 1rem;
+        }
 
+        @include buttonLink();
         &:hover {
             background-color: $hover;
         }
@@ -47,13 +51,19 @@
         height: 100%;
         &__container {
             border: 4px solid $white;
-            width:8.335rem;
-            height:8.335rem;
+            width:9.09375rem;
+            height:9.09375rem;
             border-radius: 100%;
             position:absolute;
-            top: -4.1675rem;
+            top: 8rem;
+            left: 1rem;
         }
-        // width
+    }
+
+    &__photos {
+        &__wrapper {
+            position: relative;
+        }
     }
 
     &__coverphoto {

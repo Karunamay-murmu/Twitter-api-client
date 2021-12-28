@@ -18,7 +18,6 @@ import OptionCardContainer from "components/OptionCard/OptionCardContainer";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = React.forwardRef(({ options, showMoreOption, showCard }, ref) => {
-	console.log(showMoreOption);
 	return (
 		<div className={styles.sidebar}>
 			<div className={styles.sidebar__wrapper}>

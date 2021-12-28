@@ -3,17 +3,20 @@ import PropTypes from "prop-types";
 
 import styles from "./Bio.module.css";
 
-function DisplayName({ bio, className }) {
+function Bio({ dangerouslySetInnerHTML, className }) {
+	console.log(dangerouslySetInnerHTML);
 	return (
-		<div className={`${styles.bio} ${className??""}`}>
-			{bio}
+
+		<div className={`${styles.bio} ${className ?? ""}`} dangerouslySetInnerHTML={dangerouslySetInnerHTML}>
 		</div>
 	);
 }
 
-DisplayName.propTypes = {
+Bio.propTypes = {
 	bio: PropTypes.string.isRequired,
-	className: PropTypes.string
+	className: PropTypes.string,
+	children: PropTypes.node,
+	dangerouslySetInnerHTML: PropTypes.object,
 };
 
-export default DisplayName;
+export default Bio;

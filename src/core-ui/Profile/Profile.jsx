@@ -7,7 +7,7 @@ import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import Avatar from "components/Avatar/Avatar";
 import DisplayName from "components/DisplayName/DisplayName";
 import Username from "components/Username/Username";
-import Bio from "components/Bio/Bio.jsx";
+import BioContainer from "components/Bio/BioContainer.jsx";
 import FollowInfo from "components/FollowInfo/FollowInfo.jsx";
 import { EDIT_PROFILE } from "routes/routes";
 
@@ -19,27 +19,43 @@ function Profile({ profile, routeLocation }) {
 		location,
 		username,
 		verified,
-		url,
 		description,
 		public_metrics: {
 			followers_count,
 			following_count,
 		},
+		entities,
+		profile_image_url,
+		profile_display_url,
+		profile_url
 	} = profile;
+
+	console.log(profile_url);
+	console.log(profile_display_url);
 
 	return (
 		<>
 			<div className={styles.profile}>
 				<div className={styles.profile__wrapper}>
-					<div className={styles.profile__coverphoto__container}></div>
+					<div className={styles.profile__photos__wrapper}>
+						<div className={styles.profile__coverphoto__container}></div>
+						<div className={styles.profile__avatar__container}>
+							<Avatar className={styles.profile__avatar} image={profile_image_url} />
+						</div>
+					</div>
+					<div className={styles.profile__edit__wrapper}>
+						<Link to={EDIT_PROFILE} state={{ background: routeLocation }} className={styles.profile__edit} attributes={{
+							title: "Edit Profile",
+							"aira-label": "Edit Profile",
+						}}>
+							Edit Profile
+						</Link>
+					</div>
 					<div className={styles.profile__info__wrapper}>
 						<div className={styles.profile__info}>
-							<div className={styles.profile__avatar__container}>
-								<Avatar className={styles.profile__avatar} />
-							</div>
 							<DisplayName name={name} verified={verified} className={styles.profile__displayName} />
 							<Username name={username} />
-							<Bio bio={description} />
+							<BioContainer entities={entities.description} bio={description} />
 							<div className={styles.profile__extra}>
 								<div className={styles.profile__extra__container}>
 									<LocationOnOutlinedIcon className={styles.icon} />
@@ -47,19 +63,14 @@ function Profile({ profile, routeLocation }) {
 								</div>
 								<div className={styles.profile__extra__container}>
 									<LanguageOutlinedIcon className={styles.icon} />
-									<a href={url} target="_blank" rel="noopener noreferrer" className={styles.link}>
-										{url}
+									<a href={profile_url} target="_blank" rel="noopener noreferrer" className={styles.link}>
+										{profile_display_url}
 									</a>
 								</div>
 							</div>
-							<FollowInfo following={`${following_count}`} followers={followers_count} />
+							<FollowInfo following={`${following_count}`} followers={`${followers_count}`} />
 						</div>
-						<Link to={EDIT_PROFILE} state={{ background: routeLocation }} className={styles.profile__edit} attributes={{
-							title: "Edit Profile",
-							"aira-label": "Edit Profile",
-						}}>
-							Edit Profile
-						</Link>
+
 					</div>
 				</div>
 			</div>

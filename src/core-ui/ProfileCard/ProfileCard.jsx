@@ -10,7 +10,7 @@ import Bio from "components/Bio/Bio.jsx";
 
 import styles from "./profilecard.module.css";
 
-function ProfileCard({ displayName="DisplayName", username="Username", bio="Risk management, be ready to enjoy the best case, be ready to handle the worst case", following=187, followers="2.3M" }) {
+function ProfileCard({ displayName="DisplayName", username="Username", bio="Risk management, be ready to enjoy the best case, be ready to handle the worst case", following="187", followers="2.3M" }) {
 	return (
 		<div className={styles.profile__wrapper}>
 			<div className={styles.profile__avatar}>

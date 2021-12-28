@@ -3,4 +3,5 @@
 
 .name {
     @include title();
+    @include flex($align: center);
 }
