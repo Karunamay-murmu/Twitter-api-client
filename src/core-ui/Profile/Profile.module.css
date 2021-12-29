@@ -17,6 +17,10 @@
   position: relative;
 }
 
+.profile__info__wrapper a:hover {
+  text-decoration: underline;
+}
+
 .profile__info {
   display: -webkit-box;
   display: -ms-flexbox;

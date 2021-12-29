@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+// import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
+import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 
 import Avatar from "components/Avatar/Avatar";
 import DisplayName from "components/DisplayName/DisplayName";
@@ -15,6 +17,7 @@ import styles from "./Profile.module.css";
 
 function Profile({ profile, routeLocation }) {
 	let {
+		created_at,
 		name,
 		location,
 		username,
@@ -29,9 +32,6 @@ function Profile({ profile, routeLocation }) {
 		profile_display_url,
 		profile_url
 	} = profile;
-
-	console.log(profile_url);
-	console.log(profile_display_url);
 
 	return (
 		<>
@@ -55,22 +55,25 @@ function Profile({ profile, routeLocation }) {
 						<div className={styles.profile__info}>
 							<DisplayName name={name} verified={verified} className={styles.profile__displayName} />
 							<Username name={username} />
-							<BioContainer entities={entities.description} bio={description} />
+							{description && <BioContainer entities={entities.description} bio={description} />}
 							<div className={styles.profile__extra}>
-								<div className={styles.profile__extra__container}>
-									<LocationOnOutlinedIcon className={styles.icon} />
+								{location && <div className={styles.profile__extra__container}>
+									<LocationOnRoundedIcon className={styles.icon} />
 									{location}
-								</div>
-								<div className={styles.profile__extra__container}>
+								</div>}
+								{profile_display_url && <div className={styles.profile__extra__container}>
 									<LanguageOutlinedIcon className={styles.icon} />
 									<a href={profile_url} target="_blank" rel="noopener noreferrer" className={styles.link}>
 										{profile_display_url}
 									</a>
-								</div>
+								</div>}
+								{created_at && <div className={styles.profile__extra__container}>
+									<DateRangeOutlinedIcon className={styles.icon} />
+									Joined {created_at}
+								</div>}
 							</div>
 							<FollowInfo following={`${following_count}`} followers={`${followers_count}`} />
 						</div>
-
 					</div>
 				</div>
 			</div>

@@ -1,32 +1,23 @@
-import React, { useEffect, useMemo } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import React, { useMemo } from "react";
+import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 import Profile from "core-ui/Profile/Profile.jsx";
-import useFetch from "hooks/useFetch";
-import endpoints from "api/endpoints";
 
 function ProfileContainer(props) {
 	const location = useLocation();
-	const params = useParams();
+	const user = props.user;
 
-	const [api, doFetch] = useFetch();
-
-	console.log(api);
-
-	useEffect(() => {
-		doFetch(endpoints.getUserByUsername(params.username));
-	}, [params.username]);
-
-
+	console.log(props);
 
 	const normalizeData = useMemo(() => {
 
-		if (!api.data) {
+		if (!user.data) {
 			return;
 		}
 
-		const profile = api.data;
-		let { entities, description, url } = profile;
+		const profile = user.data;
+		let { entities, description, url, created_at } = profile;
 
 		let expand_profile = {};
 
@@ -42,20 +33,25 @@ function ProfileContainer(props) {
 			}
 		}
 
+		const date = new Date(created_at);
+		const year = date.getFullYear();
+		const month = date.toLocaleDateString("default", { month: "long" });
+
 		return {
 			...profile,
 			...expand_profile,
 			description,
 			entities,
 			url,
+			created_at: `${month} ${year}`,
 
 		};
 
-	}, [api.data]);
+	}, [user.data]);
 
 	return (
 		<>
-			{!api.data ? <div>Loading</div>
+			{!user.data ? <div>Loading</div>
 
 				:
 				<Profile profile={normalizeData} routeLocation={location} {...props} />
@@ -64,5 +60,11 @@ function ProfileContainer(props) {
 	);
 }
 
+ProfileContainer.propTypes = {
+	user: PropTypes.object,
+};
 
-export default ProfileContainer;
+
+export default React.memo(ProfileContainer, (prev, next) => {
+	return prev.user.data === next.user.data;
+});

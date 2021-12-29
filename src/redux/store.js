@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import moreReducer from "redux/slice/moreSlice";
 import modalReducer from "redux/slice/modalSlice";
-import userProfileReducer from "redux/slice/userProfileSlice";
+import userProfileReducer from "redux/slice/userSlice";
 import apiReducer from "redux/slice/apiSlice";
 // import { apiSlice } from "redux/apiSlice";
 

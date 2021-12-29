@@ -14,7 +14,6 @@ function Home() {
 			<div className={styles.home__outlet}>
 				<Outlet />
 			</div>
-			<WidgetBar />
 		</div>
 	);
 }

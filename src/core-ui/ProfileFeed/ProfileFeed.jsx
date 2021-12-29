@@ -8,17 +8,19 @@ import FeedHeader from "components/FeedHeader/FeedHeader";
 
 import styles from "./ProfileFeed.module.css";
 
-function ProfileFeed({ username, tweetcount, ...props }) {
+function ProfileFeed({ user, ...props }) {
+	console.log(user.data);
+	const { name, verified, public_metrics: { tweet_count } } = user.data;
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.feed}>
 				<FeedHeader>
-					<DisplayName name={username} className={styles.feed__title} />
+					<DisplayName name={name} className={styles.feed__title} verified={verified} />
 					<div className={styles.feed__meta}>
-						{tweetcount || "15.5K"} Tweets
+						{tweet_count} Tweets
 					</div>
 				</FeedHeader>
-				<ProfileContainer {...props} />
+				<ProfileContainer {...props} user={user} />
 				<div>
 					<FeedPostContainer />
 					<FeedPostContainer />
@@ -31,9 +33,12 @@ function ProfileFeed({ username, tweetcount, ...props }) {
 }
 
 ProfileFeed.propTypes = {
-	username: PropTypes.string,
-	tweetcount: PropTypes.string,
+	user: PropTypes.object,
+
 };
 
 
 export default ProfileFeed;
+// export default React.memo(ProfileFeed, (prev, next) => {
+// 	return prev.user.data === next.user.data;
+// });

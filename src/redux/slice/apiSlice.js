@@ -3,12 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 let initialState = {
 	data: null,
 	isLoading: false,
+	isFetching: false,
 	error: null,
 	url: null,
 	method: null,
 	body: null,
 	params: null,
-	status: ""
+	status: "",
 };
 
 
@@ -36,10 +37,6 @@ const apiSlice = createSlice({
 		},
 		apiCallFinish: (state) => {
 			state.isLoading = false;
-			state.url = null;
-			state.method = null;
-			state.body = null;
-			state.params = null;
 			state.status = "api fetching finished";
 		}
 	}

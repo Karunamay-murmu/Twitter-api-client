@@ -2,9 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
-// import { getUserProfileFailure, getUserProfileStart, getUserProfileSuccess } from "redux/slice/userProfileSlice";
 import { apiCallStart, apiCallSuccess, apiCallFailure, apiCallFinish } from "redux/slice/apiSlice";
-// import getEndpoint from "api/endpoints";
 
 const BASE_URL = process.env.REACT_APP_TWITTER_API_BASE_URL;
 
@@ -18,7 +16,7 @@ const useFetch = () => {
 		timeout: 10000,
 		cancelToken: cancelToken.token,
 	});
-	let { data, isLoading, error, status } = useSelector(state => state.api);
+	let { data, url, isLoading, error, status } = useSelector(state => state.api);
 	const dispatch = useDispatch();
 
 
@@ -62,6 +60,7 @@ const useFetch = () => {
 
 	const api = {
 		data,
+		url,
 		isLoading,
 		error,
 		status,
