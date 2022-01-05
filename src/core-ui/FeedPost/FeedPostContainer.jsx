@@ -9,24 +9,26 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import FeedPost from "core-ui/FeedPost/FeedPost.jsx";
 
-function FeedPostContainer({ isFollowing, username, ...props }) {
+function FeedPostContainer({ isFollowing, user, tweet,...props }) {
+	console.log(tweet);
+	console.log(user);
 	const moreOptions = [
 		{
-			"text": `${isFollowing ? "Unfollow" : "Follow"} @${username}`,
+			"text": `${isFollowing ? "Unfollow" : "Follow"}`,
 			"Icon": PersonAddAltOutlinedIcon,
 		},
 		{
-			"text": `Add/remove @${username} from Lists`,
+			"text": "Add/remove from Lists",
 			"Icon": ListAltOutlinedIcon,
 		}, {
-			"text": `Mute @${username}`,
+			"text": "Mute",
 			"Icon": VolumeOffOutlinedIcon,
 		}, {
 			"text": "Mute this conversation",
 			"Icon": VolumeOffOutlinedIcon,
 		}
 		, {
-			"text": `Block @${username}`,
+			"text": "Block",
 			"Icon": BlockIcon,
 		}
 		, {
@@ -39,13 +41,25 @@ function FeedPostContainer({ isFollowing, username, ...props }) {
 		}
 	];
 
-	// const replyTweet = () => {
-		
-	// };
+	// const {
+	// 	id,
+	// 	username,
+	// 	name,
+	// 	verified,
+	// 	public_metrics: {
+	// 		tweet_count,
+	// 		follower_count,
+	// 		following_count,
+	// 		likes_count,
+	// 		retweet_count,
+
+	// } = tweet;
+
 
 	return (
 		<FeedPost
 			moreOptions={moreOptions ?? null}
+			{...user}
 			{...props}
 		/>
 	);
@@ -53,7 +67,8 @@ function FeedPostContainer({ isFollowing, username, ...props }) {
 
 FeedPostContainer.propTypes = {
 	isFollowing: PropTypes.bool,
-	username: PropTypes.string,
+	user: PropTypes.object,
+	tweet: PropTypes.array,
 };
 
-export default FeedPostContainer;
+export default React.memo(FeedPostContainer);

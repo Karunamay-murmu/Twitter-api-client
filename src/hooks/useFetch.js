@@ -41,7 +41,7 @@ const useFetch = () => {
 			}));
 			try {
 				const response = await axios.request(options);
-				dispatch(apiCallSuccess(response.data.data));
+				dispatch(apiCallSuccess(response.data));
 			} catch (error) {
 				if (axios.isCancel(error)) {
 					dispatch(apiCallFailure(error.message));

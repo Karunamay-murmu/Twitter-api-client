@@ -1,0 +1,43 @@
+@import "../../static/style/mixin.scss";
+
+
+.menu {
+    @include flex($justify: space-between);
+
+    &__item__wrapper {
+        @include flex();
+        flex-grow: 1;
+        position: relative;
+    }
+
+    &__item {
+        @include flex($align: center, $justify: center);
+        @include textBold($weight: 600);
+        @include link($color: $gray);
+        width: 100%;
+
+        &__content {
+            padding: 1rem .5rem;
+            position: relative;
+        }
+
+        &:hover {
+            background-color: $hover;
+        }
+    }
+}
+
+.menu__item--active>.menu__item>.menu__item__content {
+    @include link($color: $primary-dark);
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: $primary-blue;
+        height: 5px;
+        border-radius: 50rem;
+    }
+}

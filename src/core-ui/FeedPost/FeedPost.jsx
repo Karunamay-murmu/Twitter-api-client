@@ -12,6 +12,7 @@ import Avatar from "components/Avatar/Avatar";
 import FeedTweetActionBarContainer from "components/FeedTweetActionBar/FeedTweetActionBarContainer";
 
 import styles from "./FeedPost.module.css";
+import DisplayName from "components/DisplayName/DisplayName";
 
 const FeedPost = React.forwardRef((props) => {
 	const {
@@ -22,7 +23,6 @@ const FeedPost = React.forwardRef((props) => {
 		text = "Risk management, be ready to enjoy the best case, be ready to handle the worst case. Don’t invest more than you can lose.",
 		moreOptions,
 	} = props;
-	// const { isOpen } = useSelector((state) => state.modal);
 	return (
 		<>
 			<div className={styles.post__wrapper} data-tweet-id={tweetId}>
@@ -32,6 +32,7 @@ const FeedPost = React.forwardRef((props) => {
 				<div className={styles.post__body}>
 					<div className={styles.post__header}>
 						<div className={styles.post__header__info}>
+							<DisplayName name="Name"/>
 							<span className={styles.post__user__displayName}>{displayName}</span>
 							{verified && <VerifiedRoundedIcon className={`${styles.post__user__verified}`} />}
 							<span className={styles.post__user__username}>{username}</span>

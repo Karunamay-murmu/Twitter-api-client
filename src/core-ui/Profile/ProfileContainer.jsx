@@ -8,15 +8,13 @@ function ProfileContainer(props) {
 	const location = useLocation();
 	const user = props.user;
 
-	console.log(props);
-
 	const normalizeData = useMemo(() => {
 
-		if (!user.data) {
+		if (!user) {
 			return;
 		}
 
-		const profile = user.data;
+		const profile = user;
 		let { entities, description, url, created_at } = profile;
 
 		let expand_profile = {};
@@ -47,11 +45,11 @@ function ProfileContainer(props) {
 
 		};
 
-	}, [user.data]);
+	}, [user]);
 
 	return (
 		<>
-			{!user.data ? <div>Loading</div>
+			{!user ? <div>Loading</div>
 
 				:
 				<Profile profile={normalizeData} routeLocation={location} {...props} />
@@ -66,5 +64,5 @@ ProfileContainer.propTypes = {
 
 
 export default React.memo(ProfileContainer, (prev, next) => {
-	return prev.user.data === next.user.data;
+	return prev.user === next.user;
 });
