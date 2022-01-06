@@ -1,0 +1,39 @@
+@import "../../static/style/mixin.scss";
+
+.spinner {
+    @include flex($justify: center, $align: center, $direction: column);
+    padding: 1rem;
+
+    &__outer {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        position: relative;
+        border: 4px solid $primary-blue-alpha-1;
+        border-top-color: $primary-blue;
+        border-right-color: $primary-blue;
+        animation: spin 1s linear infinite;
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+    }
+
+    &__message {
+        @include text();
+        margin: .5rem 1rem 1rem;
+    }
+}

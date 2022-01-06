@@ -51,7 +51,7 @@
 
 .input__label {
   font-size: 1.0625rem;
-  color: #536471;
+  color: #52636f;
   -webkit-transition-duration: 150ms;
           transition-duration: 150ms;
   -webkit-transition-property: all;
@@ -140,7 +140,7 @@
 
 .input__length {
   font-size: 0.8125rem;
-  color: #536471;
+  color: #52636f;
   position: absolute;
   top: .5rem;
   right: .5rem;

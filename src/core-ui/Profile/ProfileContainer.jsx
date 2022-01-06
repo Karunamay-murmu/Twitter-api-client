@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 
 import Profile from "core-ui/Profile/Profile.jsx";
+import Spinner from "components/Spinner/Spinner";
 
 function ProfileContainer(props) {
 	const location = useLocation();
@@ -49,7 +50,9 @@ function ProfileContainer(props) {
 
 	return (
 		<>
-			{!user ? <div>Loading</div>
+			{!user ? <div>
+				<Spinner />
+			</div>
 
 				:
 				<Profile profile={normalizeData} routeLocation={location} {...props} />

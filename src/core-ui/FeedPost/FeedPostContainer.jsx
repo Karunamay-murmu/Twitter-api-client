@@ -9,26 +9,24 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import FeedPost from "core-ui/FeedPost/FeedPost.jsx";
 
-function FeedPostContainer({ isFollowing, user, tweet,...props }) {
-	console.log(tweet);
-	console.log(user);
+function FeedPostContainer({ isFollowing, ...props }) {
 	const moreOptions = [
 		{
-			"text": `${isFollowing ? "Unfollow" : "Follow"}`,
+			"text": `${isFollowing ? "Unfollow" : "Follow"} ${props.user.name}`,
 			"Icon": PersonAddAltOutlinedIcon,
 		},
 		{
 			"text": "Add/remove from Lists",
 			"Icon": ListAltOutlinedIcon,
 		}, {
-			"text": "Mute",
+			"text": `Mute ${props.user.name}`,
 			"Icon": VolumeOffOutlinedIcon,
 		}, {
 			"text": "Mute this conversation",
 			"Icon": VolumeOffOutlinedIcon,
 		}
 		, {
-			"text": "Block",
+			"text": `Block ${props.user.name}`,
 			"Icon": BlockIcon,
 		}
 		, {
@@ -59,7 +57,6 @@ function FeedPostContainer({ isFollowing, user, tweet,...props }) {
 	return (
 		<FeedPost
 			moreOptions={moreOptions ?? null}
-			{...user}
 			{...props}
 		/>
 	);
@@ -68,7 +65,7 @@ function FeedPostContainer({ isFollowing, user, tweet,...props }) {
 FeedPostContainer.propTypes = {
 	isFollowing: PropTypes.bool,
 	user: PropTypes.object,
-	tweet: PropTypes.array,
+	tweet: PropTypes.object,
 };
 
 export default React.memo(FeedPostContainer);

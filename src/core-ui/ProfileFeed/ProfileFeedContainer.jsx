@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { Outlet } from "react-router";
 
 import ProfileFeed from "core-ui/ProfileFeed/ProfileFeed.jsx";
 import MainFeedContainer from "core-ui/MainFeed/MainFeedContainer";
 import endpoints from "api/endpoints";
 import useFetch from "hooks/useFetch";
 import { setUser } from "redux/slice/userSlice";
+import Spinner from "components/Spinner/Spinner";
 
 function ProfileFeedContainer() {
 
@@ -33,7 +33,9 @@ function ProfileFeedContainer() {
 
 	return (
 		<MainFeedContainer>
-			{!user.data ? <div>Loading</div> :
+			{!user.data ? <div>
+				<Spinner message="Loading profile..."/>
+			</div> :
 				<ProfileFeed user={user.data} />
 			}
 		</MainFeedContainer>

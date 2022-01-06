@@ -59,7 +59,7 @@
 
 .profile__extra__container {
   font-size: 0.9375rem;
-  color: #536471;
+  color: #52636f;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -154,7 +154,7 @@
 .icon {
   width: 1.17188rem !important;
   height: 1.17188rem !important;
-  fill: #536471 !important;
+  fill: #52636f !important;
   pointer-events: none;
   margin-right: .25rem;
 }

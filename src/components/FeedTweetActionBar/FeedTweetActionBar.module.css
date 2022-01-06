@@ -31,7 +31,7 @@
       -ms-flex-align: center;
           align-items: center;
   font-size: 0.8125rem;
-  color: #536471;
+  color: #52636f;
   cursor: pointer;
 }
 
@@ -57,7 +57,7 @@
 .actionbar__icon {
   width: 1.17188rem !important;
   height: 1.17188rem !important;
-  fill: #536471 !important;
+  fill: #52636f !important;
   pointer-events: none;
 }
 

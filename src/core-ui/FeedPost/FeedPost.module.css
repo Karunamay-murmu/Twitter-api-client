@@ -10,6 +10,30 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  position: relative;
+  border-width: 1px 0;
+  border-color: #eff3f4;
+  border-style: solid;
+}
+
+.post__wrapper:hover {
+  background-color: #eff3f4;
+}
+
+.post__main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -20,11 +44,38 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  position: relative;
 }
 
-.post__wrapper:hover {
-  background-color: #eff3f4;
+.post__pin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 2.5rem;
+  gap: .5rem;
+}
+
+.post__pin__icon {
+  width: 1rem !important;
+  height: 1rem !important;
+  fill: #52636f !important;
+  pointer-events: none;
+}
+
+.post__pin__text {
+  font-size: 0.8125rem;
+  color: #52636f;
+  font-weight: 700;
+  margin-top: -5px;
 }
 
 .post__body {
@@ -80,14 +131,19 @@
           align-items: center;
 }
 
-.post__header__info * {
-  margin-right: 2px;
+.post__header__info__date {
+  font-size: 0.9375rem;
+  color: #52636f;
+}
+
+.post__header__info__date__separator {
+  margin: 0 .275rem;
 }
 
 .post__header__more-icon {
   width: 1.17188rem !important;
   height: 1.17188rem !important;
-  fill: #536471 !important;
+  fill: #52636f !important;
   pointer-events: none;
 }
 
@@ -95,6 +151,11 @@
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
   text-align: start;
+}
+
+.post__text {
+  font-size: 0.9375rem;
+  color: #0f1419;
 }
 
 .post__footer {
@@ -131,7 +192,7 @@
       -ms-flex-align: center;
           align-items: center;
   font-size: 0.8125rem;
-  color: #536471;
+  color: #52636f;
   cursor: pointer;
 }
 
@@ -157,7 +218,7 @@
 .post__footer__icon {
   width: 1.17188rem !important;
   height: 1.17188rem !important;
-  fill: #536471 !important;
+  fill: #52636f !important;
   pointer-events: none;
 }
 
@@ -212,7 +273,7 @@
 
 .post__user__username {
   font-size: 0.9375rem;
-  color: #536471;
+  color: #52636f;
 }
 
 .post__options__wrapper {

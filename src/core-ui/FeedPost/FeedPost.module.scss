@@ -10,15 +10,36 @@
 
     &__wrapper {
         @include padding($top: 1rem, $bottom: .5rem, $left: 1rem, $right: 1rem);
-        @include flex();
+        @include flex($direction: column);
         position: relative;
+        border-width: 1px 0;
+        border-color: $light-gray;
+        border-style: solid;
 
         &:hover {
             background-color: $light-gray
         }
     }
 
+    &__main {
+        @include flex();
+    }
 
+    &__pin {
+        @include flex($align: center);
+        margin-left: 2.5rem;
+        gap: .5rem;
+
+        &__icon {
+            @include icon($color: $gray);
+        }
+
+        &__text {
+            @include meta($font-size: 0.8125rem);
+            @include textBold();
+            margin-top: -5px;
+        }
+    }
 
     &__body {
         @include flex($direction: column);
@@ -31,11 +52,15 @@
         position: relative;
 
         &__info {
-            * {
-                @include margin($right: 2px);
+            @include flex($align: center);
+
+            &__date {
+                @include meta();
+                &__separator {
+                    margin: 0 .275rem;
+                }
             }
 
-            @include flex($align: center);
         }
 
         &__more-icon {
@@ -47,6 +72,10 @@
     &__content {
         @include margin($top: .3rem, $bottom: .3rem);
         text-align: start;
+    }
+
+    &__text {
+        @include text($size: .9375rem);
     }
 
     &__footer {

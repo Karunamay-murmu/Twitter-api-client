@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
+import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
 import ProfileContainer from "core-ui/Profile/ProfileContainer.jsx";
 import DisplayName from "components/DisplayName/DisplayName";
 import FeedHeader from "components/FeedHeader/FeedHeader";
 
 import styles from "./ProfileFeed.module.css";
 import TweetMenuBarContainer from "components/TweetMenuBar/TweetMenuBarContainer";
+import Spinner from "components/Spinner/Spinner";
 
 
 function ProfileFeed({ user, ...props }) {
@@ -30,6 +31,7 @@ function ProfileFeed({ user, ...props }) {
 			href: `/${username}/likes`,
 		}
 	];
+	const pinnedTweet = user?.includes?.tweets;
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.feed}>
@@ -41,6 +43,12 @@ function ProfileFeed({ user, ...props }) {
 				</FeedHeader>
 				<ProfileContainer {...props} user={user.data} />
 				<TweetMenuBarContainer menuItems={menuItems} />
+				<Spinner />
+				{
+					pinnedTweet && pinnedTweet.map((tweet, idx) => (
+						<FeedPostContainer key={idx} user={user.data} tweet={tweet} />
+					))
+				}
 				{/* {
 					pinnedTweet.length && <FeedPostContainer user={user.data} tweet={pinnedTweet} />
 				}

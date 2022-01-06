@@ -6,40 +6,37 @@ import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 
-// import ModalContainer from "components/Modal/ModalContainer";
-// import TweetContainer from "core-ui/Tweet/TweetContainer";
+import { short } from "utils/number";
 
 import styles from "./FeedTweetActionBar.module.css";
 
 function FeedTweetActionBar({
-	// isModalOpen,
-	// handleModalOpen,
-	tweetId,
-	// modalId
+	id,
+	replyCount,
+	likeCount,
+	retweetCount,
 }) {
 	const location = useLocation();
-	// console.log(location);
-	// TODO: fix tweet modal in profile page
 	return (
 		<>
 			<div className={styles.actionbar__wrapper}>
-				<Link to="/compose/tweet" state={{ background: location, tweetId }} className={`${styles.actionbar__analytics} ${styles["actionbar__analytics--reply"]}`} title="Reply">
+				<Link to="/compose/tweet" state={{ background: location, id }} className={`${styles.actionbar__analytics} ${styles["actionbar__analytics--reply"]}`} title="Reply">
 					<div className={`${styles.actionbar__icon__wrapper}`}>
 						<ChatBubbleOutlineRoundedIcon className={styles.actionbar__icon} />
 					</div>
-					<span>4.9K</span>
+					<span>{short(replyCount)}</span>
 				</Link>
 				<div className={`${styles.actionbar__analytics} ${styles["actionbar__analytics--retweet"]}`} title="Retweets">
 					<div className={`${styles.actionbar__icon__wrapper}`}>
 						<RepeatRoundedIcon className={styles.actionbar__icon} />
 					</div>
-					<span>59</span>
+					<span>{short(retweetCount)}</span>
 				</div>
 				<div className={`${styles.actionbar__analytics} ${styles["actionbar__analytics--like"]}`} title="Like">
 					<div className={`${styles.actionbar__icon__wrapper}`}>
 						<FavoriteBorderRoundedIcon className={styles.actionbar__icon} />
 					</div>
-					<span>1.1M</span>
+					<span>{short(likeCount)}</span>
 				</div>
 				<div className={`${styles.actionbar__analytics} ${styles["actionbar__analytics--share"]}`} title="Share">
 					<div className={`${styles.actionbar__icon__wrapper}`}>
@@ -63,8 +60,10 @@ function FeedTweetActionBar({
 }
 
 FeedTweetActionBar.propTypes = {
-	// handleModalOpen: PropTypes.func.isRequired,
-	tweetId: PropTypes.string,
+	id: PropTypes.string,
+	replyCount: PropTypes.number,
+	likeCount: PropTypes.number,
+	retweetCount: PropTypes.number,
 	isModalOpen: PropTypes.bool,
 };
 

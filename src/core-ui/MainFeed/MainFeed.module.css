@@ -4,11 +4,13 @@
   -ms-grid-columns: 598px 348px;
       grid-template-columns: 598px 348px;
   grid-gap: 1.375rem;
+  height: 100%;
 }
 
 .feed__wrapper {
   border-width: 0 1px;
   border-color: #eff3f4;
   border-style: solid;
+  height: 100%;
 }
 /*# sourceMappingURL=MainFeed.module.css.map */
