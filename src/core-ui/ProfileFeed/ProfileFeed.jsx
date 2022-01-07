@@ -1,54 +1,69 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
+// import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
+import { Outlet } from "react-router-dom";
 import ProfileContainer from "core-ui/Profile/ProfileContainer.jsx";
 import DisplayName from "components/DisplayName/DisplayName";
 import FeedHeader from "components/FeedHeader/FeedHeader";
 
 import styles from "./ProfileFeed.module.css";
 import TweetMenuBarContainer from "components/TweetMenuBar/TweetMenuBarContainer";
-import Spinner from "components/Spinner/Spinner";
+import { short } from "utils/number";
+// import Spinner from "components/Spinner/Spinner";
 
 
 function ProfileFeed({ user, ...props }) {
-	const { name, username, verified, public_metrics: { tweet_count } } = user.data;
+	console.log(user);
+	const {
+		name,
+		screen_name,
+		verified,
+		statuses_count,
+	} = user;
 	const menuItems = [
 		{
 			name: "Tweet",
-			href: `/${username}`,
+			href: `/${screen_name}`,
 		},
 		{
 			name: "Tweets & replies",
-			href: `/${username}/with_replies`,
+			href: `/${screen_name}/with_replies`,
 		},
 		{
 			name: "Media",
-			href: `/${username}/media`,
+			href: `/${screen_name}/media`,
 		},
 		{
 			name: "Likes",
-			href: `/${username}/likes`,
+			href: `/${screen_name}/likes`,
 		}
 	];
-	const pinnedTweet = user?.includes?.tweets;
+	// const pinnedTweet = user?.includes?.tweets;
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.feed}>
 				<FeedHeader>
 					<DisplayName name={name} className={styles.feed__title} verified={verified} />
 					<div className={styles.feed__meta}>
-						{tweet_count} Tweets
+						{short(statuses_count)} Tweets
 					</div>
 				</FeedHeader>
-				<ProfileContainer {...props} user={user.data} />
+				<ProfileContainer {...props} user={user} />
 				<TweetMenuBarContainer menuItems={menuItems} />
-				<Spinner />
-				{
+				{/* <ProfileTweetsContainer /> */}
+				{/* {
 					pinnedTweet && pinnedTweet.map((tweet, idx) => (
-						<FeedPostContainer key={idx} user={user.data} tweet={tweet} />
+						<FeedPostContainer key={idx} user={user} tweet={tweet} />
 					))
-				}
+				} */}
+				<Outlet />
+				{/* {
+					!tweets.data ? (
+						<Spinner />
+					) : (
+					)
+				} */}
 				{/* {
 					pinnedTweet.length && <FeedPostContainer user={user.data} tweet={pinnedTweet} />
 				}
@@ -65,7 +80,7 @@ function ProfileFeed({ user, ...props }) {
 
 ProfileFeed.propTypes = {
 	user: PropTypes.object,
-
+	tweets: PropTypes.object,
 };
 
 export default React.memo(ProfileFeed, (prev, next) => {

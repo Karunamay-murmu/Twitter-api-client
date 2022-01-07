@@ -12,31 +12,40 @@ import Spinner from "components/Spinner/Spinner";
 function ProfileFeedContainer() {
 
 	const user = useSelector(state => state.userProfile);
+	const tweets = useSelector(state => state.userTweets);
+	const api = useSelector(state => state.api, (prev, next) => prev.data === next.data);
+
 	const dispatch = useDispatch();
 	const params = useParams();
 
-	const [api, doFetch] = useFetch();
+	const [doFetch] = useFetch();
 
-	const endpoint = useMemo(() => {
-		return endpoints.getUserByUsername(params.username);
+	const profileEndpoint = useMemo(() => {
+		return endpoints.showUser();
+		// return endpoints.getUserByUsername(params.username);
 	}, [params.username]);
 
 	useEffect(() => {
-		doFetch(endpoint);
+		doFetch(profileEndpoint, {
+			params: {
+				screen_name: params.username
+			}
+		});
 	}, [params.username]);
 
 	useEffect(() => {
-		if (api.data && (api.url === endpoint)) {
+		if (api.data && (api.url === profileEndpoint)) {
 			dispatch(setUser(api.data));
 		}
 	}, [api.url, api.data]);
 
+
 	return (
 		<MainFeedContainer>
 			{!user.data ? <div>
-				<Spinner message="Loading profile..."/>
+				<Spinner message="Loading profile..." />
 			</div> :
-				<ProfileFeed user={user.data} />
+				<ProfileFeed user={user.data} tweets={tweets} />
 			}
 		</MainFeedContainer>
 	);

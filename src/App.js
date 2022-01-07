@@ -11,6 +11,8 @@ import MainLayout from "core-ui/MainLayout/MainLayout.jsx";
 import SettingLayoutContainer from "core-ui/SettingLayout/SettingLayoutContainer";
 import AccountSettingContainer from "core-ui/AccountSetting/AccountSettingContainer";
 import PrivacySettingContainer from "core-ui/PrivacySetting/PrivacySettingContainer";
+// import ProfileReplyTweetsContainer from "core-ui/ProfileReplyTweets/ProfileReplyTweetsContainer";
+import ProfileTweetsContainer from "core-ui/ProfileTweets/ProfileTweetsContainer";
 
 
 function App() {
@@ -27,7 +29,9 @@ function App() {
 			<Routes location={background || location} >
 				<Route path="/" element={<MainLayout />}>
 					<Route index element={<HomeFeed />} />
-					<Route path=":username" element={<ProfileFeedContainer />} />
+					<Route path=":username" element={<ProfileFeedContainer />}>
+						<Route path="with_replies" element={<ProfileTweetsContainer />} />
+					</Route>
 					<Route path=":username/status/:tweetId" element={<TweetDetailContainer />} />
 					<Route path="settings" element={<SettingLayoutContainer />}>
 						<Route path="account" element={<AccountSettingContainer />} />

@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
 	data: null,
-	isLoading: false,
 	isFetching: false,
 	error: null,
 	url: null,
@@ -18,7 +17,8 @@ const apiSlice = createSlice({
 	initialState,
 	reducers: {
 		apiCallStart: (state, action) => {
-			state.isLoading = true;
+			state.data = null;
+			state.isFetching = true;
 			state.url = action.payload.url;
 			state.method = action.payload.method;
 			state.body = action.payload.body;
@@ -26,17 +26,17 @@ const apiSlice = createSlice({
 			state.status = "api fetching started";
 		},
 		apiCallSuccess: (state, action) => {
-			state.isLoading = false;
+			state.isFetching = false;
 			state.data = action.payload;
 			state.status = "api fetching success";
 		},
 		apiCallFailure: (state, action) => {
-			state.isLoading = false;
+			state.isFetching = false;
 			state.error = action.payload;
 			state.status = "api fetching failed";
 		},
 		apiCallFinish: (state) => {
-			state.isLoading = false;
+			state.isFetching = false;
 			state.status = "api fetching finished";
 		}
 	}

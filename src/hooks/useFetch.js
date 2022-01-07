@@ -1,10 +1,12 @@
-import { useState, useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect, useMemo, } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 import { apiCallStart, apiCallSuccess, apiCallFailure, apiCallFinish } from "redux/slice/apiSlice";
 
 const BASE_URL = process.env.REACT_APP_TWITTER_API_BASE_URL;
+
+// const apiSelector = state => state.api;
 
 const useFetch = () => {
 	const cancelToken = useMemo(() => (axios.CancelToken.source()), []);
@@ -16,11 +18,18 @@ const useFetch = () => {
 		timeout: 10000,
 		cancelToken: cancelToken.token,
 	});
-	let { data, url, isLoading, error, status } = useSelector(state => state.api);
+
+	// console.log("running");
+
+	// let { data, url, isFetching, error, status } = useSelector(apiSelector, (prev, next) => prev.data == next.data || prev.status === next.status);
+	// console.log(options.url);
+	// console.log(data, status);
+	// console.log(url, status, isFetching, error, data);
 	const dispatch = useDispatch();
 
 
 	const doFetch = (endpoint, extraOption = {}) => {
+		console.log("doFetch");
 		setOptions((prev) => ({
 			...prev,
 			...extraOption,
@@ -33,6 +42,7 @@ const useFetch = () => {
 			return;
 		}
 		const fetchData = async () => {
+			console.log("dispathic");
 			dispatch(apiCallStart({
 				url: options.url,
 				method: options.method,
@@ -58,15 +68,15 @@ const useFetch = () => {
 		};
 	}, [options.url]);
 
-	const api = {
-		data,
-		url,
-		isLoading,
-		error,
-		status,
-	};
+	// const api = {
+	// 	data,
+	// 	url,
+	// 	isFetching,
+	// 	error,
+	// 	status,
+	// };
 
-	return [api, doFetch];
+	return [doFetch];
 };
 
 

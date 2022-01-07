@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import Profile from "core-ui/Profile/Profile.jsx";
 import Spinner from "components/Spinner/Spinner";
+import { getOriginalImage } from "utils/image";
 
 function ProfileContainer(props) {
 	const location = useLocation();
@@ -20,15 +21,17 @@ function ProfileContainer(props) {
 
 		let expand_profile = {};
 
-		for (const value of Object.values(entities.url)) {
-			if (value.length) {
-				value.forEach(value => {
-					expand_profile = {
-						profile_display_url: value.display_url,
-						profile_url: value.url,
-						profile_expanded_url: value.expanded_url,
-					};
-				});
+		if (entities) {
+			for (const value of Object.values(entities.url)) {
+				if (value.length) {
+					value.forEach(value => {
+						expand_profile = {
+							profile_display_url: value.display_url,
+							profile_url: value.url,
+							profile_expanded_url: value.expanded_url,
+						};
+					});
+				}
 			}
 		}
 
@@ -43,10 +46,15 @@ function ProfileContainer(props) {
 			entities,
 			url,
 			created_at: `${month} ${year}`,
-
 		};
 
 	}, [user]);
+
+	const originalImageVariant = useMemo(() => {
+		return getOriginalImage(user.profile_image_url_https);
+	}, [user]);
+
+	console.log(originalImageVariant);
 
 	return (
 		<>
@@ -55,7 +63,7 @@ function ProfileContainer(props) {
 			</div>
 
 				:
-				<Profile profile={normalizeData} routeLocation={location} {...props} />
+				<Profile profile={{ ...normalizeData, profile_image_url_https: originalImageVariant }} routeLocation={location} {...props} />
 			}
 		</>
 	);

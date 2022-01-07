@@ -1,12 +1,11 @@
 "use strict";
 
-const FETCH_SINGLE_USER_BY_USERNAME = "users/by/username/";
-
 const endpoints = {
-	"user_by_username": FETCH_SINGLE_USER_BY_USERNAME,
 	getUserByUsername: (username) => {
-		return FETCH_SINGLE_USER_BY_USERNAME + username;
+		return "users/by/username/" + username;
 	},
+	getTweetsByTweetId: (tweetId) => `users/${tweetId}/tweets`,
+	showUser: () => "users/show.json",
 };
 
 

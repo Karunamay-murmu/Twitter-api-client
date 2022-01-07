@@ -8,7 +8,7 @@ function TweetMenuBar({ menuItems = [] }) {
 	return (
 		<div className={styles.menu}>
 			{menuItems.map((item, idx) => (
-				<NavLink to={item.href} key={idx} className={({ isActive }) => isActive ? `${styles["menu__item--active"]} ${styles.menu__item__wrapper}` : styles.menu__item__wrapper}>
+				<NavLink end to={item.href} key={idx} className={({ isActive }) => isActive ? `${styles["menu__item--active"]} ${styles.menu__item__wrapper}` : styles.menu__item__wrapper}>
 					<div className={styles.menu__item}>
 						<div className={styles.menu__item__content}>
 							{item.name}

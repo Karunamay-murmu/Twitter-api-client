@@ -20,15 +20,14 @@ function Profile({ profile, routeLocation }) {
 		created_at,
 		name,
 		location,
-		username,
+		screen_name,
 		verified,
 		description,
-		public_metrics: {
-			followers_count,
-			following_count,
-		},
+		followers_count,
+		friends_count,
 		entities,
-		profile_image_url,
+		profile_image_url_https,
+		profile_banner_url,
 		profile_display_url,
 		profile_url
 	} = profile;
@@ -38,9 +37,11 @@ function Profile({ profile, routeLocation }) {
 			<div className={styles.profile}>
 				<div className={styles.profile__wrapper}>
 					<div className={styles.profile__photos__wrapper}>
-						<div className={styles.profile__coverphoto__container}></div>
+						<div className={styles.profile__coverphoto__container}>
+							<img src={profile_banner_url} alt="banner image" />
+						</div>
 						<div className={styles.profile__avatar__container}>
-							<Avatar className={styles.profile__avatar} image={profile_image_url} />
+							<Avatar className={styles.profile__avatar} image={profile_image_url_https} />
 						</div>
 					</div>
 					<div className={styles.profile__edit__wrapper}>
@@ -54,7 +55,7 @@ function Profile({ profile, routeLocation }) {
 					<div className={styles.profile__info__wrapper}>
 						<div className={styles.profile__info}>
 							<DisplayName name={name} verified={verified} className={styles.profile__displayName} />
-							<Username name={username} />
+							<Username name={screen_name} />
 							{description && <BioContainer entities={entities.description} bio={description} />}
 							<div className={styles.profile__extra}>
 								{location && <div className={styles.profile__extra__container}>
@@ -72,7 +73,7 @@ function Profile({ profile, routeLocation }) {
 									Joined {created_at}
 								</div>}
 							</div>
-							<FollowInfo following={`${following_count}`} followers={`${followers_count}`} />
+							<FollowInfo following={`${friends_count}`} followers={`${followers_count}`} />
 						</div>
 					</div>
 				</div>
@@ -84,7 +85,7 @@ function Profile({ profile, routeLocation }) {
 
 
 Profile.propTypes = {
-	// username: PropTypes.string,
+	// screen_: PropTypes.string,
 	// name: PropTypes.string,
 	// description: PropTypes.string,
 	// url: PropTypes.string,

@@ -77,6 +77,13 @@
             width: 100%;
             height: 12.458rem;
             background-color: $blue-shade-gray;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
         }
     }
 
