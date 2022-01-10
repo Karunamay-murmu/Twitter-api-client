@@ -30,6 +30,7 @@ function App() {
 				<Route path="/" element={<MainLayout />}>
 					<Route index element={<HomeFeed />} />
 					<Route path=":username" element={<ProfileFeedContainer />}>
+						<Route path="" element={<ProfileTweetsContainer />} />
 						<Route path="with_replies" element={<ProfileTweetsContainer />} />
 					</Route>
 					<Route path=":username/status/:tweetId" element={<TweetDetailContainer />} />

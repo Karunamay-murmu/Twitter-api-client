@@ -20,13 +20,15 @@ function Profile({ profile, routeLocation }) {
 		created_at,
 		name,
 		location,
-		screen_name,
+		username,
 		verified,
 		description,
-		followers_count,
-		friends_count,
+		public_metrics: {
+			followers_count,
+			following_count,
+		},
 		entities,
-		profile_image_url_https,
+		profile_image_url,
 		profile_banner_url,
 		profile_display_url,
 		profile_url
@@ -41,7 +43,7 @@ function Profile({ profile, routeLocation }) {
 							<img src={profile_banner_url} alt="banner image" />
 						</div>
 						<div className={styles.profile__avatar__container}>
-							<Avatar className={styles.profile__avatar} image={profile_image_url_https} />
+							<Avatar className={styles.profile__avatar} image={profile_image_url} />
 						</div>
 					</div>
 					<div className={styles.profile__edit__wrapper}>
@@ -55,7 +57,7 @@ function Profile({ profile, routeLocation }) {
 					<div className={styles.profile__info__wrapper}>
 						<div className={styles.profile__info}>
 							<DisplayName name={name} verified={verified} className={styles.profile__displayName} />
-							<Username name={screen_name} />
+							<Username name={username} />
 							{description && <BioContainer entities={entities.description} bio={description} />}
 							<div className={styles.profile__extra}>
 								{location && <div className={styles.profile__extra__container}>
@@ -73,7 +75,7 @@ function Profile({ profile, routeLocation }) {
 									Joined {created_at}
 								</div>}
 							</div>
-							<FollowInfo following={`${friends_count}`} followers={`${followers_count}`} />
+							<FollowInfo following={`${following_count}`} followers={`${followers_count}`} />
 						</div>
 					</div>
 				</div>

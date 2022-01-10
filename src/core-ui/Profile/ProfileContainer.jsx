@@ -47,14 +47,11 @@ function ProfileContainer(props) {
 			url,
 			created_at: `${month} ${year}`,
 		};
-
 	}, [user]);
 
 	const originalImageVariant = useMemo(() => {
-		return getOriginalImage(user.profile_image_url_https);
+		return getOriginalImage(user.profile_image_url);
 	}, [user]);
-
-	console.log(originalImageVariant);
 
 	return (
 		<>
@@ -63,7 +60,7 @@ function ProfileContainer(props) {
 			</div>
 
 				:
-				<Profile profile={{ ...normalizeData, profile_image_url_https: originalImageVariant }} routeLocation={location} {...props} />
+				<Profile profile={{ ...normalizeData, profile_image_url: originalImageVariant }} routeLocation={location} {...props} />
 			}
 		</>
 	);

@@ -8,9 +8,11 @@ import ProfileTweets from "core-ui/ProfileTweets/ProfileTweets";
 import useFetch from "hooks/useFetch";
 import endpoints from "api/endpoints";
 import { setTweet } from "redux/slice/userTweetSlice";
+import Spinner from "components/Spinner/Spinner";
 
 function ProfileTweetsContainer() {
-	const tweets = useSelector(state => state.userTweets, (prev, next) => prev.data === next.data);
+	const tweets = useSelector(state => state.userTweets, (prev, next) => prev === next);
+	const media = useSelector(state => state.userTweets.media, (prev, next) => prev === next);
 	const user = useSelector(state => state.userProfile, (prev, next) => prev.data === next.data);
 	const api = useSelector(state => state.api);
 
@@ -19,19 +21,20 @@ function ProfileTweetsContainer() {
 	const [doFetch] = useFetch();
 
 	const { id } = user.data.data;
-	const endpoint = useMemo(() => endpoints.getTweetsByTweetId(id), []);
+	const endpoint = useMemo(() => endpoints.showUserTimeline(), []);
 
 	useEffect(() => {
 		if (user.data && !tweets.data) {
-			doFetch(endpoint);
+			doFetch(endpoint, {
+				params: {
+					user_id: user.data.data.id
+				}
+			});
 		}
-	}, [user.data, tweets.id]);
-
-	console.log(api);
+	}, [user.data]);
 
 	useEffect(() => {
 		if (!tweets.data && api.data && (api.url === endpoint)) {
-			console.log("rn");
 			dispatch(setTweet({
 				tweets: api.data,
 				userId: id,
@@ -40,17 +43,19 @@ function ProfileTweetsContainer() {
 	}, [api.url, api.data]);
 
 	return (
-		// {
-		// 	tweets
-		// }
-		// <ProfileTweets tweets={tweets} user={user} />
-		<ProfileTweets />
+		<>
+			{
+				!tweets.data ? <div>
+					<Spinner message="Loading tweets..." />
+				</div> :
+					<ProfileTweets
+						tweets={tweets.tweets}
+						user={user.data.data}
+						media={media}
+					/>
+			}
+		</>
 	);
 }
-
-// ProfileTweetsContainer.propTypes = {
-// 	user: PropTypes.object.isRequired,
-// 	tweets: PropTypes.object.isRequired,
-// };
 
 export default ProfileTweetsContainer;

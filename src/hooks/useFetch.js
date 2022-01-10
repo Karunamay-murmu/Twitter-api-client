@@ -29,7 +29,6 @@ const useFetch = () => {
 
 
 	const doFetch = (endpoint, extraOption = {}) => {
-		console.log("doFetch");
 		setOptions((prev) => ({
 			...prev,
 			...extraOption,
@@ -42,7 +41,6 @@ const useFetch = () => {
 			return;
 		}
 		const fetchData = async () => {
-			console.log("dispathic");
 			dispatch(apiCallStart({
 				url: options.url,
 				method: options.method,

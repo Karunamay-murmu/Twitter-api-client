@@ -38,22 +38,7 @@ function FeedPostContainer({ isFollowing, ...props }) {
 			"Icon": FlagOutlinedIcon,
 		}
 	];
-
-	// const {
-	// 	id,
-	// 	username,
-	// 	name,
-	// 	verified,
-	// 	public_metrics: {
-	// 		tweet_count,
-	// 		follower_count,
-	// 		following_count,
-	// 		likes_count,
-	// 		retweet_count,
-
-	// } = tweet;
-
-
+	
 	return (
 		<FeedPost
 			moreOptions={moreOptions ?? null}

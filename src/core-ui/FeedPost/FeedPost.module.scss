@@ -74,6 +74,15 @@
         text-align: start;
     }
 
+    &__image {
+        width: 100%;
+        height: auto;
+        border-radius: 1rem;
+        &__wrapper {
+            margin: 1rem 0 0;
+        }
+    }
+
     &__text {
         @include text($size: .9375rem);
     }

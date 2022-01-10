@@ -16,17 +16,22 @@ import styles from "./FeedPost.module.css";
 import DisplayName from "components/DisplayName/DisplayName";
 import Username from "components/Username/Username";
 import { getPostDate } from "utils/convertDate";
+import { trimText } from "utils/string";
 
 const FeedPost = ({ moreOptions, ...props }) => {
 	const { name, username, verified, profile_image_url } = props?.user;
-	const { id, created_at, text, public_metrics: { reply_count, like_count, retweet_count } } = props.tweet;
+	const { id, created_at, text, public_metrics: { reply_count, like_count, retweet_count } = {}, entities, attachments: { media_keys } = {}, isPinnedTweet = false } = props.tweet;
 	return (
 		<>
 			<div className={styles.post__wrapper} >
-				<div className={styles.post__pin}>
-					<PushPinRoundedIcon className={styles.post__pin__icon}/>
-					<div className={styles.post__pin__text}>Pinned Tweet</div>
-				</div>
+				{
+					isPinnedTweet && (
+						<div className={styles.post__pin}>
+							<PushPinRoundedIcon className={styles.post__pin__icon} />
+							<div className={styles.post__pin__text}>Pinned Tweet</div>
+						</div>
+					)
+				}
 				<div className={styles.post__main}>
 					<div className={styles.post__avatar}>
 						<Avatar image={profile_image_url} />
@@ -46,9 +51,21 @@ const FeedPost = ({ moreOptions, ...props }) => {
 							<MoreOptionContainer moreOptions={moreOptions} />
 						</div>
 						<div className={styles.post__content}>
-							<p className={styles.post__text}>{text}</p>
+							<p className={styles.post__text}>{trimText({
+								text,
+								trim: true,
+								replace: false,
+								entities
+							})}</p>
 							<div className={styles.post__image__wrapper}>
-								{/* <img src={Image} alt="" /> */}
+								{
+									media_keys && media_keys.map((media_key, index) => {
+										const media = props.media[media_key];
+										if (media.type === "photo") {
+											return <img key={index} className={styles.post__image} src={media.url} width={media.width} height={media.height} />;
+										}
+									})
+								}
 							</div>
 						</div>
 						<div className={styles.post__footer}>
@@ -69,14 +86,11 @@ const FeedPost = ({ moreOptions, ...props }) => {
 FeedPost.displayName = "FeedPost";
 
 FeedPost.propTypes = {
-	// tweetId: PropTypes.string,
-	// username: PropTypes.string,
-	// displayName: PropTypes.string,
-	// verified: PropTypes.bool,
-	// text: PropTypes.string,
 	moreOptions: PropTypes.array,
 	user: PropTypes.object,
 	tweet: PropTypes.object,
+	media: PropTypes.object,
+	media_keys: PropTypes.array
 };
 
 // FeedPost.defaultProps = {

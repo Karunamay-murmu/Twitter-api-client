@@ -14,31 +14,33 @@ import { short } from "utils/number";
 
 
 function ProfileFeed({ user, ...props }) {
-	console.log(user);
 	const {
 		name,
-		screen_name,
+		username,
 		verified,
-		statuses_count,
+		public_metrics: {
+			tweet_count
+		},
 	} = user;
 	const menuItems = [
 		{
 			name: "Tweet",
-			href: `/${screen_name}`,
+			href: `/${username}`,
 		},
 		{
 			name: "Tweets & replies",
-			href: `/${screen_name}/with_replies`,
+			href: `/${username}/with_replies`,
 		},
 		{
 			name: "Media",
-			href: `/${screen_name}/media`,
+			href: `/${username}/media`,
 		},
 		{
 			name: "Likes",
-			href: `/${screen_name}/likes`,
+			href: `/${username}/likes`,
 		}
 	];
+	// TODO: set pinned tweet
 	// const pinnedTweet = user?.includes?.tweets;
 	return (
 		<div className={styles.wrapper}>
@@ -46,7 +48,7 @@ function ProfileFeed({ user, ...props }) {
 				<FeedHeader>
 					<DisplayName name={name} className={styles.feed__title} verified={verified} />
 					<div className={styles.feed__meta}>
-						{short(statuses_count)} Tweets
+						{short(tweet_count)} Tweets
 					</div>
 				</FeedHeader>
 				<ProfileContainer {...props} user={user} />

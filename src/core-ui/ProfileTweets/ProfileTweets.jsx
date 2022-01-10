@@ -3,22 +3,24 @@ import PropTypes from "prop-types";
 
 import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
 
-function ProfileTweets({ user, pinnedTweet }) {
+function ProfileTweets({ tweets, ...props }) {
 	return (
-		<>
-			{
-				pinnedTweet && pinnedTweet.map((tweet, idx) => (
-					<FeedPostContainer key={idx} user={user.data} tweet={tweet} />
-				))
-			}
-			tweetsds
-		</>
+		<div>
+			{tweets && tweets.map((tweet, idx) => (
+				<FeedPostContainer
+					key={idx}
+					tweet={tweet}
+					{...props}
+				/>
+			))}
+		</div>
 	);
 }
 
 ProfileTweets.propTypes = {
-	pinnedTweet: PropTypes.arrayOf(PropTypes.object).isRequired,
+	pinnedTweet: PropTypes.arrayOf(PropTypes.object),
 	user: PropTypes.object.isRequired,
+	tweets: PropTypes.array,
 };
 
 ProfileTweets.defaultProps = {
@@ -26,4 +28,4 @@ ProfileTweets.defaultProps = {
 	user: {},
 };
 
-export default ProfileTweets;
+export default React.memo(ProfileTweets, (prev, next) => prev.tweets === next.tweets);
