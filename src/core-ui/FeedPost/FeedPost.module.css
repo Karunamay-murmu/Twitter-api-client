@@ -1,12 +1,20 @@
 .post__avatar {
-  margin-right: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
-.post__wrapper {
-  padding-top: 1rem;
-  padding-bottom: 0.5rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
+.post__avatar__wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -20,10 +28,15 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  position: relative;
-  border-width: 1px 0;
-  border-color: #eff3f4;
-  border-style: solid;
+  margin-right: 1rem;
+  height: 100%;
+}
+
+.post__wrapper {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .post__wrapper:hover {
@@ -44,6 +57,8 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  position: relative;
+  width: 100%;
 }
 
 .post__pin {
@@ -76,6 +91,17 @@
   color: #52636f;
   font-weight: 700;
   margin-top: -5px;
+}
+
+.post__link {
+  position: absolute;
+  left: 23px;
+  bottom: -18px;
+  width: 2px;
+  height: calc(100% - 35px);
+  background-color: #cfd9de;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
 }
 
 .post__body {
@@ -148,9 +174,9 @@
 }
 
 .post__content {
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: .3rem;
   text-align: start;
+  width: 100%;
 }
 
 .post__image {
@@ -161,6 +187,18 @@
 
 .post__image__wrapper {
   margin: 1rem 0 0;
+  position: relative;
+}
+
+.post__image__metrics {
+  font-size: 0.875rem;
+  color: #ffffff;
+  background-color: #0f1419;
+  padding: .125rem .25rem;
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  border-radius: .25rem;
 }
 
 .post__text {

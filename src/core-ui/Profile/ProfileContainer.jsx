@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 
 import Profile from "core-ui/Profile/Profile.jsx";
-import Spinner from "components/Spinner/Spinner";
 import { getOriginalImage } from "utils/image";
 
 function ProfileContainer(props) {
@@ -11,16 +10,12 @@ function ProfileContainer(props) {
 	const user = props.user;
 
 	const normalizeData = useMemo(() => {
-
 		if (!user) {
 			return;
 		}
-
 		const profile = user;
 		let { entities, description, url, created_at } = profile;
-
 		let expand_profile = {};
-
 		if (entities) {
 			for (const value of Object.values(entities.url)) {
 				if (value.length) {
@@ -54,15 +49,7 @@ function ProfileContainer(props) {
 	}, [user]);
 
 	return (
-		<>
-			{!user ? <div>
-				<Spinner />
-			</div>
-
-				:
-				<Profile profile={{ ...normalizeData, profile_image_url: originalImageVariant }} routeLocation={location} {...props} />
-			}
-		</>
+		<Profile profile={{ ...normalizeData, profile_image_url: originalImageVariant }} routeLocation={location} {...props} />
 	);
 }
 

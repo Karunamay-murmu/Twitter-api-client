@@ -58,7 +58,7 @@ function Profile({ profile, routeLocation }) {
 						<div className={styles.profile__info}>
 							<DisplayName name={name} verified={verified} className={styles.profile__displayName} />
 							<Username name={username} />
-							{description && <BioContainer entities={entities.description} bio={description} />}
+							{description && <BioContainer entities={entities?.description} bio={description} />}
 							<div className={styles.profile__extra}>
 								{location && <div className={styles.profile__extra__container}>
 									<LocationOnRoundedIcon className={styles.icon} />
@@ -87,16 +87,6 @@ function Profile({ profile, routeLocation }) {
 
 
 Profile.propTypes = {
-	// screen_: PropTypes.string,
-	// name: PropTypes.string,
-	// description: PropTypes.string,
-	// url: PropTypes.string,
-	// location: PropTypes.string,
-	// following_count: PropTypes.number,
-	// followers_count: PropTypes.number,
-	// editProfile: PropTypes.func,
-	// isModalOpen: PropTypes.bool,
-
 	routeLocation: PropTypes.object,
 	profile: PropTypes.object,
 };

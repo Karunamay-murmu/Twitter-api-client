@@ -7,6 +7,7 @@ import userProfileReducer from "redux/slice/userSlice";
 import apiReducer from "redux/slice/apiSlice";
 import tweetsReducer from "redux/slice/userTweetSlice";
 // import { apiSlice } from "redux/apiSlice";
+import { apiSlice } from "features/api/api-slice";
 
 const reducer = {
 	more: moreReducer,
@@ -14,12 +15,12 @@ const reducer = {
 	userProfile: userProfileReducer,
 	api: apiReducer,
 	userTweets: tweetsReducer,
-	// [apiSlice.reducerPath]: apiSlice.reducer,
+	[apiSlice.reducerPath]: apiSlice.reducer,
 };
 
 export default configureStore({
 	reducer,
-	// middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
+	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 // middleware: getDefaultMiddleware =>

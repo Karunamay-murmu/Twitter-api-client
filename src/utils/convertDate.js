@@ -1,4 +1,4 @@
-export const getProfileDat = (date) => {
+export const getProfileDate = (date) => {
 	const newDate = new Date(date);
 	const year = newDate.getFullYear();
 	const month = newDate.toLocaleDateString("default", { month: "long" });

@@ -6,7 +6,7 @@ const endpoints = {
 	},
 	getTweetsByTweetId: (tweetId) => `users/${tweetId}/tweets`,
 	showUser: () => "users/show.json",
-	showUserTimeline: () => "tweets/user_timeline.json",
+	showUserTimeline: () => "tweets/user_timeline",
 };
 
 

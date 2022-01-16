@@ -38,7 +38,6 @@ function FeedPostContainer({ isFollowing, ...props }) {
 			"Icon": FlagOutlinedIcon,
 		}
 	];
-	
 	return (
 		<FeedPost
 			moreOptions={moreOptions ?? null}
@@ -50,7 +49,6 @@ function FeedPostContainer({ isFollowing, ...props }) {
 FeedPostContainer.propTypes = {
 	isFollowing: PropTypes.bool,
 	user: PropTypes.object,
-	tweet: PropTypes.object,
 };
 
 export default React.memo(FeedPostContainer);

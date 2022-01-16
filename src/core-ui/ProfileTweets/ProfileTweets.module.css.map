@@ -1,8 +1,10 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAEA,AAAA,wBAAwB,CAAC;EACrB,YAAY,EAAE,KAAK;EACnB,YAAY,EEIH,OAAkB;EFH3B,YAAY,EAAE,KAAK;CACtB",
     "sources": [
-        "ProfileTweets.module.scss"
+        "ProfileTweets.module.scss",
+        "../../static/style/mixin.scss",
+        "../../static/style/variable.scss"
     ],
     "names": [],
     "file": "ProfileTweets.module.css"
