@@ -5,14 +5,14 @@ import Client from "api/client";
 
 const initialState = {
 	user: null,
-	pinnedTweets: null,
+	pinnedTweet: null,
 	pinnedTweetMedia: null,
 	status: "idle",
 	error: null,
 };
 
-export const fetchUser = createAsyncThunk("user/fetchUser", username => {
-	const response = Client.get(endpoints.getUserByUsername(username));
+export const fetchUser = createAsyncThunk("user/fetchUser", async username => {
+	const response = await Client.get(endpoints.getUserByUsername(username));
 	return response;
 });
 
@@ -26,18 +26,20 @@ const userProfileSlice = createSlice({
 		});
 		builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
 			state.status = "succeeded";
-			let pinnedTweets = payload?.pinned_tweet?.data;
-			pinnedTweets = {
-				...pinnedTweets,
-				isPinned: true,
-			};
+			const pinnedTweet = payload?.pinned_tweet?.data;
+			const pinnedTweetMedia = payload?.pinned_tweet?.includes?.media;
+
 			const pinnedMedia = {};
-			const medias = payload?.pinned_tweet?.includes?.media;
-			for (const media of medias) {
-				pinnedMedia["media_key"] = media;
+			if (pinnedTweetMedia) {
+				for (const media of pinnedTweetMedia) {
+					pinnedTweet["media"] = [...pinnedTweet["media"] || [], media];
+					pinnedMedia[media.media_key] = media;
+				}
 			}
+			pinnedTweet && (pinnedTweet["isPinned"] = true);
+
 			state.pinnedTweetMedia = pinnedMedia;
-			state.pinnedTweets = pinnedTweets;
+			state.pinnedTweet = pinnedTweet;
 			state.user = payload.data;
 		});
 		builder.addCase(fetchUser.rejected, (state, action) => {
@@ -47,11 +49,8 @@ const userProfileSlice = createSlice({
 	}
 });
 
-
-export const { setUser } = userProfileSlice.actions;
-
 export default userProfileSlice.reducer;
 
 export const selectUser = state => state.userProfile.user;
-export const selectPinnedTweets = state => state.userProfile.pinnedTweets;
-export const selectPinnedTweetMedia = state => state.userProfile.pinnedTweetMedia;
+export const selectPinnedTweet = state => state.userProfile.pinnedTweet || {};
+export const selectPinnedTweetMedia = state => state.userProfile.pinnedTweetMedia || [];

@@ -7,7 +7,7 @@ const defaultOptions = {
 	url: "",
 	method: "GET",
 	mode: "cors",
-	timeout: 10000,
+	timeout: 20000,
 	cancelToken: cancelToken.token,
 };
 

@@ -1,72 +1,38 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-// import React, { useEffect, useMemo } from "react";
-// import PropTypes from "prop-types";
-// import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-// import ProfileTweets from "core-ui/ProfileTweets/ProfileTweets";
-// import useFetch from "hooks/useFetch";
-// import endpoints from "api/endpoints";
-// import { setTweet } from "redux/slice/userTweetSlice";
+import { fetchTweets, selectTweets, tweetStatus } from "redux/slice/userTweetSlice";
+import { selectPinnedTweet } from "redux/slice/userSlice";
+import { selectUser } from "redux/slice/userSlice";
 import Spinner from "components/Spinner/Spinner";
-import { useFetchTweetQuery } from "features/tweet/tweet-slice";
-import { useFetchUserQuery } from "features/user/user-slice";
+import ProfileTweets from "core-ui/ProfileTweets/ProfileTweets";
 
 function ProfileTweetsContainer() {
-	// const media = useSelector(state => state.userTweets.media, (prev, next) => prev === next);
-	// const user = useSelector(state => state.userProfile, (prev, next) => prev.data === next.data);
-	// const api = useSelector(state => state.api);
+	const user = useSelector(state => selectUser(state));
+	const tweets = useSelector(state => selectTweets(state));
+	const userPinnedTweet = useSelector(state => selectPinnedTweet(state));
+	const status = useSelector(state => tweetStatus(state));
 
+	const dispatch = useDispatch();
 
-	const params = useParams();
+	console.log(userPinnedTweet);
 
-	const user = useFetchUserQuery(params.username);
-	const id = user?.data?.data?.id;
-	const tweet = useFetchTweetQuery(id);
-
-	console.log(tweet);
-
-	// const dispatch = useDispatch();
-
-	// const [doFetch] = useFetch();
-
-	// const { id } = user.data.data;
-	// const endpoint = useMemo(() => endpoints.showUserTimeline(), []);
-
-	// useEffect(() => {
-	// 	if (user.data && !tweets.data) {
-	// 		doFetch(endpoint, {
-	// 			params: {
-	// 				user_id: user.data.data.id
-	// 			}
-	// 		});
-	// 	}
-	// }, [user.data]);
-
-	// useEffect(() => {
-	// 	if (!tweets.data && api.data && (api.url === endpoint)) {
-	// 		dispatch(setTweet({
-	// 			tweets: api.data,
-	// 			userId: id,
-	// 		}));
-	// 	}
-	// }, [api.url, api.data]);
+	useEffect(() => {
+		if (!tweets.length && user?.id) {
+			dispatch(fetchTweets(user.id));
+		}
+	}, [user.id]);
+	
 	return (
 		<>
 			{
-				tweet.isLoading ? <div>
+				status === "loading" ? <div>
 					<Spinner message="Loading tweets..." />
 				</div> :
-					// <ProfileTweets
-					// 	tweets={[...tweets.pinnedTweet || [], ...tweets.tweets || []]}
-					// 	allTweets={tweets.allTweets}
-					// 	refUsers={tweets.refUsers}
-					// 	user={user.data.data}
-					// 	media={media}
-					// />
 					<div>
-						tweet ads
-
+						<ProfileTweets
+							tweets={[userPinnedTweet, ...tweets || []]}
+						/>
 					</div>
 			}
 		</>

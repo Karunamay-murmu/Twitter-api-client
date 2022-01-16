@@ -55,9 +55,9 @@ function ProfileFeedContainer() {
 	// 	}
 	// }, [api.url, api.data]);
 
-	if (userStatus === "loading") {
-		return <Spinner message="Loading profile..." />;
-	}
+	// if (userStatus === "loading") {
+	// 	return <Spinner message="Loading profile..." />;
+	// }
 
 	return (
 		<MainFeedContainer>
