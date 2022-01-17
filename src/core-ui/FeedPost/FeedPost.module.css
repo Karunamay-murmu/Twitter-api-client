@@ -33,10 +33,7 @@
 }
 
 .post__wrapper {
-  padding-top: 1rem;
-  padding-bottom: 0.5rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding: .75rem .5rem;
 }
 
 .post__wrapper:hover {
@@ -155,6 +152,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  gap: 5px;
 }
 
 .post__header__info__date {

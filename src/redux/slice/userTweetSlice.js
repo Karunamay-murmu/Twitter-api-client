@@ -21,8 +21,12 @@ const mapData = (dataSet, key) => {
 	return map;
 };
 
-export const fetchTweets = createAsyncThunk("tweet/fetch", async (id) => {
-	return await Client.get(endpoints.userTweetTimeline(id));
+export const fetchTweets = createAsyncThunk("tweet/fetch", async (id, { rejectWithValue }) => {
+	try {
+		return await Client.get(endpoints.userTweetTimeline(id));
+	} catch (error) {
+		return rejectWithValue(error.message);
+	}
 });
 
 export const tweetSlice = createSlice({
@@ -97,7 +101,7 @@ export const tweetSlice = createSlice({
 		builder.addCase(fetchTweets.pending, (state) => {
 			state.status = "loading";
 		});
-		builder.addCase(fetchTweets.fulfilled, (state, { payload: { data, includes: { users = {}, media = {}, tweets = {} } = {} } }) => {
+		builder.addCase(fetchTweets.fulfilled, (state, { payload: { data, includes: { users = [], media = [], tweets = [] } = {} } }) => {
 			state.status = "succeeded";
 
 			const tweetsMap = mapData(data);
@@ -152,7 +156,7 @@ export const tweetSlice = createSlice({
 		});
 		builder.addCase(fetchTweets.rejected, (state, action) => {
 			state.status = "failed";
-			state.error = action.error;
+			state.error = action.payload;
 		});
 	}
 });

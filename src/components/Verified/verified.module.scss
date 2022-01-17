@@ -5,7 +5,7 @@
 .verified {
     &__wrapper {
         @include flex();
-        margin: 0 2px;
+        margin: 0 0 0 2px;
     }
 
     &__icon {

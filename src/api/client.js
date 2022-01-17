@@ -15,8 +15,9 @@ const request = async (options) => {
 	try {
 		const response = await axios.request(options);
 		return response.data;
-	} catch (error) {
-		return error.message;
+	} catch (e) {
+		const error = e.response.data.error;
+		throw new Error(error.message);
 	}
 };
 
@@ -24,7 +25,6 @@ const request = async (options) => {
 class Client {
 
 	static get(url, opt = {}) {
-		console.log(url);
 		const options = {
 			...defaultOptions,
 			...opt,

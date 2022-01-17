@@ -1,36 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
-// import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
-// import DOMPurify from "dompurify";
+import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
+import DOMPurify from "dompurify";
 
-// import Avatar from "components/Avatar/Avatar";
-// import FeedTweetActionBarContainer from "components/FeedTweetActionBar/FeedTweetActionBarContainer";
+import Avatar from "components/Avatar/Avatar";
+import FeedTweetActionBarContainer from "components/FeedTweetActionBar/FeedTweetActionBarContainer";
+import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
+import DisplayName from "components/DisplayName/DisplayName";
+import Username from "components/Username/Username";
+import { getPostDate } from "utils/convertDate";
+import { trimText } from "utils/string";
 
 import styles from "./FeedPost.module.css";
-// import DisplayName from "components/DisplayName/DisplayName";
-// import Username from "components/Username/Username";
-// import { getPostDate } from "utils/convertDate";
-// import { trimText } from "utils/string";
-// import { short } from "utils/number";
 
-const FeedPost = ({ ...props }) => {
-	console.log(props);
-	// const { name, username, verified, profile_image_url } = props?.user;
-	// let { id, created_at, text, public_metrics: { reply_count, like_count, retweet_count } = {}, entities, isPinnedTweet = false, hasReplies = false } = props.tweet;
-	// text = trimText({
-	// 	text,
-	// 	trim: true,
-	// 	replace: false,
-	// 	entities
-	// });
+const FeedPost = ({ user, tweet, moreOptions }) => {
+	const { name, username, verified, profile_image_url } = user;
+	let { id, created_at, text, public_metrics: { reply_count, like_count, retweet_count } = {}, entities, isPinned = false, replies = [] } = tweet;
+	text = trimText({
+		text,
+		trim: true,
+		replace: false,
+		entities
+	});
 	// console.log(media_keys);
 	return (
 		<>
 			<div className={styles.post__wrapper} >
-				{props.tweet.text}
-				{/* {
-					isPinnedTweet && (
+				{/* {tweet.text} */}
+				{
+					isPinned && (
 						<div className={styles.post__pin}>
 							<PushPinRoundedIcon className={styles.post__pin__icon} />
 							<div className={styles.post__pin__text}>Pinned Tweet</div>
@@ -43,9 +41,8 @@ const FeedPost = ({ ...props }) => {
 							<Avatar image={profile_image_url} />
 						</div>
 						{
-							hasReplies && (
-								<div className={styles.post__link}>
-								</div>
+							(replies.length !== 0) && (
+								<div className={styles.post__link}></div>
 							)
 						}
 					</div>
@@ -65,7 +62,7 @@ const FeedPost = ({ ...props }) => {
 						</div>
 						<div className={styles.post__content}>
 							<p className={styles.post__text} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }}></p>
-							{
+							{/* {
 								media_keys && media_keys.map((media_key, index) => {
 									const media = props.media[media_key];
 									const views = media?.public_metrics?.view_count;
@@ -74,7 +71,7 @@ const FeedPost = ({ ...props }) => {
 										{media.type === "video" && <span className={styles.post__image__metrics}>{short(views)} views</span>}
 									</div>);
 								})
-							}
+							} */}
 						</div>
 						<div className={styles.post__footer}>
 							<FeedTweetActionBarContainer
@@ -85,7 +82,7 @@ const FeedPost = ({ ...props }) => {
 							/>
 						</div>
 					</div>
-				</div> */}
+				</div>
 			</div>
 		</>
 	);

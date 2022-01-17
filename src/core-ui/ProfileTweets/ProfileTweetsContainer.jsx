@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchTweets, selectTweets, tweetStatus } from "redux/slice/userTweetSlice";
@@ -15,14 +15,14 @@ function ProfileTweetsContainer() {
 
 	const dispatch = useDispatch();
 
-	console.log(userPinnedTweet);
-
 	useEffect(() => {
 		if (!tweets.length && user?.id) {
 			dispatch(fetchTweets(user.id));
 		}
 	}, [user.id]);
-	
+
+	const allTweets = useMemo(() => userPinnedTweet ? [userPinnedTweet, ...tweets] : tweets, [tweets, userPinnedTweet]);
+
 	return (
 		<>
 			{
@@ -31,8 +31,9 @@ function ProfileTweetsContainer() {
 				</div> :
 					<div>
 						<ProfileTweets
-							tweets={[userPinnedTweet, ...tweets || []]}
+							tweets={allTweets}
 						/>
+						
 					</div>
 			}
 		</>

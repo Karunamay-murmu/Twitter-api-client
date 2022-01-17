@@ -9,24 +9,24 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import FeedPost from "core-ui/FeedPost/FeedPost.jsx";
 
-function FeedPostContainer({ isFollowing, ...props }) {
+function FeedPostContainer({ isFollowing, user, ...props }) {
 	const moreOptions = [
 		{
-			"text": `${isFollowing ? "Unfollow" : "Follow"} `,
+			"text": `${isFollowing ? `Unfollow ${user?.username}` : `Follow ${user?.username}`} `,
 			"Icon": PersonAddAltOutlinedIcon,
 		},
 		{
 			"text": "Add/remove from Lists",
 			"Icon": ListAltOutlinedIcon,
 		}, {
-			"text": "Mute ",
+			"text": `Mute ${user?.username}`,
 			"Icon": VolumeOffOutlinedIcon,
 		}, {
 			"text": "Mute this conversation",
 			"Icon": VolumeOffOutlinedIcon,
 		}
 		, {
-			"text": "Block ",
+			"text": `Block ${user?.username}`,
 			"Icon": BlockIcon,
 		}
 		, {
@@ -41,6 +41,7 @@ function FeedPostContainer({ isFollowing, ...props }) {
 	return (
 		<FeedPost
 			moreOptions={moreOptions ?? null}
+			user={user}
 			{...props}
 		/>
 	);

@@ -11,9 +11,12 @@ const initialState = {
 	error: null,
 };
 
-export const fetchUser = createAsyncThunk("user/fetchUser", async username => {
-	const response = await Client.get(endpoints.getUserByUsername(username));
-	return response;
+export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { rejectWithValue }) => {
+	try {
+		return await Client.get(endpoints.getUserByUsername(username));
+	} catch (error) {
+		return rejectWithValue(error.message);
+	}
 });
 
 const userProfileSlice = createSlice({
@@ -24,7 +27,8 @@ const userProfileSlice = createSlice({
 		builder.addCase(fetchUser.pending, (state) => {
 			state.status = "loading";
 		});
-		builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
+		builder.addCase(fetchUser.fulfilled, (state, action) => {
+			const { payload } = action;
 			state.status = "succeeded";
 			const pinnedTweet = payload?.pinned_tweet?.data;
 			const pinnedTweetMedia = payload?.pinned_tweet?.includes?.media;
@@ -44,7 +48,7 @@ const userProfileSlice = createSlice({
 		});
 		builder.addCase(fetchUser.rejected, (state, action) => {
 			state.status = "failed";
-			state.error = action.error;
+			state.error = action.payload;
 		});
 	}
 });
@@ -52,5 +56,5 @@ const userProfileSlice = createSlice({
 export default userProfileSlice.reducer;
 
 export const selectUser = state => state.userProfile.user;
-export const selectPinnedTweet = state => state.userProfile.pinnedTweet || {};
+export const selectPinnedTweet = state => state.userProfile.pinnedTweet;
 export const selectPinnedTweetMedia = state => state.userProfile.pinnedTweetMedia || [];

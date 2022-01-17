@@ -30,7 +30,7 @@ function ProfileFeedContainer() {
 		}
 	}, [userStatus, dispatch, params.username]);
 
-	console.log(user);
+	// console.log(user);
 
 	// const { data = [], isLoading } = useFetchUserQuery(params.username);
 
@@ -62,7 +62,7 @@ function ProfileFeedContainer() {
 	return (
 		<MainFeedContainer>
 			{userStatus === "loading" && <Spinner message="Loading profile..." />}
-			{userStatus === "error" && <div>Error loading profile</div>}
+			{userStatus === "failed" && <div>Couldn&#39;t Load Profile</div>}
 			{userStatus === "succeeded" && <ProfileFeed user={user} />}
 		</MainFeedContainer>
 	);

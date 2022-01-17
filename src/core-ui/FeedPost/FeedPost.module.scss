@@ -14,7 +14,7 @@
     }
 
     &__wrapper {
-        @include padding($top: 1rem, $bottom: .5rem, $left: 1rem, $right: 1rem);        
+        padding: .75rem .5rem;     
         &:hover {
             background-color: $light-gray
         }
@@ -65,6 +65,7 @@
 
         &__info {
             @include flex($align: center);
+            gap: 5px;
 
             &__date {
                 @include meta();
