@@ -35,7 +35,7 @@
     }
 
     &__displayName {
-        @include title($font-size: 1.25rem);
+        @include title($font-size: 1.25rem, $weight: 800);
     }
 
     &__edit {

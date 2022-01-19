@@ -16,12 +16,8 @@ import { fetchUser, selectUser } from "redux/slice/userSlice";
 function ProfileFeedContainer() {
 
 	const user = useSelector(state => selectUser(state));
-	// const tweets = useSelector(state => state.userTweets);
-	// const api = useSelector(state => state.api, (prev, next) => prev.data === next.data);
-
 	const dispatch = useDispatch();
 	const params = useParams();
-
 	const userStatus = useSelector(state => state.userProfile.status);
 
 	useEffect(() => {
@@ -29,35 +25,6 @@ function ProfileFeedContainer() {
 			dispatch(fetchUser(params.username));
 		}
 	}, [userStatus, dispatch, params.username]);
-
-	// console.log(user);
-
-	// const { data = [], isLoading } = useFetchUserQuery(params.username);
-
-	// const user = useMemo(() => data, [data]);
-
-	// console.log("user", user);
-
-	// const [doFetch] = useFetch();
-
-	// const profileEndpoint = useMemo(() => {
-	// 	return endpoints.getUserByUsername(params.username);
-	// }, [params.username]);
-
-	// useEffect(() => {
-	// 	doFetch(profileEndpoint);
-	// }, [params.username]);
-
-	// useEffect(() => {
-	// 	if (api.data && (api.url === profileEndpoint)) {
-	// 		dispatch(setUser(api.data));
-	// 		api.data.pinned_tweet && dispatch(setPinnedTweet(api.data.pinned_tweet));
-	// 	}
-	// }, [api.url, api.data]);
-
-	// if (userStatus === "loading") {
-	// 	return <Spinner message="Loading profile..." />;
-	// }
 
 	return (
 		<MainFeedContainer>

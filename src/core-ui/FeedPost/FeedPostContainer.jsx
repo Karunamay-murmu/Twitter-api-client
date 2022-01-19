@@ -12,21 +12,21 @@ import FeedPost from "core-ui/FeedPost/FeedPost.jsx";
 function FeedPostContainer({ isFollowing, user, ...props }) {
 	const moreOptions = [
 		{
-			"text": `${isFollowing ? `Unfollow ${user?.username}` : `Follow ${user?.username}`} `,
+			"text": `${isFollowing ? `Unfollow @${user?.username}` : `Follow @${user?.username}`} `,
 			"Icon": PersonAddAltOutlinedIcon,
 		},
 		{
 			"text": "Add/remove from Lists",
 			"Icon": ListAltOutlinedIcon,
 		}, {
-			"text": `Mute ${user?.username}`,
+			"text": `Mute @${user?.username}`,
 			"Icon": VolumeOffOutlinedIcon,
 		}, {
 			"text": "Mute this conversation",
 			"Icon": VolumeOffOutlinedIcon,
 		}
 		, {
-			"text": `Block ${user?.username}`,
+			"text": `Block @${user?.username}`,
 			"Icon": BlockIcon,
 		}
 		, {

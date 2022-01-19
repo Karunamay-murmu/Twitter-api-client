@@ -10,10 +10,11 @@ import DisplayName from "components/DisplayName/DisplayName";
 import Username from "components/Username/Username";
 import { getPostDate } from "utils/convertDate";
 import { trimText } from "utils/string";
+// import { short } from "utils/number";
 
 import styles from "./FeedPost.module.css";
 
-const FeedPost = ({ user, tweet, moreOptions }) => {
+const FeedPost = ({ user, tweet, media, moreOptions }) => {
 	const { name, username, verified, profile_image_url } = user;
 	let { id, created_at, text, public_metrics: { reply_count, like_count, retweet_count } = {}, entities, isPinned = false, replies = [] } = tweet;
 	text = trimText({
@@ -62,16 +63,15 @@ const FeedPost = ({ user, tweet, moreOptions }) => {
 						</div>
 						<div className={styles.post__content}>
 							<p className={styles.post__text} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }}></p>
-							{/* {
-								media_keys && media_keys.map((media_key, index) => {
-									const media = props.media[media_key];
-									const views = media?.public_metrics?.view_count;
-									return (<div key={index} className={styles.post__image__wrapper}>
-										<img className={styles.post__image} src={media.url ?? media.preview_image_url} width={media.width} height={media.height} />
-										{media.type === "video" && <span className={styles.post__image__metrics}>{short(views)} views</span>}
+							{
+								media?.map((media, index) => {
+									// const views = media?.public_metrics?.view_count;
+									return (<div key={index} data-media={media} className={styles.post__image__wrapper}>
+										{/* <img className={styles.post__image} src={media.url ?? media.preview_image_url} width={media.width} height={media.height} />
+										{media.type === "video" && <span className={styles.post__image__metrics}>{short(views)} views</span>} */}
 									</div>);
 								})
-							} */}
+							}
 						</div>
 						<div className={styles.post__footer}>
 							<FeedTweetActionBarContainer

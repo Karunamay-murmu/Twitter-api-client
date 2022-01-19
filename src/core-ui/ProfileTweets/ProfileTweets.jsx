@@ -12,6 +12,7 @@ function ProfileTweets({ tweets, ...props }) {
 				<FeedPostContainer
 					tweet={tweet}
 					user={tweet.user}
+					media={tweet.media}
 					{...props}
 				/>
 				{tweet?.replies && mapTweets(tweet.replies)}

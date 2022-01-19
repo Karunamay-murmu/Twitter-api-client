@@ -1,10 +1,38 @@
 @use "../../static/style/global.scss";
+@font-face {
+  font-family: "chirp";
+  src: url("../../static/font/chirp-regular-web.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "chirp";
+  src: url("../../static/font/chirp-medium-web.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "chirp";
+  src: url("../../static/font/chirp-bold-web.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "chirp";
+  src: url("../../static/font/chirp-heavy-web.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: 'chirp', sans-serif;
 }
 
 html {
