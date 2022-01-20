@@ -23,8 +23,8 @@
     }
 
     &__extra {
-        @include flex();
-        margin: 0 0 1rem 0;
+        @include flex($align: center);
+        margin: 0 0 .75rem 0;
         
         &__container {
             @include meta();

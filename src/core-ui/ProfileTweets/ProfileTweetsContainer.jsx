@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
-import { fetchTweets, selectTweets, tweetStatus } from "redux/slice/userTweetSlice";
+import { fetchTweets, selectLikes, selectTweets, tweetStatus } from "redux/slice/userTweetSlice";
 import { selectPinnedTweet } from "redux/slice/userSlice";
 import { selectUser } from "redux/slice/userSlice";
 import Spinner from "components/Spinner/Spinner";
@@ -10,18 +11,38 @@ import ProfileTweets from "core-ui/ProfileTweets/ProfileTweets";
 function ProfileTweetsContainer() {
 	const user = useSelector(state => selectUser(state));
 	const tweets = useSelector(state => selectTweets(state));
+	const likes = useSelector(state => selectLikes(state));
 	const userPinnedTweet = useSelector(state => selectPinnedTweet(state));
 	const status = useSelector(state => tweetStatus(state));
 
 	const dispatch = useDispatch();
+	const location = useLocation();
 
 	useEffect(() => {
-		if (!tweets.length && user?.id) {
-			dispatch(fetchTweets(user.id));
+		let promise;
+		if ((!likes.length || !tweets.length) && user?.id) {
+			promise = dispatch(fetchTweets({ userId: user.id, pathname: location.pathname }));
+		} else {
+			return null;
 		}
-	}, [user.id]);
+		return () => {
+			// TODO: cancel promise
+			promise.then(data => console.log(data)).catch(() => {
+				promise.abort();
+			});
+		};
+	}, [user.id, location.pathname]);
 
-	const allTweets = useMemo(() => userPinnedTweet ? [userPinnedTweet, ...tweets] : tweets, [tweets, userPinnedTweet]);
+	const tweetsData = useMemo(() => {
+		let data;
+		if (location.pathname.includes("likes")) {
+			data = likes;
+		} else {
+			data = userPinnedTweet ? [userPinnedTweet, ...tweets] : tweets;
+		}
+		return data;
+		
+	}, [tweets, userPinnedTweet, location.pathname, likes]);
 
 	return (
 		<>
@@ -31,9 +52,9 @@ function ProfileTweetsContainer() {
 				</div> :
 					<div>
 						<ProfileTweets
-							tweets={allTweets}
+							tweets={tweetsData}
 						/>
-						
+
 					</div>
 			}
 		</>

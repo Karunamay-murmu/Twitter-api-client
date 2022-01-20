@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import endpoints from "api/endpoints";
-import Client from "api/client";
+import Client, { cancelToken } from "api/client";
 
 const initialState = {
 	user: null,
@@ -11,8 +11,11 @@ const initialState = {
 	error: null,
 };
 
-export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { rejectWithValue }) => {
+export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { rejectWithValue, signal }) => {
 	try {
+		signal.addEventListener("abort", () => {
+			cancelToken.cancel();
+		});
 		return await Client.get(endpoints.getUserByUsername(username));
 	} catch (error) {
 		return rejectWithValue(error.message);
@@ -27,12 +30,11 @@ const userProfileSlice = createSlice({
 		builder.addCase(fetchUser.pending, (state) => {
 			state.status = "loading";
 		});
-		builder.addCase(fetchUser.fulfilled, (state, action) => {
-			const { payload } = action;
+		builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
 			state.status = "succeeded";
+			const user = payload.data;
 			const pinnedTweet = payload?.pinned_tweet?.data;
 			const pinnedTweetMedia = payload?.pinned_tweet?.includes?.media;
-
 			const pinnedMedia = {};
 			if (pinnedTweetMedia) {
 				for (const media of pinnedTweetMedia) {
@@ -40,11 +42,13 @@ const userProfileSlice = createSlice({
 					pinnedMedia[media.media_key] = media;
 				}
 			}
-			pinnedTweet && (pinnedTweet["isPinned"] = true);
-
+			if (pinnedTweet) {
+				pinnedTweet.isPinned = true;
+				pinnedTweet.user = user;
+			}
 			state.pinnedTweetMedia = pinnedMedia;
 			state.pinnedTweet = pinnedTweet;
-			state.user = payload.data;
+			state.user = user;
 		});
 		builder.addCase(fetchUser.rejected, (state, action) => {
 			state.status = "failed";

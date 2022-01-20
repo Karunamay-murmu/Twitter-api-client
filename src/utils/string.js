@@ -14,10 +14,13 @@ export const trimText = ({ text, trim = false, replace = true, entities }) => {
 						if (replace) {
 							text = text.replace(urlRegex, `<a href="${val.url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a>`);
 						}
+					} else if (key === "mentions") {
+						text = text.replace(`@${val.username}`, `<a href="/${val.username}" target="_blank" rel="noopener noreferrer">@${val.username}</a>`);
 					}
 				});
 			}
 		}
 	}
 	return text;
+	// return text.replace(/\n/g, "<br>");
 };

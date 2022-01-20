@@ -5,7 +5,8 @@
 .post {
 
     &__avatar {
-        @include flex();  
+        @include flex();
+
         &__wrapper {
             @include flex($direction: column);
             margin-right: 1rem;
@@ -14,12 +15,13 @@
     }
 
     &__wrapper {
-        padding: .75rem .5rem;     
+        padding: .75rem 1rem;
+
         &:hover {
             background-color: $light-gray
         }
     }
-    
+
     &__main {
         @include flex();
         position: relative;
@@ -38,7 +40,6 @@
         &__text {
             @include meta($font-size: 0.8125rem);
             @include textBold();
-            margin-top: -5px;
         }
     }
 
@@ -62,6 +63,8 @@
         @include flex($align: center, $justify: space-between);
         width: 100%;
         position: relative;
+        height: 1.5rem;
+        margin-bottom: .25rem;
 
         &__info {
             @include flex($align: center);
@@ -69,6 +72,7 @@
 
             &__date {
                 @include meta();
+
                 &__separator {
                     margin: 0 .275rem;
                 }
@@ -90,12 +94,17 @@
 
     &__image {
         width: 100%;
-        height: auto;
+        height: 100%;
         border-radius: 1rem;
+        object-fit: cover;
+
         &__wrapper {
             margin: 1rem 0 0;
             position: relative;
+            width: 382px;
+            height: 510px;
         }
+
         &__metrics {
             @include text($size: .875rem, $color: $white);
             background-color: $primary-dark;
@@ -109,6 +118,7 @@
 
     &__text {
         @include text($size: .9375rem);
+        white-space: pre-wrap;
     }
 
     &__footer {

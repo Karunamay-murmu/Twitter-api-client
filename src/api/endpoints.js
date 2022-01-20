@@ -5,8 +5,10 @@ const endpoints = {
 		return "users/by/username/" + username;
 	},
 	userTweetTimeline: (id) => `users/${id}/tweets`,
+	userLikedTweets: (id) => `users/${id}/liked_tweets`,
 	showUser: () => "users/show.json",
 	showUserTimeline: () => "tweets/user_timeline",
+
 };
 
 

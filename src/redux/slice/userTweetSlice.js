@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import endpoints from "api/endpoints";
-import Client from "api/client";
+import Client, { cancelToken } from "api/client";
 
 const initialState = {
+	likes: [],
 	tweets: [],
 	tweetsMap: null,
 	media: null,
@@ -21,9 +22,25 @@ const mapData = (dataSet, key) => {
 	return map;
 };
 
-export const fetchTweets = createAsyncThunk("tweet/fetch", async (id, { rejectWithValue }) => {
+export const fetchTweets = createAsyncThunk("tweet/fetch", async ({ userId, pathname }, { rejectWithValue, signal }) => {
 	try {
-		return await Client.get(endpoints.userTweetTimeline(id));
+		let endpoint = endpoints.userTweetTimeline(userId);
+		let path = "";
+		if (pathname.includes("likes")) {
+			endpoint = endpoints.userLikedTweets(userId);
+			path = "likes";
+		}
+		signal.addEventListener("abort", () => {
+			cancelToken.cancel();
+		});
+		const response = await Client.get(endpoint, {
+			cancelRequest: signal
+		});
+		return {
+			...response,
+			pathname: path
+		};
+
 	} catch (error) {
 		return rejectWithValue(error.message);
 	}
@@ -101,7 +118,8 @@ export const tweetSlice = createSlice({
 		builder.addCase(fetchTweets.pending, (state) => {
 			state.status = "loading";
 		});
-		builder.addCase(fetchTweets.fulfilled, (state, { payload: { data, includes: { users = [], media = [], tweets = [] } = {} } }) => {
+		builder.addCase(fetchTweets.fulfilled, (state, action) => {
+			let { payload: { pathname, data, includes: { users = [], media = [], tweets = [] } = {} } } = action;
 			state.status = "succeeded";
 
 			const tweetsMap = mapData(data);
@@ -114,12 +132,13 @@ export const tweetSlice = createSlice({
 
 			const mapTweet = (data) => {
 				data?.forEach(tweet => {
-					tweet["user"] = usersMap[tweet.author_id];
+					tweet.user = usersMap[tweet.author_id];
 					tweet?.attachments?.media_keys?.forEach(mediaKey => {
 						const media = mediaMap[mediaKey];
 						media && (tweet["media"] = [...tweet["media"] ?? [], mediaMap[mediaKey]]);
+						tweet.mediaCount = (tweet.mediaCount || 0) + 1;
 					});
-					if (tweet?.referenced_tweets) {
+					if (tweet?.referenced_tweets && pathname === "") {
 						replyStack.push(tweet);
 						const refTweets = tweet?.referenced_tweets;
 						const replies = [];
@@ -134,6 +153,7 @@ export const tweetSlice = createSlice({
 							}
 							replies.length && mapTweet(replies);
 						}
+
 					} else {
 						if (!tweetsOnly.has(tweet.id)) {
 							tweetsOnly.set(tweet.id, tweet);
@@ -152,11 +172,20 @@ export const tweetSlice = createSlice({
 			};
 			mapTweet([...data]);
 
-			state.tweets = [...state.tweets, ...tweetsOnly.values()];
-			state.tweetsMap = {...state.tweetsMap, ...tweetsMap};
-			state.refTweets = {...state.refTweets, ...refTweetsMap};
-			state.users = {...state.users, ...usersMap};
-			state.media = {...state.media, ...mediaMap};
+			switch (pathname) {
+			case "":
+				state.tweets = [...state.tweets, ...tweetsOnly.values()];
+				break;
+			case "likes":
+				state.likes = [...state.likes, ...tweetsOnly.values()];
+				break;
+			default:
+				break;
+			}
+			state.tweetsMap = { ...state.tweetsMap, ...tweetsMap };
+			state.refTweets = { ...state.refTweets, ...refTweetsMap };
+			state.users = { ...state.users, ...usersMap };
+			state.media = { ...state.media, ...mediaMap };
 
 		});
 		builder.addCase(fetchTweets.rejected, (state, action) => {
@@ -170,5 +199,6 @@ export const { setTweet, setPinnedTweet } = tweetSlice.actions;
 export default tweetSlice.reducer;
 
 export const selectTweets = (state) => state.userTweets.tweets;
+export const selectLikes = (state) => state.userTweets.likes;
 export const tweetStatus = (state) => state.userTweets.status;
 

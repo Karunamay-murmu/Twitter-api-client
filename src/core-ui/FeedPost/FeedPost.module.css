@@ -33,7 +33,7 @@
 }
 
 .post__wrapper {
-  padding: .75rem .5rem;
+  padding: .75rem 1rem;
 }
 
 .post__wrapper:hover {
@@ -87,7 +87,6 @@
   font-size: 0.8125rem;
   color: #52636f;
   font-weight: 700;
-  margin-top: -5px;
 }
 
 .post__link {
@@ -136,6 +135,8 @@
           align-items: center;
   width: 100%;
   position: relative;
+  height: 1.5rem;
+  margin-bottom: .25rem;
 }
 
 .post__header__info {
@@ -179,13 +180,17 @@
 
 .post__image {
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .post__image__wrapper {
   margin: 1rem 0 0;
   position: relative;
+  width: 382px;
+  height: 510px;
 }
 
 .post__image__metrics {
@@ -202,6 +207,7 @@
 .post__text {
   font-size: 0.9375rem;
   color: #0f1419;
+  white-space: pre-wrap;
 }
 
 .post__footer {

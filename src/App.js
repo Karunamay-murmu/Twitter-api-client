@@ -31,7 +31,13 @@ function App() {
 					<Route index element={<HomeFeed />} />
 					<Route path=":username" element={<ProfileFeedContainer />}>
 						<Route path="" element={<ProfileTweetsContainer />} />
-						<Route path="with_replies" element={<ProfileTweetsContainer />} />
+						{
+							["with_replies", "likes"].map((path, idx) => {
+								return (
+									<Route key={idx} path={path} element={<ProfileTweetsContainer />} />
+								);
+							})
+						}
 					</Route>
 					<Route path=":username/status/:tweetId" element={<TweetDetailContainer />} />
 					<Route path="settings" element={<SettingLayoutContainer />}>

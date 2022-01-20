@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
 import DOMPurify from "dompurify";
+import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
+import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 
 import Avatar from "components/Avatar/Avatar";
 import FeedTweetActionBarContainer from "components/FeedTweetActionBar/FeedTweetActionBarContainer";
@@ -10,20 +11,19 @@ import DisplayName from "components/DisplayName/DisplayName";
 import Username from "components/Username/Username";
 import { getPostDate } from "utils/convertDate";
 import { trimText } from "utils/string";
-// import { short } from "utils/number";
+import { short } from "utils/number";
 
 import styles from "./FeedPost.module.css";
 
 const FeedPost = ({ user, tweet, media, moreOptions }) => {
 	const { name, username, verified, profile_image_url } = user;
-	let { id, created_at, text, public_metrics: { reply_count, like_count, retweet_count } = {}, entities, isPinned = false, replies = [] } = tweet;
+	let { id, created_at, text, public_metrics: { reply_count, like_count, retweet_count } = {}, entities, isPinned = false, isRetweet = false, replies = [] } = tweet;
 	text = trimText({
 		text,
 		trim: true,
 		replace: false,
 		entities
 	});
-	// console.log(media_keys);
 	return (
 		<>
 			<div className={styles.post__wrapper} >
@@ -33,6 +33,14 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 						<div className={styles.post__pin}>
 							<PushPinRoundedIcon className={styles.post__pin__icon} />
 							<div className={styles.post__pin__text}>Pinned Tweet</div>
+						</div>
+					)
+				}
+				{
+					isRetweet && (
+						<div className={styles.post__pin}>
+							<RepeatRoundedIcon className={styles.post__pin__icon} />
+							<div className={styles.post__pin__text}>Retweeted</div>
 						</div>
 					)
 				}
@@ -65,10 +73,10 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 							<p className={styles.post__text} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }}></p>
 							{
 								media?.map((media, index) => {
-									// const views = media?.public_metrics?.view_count;
-									return (<div key={index} data-media={media} className={styles.post__image__wrapper}>
-										{/* <img className={styles.post__image} src={media.url ?? media.preview_image_url} width={media.width} height={media.height} />
-										{media.type === "video" && <span className={styles.post__image__metrics}>{short(views)} views</span>} */}
+									const views = media?.public_metrics?.view_count;
+									return (<div key={index} className={styles.post__image__wrapper}>
+										<img className={styles.post__image} src={media.url ?? media.preview_image_url} width={media.width} height={media.height} />
+										{media.type === "video" && <span className={styles.post__image__metrics}>{short(views)} views</span>}
 									</div>);
 								})
 							}
@@ -94,17 +102,8 @@ FeedPost.propTypes = {
 	moreOptions: PropTypes.array,
 	user: PropTypes.object,
 	tweet: PropTypes.object,
-	media: PropTypes.object,
+	media: PropTypes.array,
 	media_keys: PropTypes.array
 };
-
-// FeedPost.defaultProps = {
-// 	tweetId: "",
-// 	username: "USERNAME",
-// 	displayName: "DISPLAY NAME",
-// 	verified: false,
-// 	text: "TEXT",
-// 	moreOptions: [],
-// };
 
 export default FeedPost;

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const cancelToken = axios.CancelToken.source();
+export const cancelToken = axios.CancelToken.source();
 const baseURL = process.env.REACT_APP_TWITTER_API_BASE_URL;
 const defaultOptions = {
 	baseURL,
