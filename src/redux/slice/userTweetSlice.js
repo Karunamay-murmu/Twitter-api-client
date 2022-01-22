@@ -119,73 +119,79 @@ export const tweetSlice = createSlice({
 			state.status = "loading";
 		});
 		builder.addCase(fetchTweets.fulfilled, (state, action) => {
-			let { payload: { pathname, data, includes: { users = [], media = [], tweets = [] } = {} } } = action;
+			let { payload: { pathname, data, includes: { users = [], media = [], tweets = [] } = {}, meta = {} } } = action;
 			state.status = "succeeded";
 
-			const tweetsMap = mapData(data);
-			const refTweetsMap = mapData(tweets, "id");
-			const usersMap = mapData(users, "id");
-			const mediaMap = mapData(media, "media_key");
+			if (meta.result_count >= 1) {
+				const tweetsMap = mapData(data);
+				const refTweetsMap = mapData(tweets, "id");
+				const usersMap = mapData(users, "id");
+				const mediaMap = mapData(media, "media_key");
 
-			const tweetsOnly = new Map();
-			const replyStack = [];
+				const tweetsOnly = new Map();
+				const replyStack = [];
 
-			const mapTweet = (data) => {
-				data?.forEach(tweet => {
-					tweet.user = usersMap[tweet.author_id];
-					tweet?.attachments?.media_keys?.forEach(mediaKey => {
-						const media = mediaMap[mediaKey];
-						media && (tweet["media"] = [...tweet["media"] ?? [], mediaMap[mediaKey]]);
-						tweet.mediaCount = (tweet.mediaCount || 0) + 1;
-					});
-					if (tweet?.referenced_tweets && pathname === "") {
-						replyStack.push(tweet);
-						const refTweets = tweet?.referenced_tweets;
-						const replies = [];
-						if (refTweets) {
-							for (const refTweet of refTweets) {
-								const id = refTweet.id;
-								const reply = refTweetsMap[id] ?? tweetsMap[id];
-								replies.push(reply);
-								if (refTweet.type === "retweeted") {
-									reply.isRetweet = true;
+				const mapTweet = (data) => {
+					data?.forEach(tweet => {
+						tweet?.user == undefined && (tweet.user = usersMap[tweet.author_id]);
+						tweet?.attachments?.media_keys?.forEach(mediaKey => {
+							const media = mediaMap[mediaKey];
+							media && (tweet["media"] = [...tweet["media"] ?? [], mediaMap[mediaKey]]);
+							tweet.mediaCount = (tweet.mediaCount || 0) + 1;
+						});
+						if (tweet?.referenced_tweets && pathname === "") {
+							replyStack.push(tweet);
+							const refTweets = tweet?.referenced_tweets;
+							const parent = [];
+							if (refTweets) {
+								for (const refTweet of refTweets) {
+									const id = refTweet.id;
+									const reply = refTweetsMap[id] ?? tweetsMap[id];
+									parent.push(reply);
+									if (refTweet.type === "retweeted") {
+										reply.isRetweet = true;
+									}
+								}
+								parent.length && mapTweet(parent);
+							}
+
+						} else {
+							if (!tweetsOnly.has(tweet.id) && tweet.id !== tweet?.user?.pinned_tweet_id) {
+								tweetsOnly.set(tweet.id, tweet);
+							}
+
+						}
+						if (replyStack.length) {
+							const reply = replyStack.pop();
+							if (!tweet.isRetweet) {
+								if (tweet.id === tweet?.user?.pinned_tweet_id) {
+									tweetsOnly.set(reply.id, reply);
+								} else {
+									tweet && (tweet["replies"] = [
+										...tweet["replies"] = [],
+										reply,
+									]);
 								}
 							}
-							replies.length && mapTweet(replies);
 						}
-
-					} else {
-						if (!tweetsOnly.has(tweet.id)) {
-							tweetsOnly.set(tweet.id, tweet);
-						}
-					}
-					if (replyStack.length) {
-						const reply = replyStack.pop();
-						if (!tweet.isRetweet) {
-							tweet && (tweet["replies"] = [
-								...tweet["replies"] = [],
-								reply,
-							]);
-						}
-					}
-				});
-			};
-			mapTweet([...data]);
-
-			switch (pathname) {
-			case "":
-				state.tweets = [...state.tweets, ...tweetsOnly.values()];
-				break;
-			case "likes":
-				state.likes = [...state.likes, ...tweetsOnly.values()];
-				break;
-			default:
-				break;
+					});
+				};
+				mapTweet([...data]);
+				switch (pathname) {
+				case "":
+					state.tweets = [...state.tweets, ...tweetsOnly.values()];
+					break;
+				case "likes":
+					state.likes = [...state.likes, ...tweetsOnly.values()];
+					break;
+				default:
+					break;
+				}
+				state.tweetsMap = { ...state.tweetsMap, ...tweetsMap };
+				state.refTweets = { ...state.refTweets, ...refTweetsMap };
+				state.users = { ...state.users, ...usersMap };
+				state.media = { ...state.media, ...mediaMap };
 			}
-			state.tweetsMap = { ...state.tweetsMap, ...tweetsMap };
-			state.refTweets = { ...state.refTweets, ...refTweetsMap };
-			state.users = { ...state.users, ...usersMap };
-			state.media = { ...state.media, ...mediaMap };
 
 		});
 		builder.addCase(fetchTweets.rejected, (state, action) => {

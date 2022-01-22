@@ -39,6 +39,7 @@ const userProfileSlice = createSlice({
 			if (pinnedTweetMedia) {
 				for (const media of pinnedTweetMedia) {
 					pinnedTweet["media"] = [...pinnedTweet["media"] || [], media];
+					pinnedTweet.mediaCount = (pinnedTweet.mediaCount || 0) + 1;
 					pinnedMedia[media.media_key] = media;
 				}
 			}

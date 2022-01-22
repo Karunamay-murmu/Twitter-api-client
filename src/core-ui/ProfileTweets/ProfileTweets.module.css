@@ -3,4 +3,26 @@
   border-color: #eff3f4;
   border-style: solid;
 }
+
+.message {
+  width: 25rem;
+  padding: 0 2rem;
+  margin: auto;
+}
+
+.message__wrapper {
+  margin: 3rem 0;
+}
+
+.message__main {
+  font-size: 2rem;
+  color: #0f1419;
+  font-weight: 800;
+  margin: 0 0 .5rem;
+}
+
+.message__meta {
+  font-size: 0.9375rem;
+  color: #52636f;
+}
 /*# sourceMappingURL=ProfileTweets.module.css.map */

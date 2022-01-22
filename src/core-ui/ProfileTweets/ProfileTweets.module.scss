@@ -5,3 +5,19 @@
     border-color: $light-gray;
     border-style: solid;
 }
+
+.message {
+    width: 25rem;
+    padding: 0 2rem;
+    margin: auto;
+    &__wrapper {
+        margin: 3rem 0;
+    }
+    &__main {
+        @include title($font-size: 2rem, $weight: 800);
+        margin: 0 0 .5rem;
+    }
+    &__meta {
+        @include meta();
+    }
+}

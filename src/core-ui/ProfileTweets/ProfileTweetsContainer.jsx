@@ -8,6 +8,8 @@ import { selectUser } from "redux/slice/userSlice";
 import Spinner from "components/Spinner/Spinner";
 import ProfileTweets from "core-ui/ProfileTweets/ProfileTweets";
 
+// import styles from "./ProfileTweets.module.scss";
+
 function ProfileTweetsContainer() {
 	const user = useSelector(state => selectUser(state));
 	const tweets = useSelector(state => selectTweets(state));
@@ -22,26 +24,18 @@ function ProfileTweetsContainer() {
 		let promise;
 		if ((!likes.length || !tweets.length) && user?.id) {
 			promise = dispatch(fetchTweets({ userId: user.id, pathname: location.pathname }));
-		} else {
-			return null;
 		}
 		return () => {
-			// TODO: cancel promise
-			promise.then(data => console.log(data)).catch(() => {
-				promise.abort();
-			});
+			status === "loading" && promise.abort();
 		};
 	}, [user.id, location.pathname]);
 
 	const tweetsData = useMemo(() => {
-		let data;
 		if (location.pathname.includes("likes")) {
-			data = likes;
-		} else {
-			data = userPinnedTweet ? [userPinnedTweet, ...tweets] : tweets;
+			return likes;
 		}
-		return data;
-		
+		return userPinnedTweet ? [userPinnedTweet, ...tweets] : tweets;
+
 	}, [tweets, userPinnedTweet, location.pathname, likes]);
 
 	return (
@@ -50,12 +44,11 @@ function ProfileTweetsContainer() {
 				status === "loading" ? <div>
 					<Spinner message="Loading tweets..." />
 				</div> :
-					<div>
-						<ProfileTweets
-							tweets={tweetsData}
-						/>
-
-					</div>
+					<ProfileTweets
+						pathname={location.pathname}
+						tweets={tweetsData}
+						user={user}
+					/>
 			}
 		</>
 	);
