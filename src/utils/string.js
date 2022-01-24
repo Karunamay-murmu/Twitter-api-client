@@ -1,4 +1,7 @@
-export const trimText = ({ text, trim = false, replace = true, entities }) => {
+// import UrlPreview from "components/UrlPreview/UrlPreview";
+
+export const tweetText = (tweet) => {
+	let { text, entities } = tweet;
 	const urlRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/im;
 	const hashtagRegex = /(#[a-z\d-_]+)/im;
 	if (entities) {
@@ -8,19 +11,18 @@ export const trimText = ({ text, trim = false, replace = true, entities }) => {
 					if (key === "hashtags") {
 						text = text.replace(hashtagRegex, val.tag);
 					} else if (key === "urls") {
-						if (trim) {
-							text = text.replace(urlRegex, "");
-						}
-						if (replace) {
-							text = text.replace(urlRegex, `<a href="${val.url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a>`);
-						}
+						text = text.replace(urlRegex, `<a href="${val.url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a>`);
 					} else if (key === "mentions") {
-						text = text.replace(`@${val.username}`, `<a href="/${val.username}" target="_blank" rel="noopener noreferrer">@${val.username}</a>`);
+						let html = `<a href="/${val.username}" target="_blank" rel="noopener noreferrer">@${val.username}</a>`;
+						if (tweet?.in_reply_to_user_id) {
+							text = text.replace(`@${val.username}`, "");
+						}
+						text = text.replace(`@${val.username}`, html);
 					}
 				});
 			}
 		}
 	}
-	return text;
+	return text.trim();
 	// return text.replace(/\n/g, "<br>");
 };

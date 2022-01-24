@@ -159,6 +159,9 @@ export const tweetSlice = createSlice({
 							if (!tweetsOnly.has(tweet.id) && tweet.id !== tweet?.user?.pinned_tweet_id) {
 								tweetsOnly.set(tweet.id, tweet);
 							}
+							if (pathname === "likes") {
+								tweet.isLiked = true;
+							}
 
 						}
 						if (replyStack.length) {

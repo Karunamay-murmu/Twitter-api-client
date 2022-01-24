@@ -3,6 +3,8 @@
 
 .menu {
     @include flex($justify: space-between);
+    border-bottom: 1px solid $light-gray;
+
 
     &__item__wrapper {
         @include flex();
@@ -37,7 +39,7 @@
         left: 0;
         width: 100%;
         background-color: $primary-blue;
-        height: 5px;
+        height: 4px;
         border-radius: 50rem;
     }
 }

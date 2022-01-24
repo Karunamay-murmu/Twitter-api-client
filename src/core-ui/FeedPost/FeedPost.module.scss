@@ -64,7 +64,6 @@
         width: 100%;
         position: relative;
         height: 1.5rem;
-        margin-bottom: .25rem;
 
         &__info {
             @include flex($align: center);
@@ -92,11 +91,14 @@
         width: 100%;
     }
 
-    &__media__wrapper {
-        border-radius: 1.2rem;
-        overflow: hidden;
-        margin: 1rem 0 0;
-        border: 1px solid $blue-shade-gray;
+    &__media {
+        position: relative;
+        &__wrapper {
+            border-radius: 1.2rem;
+            overflow: hidden;
+            margin: 1rem 0 0;
+            border: 1px solid $blue-shade-gray;
+        }
     }
 
     &__image {
@@ -122,11 +124,29 @@
         }
     }
 
-    &__text {
-        @include text($size: .9375rem);
-        line-height: 1.2rem;
-        white-space: pre-wrap;
-    }
+    // &__text {
+    //     @include text($size: .9375rem);
+    //     line-height: 1.2rem;
+    //     white-space: pre-wrap;
+        
+    //     &__wrapper {
+    //         @include flex($direction: column);
+    //     }
+
+    // }
+
+    // &__mentions {
+
+    //     &__type {
+    //         @include meta();
+    //     }
+
+    //     &__wrapper {
+    //         @include flex($align: center);
+    //         gap: 5px;
+    //         margin-bottom: .25rem;
+    //     }
+    // }
 
     &__footer {
         @include flex($align: center, $justify: space-between);

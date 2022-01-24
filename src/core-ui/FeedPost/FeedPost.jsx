@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DOMPurify from "dompurify";
+// import DOMPurify from "dompurify";
 import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 
@@ -9,6 +9,7 @@ import FeedTweetActionBarContainer from "components/FeedTweetActionBar/FeedTweet
 import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
 import DisplayName from "components/DisplayName/DisplayName";
 import Username from "components/Username/Username";
+import TweetTextContainer from "components/TweetText/TweetTextContainer";
 import { getPostDate } from "utils/convertDate";
 // import { trimText } from "utils/string";
 import { short } from "utils/number";
@@ -17,28 +18,21 @@ import styles from "./FeedPost.module.css";
 
 const FeedPost = ({ user, tweet, media, moreOptions }) => {
 	const { name, username, verified, profile_image_url } = user;
-	let { id, created_at, text, public_metrics: { reply_count, like_count, retweet_count } = {}, isPinned = false, isRetweet = false, replies = [], mediaCount } = tweet;
-	// text = trimText({
-	// 	text,
-	// 	trim: true,
-	// 	replace: false,
-	// 	entities
-	// });
+	let { id, created_at, public_metrics: { reply_count, like_count, retweet_count } = {}, isPinned = false, isRetweet = false, replies = [], mediaCount } = tweet;
+
+	// text = trimText(tweet);
 
 	const imageGrid = () => {
-
 		const style = {
 			display: "grid",
 			gridTemplateColumns: "repeat(2, 1fr)",
-			gridTemplateRows: `repeat(${Math.floor(mediaCount / 2)}, 1fr)`,
+			gridTemplateRows: `repeat(${Math.floor(mediaCount / 2)}, 283.5px)`,
 			gridGap: "1px"
 		};
-
 		if (tweet?.media) {
 			switch (mediaCount) {
 			case 1: {
 				const { width, height } = tweet?.media[0];
-				// const
 				if (width > height) {
 					style.gridTemplateColumns = "repeat(1, 1fr)";
 					style.gridTemplateRows = "repeat(1, 1fr)";
@@ -47,20 +41,19 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 					display: "flex",
 					width: `${width > height ? "100%" : "385px"}`,
 					height: `${height > width ? "510px" : "auto"}`,
-					// height: "auto"
 				};
 			}
 			case 2:
 				style.gridTemplateAreas = `
-					"image_1 image_2"
-				`;
+		"image_1 image_2"
+	`;
 				break;
 			case 4:
 				style.gridTemplateRows = "repeat(2, 140px)";
 				style.gridTemplateAreas = `
-				"image_1 image_2"
-				"image_3 image_4"
-				`;	
+		"image_1 image_2"
+		"image_3 image_4"
+	`;
 				break;
 			default:
 				break;
@@ -69,11 +62,11 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 		return style;
 	};
 
-	// console.log(style);
+
+
 	return (
 		<>
 			<div className={styles.post__wrapper} >
-				{/* {tweet.text} */}
 				{
 					isPinned && (
 						<div className={styles.post__pin}>
@@ -116,8 +109,27 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 							<MoreOptionContainer moreOptions={moreOptions} />
 						</div>
 						<div className={styles.post__content}>
-							<p className={styles.post__text} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }}></p>
-							{mediaCount && <div className={styles.post__media__wrapper} style={imageGrid()}>
+							<div className={styles.post__text__wrapper}>
+								{/* {
+									tweet?.in_reply_to_user_id && tweet?.in_reply_to_user_id !== tweet?.user?.id && (
+										<div className={styles.post__mentions__wrapper}>
+											<span className={styles.post__mentions__type}>
+												Replying to
+											</span>
+											<div className={styles.post__mentions}>
+												{
+													tweet?.entities?.mentions?.map(user => (
+														<a key={user.id} href={`/${user.username}`} target="_blank" rel="noopener noreferrer">@{user.username}</a>
+													))
+												}
+											</div>
+										</div>
+									)
+								}
+								<p className={styles.post__text} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }}></p> */}
+								<TweetTextContainer tweet={tweet} />
+							</div>
+							{mediaCount && <div className={`${tweet?.media ? styles.post__media__wrapper : ""}`} style={imageGrid()}>
 								{
 									media?.map((media, index) => {
 										const views = media?.public_metrics?.view_count;

@@ -23,7 +23,7 @@ function ProfileTweets({ tweets, pathname, user, ...props }) {
 			);
 		}
 		return tweets.map((tweet, idx) => (
-			<div key={idx} className={`${!tweet?.referenced_tweets ? styles.profile__tweet__wrapper : ""}`}>
+			<div key={idx} className={`${!tweet?.referenced_tweets || tweet?.isLiked ? styles.profile__tweet__wrapper : ""}`}>
 				<FeedPostContainer
 					tweet={tweet}
 					user={tweet.user}
