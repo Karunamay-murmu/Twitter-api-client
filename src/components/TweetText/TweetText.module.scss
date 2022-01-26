@@ -4,6 +4,8 @@
 .post {
     @include flex($direction: column);
     &__mentions {
+        @include flex($align: center);
+        gap: 5px;
 
         &__type {
             @include meta();
@@ -14,13 +16,15 @@
             gap: 5px;
             margin-bottom: .25rem;
         }
+        &__others {
+            @include meta($color: $primary-blue);
+        }
     }
 
 }
 
 .text {
     @include text($size: .9375rem);
-    @include flex();
     line-height: 1.2rem;
     white-space: pre-wrap;
 
@@ -28,15 +32,16 @@
 
 .url {
     &__preview {
-
         &__wrapper {
             @include flex($align: center);
+            width: 100%;
             border-radius: 1.2rem;
             overflow: hidden;
             border-width: 1px;
             border-color: $blue-shade-gray;
             border-style: solid;
             height: 130px;
+            margin-top: .75rem;
         }
 
         &__image {
@@ -73,4 +78,11 @@
 
     }
 
+}
+
+.quotedTweet__wrapper {
+    border: 1px solid $blue-shade-gray;
+    margin-top: 1rem;
+    border-radius: 1.2rem;
+    overflow: hidden;
 }

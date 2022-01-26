@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import Avatar from "components/Avatar/Avatar.jsx";
 import FollowButtonContainer from "components/FollowButton/FollowButtonContainer.jsx";
 import Verified from "components/Verified/Verified.jsx";
-import ProfileCardContainer from "core-ui/ProfileCard/ProfileCardContainer.jsx";
+// import ProfileCardContainer from "components/ProfileCard/ProfileCardContainer.jsx";
 
 import styles from "./profileButton.module.css";
 
-function ProfileButton({ onShowProfileCard, showCard, verified = true, image, displayName, username, bio, follower, following }) {
+function ProfileButton({ onShowProfileCard, verified = true, image, displayName, username }) {
 	return (
 		<React.Fragment>
 			<div className={styles.profile__wrapper}>
@@ -25,7 +25,7 @@ function ProfileButton({ onShowProfileCard, showCard, verified = true, image, di
 					<FollowButtonContainer />
 				</div>
 			</div>
-			{
+			{/* {
 				showCard && <ProfileCardContainer
 					displayName={displayName}
 					username={username}
@@ -33,7 +33,7 @@ function ProfileButton({ onShowProfileCard, showCard, verified = true, image, di
 					follower={follower}
 					following={following}
 				/>
-			}
+			} */}
 		</React.Fragment>
 	);
 }

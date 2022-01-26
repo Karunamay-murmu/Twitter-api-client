@@ -179,6 +179,7 @@
 
 .post__media {
   position: relative;
+  width: 100%;
 }
 
 .post__media__wrapper {

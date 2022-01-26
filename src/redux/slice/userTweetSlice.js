@@ -133,62 +133,70 @@ export const tweetSlice = createSlice({
 
 				const mapTweet = (data) => {
 					data?.forEach(tweet => {
-						tweet?.user == undefined && (tweet.user = usersMap[tweet.author_id]);
+						tweet.user = usersMap[tweet.author_id];
 						tweet?.attachments?.media_keys?.forEach(mediaKey => {
 							const media = mediaMap[mediaKey];
 							media && (tweet["media"] = [...tweet["media"] ?? [], mediaMap[mediaKey]]);
 							tweet.mediaCount = (tweet.mediaCount || 0) + 1;
 						});
-						if (tweet?.referenced_tweets && pathname === "") {
+						if (tweet?.referenced_tweets) {
 							replyStack.push(tweet);
 							const refTweets = tweet?.referenced_tweets;
 							const parent = [];
 							if (refTweets) {
 								for (const refTweet of refTweets) {
 									const id = refTweet.id;
+									const type = refTweet.type;
 									const reply = refTweetsMap[id] ?? tweetsMap[id];
-									parent.push(reply);
-									if (refTweet.type === "retweeted") {
+									if ((type === "retweeted" || type === "quoted" || (type === "replied_to" && pathname === "")) && reply) {
+										parent.push(reply);
+									} else {
+										tweetsOnly.set(tweet.id, tweet);
+										replyStack.pop();
+									}
+									if (type === "retweeted") {
 										reply.isRetweet = true;
+									}
+									if (type === "quoted") {
+										reply.isQuoted = true;
 									}
 								}
 								parent.length && mapTweet(parent);
 							}
-
 						} else {
-							if (!tweetsOnly.has(tweet.id) && tweet.id !== tweet?.user?.pinned_tweet_id) {
+							if (!tweetsOnly.has(tweet.id) && !tweet?.isQuoted) {
 								tweetsOnly.set(tweet.id, tweet);
 							}
 							if (pathname === "likes") {
 								tweet.isLiked = true;
 							}
-
 						}
 						if (replyStack.length) {
 							const reply = replyStack.pop();
 							if (!tweet.isRetweet) {
-								if (tweet.id === tweet?.user?.pinned_tweet_id) {
+								if (tweet?.isQuoted) {
 									tweetsOnly.set(reply.id, reply);
+									reply.quotedTweet = tweet;
 								} else {
+									reply.isReply = true;
 									tweet && (tweet["replies"] = [
 										...tweet["replies"] = [],
 										reply,
 									]);
+									// if (pathname === "") {
+									// }
 								}
 							}
 						}
 					});
 				};
+
 				mapTweet([...data]);
-				switch (pathname) {
-				case "":
+				if (pathname === "") {
 					state.tweets = [...state.tweets, ...tweetsOnly.values()];
-					break;
-				case "likes":
+				}
+				if (pathname === "likes") {
 					state.likes = [...state.likes, ...tweetsOnly.values()];
-					break;
-				default:
-					break;
 				}
 				state.tweetsMap = { ...state.tweetsMap, ...tweetsMap };
 				state.refTweets = { ...state.refTweets, ...refTweetsMap };

@@ -5,7 +5,8 @@
     @include text($size: .9375rem);
     text-align: left;
     margin:.75rem 0;
-    text-transform: title;
+    line-height: 1.35rem;
+
 
     a {
         color: $primary-blue;

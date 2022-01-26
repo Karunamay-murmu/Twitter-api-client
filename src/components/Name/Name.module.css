@@ -1,0 +1,32 @@
+.name {
+  position: relative;
+}
+
+.name__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+}
+
+.name__wrapper:hover > .name__displayname {
+  text-decoration: underline !important;
+}
+
+.profile {
+  position: absolute;
+  top: 2rem;
+  left: -3.5rem;
+  z-index: 10;
+}
+/*# sourceMappingURL=Name.module.css.map */

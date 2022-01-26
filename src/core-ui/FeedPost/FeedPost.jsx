@@ -7,20 +7,18 @@ import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
 import Avatar from "components/Avatar/Avatar";
 import FeedTweetActionBarContainer from "components/FeedTweetActionBar/FeedTweetActionBarContainer";
 import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
-import DisplayName from "components/DisplayName/DisplayName";
-import Username from "components/Username/Username";
+// import DisplayName from "components/DisplayName/DisplayName";
+// import Username from "components/Username/Username";
 import TweetTextContainer from "components/TweetText/TweetTextContainer";
+import Name from "components/Name/Name";
 import { getPostDate } from "utils/convertDate";
-// import { trimText } from "utils/string";
 import { short } from "utils/number";
 
 import styles from "./FeedPost.module.css";
 
 const FeedPost = ({ user, tweet, media, moreOptions }) => {
-	const { name, username, verified, profile_image_url } = user;
+	const { profile_image_url } = user;
 	let { id, created_at, public_metrics: { reply_count, like_count, retweet_count } = {}, isPinned = false, isRetweet = false, replies = [], mediaCount } = tweet;
-
-	// text = trimText(tweet);
 
 	const imageGrid = () => {
 		const style = {
@@ -45,24 +43,29 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 			}
 			case 2:
 				style.gridTemplateAreas = `
-		"image_1 image_2"
-	`;
+"image_1 image_2"
+`;
+				break;
+			case 3:
+				style.gridTemplateRows = "repeat(2, 140px)";
+				style.gridTemplateAreas = `
+					"image_1 image_2"
+					"image_1 image_3"
+				`;
 				break;
 			case 4:
 				style.gridTemplateRows = "repeat(2, 140px)";
 				style.gridTemplateAreas = `
-		"image_1 image_2"
-		"image_3 image_4"
-	`;
+"image_1 image_2"
+"image_3 image_4"
+`;
 				break;
 			default:
 				break;
 			}
+			return style;
 		}
-		return style;
 	};
-
-
 
 	return (
 		<>
@@ -97,8 +100,7 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 					<div className={styles.post__body}>
 						<div className={styles.post__header}>
 							<div className={styles.post__header__info}>
-								<DisplayName name={name} verified={verified} />
-								<Username name={username} />
+								<Name user={user} />
 								<time className={styles.post__header__info__date} dateTime={created_at}>
 									<span className={styles.post__header__info__date__separator}>
 										&bull;
@@ -106,27 +108,10 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 									{getPostDate(created_at)}
 								</time>
 							</div>
-							<MoreOptionContainer moreOptions={moreOptions} />
+							{moreOptions && <MoreOptionContainer moreOptions={moreOptions} />}
 						</div>
 						<div className={styles.post__content}>
 							<div className={styles.post__text__wrapper}>
-								{/* {
-									tweet?.in_reply_to_user_id && tweet?.in_reply_to_user_id !== tweet?.user?.id && (
-										<div className={styles.post__mentions__wrapper}>
-											<span className={styles.post__mentions__type}>
-												Replying to
-											</span>
-											<div className={styles.post__mentions}>
-												{
-													tweet?.entities?.mentions?.map(user => (
-														<a key={user.id} href={`/${user.username}`} target="_blank" rel="noopener noreferrer">@{user.username}</a>
-													))
-												}
-											</div>
-										</div>
-									)
-								}
-								<p className={styles.post__text} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }}></p> */}
 								<TweetTextContainer tweet={tweet} />
 							</div>
 							{mediaCount && <div className={`${tweet?.media ? styles.post__media__wrapper : ""}`} style={imageGrid()}>

@@ -1,0 +1,25 @@
+@import "../../static/style/mixin.scss";
+
+.name {
+
+    position: relative;
+
+    &__wrapper {
+        @include flex($align: center);
+        gap: 5px;
+
+    }
+
+    &__wrapper:hover>&__displayname {
+        text-decoration: underline !important;
+    }
+
+}
+
+.profile {
+    position: absolute;
+    top: 2rem;
+    left: -3.5rem;
+    z-index: 10;
+    // transition: all 250ms ease-in-out;
+}

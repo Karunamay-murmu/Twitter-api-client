@@ -3,7 +3,7 @@ import React from "react";
 import SearchContainer from "components/Search/SearchContainer.jsx";
 import WidgetContainer from "components/Widget/WidgetContainer.jsx";
 import ProfileButtonContainer from "components/ProfileButton/ProfileButtonContainer";
-import ProfileCard from "core-ui/ProfileCard/ProfileCardContainer.jsx";
+// import ProfileCard from "components/ProfileCard/ProfileCardContainer.jsx";
 
 import styles from "./WidgetBar.module.css";
 
@@ -19,7 +19,7 @@ function WidgetBar() {
 					<ProfileButtonContainer />
 				</WidgetContainer>
 			</div>
-			<ProfileCard />
+			{/* <ProfileCard /> */}
 		</div>
 	);
 }

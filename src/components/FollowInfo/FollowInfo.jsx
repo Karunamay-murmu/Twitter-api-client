@@ -5,7 +5,7 @@ import { short } from "utils/number";
 
 import styles from "./FollowInfo.module.css";
 
-function FollowInfo({ following = "1.1K", followers = "1.1K" }) {
+function FollowInfo({ following, followers }) {
 	return (
 		<div className={styles.follow}>
 			<div className={styles.follow__wrapper}><span className={styles["follow--count"]}>{short(following)}</span>Following</div>
@@ -15,8 +15,13 @@ function FollowInfo({ following = "1.1K", followers = "1.1K" }) {
 }
 
 FollowInfo.propTypes = {
-	following: PropTypes.string,
-	followers: PropTypes.string
+	following: PropTypes.number,
+	followers: PropTypes.number
+};
+
+FollowInfo.defaultProps = {
+	following: 0,
+	followers: 0
 };
 
 
