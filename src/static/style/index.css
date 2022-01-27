@@ -91,4 +91,11 @@ a {
   text-decoration: none;
   color: #1d9bf0;
 }
+
+img.emoji {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0 .05rem 0 .1rem;
+  vertical-align: -0.25rem;
+}
 /*# sourceMappingURL=index.css.map */

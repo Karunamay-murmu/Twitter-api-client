@@ -2,11 +2,11 @@
 
 
 .follow {
-    @include flex();
+    @include flex($align: center);
+    gap: .875rem;
 
     &__wrapper {
         @include meta();
-        margin: 0 2rem 0 0;
     }
 
     &--count {

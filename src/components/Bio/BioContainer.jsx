@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DOMPurify from "dompurify";
+import twemoji from "twemoji";
 
 import Bio from "components/Bio/Bio.jsx";
 
@@ -48,7 +49,7 @@ function BioContainer({ entities, bio, className }) {
 	// }
 
 	return (
-		<Bio className={className} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(bio) }} />
+		<Bio className={className} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(twemoji.parse(bio)) }} />
 	);
 }
 

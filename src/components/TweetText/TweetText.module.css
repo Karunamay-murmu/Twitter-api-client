@@ -12,6 +12,7 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  word-break: break-word;
 }
 
 .post__mentions {
@@ -54,9 +55,23 @@
   margin-bottom: .25rem;
 }
 
-.post__mentions__others {
+.post__mentions__people {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 0.9375rem;
   color: #1d9bf0;
+  gap: 5px;
 }
 
 .text {

@@ -17,15 +17,17 @@ function ProfileContainer(props) {
 		let { entities, description, url, created_at } = profile;
 		let expand_profile = {};
 		if (entities) {
-			for (const value of Object.values(entities.url)) {
-				if (value.length) {
-					value.forEach(value => {
-						expand_profile = {
-							profile_display_url: value.display_url,
-							profile_url: value.url,
-							profile_expanded_url: value.expanded_url,
-						};
-					});
+			if (entities?.url) {
+				for (const value of Object.values(entities.url)) {
+					if (value.length) {
+						value.forEach(value => {
+							expand_profile = {
+								profile_display_url: value.display_url,
+								profile_url: value.url,
+								profile_expanded_url: value.expanded_url,
+							};
+						});
+					}
 				}
 			}
 		}

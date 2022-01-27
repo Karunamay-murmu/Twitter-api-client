@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
+import DOMPurify from "dompurify";
+import twemoji from "twemoji";
 
 import Avatar from "components/Avatar/Avatar";
 import DisplayName from "components/DisplayName/DisplayName";
@@ -56,13 +58,15 @@ function Profile({ profile, routeLocation }) {
 					</div>
 					<div className={styles.profile__info__wrapper}>
 						<div className={styles.profile__info}>
-							<DisplayName name={name} verified={verified} className={styles.profile__displayName} />
+							<DisplayName name={name} verified={verified} className={styles.profile__displayName}>
+								{name}
+							</DisplayName>
 							<Username name={username} />
 							{description && <BioContainer entities={entities?.description} bio={description} />}
 							<div className={styles.profile__extra}>
 								{location && <div className={styles.profile__extra__container}>
 									<LocationOnRoundedIcon className={styles.icon} />
-									{location}
+									<span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(twemoji.parse(location)) }}></span>
 								</div>}
 								{profile_display_url && <div className={styles.profile__extra__container}>
 									<LanguageOutlinedIcon className={styles.icon} />

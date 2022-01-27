@@ -34,10 +34,10 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 				if (width > height) {
 					style.gridTemplateColumns = "repeat(1, 1fr)";
 					style.gridTemplateRows = "repeat(1, 1fr)";
-				}
+				} 
 				return {
 					display: "flex",
-					width: `${width > height ? "100%" : "385px"}`,
+					width: `${width >= height ? "100%" : "385px"}`,
 					height: `${height > width ? "510px" : "auto"}`,
 				};
 			}
@@ -49,9 +49,9 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 			case 3:
 				style.gridTemplateRows = "repeat(2, 140px)";
 				style.gridTemplateAreas = `
-					"image_1 image_2"
-					"image_1 image_3"
-				`;
+				"image_1 image_2"
+				"image_1 image_3"
+			`;
 				break;
 			case 4:
 				style.gridTemplateRows = "repeat(2, 140px)";

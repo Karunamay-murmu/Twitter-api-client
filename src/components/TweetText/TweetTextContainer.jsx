@@ -11,27 +11,32 @@ import FeedPost from "core-ui/FeedPost/FeedPost";
 function TweetTextContainer({ tweet }) {
 
 	let { text, entities } = tweet;
-
-	// const urlRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/im;
 	const hashtagRegex = /(#[a-z\d-_]+)/im;
 
 	if (entities) {
-		let description = text;
 		for (const [key, value] of Object.entries(entities)) {
 			if (value.length) {
 				value.forEach(val => {
 					if (key === "hashtags") {
-						text = text.replace(hashtagRegex, val.tag);
+						text = text.replace(hashtagRegex, `<span><a href="/hashtags/${val.tag}" target="_blank" rel="noopener noreferrer">#${val.tag}</a></span>`);
 					} else {
-						const start = val.start;
-						const end = val.end;
 						if (key === "urls") {
-							const url = description.slice(start, end);
-							text = text.replace(url, "");
+							const url = new RegExp(val.url, "ig");
+							if (!val?.display_url.includes("twitter.com")) {
+								text = text.replace(url, `<span><a href="${val.url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
+							} else {
+								text = text.replace(url, "");
+							}
 						}
 						if (key === "mentions") {
-							const mentions = description.slice(start, end);
-							text = text.replace(mentions, `<span><a href="/${mentions}" target="_blank" rel="noopener noreferrer">${mentions}</a></span>`);
+							const username = new RegExp(`@${val.username}`, "ig");
+							if (tweet?.in_reply_to_user_id && !tweet?.isReply) {
+								text = text.replace(username, "");
+							} else {
+								console.log(text);
+								text = text.replace(username, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">@${val.username}</a></span>`);
+								console.log(text);
+							}
 						}
 					}
 				});
@@ -50,13 +55,16 @@ function TweetTextContainer({ tweet }) {
 					</span>
 					<div className={styles.post__mentions}>
 						{
-							mentions.slice(0, 2)?.map(user => (
-								<a key={user.id} href={`/${user.username}`} target="_blank" rel="noopener noreferrer">@{user.username}</a>
+							mentions.slice(0, 3)?.map((user, idx) => (
+								<div className={styles.post__mentions__people} key={user.id}>
+									{mentions.length >= 2 && mentions.length - idx === 1 && "and"}
+									<a href={`/${user.username}`} target="_blank" rel="noopener noreferrer">@{user.username}</a>
+								</div>
 							))
 						}
-						{mentions.length > 2 && (
-							<span className={styles.post__mentions__others}>
-								and {mentions.length - 2} others
+						{mentions.length > 3 && (
+							<span className={styles.post__mentions__people}>
+								and {mentions.length - 3} others
 							</span>
 						)}
 					</div>
@@ -74,7 +82,7 @@ function TweetTextContainer({ tweet }) {
 								<div className={styles.url__preview__info__wrapper}>
 									<div className={styles.url__preview__info}>
 										<div className={styles.url__preview__display}>{url.display_url.split("/")[0]}</div>
-										<div className={styles.url__preview__title}>{url.title.slice(0, 25)}...</div>
+										<div className={styles.url__preview__title}>{url.title.slice(0, 25)}{url.title.length > 25 && "..." }</div>
 										<div className={styles.url__preview__desc}>{url.description.slice(0, 80)}...</div>
 									</div>
 								</div>

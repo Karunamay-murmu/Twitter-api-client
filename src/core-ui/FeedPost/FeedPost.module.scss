@@ -125,30 +125,6 @@
         }
     }
 
-    // &__text {
-    //     @include text($size: .9375rem);
-    //     line-height: 1.2rem;
-    //     white-space: pre-wrap;
-        
-    //     &__wrapper {
-    //         @include flex($direction: column);
-    //     }
-
-    // }
-
-    // &__mentions {
-
-    //     &__type {
-    //         @include meta();
-    //     }
-
-    //     &__wrapper {
-    //         @include flex($align: center);
-    //         gap: 5px;
-    //         margin-bottom: .25rem;
-    //     }
-    // }
-
     &__footer {
         @include flex($align: center, $justify: space-between);
         margin-left: -0.5rem;
