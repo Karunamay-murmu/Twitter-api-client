@@ -1,5 +1,7 @@
-import React from "react";
+// import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import VolumeOffOutlinedIcon from "@mui/icons-material/VolumeOffOutlined";
@@ -9,13 +11,12 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import FeedPost from "core-ui/FeedPost/FeedPost.jsx";
 
-function FeedPostContainer({ isFollowing, user, ...props }) {
+function FeedPostContainer({ isFollowing, user, tweet, ...props }) {
 	const moreOptions = [
 		{
 			"text": `${isFollowing ? `Unfollow @${user?.username}` : `Follow @${user?.username}`} `,
 			"Icon": PersonAddAltOutlinedIcon,
-		},
-		{
+		}, {
 			"text": "Add/remove from Lists",
 			"Icon": ListAltOutlinedIcon,
 		}, {
@@ -38,11 +39,23 @@ function FeedPostContainer({ isFollowing, user, ...props }) {
 			"Icon": FlagOutlinedIcon,
 		}
 	];
+
+	const navigate = useNavigate();
+
+	const navigateToTweetDetail = useCallback(() => {
+		const id = tweet?.id;
+		if (id) {
+			navigate(`/${user.username}/status/${id}`);
+		}
+	}, [tweet.id]);
+
 	return (
 		<FeedPost
 			moreOptions={moreOptions ?? null}
 			user={user}
+			tweet={tweet}
 			{...props}
+			navigateToTweetDetail={navigateToTweetDetail}
 		/>
 	);
 }
@@ -50,6 +63,7 @@ function FeedPostContainer({ isFollowing, user, ...props }) {
 FeedPostContainer.propTypes = {
 	isFollowing: PropTypes.bool,
 	user: PropTypes.object,
+	tweet: PropTypes.object,
 };
 
 export default React.memo(FeedPostContainer);

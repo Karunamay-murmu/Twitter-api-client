@@ -183,8 +183,6 @@ export const tweetSlice = createSlice({
 										...tweet["replies"] = [],
 										reply,
 									]);
-									// if (pathname === "") {
-									// }
 								}
 							}
 						}

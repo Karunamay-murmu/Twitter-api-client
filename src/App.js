@@ -13,6 +13,7 @@ import AccountSettingContainer from "core-ui/AccountSetting/AccountSettingContai
 import PrivacySettingContainer from "core-ui/PrivacySetting/PrivacySettingContainer";
 // import ProfileReplyTweetsContainer from "core-ui/ProfileReplyTweets/ProfileReplyTweetsContainer";
 import ProfileTweetsContainer from "core-ui/ProfileTweets/ProfileTweetsContainer";
+import ProfileContainer from "core-ui/Profile/ProfileContainer";
 
 
 function App() {
@@ -30,16 +31,17 @@ function App() {
 				<Route path="/" element={<MainLayout />}>
 					<Route index element={<HomeFeed />} />
 					<Route path=":username" element={<ProfileFeedContainer />}>
-						<Route path="" element={<ProfileTweetsContainer />} />
-						{
-							["with_replies", "likes"].map((path, idx) => {
-								return (
-									<Route key={idx} path={path} element={<ProfileTweetsContainer />} />
-								);
-							})
-						}
+						<Route path="" element={<ProfileContainer />}>
+							{
+								["", "with_replies", "likes"].map((path, idx) => {
+									return (
+										<Route key={idx} path={path} element={<ProfileTweetsContainer />} />
+									);
+								})
+							}
+						</Route>
+						<Route path="status/:tweetId" element={<TweetDetailContainer />} />
 					</Route>
-					<Route path=":username/status/:tweetId" element={<TweetDetailContainer />} />
 					<Route path="settings" element={<SettingLayoutContainer />}>
 						<Route path="account" element={<AccountSettingContainer />} />
 						<Route path="privacy_and_safety" element={<PrivacySettingContainer />} />

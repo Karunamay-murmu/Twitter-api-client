@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import VolumeOffOutlinedIcon from "@mui/icons-material/VolumeOffOutlined";
@@ -9,6 +11,7 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import TweetDetail from "core-ui/TweetDetail/TweetDetail";
 import MainFeedContainer from "core-ui/MainFeed/MainFeedContainer";
+import { fetchTweetDetail, selectTweet, selectStatus } from "redux/slice/tweetDetailSlice";
 
 function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props }) {
 
@@ -40,9 +43,20 @@ function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props })
 		}
 	];
 
+	const tweet = useSelector(state => selectTweet(state));
+	const tweetStatus = useSelector(state => selectStatus(state));
+	const dispatch = useDispatch();
+	const param = useParams();
+
+	useEffect(() => {
+		if (tweetStatus === "idle") {
+			dispatch(fetchTweetDetail(param.id));
+		}
+	}, [tweetStatus, dispatch, param.id]);
+
 	return (
 		<MainFeedContainer>
-			<TweetDetail moreOptions={moreOptions} {...props} />
+			<TweetDetail tweet={tweet} moreOptions={moreOptions} {...props} />
 		</MainFeedContainer>
 	);
 }

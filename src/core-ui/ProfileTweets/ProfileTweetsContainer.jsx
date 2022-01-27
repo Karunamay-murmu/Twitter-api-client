@@ -7,6 +7,10 @@ import { selectPinnedTweet } from "redux/slice/userSlice";
 import { selectUser } from "redux/slice/userSlice";
 import Spinner from "components/Spinner/Spinner";
 import ProfileTweets from "core-ui/ProfileTweets/ProfileTweets";
+// import FeedHeader from "components/FeedHeader/FeedHeader";
+// import DisplayName from "components/DisplayName/DisplayName";
+// import ProfileContainer from "core-ui/Profile/ProfileContainer";
+// import TweetMenuBarContainer from "components/TweetMenuBar/TweetMenuBarContainer";
 
 // import styles from "./ProfileTweets.module.scss";
 
@@ -40,6 +44,7 @@ function ProfileTweetsContainer() {
 
 	return (
 		<>
+			
 			{
 				status === "loading" ? <div>
 					<Spinner message="Loading tweets..." />

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 
@@ -6,12 +7,26 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 
 import styles from "./FeedHeader.module.css";
 
-function FeedHeader({ backbtn=true, meta, title, children }) {
+function FeedHeader({ backbtn = true, meta, title, children }) {
+
+	const [back, setBack] = React.useState(false);
+	const navigate = useNavigate();
+
+	const goBack = () => {
+		setBack(true);
+	};
+
+	React.useEffect(() => {
+		if (back) {
+			navigate(-1);
+		}
+	}, [back]);
+
 	return (
 		<header className={styles.feed__header}>
 			<div className={styles.feed__header__wrapper}>
 				{backbtn &&
-					<div className={styles.feed__back}>
+					<div className={styles.feed__back} onClick={goBack}>
 						<ArrowBackOutlinedIcon className={styles.feed__back__icon} />
 					</div>}
 				<div className={styles.feed__info}>

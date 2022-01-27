@@ -3,6 +3,13 @@
 
 
 .post {
+    &__wrapper {
+        padding: .75rem 1rem;
+        cursor: pointer;
+        &:hover {
+            background-color: $light-gray
+        }
+    }
 
     &__avatar {
         @include flex();
@@ -14,13 +21,6 @@
         }
     }
 
-    &__wrapper {
-        padding: .75rem 1rem;
-
-        &:hover {
-            background-color: $light-gray
-        }
-    }
 
     &__main {
         @include flex();

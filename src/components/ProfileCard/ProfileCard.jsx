@@ -11,10 +11,10 @@ import BioContainer from "components/Bio/BioContainer.jsx";
 
 import styles from "./profilecard.module.css";
 
-const ProfileCard = React.forwardRef(({ user, className, mouseOver, mouseLeave }, ref) => {
+const ProfileCard = React.forwardRef(({ user, className, mouseLeave }, ref) => {
 	const { name, username, verified, profile_image_url, description, public_metrics: { followers_count, following_count }, entities } = user;
 	return (
-		<div className={`${styles.profile__wrapper} ${className}`} ref={ref} onMouseOver={mouseOver} onMouseLeave={mouseLeave}>
+		<div className={`${styles.profile__wrapper} ${className}`} ref={ref} onMouseLeave={mouseLeave}>
 			<div className={styles.profile__avatar}>
 				<Avatar image={profile_image_url} />
 				<FollowButtonContainer />
@@ -26,6 +26,8 @@ const ProfileCard = React.forwardRef(({ user, className, mouseOver, mouseLeave }
 			<BioContainer entities={entities?.description} bio={description} />
 			<FollowInfo following={following_count} followers={followers_count} />
 		</div>
+		// 		<div className={styles.profile}>
+		// </div>
 	);
 });
 

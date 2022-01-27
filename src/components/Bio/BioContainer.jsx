@@ -7,27 +7,28 @@ import Bio from "components/Bio/Bio.jsx";
 
 function BioContainer({ entities, bio, className }) {
 	// const urlRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/im;
-	const hashtagRegex = /(#[a-z\d-_]+)/im;
+	// const hashtagRegex = /(#[a-z\d-_]+)/im;
 
 	if (entities) {
 		let description = bio;
 		for (const [key, value] of Object.entries(entities)) {
 			if (value.length) {
 				value.forEach(val => {
-					if (key === "hashtags") {
-						bio = bio.replace(hashtagRegex, val.tag);
-					} else {
-						const start = val.start;
-						const end = val.end;
-						if (key === "urls") {
-							const url = description.slice(start, end);
-							bio = bio.replace(url, `<span><a href="${url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
-						}
-						if (key === "mentions") {
-							const mentions = description.slice(start, end);
-							bio = bio.replace(mentions, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">${mentions}</a></span>`);
-						}
+					const start = val.start;
+					const end = val.end;
+					if (key === "urls") {
+						const url = description.slice(start, end);
+						bio = bio.replace(url, `<span><a href="${url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
 					}
+					if (key === "mentions") {
+						const mentions = description.slice(start, end);
+						bio = bio.replace(mentions, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">${mentions}</a></span>`);
+					}
+					if (key === "hashtags") {
+						const hashTag = description.slice(start, end);
+						bio = bio.replace(hashTag, `<span><a href="/hashtags/${val.tag}" target="_blank" rel="noopener noreferrer">#${val.tag}</a></span>`);
+					}
+
 				});
 			}
 		}

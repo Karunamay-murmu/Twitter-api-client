@@ -1,75 +1,44 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
+// import React, { useState, useRef, useEffect } from "react";
 // import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
 import Username from "components/Username/Username";
 import DisplayName from "components/DisplayName/DisplayName";
-import ProfileCardContainer from "components/ProfileCard/ProfileCardContainer";
+// import ProfileCardContainer from "components/ProfileCard/ProfileCardContainer";
 
 import styles from "./Name.module.css";
+// import { useCallback } from "react";
+// import { display } from "@mui/system";
 
 function Name({ user, className }) {
+	// const [showCard, setShowCard] = useState(false);
+	// // const [mouseOver, setMouseOver] = useState(false);
 
-	const [showCard, ] = useState(false);
-	// const [mouseLeave, setMouseLeave] = useState(false);
-	// const [cursorOnCard, setCursorOnCard] = useState(false);
-
-	const cardRef = useRef(null);
+	// const cardRef = useRef(null);
 
 	const { name, username, verified } = user;
 
 	// const handleMouseEnter = () => {
-	// 	// setTimeout(() => {
-	// 	// 	// setShowCard(true);
-	// 	// }, 500);
+	// 	setShowCard(true);
 	// };
-
-	useEffect(() => {
-		document.addEventListener("mousedown", () => {
-			console.log("mouse down");
-		});
-	}, []);
-
 
 	// const handleMouseLeave = () => {
-	// 	setMouseLeave(true);
-	// };
-
-	// const closeCardTimeout = () => {
-	// 	setTimeout(() => {
-	// 		setShowCard(false);
-	// 	}, 500);
+	// 	setShowCard(false);
 	// };
 
 	// useEffect(() => {
 	// 	if (showCard) {
-	// 		if (mouseLeave && !cursorOnCard) {
-	// 			setShowCard(false);
+	// 		const element = cardRef.current.getBoundingClientRect();
+	// 		if (element.top + element.height > window.innerHeight) {
+	// 			cardRef.current.style.height = `${(element.height + 35) / 16}rem`;
+	// 			cardRef.current.style.top = `-${(element.height + 16) / 16}rem`;
+	// 			cardRef.current.style.alignItems = "flex-start";
 	// 		} else {
-	// 			closeCardTimeout();
+	// 			cardRef.current.style.height = `${(element.height + 32) / 16}rem`;
 	// 		}
 	// 	}
-	// 	return () => clearTimeout(closeCardTimeout);
-	// }, [mouseLeave, cursorOnCard]);
-
-	// const handleMouseEnterCard = () => {
-	// 	setCursorOnCard(true);
-	// };
-
-	// const handleMouseLeaveCard = () => {
-	// 	setCursorOnCard(false);
-	// };
-
-	useEffect(() => {
-		if (showCard) {
-			const element = cardRef.current.getBoundingClientRect();
-			if (element.top + element.height > window.innerHeight) {
-				cardRef.current.style.top = `-${(element.height + 16) / 16}rem`;
-				// setCardStyle({display: "initial"});
-			}
-		}
-
-	}, [showCard]);
+	// }, [showCard]);
 
 
 	return (
@@ -78,11 +47,11 @@ function Name({ user, className }) {
 				<DisplayName name={name} verified={verified} className={styles.name__displayname} />
 				<Username name={username} />
 			</a>
-			{showCard &&
-				<ProfileCardContainer  ref={cardRef} className={styles.profile} user={user} />
-				// <div>
-				// 	</div>
-			}
+			{/* {showCard &&
+				<div className={styles.profile} ref={cardRef}>
+					<ProfileCardContainer mouseLeave={handleMouseLeave} user={user} />
+				</div>
+			} */}
 		</div>
 	);
 }

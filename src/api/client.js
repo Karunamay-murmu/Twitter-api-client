@@ -65,47 +65,4 @@ class Client {
 	}
 }
 
-// const client = {
-//     get: (url, opt) => {
-//         const options = {
-//             ...defaultOptions,
-//             ...options,
-//             url,
-//             method: "GET",
-//         };
-//         return request(options);
-//     },
-//     post: (url, options) => {
-//         return request(url, {
-//             method: "POST",
-//             ...options,
-//         });
-//     },
-//     put: (url, options) => {
-//         return request(url, {
-//             method: "PUT",
-//             ...options,
-//         });
-//     },
-//     delete: (url, options) => {
-//         return request(url, {
-//             method: "DELETE",
-//             ...options,
-//         });
-//     }
-// }
-
-// const client = async (url, extraOptions) => {
-//     try {
-//         const response = await axios.request({
-//             url,
-//             ...options,
-//             ...extraOptions,
-//         });
-//         return response.data;
-//     } catch (error) {
-//         return error.message;
-//     }
-// }
-
 export default Client;

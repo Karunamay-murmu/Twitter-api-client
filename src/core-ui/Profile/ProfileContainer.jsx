@@ -1,13 +1,24 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
 
 import Profile from "core-ui/Profile/Profile.jsx";
+import Spinner from "components/Spinner/Spinner";
 import { getOriginalImage } from "utils/image";
+import { fetchUser, selectUser } from "redux/slice/userSlice";
 
 function ProfileContainer(props) {
 	const location = useLocation();
-	const user = props.user;
+	const user = useSelector(state => selectUser(state));
+	const dispatch = useDispatch();
+	const params = useParams();
+	const userStatus = useSelector(state => state.userProfile.status);
+
+	useEffect(() => {
+		if (userStatus === "idle") {
+			dispatch(fetchUser(params.username));
+		}
+	}, [userStatus, dispatch, params.username]);
 
 	const normalizeData = useMemo(() => {
 		if (!user) {
@@ -47,19 +58,22 @@ function ProfileContainer(props) {
 	}, [user]);
 
 	const originalImageVariant = useMemo(() => {
+		if (!user) {
+			return;
+		}
 		return getOriginalImage(user.profile_image_url);
 	}, [user]);
 
 	return (
-		<Profile profile={{ ...normalizeData, profile_image_url: originalImageVariant }} routeLocation={location} {...props} />
+		<>
+			{(userStatus === "loading" || userStatus === "idle") && <Spinner message="Loading profile..." />}
+			{userStatus === "failed" && <div>Couldn&#39;t Load Profile</div>}
+			{userStatus === "succeeded" &&
+				<Profile profile={{ ...normalizeData, profile_image_url: originalImageVariant }} routeLocation={location} {...props} />
+			}
+		</>
 	);
 }
 
-ProfileContainer.propTypes = {
-	user: PropTypes.object,
-};
 
-
-export default React.memo(ProfileContainer, (prev, next) => {
-	return prev.user === next.user;
-});
+export default ProfileContainer;

@@ -33,9 +33,7 @@ function TweetTextContainer({ tweet }) {
 							if (tweet?.in_reply_to_user_id && !tweet?.isReply) {
 								text = text.replace(username, "");
 							} else {
-								console.log(text);
 								text = text.replace(username, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">@${val.username}</a></span>`);
-								console.log(text);
 							}
 						}
 					}
@@ -93,11 +91,6 @@ function TweetTextContainer({ tweet }) {
 			}
 			{
 				tweet?.quotedTweet && (
-					// <div>
-					// 	<Avatar image={tweet?.quotedTweet?.user?.profile_image_url} />
-					// 	<Name user={tweet?.quotedTweet?.user} />
-					// </div>
-					// <TweetTextContainer tweet={tweet?.quotedTweet} />
 					<div className={styles.quotedTweet__wrapper}>
 						<FeedPost
 							user={tweet.quotedTweet.user}

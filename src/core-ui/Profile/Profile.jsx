@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 // import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
@@ -13,7 +13,10 @@ import DisplayName from "components/DisplayName/DisplayName";
 import Username from "components/Username/Username";
 import BioContainer from "components/Bio/BioContainer.jsx";
 import FollowInfo from "components/FollowInfo/FollowInfo.jsx";
+import FeedHeader from "components/FeedHeader/FeedHeader";
+import TweetMenuBarContainer from "components/TweetMenuBar/TweetMenuBarContainer";
 import { EDIT_PROFILE } from "routes/routes";
+import { short } from "utils/number";
 
 import styles from "./Profile.module.css";
 
@@ -28,6 +31,7 @@ function Profile({ profile, routeLocation }) {
 		public_metrics: {
 			followers_count,
 			following_count,
+			tweet_count,
 		},
 		entities,
 		profile_image_url,
@@ -36,8 +40,33 @@ function Profile({ profile, routeLocation }) {
 		profile_url
 	} = profile;
 
+	const menuItems = [
+		{
+			name: "Tweet",
+			href: `/${username}`,
+		},
+		{
+			name: "Tweets & replies",
+			href: `/${username}/with_replies`,
+		},
+		{
+			name: "Media",
+			href: `/${username}/media`,
+		},
+		{
+			name: "Likes",
+			href: `/${username}/likes`,
+		}
+	];
+
 	return (
 		<>
+			<FeedHeader>
+				<DisplayName name={username} className={styles.feed__title} verified={verified} />
+				<div className={styles.feed__meta}>
+					{short(tweet_count)} Tweets
+				</div>
+			</FeedHeader>
 			<div className={styles.profile}>
 				<div className={styles.profile__wrapper}>
 					<div className={styles.profile__photos__wrapper}>
@@ -84,6 +113,8 @@ function Profile({ profile, routeLocation }) {
 					</div>
 				</div>
 			</div>
+			<TweetMenuBarContainer menuItems={menuItems} />
+			<Outlet />
 		</>
 
 	);

@@ -6,6 +6,7 @@ import modalReducer from "redux/slice/modalSlice";
 import userProfileReducer from "redux/slice/userSlice";
 import apiReducer from "redux/slice/apiSlice";
 import tweetsReducer from "redux/slice/userTweetSlice";
+import tweetDetailReducer from "redux/slice/tweetDetailSlice";
 // import { apiSlice } from "redux/apiSlice";
 import { apiSlice } from "features/api/api-slice";
 
@@ -15,6 +16,7 @@ const reducer = {
 	userProfile: userProfileReducer,
 	api: apiReducer,
 	userTweets: tweetsReducer,
+	tweetDetail: tweetDetailReducer,
 	[apiSlice.reducerPath]: apiSlice.reducer,
 };
 
