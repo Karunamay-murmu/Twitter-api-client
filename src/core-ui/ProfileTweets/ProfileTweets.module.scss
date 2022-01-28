@@ -1,6 +1,7 @@
 @import "../../static/style/mixin.scss";
 
 .profile__tweet__wrapper {
+    @include flex($direction: column);
     border-width: 1px 0;
     border-color: $light-gray;
     border-style: solid;

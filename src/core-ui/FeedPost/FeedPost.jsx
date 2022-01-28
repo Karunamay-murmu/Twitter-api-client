@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 // import DOMPurify from "dompurify";
 import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
@@ -16,7 +17,7 @@ import { short } from "utils/number";
 
 import styles from "./FeedPost.module.css";
 
-const FeedPost = ({ user, tweet, media, moreOptions, navigateToTweetDetail }) => {
+const FeedPost = ({ user, tweet, media, moreOptions }) => {
 	const { profile_image_url } = user;
 	let { id, created_at, public_metrics: { reply_count, like_count, retweet_count } = {}, isPinned = false, isRetweet = false, replies = [], mediaCount } = tweet;
 
@@ -49,9 +50,9 @@ const FeedPost = ({ user, tweet, media, moreOptions, navigateToTweetDetail }) =>
 			case 3:
 				style.gridTemplateRows = "repeat(2, 140px)";
 				style.gridTemplateAreas = `
-			"image_1 image_2"
-			"image_1 image_3"
-		`;
+		"image_1 image_2"
+		"image_1 image_3"
+	`;
 				break;
 			case 4:
 				style.gridTemplateRows = "repeat(2, 140px)";
@@ -68,7 +69,7 @@ const FeedPost = ({ user, tweet, media, moreOptions, navigateToTweetDetail }) =>
 	};
 
 	return (
-		<div className={styles.post__wrapper} onClick={navigateToTweetDetail}>
+		<Link to={`/${user.username}/status/${id}`} className={styles.post__wrapper}>
 			{
 				isPinned && (
 					<div className={styles.post__pin}>
@@ -135,7 +136,7 @@ const FeedPost = ({ user, tweet, media, moreOptions, navigateToTweetDetail }) =>
 					</div>
 				</div>
 			</div>
-		</div>
+		</Link>
 
 	);
 };

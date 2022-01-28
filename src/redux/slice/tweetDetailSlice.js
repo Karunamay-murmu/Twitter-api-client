@@ -16,13 +16,12 @@ const initialState = {
 };
 
 
-export const fetchTweetDetail = createAsyncThunk("tweetDetail/fetch", async ({
-	id
-}, {
+export const fetchTweetDetail = createAsyncThunk("tweetDetail/fetch", async (id, {
 	rejectWithValue,
 	signal
 }) => {
 	try {
+		console.log(id);
 		const endpoint = endpoints.tweetDetail(id);
 		signal.addEventListener("abort", () => {
 			cancelToken.cancel();
@@ -46,6 +45,7 @@ export const tweetDetailSlice = createSlice({
 			state.status = "loading";
 		});
 		builder.addCase(fetchTweetDetail.fulfilled, (state, action) => {
+			// TODO: serialize the response
 			state.tweet = action.payload.tweet;
 			state.replies = action.payload.replies;
 			state.status = "succeeded";

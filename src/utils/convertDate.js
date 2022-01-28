@@ -10,5 +10,5 @@ export const getPostDate = (date) => {
 	const day = newDate.getDate();
 	const year = newDate.getFullYear();
 	const month = newDate.toLocaleDateString("default", { month: "short" });
-	return `${month} ${day}, ${year}`;
+	return `${month} ${day} ${(new Date().getFullYear() !== year) ? `, ${year}` : ""}`;
 };

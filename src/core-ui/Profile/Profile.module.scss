@@ -24,12 +24,13 @@
 
     &__extra {
         @include flex($align: center);
+        flex-wrap: wrap;
         margin: 0 0 .75rem 0;
-        
+        gap: .75rem;
+
         &__container {
             @include meta();
             @include flex($align: center);
-            margin: 0 1rem 0 0;
         }
 
     }

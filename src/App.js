@@ -40,7 +40,7 @@ function App() {
 								})
 							}
 						</Route>
-						<Route path="status/:tweetId" element={<TweetDetailContainer />} />
+						<Route path="status/:id" element={<TweetDetailContainer />} />
 					</Route>
 					<Route path="settings" element={<SettingLayoutContainer />}>
 						<Route path="account" element={<AccountSettingContainer />} />

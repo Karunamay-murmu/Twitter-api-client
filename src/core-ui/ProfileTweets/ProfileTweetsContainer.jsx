@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
-import { fetchTweets, selectLikes, selectTweets, tweetStatus } from "redux/slice/userTweetSlice";
+import { fetchTweets, selectLikes, selectTweets, tweetStatus, clearTweetState } from "redux/slice/userTweetSlice";
 import { selectPinnedTweet } from "redux/slice/userSlice";
 import { selectUser } from "redux/slice/userSlice";
 import Spinner from "components/Spinner/Spinner";
@@ -20,19 +20,23 @@ function ProfileTweetsContainer() {
 	const likes = useSelector(state => selectLikes(state));
 	const userPinnedTweet = useSelector(state => selectPinnedTweet(state));
 	const status = useSelector(state => tweetStatus(state));
+	const params = useParams();
 
 	const dispatch = useDispatch();
 	const location = useLocation();
 
 	useEffect(() => {
 		let promise;
-		if ((!likes.length || !tweets.length) && user?.id) {
+		if (params.username !== user.username) {
+			dispatch(clearTweetState());
+		}
+		if ((!likes.length || !tweets.length) && user?.id && params.username === user.username) {
 			promise = dispatch(fetchTweets({ userId: user.id, pathname: location.pathname }));
 		}
 		return () => {
 			status === "loading" && promise.abort();
 		};
-	}, [user.id, location.pathname]);
+	}, [user.id, params.username]);
 
 	const tweetsData = useMemo(() => {
 		if (location.pathname.includes("likes")) {

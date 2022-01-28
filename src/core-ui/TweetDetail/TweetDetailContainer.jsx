@@ -46,13 +46,13 @@ function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props })
 	const tweet = useSelector(state => selectTweet(state));
 	const tweetStatus = useSelector(state => selectStatus(state));
 	const dispatch = useDispatch();
-	const param = useParams();
+	const params = useParams();
 
 	useEffect(() => {
 		if (tweetStatus === "idle") {
-			dispatch(fetchTweetDetail(param.id));
+			dispatch(fetchTweetDetail(params.id));
 		}
-	}, [tweetStatus, dispatch, param.id]);
+	}, [tweetStatus, dispatch, params.id]);
 
 	return (
 		<MainFeedContainer>

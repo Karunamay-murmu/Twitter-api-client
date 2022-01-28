@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
 
 import styles from "./ProfileTweets.module.css";
+// import { Link } from "react-router-dom";
 
 function ProfileTweets({ tweets, pathname, user, ...props }) {
 	const mapTweets = (tweets) => {
@@ -23,7 +24,7 @@ function ProfileTweets({ tweets, pathname, user, ...props }) {
 			);
 		}
 		return tweets.map((tweet, idx) => (
-			<div key={idx} className={!tweet?.isReply ? styles.profile__tweet__wrapper : ""}>
+			<div to={`/${user.username}/status/${tweet.id}`} key={idx} className={!tweet?.isReply ? styles.profile__tweet__wrapper : ""}>
 				<FeedPostContainer
 					tweet={tweet}
 					user={tweet.user}

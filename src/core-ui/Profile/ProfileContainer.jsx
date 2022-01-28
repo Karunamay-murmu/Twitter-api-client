@@ -15,10 +15,10 @@ function ProfileContainer(props) {
 	const userStatus = useSelector(state => state.userProfile.status);
 
 	useEffect(() => {
-		if (userStatus === "idle") {
+		if (!user || params.username !== user.username) {
 			dispatch(fetchUser(params.username));
 		}
-	}, [userStatus, dispatch, params.username]);
+	}, [params.username]);
 
 	const normalizeData = useMemo(() => {
 		if (!user) {

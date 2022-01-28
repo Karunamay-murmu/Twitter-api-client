@@ -1,3 +1,14 @@
+.post__wrapper {
+  padding: .75rem 1rem;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+}
+
+.post__wrapper:hover {
+  background-color: #eff3f4;
+}
+
 .post__avatar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -30,14 +41,6 @@
           align-items: flex-start;
   margin-right: 1rem;
   height: 100%;
-}
-
-.post__wrapper {
-  padding: .75rem 1rem;
-}
-
-.post__wrapper:hover {
-  background-color: #eff3f4;
 }
 
 .post__main {

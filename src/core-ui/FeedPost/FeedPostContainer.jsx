@@ -14,7 +14,7 @@ import FeedPost from "core-ui/FeedPost/FeedPost.jsx";
 function FeedPostContainer({ isFollowing, user, tweet, ...props }) {
 	const moreOptions = [
 		{
-			"text": `${isFollowing ? `Unfollow @${user?.username}` : `Follow @${user?.username}`} `,
+			"text": `${isFollowing ? `Unfollow @${user?.username}` : `Follow @${user?.username}`}`,
 			"Icon": PersonAddAltOutlinedIcon,
 		}, {
 			"text": "Add/remove from Lists",
@@ -42,12 +42,13 @@ function FeedPostContainer({ isFollowing, user, tweet, ...props }) {
 
 	const navigate = useNavigate();
 
-	const navigateToTweetDetail = useCallback(() => {
+	const navigateToTweetDetail = useCallback((e) => {
+		e.stopPropagation();
 		const id = tweet?.id;
 		if (id) {
-			navigate(`/${user.username}/status/${id}`);
+			navigate(`/${user.username}/status/${id}`, { replace: true });
 		}
-	}, [tweet.id]);
+	}, [tweet.id, user.username]);
 
 	return (
 		<FeedPost

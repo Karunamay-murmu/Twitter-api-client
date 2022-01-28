@@ -50,68 +50,15 @@ export const tweetSlice = createSlice({
 	name: "userTweet",
 	initialState,
 	reducers: {
-		setTweet: (state, action) => {
-			const tweets = action.payload?.tweets?.data;
-			const mediaData = action.payload?.tweets?.includes?.media;
-			const refUsers = action.payload?.tweets?.includes?.users;
-			const refTweets = action.payload?.tweets?.includes?.tweets;
-			if (mediaData) {
-				state.media = { ...state.media || [], ...mapData(mediaData, "media_key") };
-			}
-			if (refUsers) {
-				state.refUsers = mapData(refUsers);
-			}
-			if (refTweets) {
-				state.refTweets = mapData(refTweets);
-			}
-			if (tweets) {
-				const allTweets = {};
-
-				for (const tweet of [...tweets, ...refTweets]) {
-					allTweets[tweet.id] = tweet;
-				}
-
-				console.log(allTweets);
-
-				const topLevelTweet = [];
-				const repliesList = {};
-
-				const checkRefTweet = (tweet) => {
-					if (tweet.referenced_tweets) {
-						const referencedTweets = tweet?.referencedTweets;
-						if (referencedTweets) {
-							for (const element of referencedTweets) {
-								if (element.type === "replied_to") {
-									const t = allTweets[element.id];
-									repliesList[t.id] = { ...repliesList[t.id] || {}, replies: { ...t } };
-									checkRefTweet(t);
-								}
-							}
-						}
-					} else {
-						topLevelTweet.push(tweet);
-					}
-				};
-
-				for (const tweet of tweets) {
-					checkRefTweet(tweet);
-				}
-
-				console.log(topLevelTweet);
-				console.log(repliesList);
-
-				state.tweets = [...state.tweets, ...tweets];
-				state.allTweets = allTweets;
-			}
-			state.userId = action.payload.userId;
-		},
-		setPinnedTweet: (state, action) => {
-			const pinnedTweet = action.payload?.data;
-			const pinnedTweetMedia = action.payload?.includes?.media;
-			if (pinnedTweetMedia) {
-				state.media = mapData(pinnedTweetMedia, "media_key");
-			}
-			state.pinnedTweet = [{ ...pinnedTweet, isPinnedTweet: true }];
+		clearTweetState: (state) => {
+			state.likes = [];
+			state.tweets = [];
+			state.tweetsMap = null;
+			state.media = null;
+			state.refTweets = null;
+			state.users = null;
+			state.status = "idle";
+			state.error = null;
 		}
 	},
 	extraReducers: (builder) => {
@@ -139,7 +86,7 @@ export const tweetSlice = createSlice({
 							media && (tweet["media"] = [...tweet["media"] ?? [], mediaMap[mediaKey]]);
 							tweet.mediaCount = (tweet.mediaCount || 0) + 1;
 						});
-						if (tweet?.referenced_tweets) {
+						if (tweet?.referenced_tweets && !tweet.isQuoted) {
 							replyStack.push(tweet);
 							const refTweets = tweet?.referenced_tweets;
 							const parent = [];
@@ -155,10 +102,10 @@ export const tweetSlice = createSlice({
 										replyStack.pop();
 									}
 									if (type === "retweeted") {
-										reply.isRetweet = true;
+										reply && (reply.isRetweet = true);
 									}
 									if (type === "quoted") {
-										reply.isQuoted = true;
+										reply && (reply.isQuoted = true);
 									}
 								}
 								parent.length && mapTweet(parent);
@@ -210,7 +157,7 @@ export const tweetSlice = createSlice({
 	}
 });
 
-export const { setTweet, setPinnedTweet } = tweetSlice.actions;
+export const { clearTweetState } = tweetSlice.actions;
 export default tweetSlice.reducer;
 
 export const selectTweets = (state) => state.userTweets.tweets;

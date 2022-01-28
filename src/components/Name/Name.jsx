@@ -1,6 +1,7 @@
 import React from "react";
 // import React, { useState, useRef, useEffect } from "react";
 // import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import Username from "components/Username/Username";
@@ -43,10 +44,10 @@ function Name({ user, className }) {
 
 	return (
 		<div className={styles.name}>
-			<a href={`/${username}`} className={`${styles.name__wrapper} ${className}`}>
+			<Link to={`/${username}`} role="link" className={`${styles.name__wrapper} ${className}`}>
 				<DisplayName name={name} verified={verified} className={styles.name__displayname} />
 				<Username name={username} />
-			</a>
+			</Link>
 			{/* {showCard &&
 				<div className={styles.profile} ref={cardRef}>
 					<ProfileCardContainer mouseLeave={handleMouseLeave} user={user} />
