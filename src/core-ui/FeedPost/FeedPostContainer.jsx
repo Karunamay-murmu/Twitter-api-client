@@ -43,10 +43,11 @@ function FeedPostContainer({ isFollowing, user, tweet, ...props }) {
 	const navigate = useNavigate();
 
 	const navigateToTweetDetail = useCallback((e) => {
-		e.stopPropagation();
+		e.preventDefault();
 		const id = tweet?.id;
 		if (id) {
-			navigate(`/${user.username}/status/${id}`, { replace: true });
+			console.log(e.target);
+			navigate(`/${user.username}/status/${id}`);
 		}
 	}, [tweet.id, user.username]);
 

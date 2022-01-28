@@ -17,7 +17,7 @@ function Name({ user, className }) {
 	// // const [mouseOver, setMouseOver] = useState(false);
 
 	// const cardRef = useRef(null);
-
+	// const navigate = useNavigate();
 	const { name, username, verified } = user;
 
 	// const handleMouseEnter = () => {
@@ -42,9 +42,15 @@ function Name({ user, className }) {
 	// }, [showCard]);
 
 
+	const handleClick = (e) => {
+		console.log(e.target);
+		e.stopPropagation();
+		// navigate(`/${username}`);
+	};
+
 	return (
 		<div className={styles.name}>
-			<Link to={`/${username}`} role="link" className={`${styles.name__wrapper} ${className}`}>
+			<Link to={`/${username}`} onClick={handleClick} className={`${styles.name__wrapper} ${className}`}>
 				<DisplayName name={name} verified={verified} className={styles.name__displayname} />
 				<Username name={username} />
 			</Link>

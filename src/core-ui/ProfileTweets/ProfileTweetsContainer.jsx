@@ -30,20 +30,19 @@ function ProfileTweetsContainer() {
 		if (params.username !== user.username) {
 			dispatch(clearTweetState());
 		}
-		if ((!likes.length || !tweets.length) && user?.id && params.username === user.username) {
+		if ((!likes.length && location.pathname.includes("likes") || !tweets.length) && user?.id && params.username === user.username) {
 			promise = dispatch(fetchTweets({ userId: user.id, pathname: location.pathname }));
 		}
 		return () => {
 			status === "loading" && promise.abort();
 		};
-	}, [user.id, params.username]);
+	}, [user.id, params.username, location.pathname]);
 
 	const tweetsData = useMemo(() => {
 		if (location.pathname.includes("likes")) {
 			return likes;
 		}
 		return userPinnedTweet ? [userPinnedTweet, ...tweets] : tweets;
-
 	}, [tweets, userPinnedTweet, location.pathname, likes]);
 
 	return (

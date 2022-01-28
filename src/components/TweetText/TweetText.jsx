@@ -5,15 +5,16 @@ import twemoji from "twemoji";
 
 import styles from "./TweetText.module.css";
 
-function TweetText({ text }) {
+function TweetText({ text, handleClickOnAnchor }, ref) {
 	const node = twemoji.parse(text);
 	return (
-		<p className={styles.text} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(node.trim()) }}></p>
+		<p className={styles.text} onClick={handleClickOnAnchor} ref={ref} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(node.trim()) }}></p>
 	);
 }
 
 TweetText.propTypes = {
-	text: PropTypes.string.isRequired
+	text: PropTypes.string.isRequired,
+	handleClickOnAnchor: PropTypes.func,
 };
 
-export default TweetText;
+export default React.forwardRef(TweetText);

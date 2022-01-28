@@ -24,7 +24,7 @@ function ProfileTweets({ tweets, pathname, user, ...props }) {
 			);
 		}
 		return tweets.map((tweet, idx) => (
-			<div to={`/${user.username}/status/${tweet.id}`} key={idx} className={!tweet?.isReply ? styles.profile__tweet__wrapper : ""}>
+			<div key={idx} className={!tweet?.isReply ? styles.profile__tweet__wrapper : ""}>
 				<FeedPostContainer
 					tweet={tweet}
 					user={tweet.user}

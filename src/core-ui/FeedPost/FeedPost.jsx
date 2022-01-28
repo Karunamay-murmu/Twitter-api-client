@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // import DOMPurify from "dompurify";
 import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
@@ -17,7 +17,7 @@ import { short } from "utils/number";
 
 import styles from "./FeedPost.module.css";
 
-const FeedPost = ({ user, tweet, media, moreOptions }) => {
+const FeedPost = ({ user, tweet, media, moreOptions, navigateToTweetDetail }) => {
 	const { profile_image_url } = user;
 	let { id, created_at, public_metrics: { reply_count, like_count, retweet_count } = {}, isPinned = false, isRetweet = false, replies = [], mediaCount } = tweet;
 
@@ -69,7 +69,7 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 	};
 
 	return (
-		<Link to={`/${user.username}/status/${id}`} className={styles.post__wrapper}>
+		<div className={styles.post__wrapper} onClick={navigateToTweetDetail}>
 			{
 				isPinned && (
 					<div className={styles.post__pin}>
@@ -136,7 +136,7 @@ const FeedPost = ({ user, tweet, media, moreOptions }) => {
 					</div>
 				</div>
 			</div>
-		</Link>
+		</div>
 
 	);
 };

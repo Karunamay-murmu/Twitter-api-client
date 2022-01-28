@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
 import TweetText from "components/TweetText/TweetText";
@@ -7,6 +7,8 @@ import styles from "./TweetText.module.css";
 import FeedPost from "core-ui/FeedPost/FeedPost";
 
 function TweetTextContainer({ tweet }) {
+
+	const textRef = useRef();
 
 	let { text, entities } = tweet;
 
@@ -19,12 +21,14 @@ function TweetTextContainer({ tweet }) {
 					const end = val.end;
 					if (key === "hashtags") {
 						const hashTag = description.slice(start, end);
+						// console.log(hashTag);
+						// const hashTag = new RegExp(`(^|\\s)${hashTag}`, "g");
 						text = text.replace(hashTag, `<span><a href="/hashtags/${val.tag}" target="_blank" rel="noopener noreferrer">#${val.tag}</a></span>`);
 					}
 					if (key === "urls") {
 						const url = new RegExp(val.url, "ig");
 						if (!val?.display_url.includes("twitter.com")) {
-							text = text.replace(url, `<span><a href="${url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
+							text = text.replace(url, `<span><a href="${val.url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
 						} else {
 							text = text.replace(url, "");
 						}
@@ -44,6 +48,14 @@ function TweetTextContainer({ tweet }) {
 
 	const mentions = tweet?.entities?.mentions;
 
+	const handleClickOnAnchor = (e) => {
+		const element = textRef.current;
+		if (element && element.contains(e.target) && e.target.tagName === "A" || e.target.tagName === "SPAN") {
+			console.log("click on anchor");
+			e.stopPropagation();
+		}
+	};
+
 	return (
 		<div className={styles.post}>
 			{tweet?.in_reply_to_user_id && tweet?.in_reply_to_user_id !== tweet?.user?.id && (
@@ -56,7 +68,7 @@ function TweetTextContainer({ tweet }) {
 							mentions.slice(0, 3)?.map((user, idx) => (
 								<div className={styles.post__mentions__people} key={user.id}>
 									{mentions.length >= 2 && mentions.length - idx === 1 && "and"}
-									<a href={`/${user.username}`} target="_blank" rel="noopener noreferrer">@{user.username}</a>
+									<a onClick={(e) => e.stopPropagation()} href={`/${user.username}`} target="_blank" rel="noopener noreferrer">@{user.username}</a>
 								</div>
 							))
 						}
@@ -68,12 +80,12 @@ function TweetTextContainer({ tweet }) {
 					</div>
 				</div>
 			)}
-			<TweetText text={text} />
+			<TweetText text={text} ref={textRef} handleClickOnAnchor={handleClickOnAnchor}/>
 			{
 				tweet?.entities?.urls?.map((url, idx) => {
 					if (url?.title) {
 						return (
-							<a href={url.url} key={idx} target="_blank" rel="noreferrer noopener" className={styles.url__preview__wrapper}>
+							<a onClick={(e) => e.stopPropagation()} href={url.url} key={idx} target="_blank" rel="noreferrer noopener" className={styles.url__preview__wrapper}>
 								{url?.images && <div className={styles.url__preview__image}>
 									<img src={url.images[1].url} alt="preview_image" />
 								</div>}
