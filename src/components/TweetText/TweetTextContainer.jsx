@@ -6,7 +6,7 @@ import TweetText from "components/TweetText/TweetText";
 import styles from "./TweetText.module.css";
 import FeedPost from "core-ui/FeedPost/FeedPost";
 
-function TweetTextContainer({ tweet }) {
+function TweetTextContainer({ tweet, ...props }) {
 
 	const textRef = useRef();
 
@@ -35,7 +35,7 @@ function TweetTextContainer({ tweet }) {
 					}
 					if (key === "mentions") {
 						const username = new RegExp(`@${val.username}`, "ig");
-						if (tweet?.in_reply_to_user_id && !tweet?.isReply) {
+						if (tweet?.in_reply_to_user_id) {
 							text = text.replace(username, "");
 						} else {
 							text = text.replace(username, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">@${val.username.toLowerCase()}</a></span>`);
@@ -65,7 +65,7 @@ function TweetTextContainer({ tweet }) {
 					</span>
 					<div className={styles.post__mentions}>
 						{
-							mentions.slice(0, 3)?.map((user, idx) => (
+							mentions.slice(0, 2)?.map((user, idx) => (
 								<div className={styles.post__mentions__people} key={user.id}>
 									{mentions.length >= 2 && mentions.length - idx === 1 && "and"}
 									<a onClick={(e) => e.stopPropagation()} href={`/${user.username}`} target="_blank" rel="noopener noreferrer">@{user.username}</a>
@@ -74,13 +74,13 @@ function TweetTextContainer({ tweet }) {
 						}
 						{mentions.length > 3 && (
 							<span className={styles.post__mentions__people}>
-								and {mentions.length - 3} others
+								and {mentions.length - 2} others
 							</span>
 						)}
 					</div>
 				</div>
 			)}
-			<TweetText text={text} ref={textRef} handleClickOnAnchor={handleClickOnAnchor}/>
+			<TweetText text={text} ref={textRef} handleClickOnAnchor={handleClickOnAnchor} {...props}/>
 			{
 				tweet?.entities?.urls?.map((url, idx) => {
 					if (url?.title) {

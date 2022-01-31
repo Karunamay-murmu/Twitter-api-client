@@ -3,6 +3,13 @@
 
 
 .post {
+
+    &__container {
+        border-width: 1px 0;
+        border-color: $light-gray;
+        border-style: solid;
+    }
+
     &__wrapper {
         padding: .75rem 1rem;
         cursor: pointer;
@@ -93,6 +100,7 @@
         width: 100%;
     }
 
+    // remove this
     &__media {
         position: relative;
         width: 100%;
@@ -126,6 +134,7 @@
             border-radius: .25rem;
         }
     }
+    // 
 
     &__footer {
         @include flex($align: center, $justify: space-between);

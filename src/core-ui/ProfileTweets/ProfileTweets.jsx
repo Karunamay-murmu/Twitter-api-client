@@ -24,16 +24,26 @@ function ProfileTweets({ tweets, pathname, user, ...props }) {
 			);
 		}
 		return tweets.map((tweet, idx) => (
-			<div key={idx} className={!tweet?.isReply ? styles.profile__tweet__wrapper : ""}>
-				<FeedPostContainer
-					tweet={tweet}
-					user={tweet.user}
-					media={tweet.media}
-					{...props}
-				/>
-				{tweet?.replies && mapTweets(tweet.replies)}
-			</div>
+			<FeedPostContainer
+				tweet={tweet}
+				key={idx}
+				{...props}
+			/>
+			// <div key={idx} className={!tweet?.isReply ? styles.profile__tweet__wrapper : ""}>
+			// 	{tweet?.replies && mapTweets(tweet.replies)}
+			// </div>
 		));
+		// return tweets.map((tweet, idx) => (
+		// 	<div key={idx} className={!tweet?.isReply ? styles.profile__tweet__wrapper : ""}>
+		// 		<FeedPostContainer
+		// 			tweet={tweet}
+		// 			user={tweet.user}
+		// 			media={tweet.media}
+		// 			{...props}
+		// 		/>
+		// 		{tweet?.replies && mapTweets(tweet.replies)}
+		// 	</div>
+		// ));
 	};
 	return (
 		<>

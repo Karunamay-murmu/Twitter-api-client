@@ -32,6 +32,17 @@
   margin: 1rem 0 0 0;
 }
 
+.tweet__post {
+  font-size: 1.5rem;
+  color: #0f1419;
+  line-height: 1.75rem;
+}
+
+.tweet__post img[src*="emoji"] {
+  width: 1.724375rem;
+  height: 1.724375rem;
+}
+
 .tweet__date {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -50,9 +61,6 @@
   color: #52636f;
   padding: 1rem 0;
   border-bottom: 1px solid #eff3f4;
-}
-
-.tweet__date .dot {
-  margin: 0 .5rem;
+  gap: 5px;
 }
 /*# sourceMappingURL=TweetDetail.module.css.map */

@@ -10,7 +10,9 @@ import Client, {
 
 const initialState = {
 	tweet: null,
-	replies: [],
+	user: null,
+	media: null,
+	meta: null,
 	status: "idle",
 	error: null,
 };
@@ -21,7 +23,6 @@ export const fetchTweetDetail = createAsyncThunk("tweetDetail/fetch", async (id,
 	signal
 }) => {
 	try {
-		console.log(id);
 		const endpoint = endpoints.tweetDetail(id);
 		signal.addEventListener("abort", () => {
 			cancelToken.cancel();
@@ -40,14 +41,24 @@ export const fetchTweetDetail = createAsyncThunk("tweetDetail/fetch", async (id,
 export const tweetDetailSlice = createSlice({
 	name: "tweetDetail",
 	initialState,
+	reducers: {
+		clearTweetDetailState: (state) => {
+			state.tweet = null;
+			state.user = null;
+			state.media = null;
+			state.status = "idle";
+			state.error = null;
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchTweetDetail.pending, (state) => {
 			state.status = "loading";
 		});
 		builder.addCase(fetchTweetDetail.fulfilled, (state, action) => {
-			// TODO: serialize the response
-			state.tweet = action.payload.tweet;
-			state.replies = action.payload.replies;
+			state.tweet = [action.payload.data];
+			state.user = action.payload.includes.users;
+			state.media = action.payload.includes.media;
+			state.meta = action.meta;
 			state.status = "succeeded";
 		});
 		builder.addCase(fetchTweetDetail.rejected, (state, action) => {
@@ -57,8 +68,12 @@ export const tweetDetailSlice = createSlice({
 	},
 });
 
+export const { clearTweetDetailState } = tweetDetailSlice.actions;
+
+export const selectMetaData = (state) => state.tweetDetail.meta;
 export const selectTweet = (state) => state.tweetDetail.tweet;
-export const selectReplies = (state) => state.tweetDetail.replies;
+export const selectUser = (state) => state.tweetDetail.user;
+export const selectMedia = (state) => state.tweetDetail.media;
 export const selectStatus = (state) => state.tweetDetail.status;
 
 export default tweetDetailSlice.reducer;

@@ -11,9 +11,10 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import TweetDetail from "core-ui/TweetDetail/TweetDetail";
 import MainFeedContainer from "core-ui/MainFeed/MainFeedContainer";
-import { fetchTweetDetail, selectTweet, selectStatus } from "redux/slice/tweetDetailSlice";
+import { fetchTweetDetail, selectTweet, selectUser, selectMedia, selectStatus, selectMetaData } from "redux/slice/tweetDetailSlice";
+import Spinner from "components/Spinner/Spinner";
 
-function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props }) {
+function TweetDetailContainer({ isFollowing, username = "Karunamay" }) {
 
 	const moreOptions = [
 		{
@@ -43,20 +44,37 @@ function TweetDetailContainer({ isFollowing, username = "Karunamay", ...props })
 		}
 	];
 
-	const tweet = useSelector(state => selectTweet(state));
+	const tweets = useSelector(state => selectTweet(state));
 	const tweetStatus = useSelector(state => selectStatus(state));
+	const tweetMetaData = useSelector(state => selectMetaData(state));
+	const user = useSelector(state => selectUser(state));
+	const media = useSelector(state => selectMedia(state));
 	const dispatch = useDispatch();
 	const params = useParams();
 
+	console.log("render");
+
 	useEffect(() => {
-		if (tweetStatus === "idle") {
+		// let promise;
+		// if (tweetStatus === "idle") {
+		// TODO: check if the tweet is already in the store
+		if (params.id !== tweetMetaData?.arg) {
 			dispatch(fetchTweetDetail(params.id));
 		}
-	}, [tweetStatus, dispatch, params.id]);
+		// // promise = dispatch(fetchTweetDetail(params.id));
+		// // }
+		// return () => {
+		// 	dispatch(clearTweetDetailState());
+		// };
+
+	}, [params.id]);
 
 	return (
 		<MainFeedContainer>
-			<TweetDetail tweet={tweet} moreOptions={moreOptions} {...props} />
+			{
+				tweetStatus === "loading" ? <Spinner message="Loading tweet..." /> :
+					tweets?.map(tweet => <TweetDetail key={tweet.id} tweet={tweet} moreOptions={moreOptions} user={user[0]} media={media} />)
+			}
 		</MainFeedContainer>
 	);
 }

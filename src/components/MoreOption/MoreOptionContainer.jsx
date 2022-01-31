@@ -11,6 +11,7 @@ function MoreOptionContainer(props) {
 	const { currentCardId, isOpen } = useSelector((state) => state.more);
 
 	const showCardOptions = (e) => {
+		e.stopPropagation();
 		const openCardId = e.target.dataset.cardId;
 		(!isOpen || openCardId !== currentCardId) ? dispatch(open({ id: openCardId })) : dispatch(close());
 	};

@@ -1,3 +1,9 @@
+.post__container {
+  border-width: 1px 0;
+  border-color: #eff3f4;
+  border-style: solid;
+}
+
 .post__wrapper {
   padding: .75rem 1rem;
   cursor: pointer;

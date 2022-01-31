@@ -16,7 +16,16 @@
     &__content {
         @include text($size: 1.4375rem);
         margin: 1rem 0 0 0;
-        &__wrapper {}
+    }
+
+    &__post {
+        @include text($size: 1.5rem);
+        line-height: 1.75rem;
+
+        img[src*="emoji"] {
+            width: 1.724375rem;
+            height: 1.724375rem;
+        }
     }
 
     &__date {
@@ -24,9 +33,7 @@
         @include meta();
         padding: 1rem 0;
         border-bottom: 1px solid $light-gray;
-        .dot {
-            margin: 0 .5rem;
-        }
+        gap: 5px;
     }
 
 }
