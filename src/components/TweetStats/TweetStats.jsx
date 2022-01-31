@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import styles from "./TweetStats.module.css";
 
-function TweetStats({ reTweets=13, quoteTweets=11, likes=5 }) {
+function TweetStats({ reTweets, quoteTweets, likes }) {
 	return (
 		<div className={styles.stats__wrapper}>
 			<div className={styles.stats__data} ><span>{reTweets}</span> Retweets</div>

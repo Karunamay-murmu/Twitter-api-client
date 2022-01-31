@@ -14,8 +14,6 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import Avatar from "components/Avatar/Avatar";
 import FeedTweetActionBarContainer from "components/FeedTweetActionBar/FeedTweetActionBarContainer";
 import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
-// import DisplayName from "components/DisplayName/DisplayName";
-// import Username from "components/Username/Username";
 import TweetTextContainer from "components/TweetText/TweetTextContainer";
 import Name from "components/Name/Name";
 import { getPostDate } from "utils/convertDate";
@@ -29,7 +27,7 @@ const FeedPost = ({ user, tweet, media, navigateToTweetDetail }) => {
 
 	const moreOptions = [
 		{
-			// "text": ${isFollowing ? "Unfollow @${user?.username}" : `Follow @${user?.username}`},
+			"text": `follow ${user.username}`,
 			"Icon": PersonAddAltOutlinedIcon,
 		}, {
 			"text": "Add/remove from Lists",

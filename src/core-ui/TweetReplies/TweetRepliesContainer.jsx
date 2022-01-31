@@ -10,7 +10,6 @@ import Spinner from "components/Spinner/Spinner";
 
 function TweetRepliesContainer() {
 	const tweet = useSelector(state => selectTweet(state))[0];
-	// const user = useSelector(state => selectUser(state))[0];
 	const replies = useSelector(state => selectReplies(state));
 	const replyStatus = useSelector(state => selectStatus(state));
 	const replyMetaData = useSelector(state => selectMetaData(state));
@@ -23,9 +22,6 @@ function TweetRepliesContainer() {
 			dispatch(fetchTweetReplies({ id: params.id, username: params.username }));
 		}
 	}, [params.id, tweet]);
-
-
-	console.log(replies);
 
 	return (
 		replyStatus === "loading" ? <Spinner message="Loading Replies..." />

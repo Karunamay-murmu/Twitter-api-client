@@ -108,7 +108,7 @@ function Profile({ profile, routeLocation }) {
 									Joined {created_at}
 								</div>}
 							</div>
-							<FollowInfo following={`${following_count}`} followers={`${followers_count}`} />
+							<FollowInfo following={following_count} followers={followers_count} />
 						</div>
 					</div>
 				</div>

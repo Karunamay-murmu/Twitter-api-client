@@ -5,13 +5,14 @@ import twemoji from "twemoji";
 
 import styles from "./TweetText.module.css";
 
-function TweetText({ text, handleClickOnAnchor, className }, ref) {
+const TweetText = React.forwardRef(({ text, handleClickOnAnchor, className }, ref) => {
 	const node = twemoji.parse(text);
-	console.log(text);
 	return (
-		<p className={`${styles.text} ${className||""}`} onClick={handleClickOnAnchor} ref={ref} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(node.trim()) }}></p>
+		<p className={`${styles.text} ${className || ""}`} onClick={handleClickOnAnchor} ref={ref} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(node.trim()) }}></p>
 	);
-}
+});
+
+TweetText.displayName = "TweetText";
 
 TweetText.propTypes = {
 	text: PropTypes.string.isRequired,
@@ -19,4 +20,4 @@ TweetText.propTypes = {
 	className: PropTypes.string
 };
 
-export default React.forwardRef(TweetText);
+export default TweetText;

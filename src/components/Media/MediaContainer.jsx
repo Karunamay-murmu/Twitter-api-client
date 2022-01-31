@@ -22,8 +22,8 @@ function MediaContainer({ media, ...props }) {
 				}
 				return {
 					display: "flex",
-					width: `${width >= height ? "100%" : "385px"}`,
-					height: `${height > width ? "510px" : "auto"}`,
+					width: "100%",
+					height: "auto",
 				};
 			}
 			case 2:

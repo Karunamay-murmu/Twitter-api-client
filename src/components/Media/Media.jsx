@@ -24,7 +24,7 @@ function Media({ media, gridStyle }) {
 Media.propTypes = {
 	mediaCount: PropTypes.number,
 	media: PropTypes.array,
-	gridStyle: PropTypes.object,
+	gridStyle: PropTypes.func,
 };
 
 export default Media;

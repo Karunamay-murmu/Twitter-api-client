@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 
 import FeedHeader from "components/FeedHeader/FeedHeader";
@@ -6,30 +6,29 @@ import ProfileBasicInfo from "components/ProfileBasicInfo/ProfileBasicInfo";
 import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
 import TweetStats from "components/TweetStats/TweetStats";
 import TweetActionBarContainer from "components/TweetActionBar/TweetActionBarContainer";
-// import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
 import TweetRepliesContainer from "core-ui/TweetReplies/TweetRepliesContainer";
 import TweetTextContainer from "components/TweetText/TweetTextContainer";
 import MediaContainer from "components/Media/MediaContainer";
-import { short } from "utils/number";
-// import { getPostDate } from "utils/convertDate";
 
 import styles from "./TweetDetail.module.css";
 
-function TweetDetail({ tweet, moreOptions, user, media }) {
+function TweetDetail({ tweet, moreOptions, user, media, location }) {
 	const { username, name, profile_image_url } = user;
 	const { created_at, public_metrics: { retweet_count, like_count, quote_count }, source } = tweet;
-	
-	const time = new Date(created_at).toLocaleString("en-us", {
+
+	const time = useMemo(() => new Date(created_at).toLocaleString("en-us", {
 		hour: "numeric",
 		minute: "numeric",
-		hour12: true,		
-	});
+		hour12: true,
+	}));
 
-	const date = new Date(created_at).toLocaleString("en-us", {
+	const date = useMemo(() => new Date(created_at).toLocaleString("en-us", {
 		month: "short",
 		year: "numeric",
-		day: "numeric",		
-	});
+		day: "numeric",
+	}));
+
+	console.log(location);
 
 	return (
 		<div>
@@ -51,7 +50,7 @@ function TweetDetail({ tweet, moreOptions, user, media }) {
 					<span>{source}</span>
 				</div>
 				<div className={styles.tweet__stats__wrapper}>
-					<TweetStats reTweets={short(retweet_count)} quoteTweets={short(quote_count)} likes={short(like_count)} />
+					<TweetStats reTweets={retweet_count} quoteTweets={quote_count} likes={like_count} />
 				</div>
 				<TweetActionBarContainer />
 			</div>
@@ -64,7 +63,8 @@ TweetDetail.propTypes = {
 	tweet: PropTypes.object.isRequired,
 	moreOptions: PropTypes.array.isRequired,
 	user: PropTypes.object.isRequired,
-	media: PropTypes.array.isRequired
+	media: PropTypes.array.isRequired,
+	location: PropTypes.object,
 };
 
 export default TweetDetail;
