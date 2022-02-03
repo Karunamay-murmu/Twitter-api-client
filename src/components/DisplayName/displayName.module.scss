@@ -5,3 +5,7 @@
     @include title();
     @include flex($align: center);
 }
+
+.header {
+    font-size: 1.25rem;
+}

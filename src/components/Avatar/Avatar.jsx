@@ -18,4 +18,9 @@ Avatar.propTypes = {
 	className: PropTypes.string,
 };
 
+Avatar.defaultProps = {
+	image: "",
+	className: "",
+};
+
 export default Avatar;

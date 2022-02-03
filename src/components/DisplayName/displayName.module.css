@@ -16,4 +16,8 @@
       -ms-flex-align: center;
           align-items: center;
 }
+
+.header {
+  font-size: 1.25rem;
+}
 /*# sourceMappingURL=displayName.module.css.map */

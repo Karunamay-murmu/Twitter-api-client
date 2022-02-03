@@ -9,6 +9,9 @@ const endpoints = {
 	recentTweetSearch: () => "tweets/search/recent",
 	tweetDetail: (id) => `tweets/${id}`,
 	tweetReplies: (id, username) => `tweets/search/recent/${id}/${username}`,
+	userFollowers: (id) => `users/${id}/followers`,
+	userFollowing: (id) => `users/${id}/following`,
+
 
 	showUser: () => "users/show.json",
 	showUserTimeline: () => "tweets/user_timeline",

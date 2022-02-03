@@ -2,32 +2,24 @@
 
 .profile {
 
-    &__avatar {
-        margin-right: .75rem;
-    }
-
     &__wrapper {
-        @include flex($justify: space-between, $align: center);
+        @include flex($justify: space-between);
         width: 100%;
         cursor: pointer;
         padding: 1rem;
     }
 
-    &__disname {
-        @include flex($align: center);
-        @include title();
-    }
-
-    &__username {
-        @include meta();
+    &__name {
+        &__wrapper {
+            @include flex($direction: column);
+            gap: 3px;
+        }
     }
 
     &__info {
-        @include flex($align: center);
+        @include flex();
+        gap: .75rem;
     }
 
-    &__userinfo {
-        @include flex($direction: column);
-    }
 
 }

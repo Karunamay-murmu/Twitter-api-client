@@ -2,7 +2,10 @@
 
 
 .widgetBar {
-    
+    position: sticky;
+    top: 0;
+
+
     &__header {
         height: 3.375rem;
         padding: .375rem 1rem;

@@ -62,8 +62,8 @@ function Profile({ profile, routeLocation }) {
 	return (
 		<>
 			<FeedHeader>
-				<DisplayName name={username} className={styles.feed__title} verified={verified} />
-				<div className={styles.feed__meta}>
+				<DisplayName name={name} onHeader verified={verified} />
+				<div className={styles.profile__feed__meta}>
 					{short(tweet_count)} Tweets
 				</div>
 			</FeedHeader>

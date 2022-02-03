@@ -12,6 +12,9 @@ function ProfileTweets({ tweets, pathname, user, ...props }) {
 			return (
 				<div className={styles.message__wrapper}>
 					<div className={styles.message}>
+						{pathname.includes("/") && (
+							<div className={styles.message__main}>@{user.username} hasn&#39;t post any Tweets</div>
+						)}
 						{pathname.includes("likes") && (
 							<div className={styles.message__main}>@{user.username} hasn&#39;t liked any Tweets</div>
 						)}

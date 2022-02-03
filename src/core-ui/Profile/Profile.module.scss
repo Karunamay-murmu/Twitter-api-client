@@ -3,6 +3,16 @@
 
 .profile {
 
+    &__feed {
+        &__displayName {
+            font-size: 1.25rem;
+        }
+
+        &__meta {
+            @include meta($font-size: .8125rem);
+        }
+    }
+
     &__info__wrapper {
         @include flex();
         width: 100%;
@@ -13,7 +23,7 @@
             &:hover {
                 text-decoration: underline;
             }
-        }   
+        }
 
     }
 
@@ -40,13 +50,14 @@
     }
 
     &__edit {
-        
+
         &__wrapper {
             @include flex($align: center, $justify: flex-end);
             padding: 1rem;
         }
 
         @include buttonLink();
+
         &:hover {
             background-color: $hover;
         }
@@ -56,12 +67,13 @@
     &__avatar {
         width: 100%;
         height: 100%;
+
         &__container {
             border: 4px solid $white;
-            width:9.09375rem;
-            height:9.09375rem;
+            width: 9.09375rem;
+            height: 9.09375rem;
             border-radius: 100%;
-            position:absolute;
+            position: absolute;
             top: 8rem;
             left: 1rem;
         }

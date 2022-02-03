@@ -14,6 +14,7 @@ import PrivacySettingContainer from "core-ui/PrivacySetting/PrivacySettingContai
 // import ProfileReplyTweetsContainer from "core-ui/ProfileReplyTweets/ProfileReplyTweetsContainer";
 import ProfileTweetsContainer from "core-ui/ProfileTweets/ProfileTweetsContainer";
 import ProfileContainer from "core-ui/Profile/ProfileContainer";
+import FollowerListContainer from "core-ui/FollowerList/FollowerListContainer";
 
 
 function App() {
@@ -31,6 +32,11 @@ function App() {
 				<Route path="/" element={<MainLayout />}>
 					<Route index element={<HomeFeed />} />
 					<Route path=":username" element={<ProfileFeedContainer />}>
+						{
+							["followers", "following"].map((path, idx) =>
+								<Route key={idx} path={path} element={<FollowerListContainer path={path} />} />
+							)
+						}
 						<Route path="" element={<ProfileContainer />}>
 							{
 								["", "with_replies", "likes"].map((path, idx) => {

@@ -8,10 +8,10 @@ import Verified from "components/Verified/Verified.jsx";
 
 import styles from "./displayName.module.css";
 
-function DisplayName({ name, verified, className }) {
+function DisplayName({ name, verified, className, onHeader }) {
 	const node = twemoji.parse(name);
 	return (
-		<div className={`${styles.name} ${className}`}>
+		<div className={`${styles.name} ${className} ${onHeader ? styles.header : ""}`}>
 			<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(node.trim()) }}></div>
 			{verified &&
 				<span>
@@ -27,11 +27,13 @@ DisplayName.propTypes = {
 	verified: PropTypes.bool,
 	className: PropTypes.string,
 	children: PropTypes.node,
+	onHeader: PropTypes.bool,
 };
 
 DisplayName.defaultProps = {
 	name: "DISPLAY NAME",
 	verified: false,
+	onHeader: false,
 	className: ""
 };
 

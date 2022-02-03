@@ -21,7 +21,10 @@ function TweetMenuBar({ menuItems = [] }) {
 }
 
 TweetMenuBar.propTypes = {
-	menuItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+	menuItems: PropTypes.arrayOf(PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		href: PropTypes.string.isRequired
+	})).isRequired,
 };
 
 export default TweetMenuBar;

@@ -40,8 +40,6 @@ function ProfileFeed({ user, ...props }) {
 			href: `/${username}/likes`,
 		}
 	];
-	// TODO: set pinned tweet
-	// const pinnedTweet = user?.includes?.tweets;
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.feed}>
@@ -53,28 +51,7 @@ function ProfileFeed({ user, ...props }) {
 				</FeedHeader>
 				<ProfileContainer {...props} user={user} />
 				<TweetMenuBarContainer menuItems={menuItems} />
-				{/* <ProfileTweetsContainer /> */}
-				{/* {
-					pinnedTweet && pinnedTweet.map((tweet, idx) => (
-						<FeedPostContainer key={idx} user={user} tweet={tweet} />
-					))
-				} */}
 				<Outlet />
-				{/* {
-					!tweets.data ? (
-						<Spinner />
-					) : (
-					)
-				} */}
-				{/* {
-					pinnedTweet.length && <FeedPostContainer user={user.data} tweet={pinnedTweet} />
-				}
-				<div>
-					<FeedPostContainer />
-					<FeedPostContainer />
-					<FeedPostContainer />
-					<FeedPostContainer />
-				</div> */}
 			</div>
 		</div >
 	);

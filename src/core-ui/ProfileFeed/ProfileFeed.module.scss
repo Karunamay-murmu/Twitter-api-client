@@ -1,13 +1,13 @@
 @import "../../static/style/mixin.scss";
 
 .wrapper {
-    .feed {
-        &__title {
-            font-size: 1.25rem;
-        }
+    // .feed {
+    //     &__title {
+    //         font-size: 1.25rem;
+    //     }
 
-        &__meta {
-            @include meta($font-size: .8125rem);
-        }
-    }
+    //     &__meta {
+    //         @include meta($font-size: .8125rem);
+    //     }
+    // }
 }

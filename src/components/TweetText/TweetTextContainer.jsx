@@ -13,16 +13,11 @@ function TweetTextContainer({ tweet, ...props }) {
 	let { text, entities } = tweet;
 
 	if (entities) {
-		let description = text;
 		for (const [key, value] of Object.entries(entities)) {
 			if (value.length) {
 				value.forEach(val => {
-					const start = val.start;
-					const end = val.end;
 					if (key === "hashtags") {
-						const hashTag = description.slice(start, end);
-						// console.log(hashTag);
-						// const hashTag = new RegExp(`(^|\\s)${hashTag}`, "g");
+						const hashTag = new RegExp(`#${val.tag}`, "ig");
 						text = text.replace(hashTag, `<span><a href="/hashtags/${val.tag}" target="_blank" rel="noopener noreferrer">#${val.tag}</a></span>`);
 					}
 					if (key === "urls") {

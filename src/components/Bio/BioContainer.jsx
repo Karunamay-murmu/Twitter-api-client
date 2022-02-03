@@ -10,22 +10,37 @@ function BioContainer({ entities, bio, className }) {
 	// const hashtagRegex = /(#[a-z\d-_]+)/im;
 
 	if (entities) {
-		let description = bio;
+		// let description = bio;
 		for (const [key, value] of Object.entries(entities)) {
 			if (value.length) {
 				value.forEach(val => {
-					const start = val.start;
-					const end = val.end;
+					// const start = val.start;
+					// const end = val.end;
+					// if (key === "urls") {
+					// 	const url = description.slice(start, end);
+					// 	bio = bio.replace(url, `<span><a href="${url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
+					// }
 					if (key === "urls") {
-						const url = description.slice(start, end);
-						bio = bio.replace(url, `<span><a href="${url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
-					}
+						const url = new RegExp(val.url, "ig");
+						if (!val?.display_url.includes("twitter.com")) {
+							bio = bio.replace(url, `<span><a href="${val.url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
+						} else {
+							bio = bio.replace(url, "");
+						}					}
+					// if (key === "mentions") {
+					// 	const mentions = description.slice(start, end);
+					// 	bio = bio.replace(mentions, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">${mentions}</a></span>`);
+					// }
 					if (key === "mentions") {
-						const mentions = description.slice(start, end);
-						bio = bio.replace(mentions, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">${mentions}</a></span>`);
+						const username = new RegExp(`@${val.username}`, "ig");
+						bio = bio.replace(username, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">@${val.username.toLowerCase()}</a></span>`);
 					}
+					// if (key === "hashtags") {
+					// 	const hashTag = description.slice(start, end);
+					// 	bio = bio.replace(hashTag, `<span><a href="/hashtags/${val.tag}" target="_blank" rel="noopener noreferrer">#${val.tag}</a></span>`);
+					// }
 					if (key === "hashtags") {
-						const hashTag = description.slice(start, end);
+						const hashTag = new RegExp(`#${val.tag}`, "ig");
 						bio = bio.replace(hashTag, `<span><a href="/hashtags/${val.tag}" target="_blank" rel="noopener noreferrer">#${val.tag}</a></span>`);
 					}
 
