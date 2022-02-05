@@ -43,7 +43,7 @@ const Sidebar = React.forwardRef(({ options, showMoreOption, showCard }, ref) =>
 					<NavLink to="/list" className={({ isActive }) => `${styles.link} ${isActive ? "active" : ""}`}>
 						<MenuItemContainer Icon={ListAltRoundedIcon} text="List" />
 					</NavLink>
-					<NavLink to="/username" className={({ isActive }) => `${styles.link} ${isActive ? "active" : ""}`}>
+					<NavLink to="/me" className={({ isActive }) => `${styles.link} ${isActive ? "active" : ""}`}>
 						<MenuItemContainer Icon={PersonOutlineRoundedIcon} text="Profile" />
 					</NavLink>
 					<div onClick={showCard} className={`${styles.sidebar__options} ${showMoreOption && styles.sidebar__options__active}`}>

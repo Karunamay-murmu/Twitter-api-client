@@ -2,8 +2,14 @@
 
 
 .name {
-    @include title();
-    @include flex($align: center);
+
+    &__wrapper {
+        @include title();
+        @include flex($align: center);
+
+    }
+    @include textOverflow();
+    max-width: 15.625rem;
 }
 
 .header {

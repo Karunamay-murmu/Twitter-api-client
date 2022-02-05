@@ -3,4 +3,5 @@
 
 .name {
     @include meta();
+    @include textOverflow();
 }

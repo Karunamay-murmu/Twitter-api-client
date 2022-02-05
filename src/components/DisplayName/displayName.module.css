@@ -1,4 +1,11 @@
 .name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 15.625rem;
+}
+
+.name__wrapper {
   font-size: 0.9375rem;
   color: #0f1419;
   font-weight: 700;

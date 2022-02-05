@@ -11,6 +11,8 @@ function ProfileFeedContainer() {
 	const dispatch = useDispatch();
 	const params = useParams();
 
+	console.log("ProfileFeedContainer", user);
+
 	React.useEffect(() => {
 		if (!user || params.username !== user.username) {
 			dispatch(fetchUser(params.username));

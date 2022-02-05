@@ -7,12 +7,6 @@ import { selectPinnedTweet } from "redux/slice/userSlice";
 import { selectUser } from "redux/slice/userSlice";
 import Spinner from "components/Spinner/Spinner";
 import ProfileTweets from "core-ui/ProfileTweets/ProfileTweets";
-// import FeedHeader from "components/FeedHeader/FeedHeader";
-// import DisplayName from "components/DisplayName/DisplayName";
-// import ProfileContainer from "core-ui/Profile/ProfileContainer";
-// import TweetMenuBarContainer from "components/TweetMenuBar/TweetMenuBarContainer";
-
-// import styles from "./ProfileTweets.module.scss";
 
 function ProfileTweetsContainer() {
 	const user = useSelector(state => selectUser(state));
@@ -27,16 +21,17 @@ function ProfileTweetsContainer() {
 
 	useEffect(() => {
 		let promise;
-		if (params.username !== user.username) {
+
+		if (params.username.toLowerCase() !== user.username.toLowerCase()) {
 			dispatch(clearTweetState());
 		}
-		if ((!likes.length && location.pathname.includes("likes") || !tweets.length) && user?.id && params.username === user.username) {
+		if (((!likes.length && location.pathname.includes("likes")) || !tweets.length) && user?.username.toLowerCase() === params.username.toLowerCase()) {
 			promise = dispatch(fetchTweets({ userId: user.id, pathname: location.pathname }));
 		}
 		return () => {
 			status === "loading" && promise.abort();
 		};
-	}, [user.id, params.username, location.pathname]);
+	}, [user, params.username, location.pathname]);
 
 	const tweetsData = useMemo(() => {
 		if (location.pathname.includes("likes")) {
@@ -49,7 +44,7 @@ function ProfileTweetsContainer() {
 		<>
 			
 			{
-				status === "loading" ? <div>
+				!tweetsData || status === "loading" ? <div>
 					<Spinner message="Loading tweets..." />
 				</div> :
 					<ProfileTweets

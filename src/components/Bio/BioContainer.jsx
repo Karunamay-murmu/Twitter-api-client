@@ -22,11 +22,12 @@ function BioContainer({ entities, bio, className }) {
 					// }
 					if (key === "urls") {
 						const url = new RegExp(val.url, "ig");
-						if (!val?.display_url.includes("twitter.com")) {
-							bio = bio.replace(url, `<span><a href="${val.url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
-						} else {
-							bio = bio.replace(url, "");
-						}					}
+						bio = bio.replace(url, `<span><a href=${val.url}>${val.display_url}</a></span>`);
+						// if (!val?.display_url.includes("twitter.com")) {
+						// 	bio = bio.replace(url, "");
+						// } else {
+						// }
+					}
 					// if (key === "mentions") {
 					// 	const mentions = description.slice(start, end);
 					// 	bio = bio.replace(mentions, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">${mentions}</a></span>`);

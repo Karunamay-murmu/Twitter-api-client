@@ -1,5 +1,8 @@
 .name {
   font-size: 0.9375rem;
   color: #52636f;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 /*# sourceMappingURL=username.module.css.map */

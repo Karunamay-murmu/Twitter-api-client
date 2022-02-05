@@ -133,11 +133,11 @@ const FeedPost = ({ user, tweet, media, navigateToTweetDetail }) => {
 					<div className={styles.post__header}>
 						<div className={styles.post__header__info}>
 							<Name user={user} />
-							<time className={styles.post__header__info__date} dateTime={created_at}>
-								<span className={styles.post__header__info__date__separator}>
-									&bull;
-								</span>
-								{getPostDate(created_at)}
+							<span className={styles.post__header__info__date__separator}>
+								&bull;
+							</span>
+							<time className={styles.post__header__info__date__wrapper} dateTime={created_at}>
+								<span>{getPostDate(created_at)}</span>
 							</time>
 						</div>
 						{moreOptions && <MoreOptionContainer moreOptions={moreOptions} />}

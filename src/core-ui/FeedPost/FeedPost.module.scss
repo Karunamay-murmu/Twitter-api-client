@@ -79,7 +79,9 @@
             gap: 5px;
 
             &__date {
-                @include meta();
+                &__wrapper {
+                    @include meta();
+                }
 
                 &__separator {
                     margin: 0 .275rem;

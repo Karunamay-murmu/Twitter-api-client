@@ -11,8 +11,8 @@ import styles from "./displayName.module.css";
 function DisplayName({ name, verified, className, onHeader }) {
 	const node = twemoji.parse(name);
 	return (
-		<div className={`${styles.name} ${className} ${onHeader ? styles.header : ""}`}>
-			<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(node.trim()) }}></div>
+		<div className={`${styles.name__wrapper} ${className} ${onHeader ? styles.header : ""}`}>
+			<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(node.trim()) }} className={styles.name}></div>
 			{verified &&
 				<span>
 					<Verified />
