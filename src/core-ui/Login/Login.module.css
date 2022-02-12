@@ -1,0 +1,70 @@
+.wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 50% 50%;
+      grid-template-columns: 50% 50%;
+  -ms-grid-rows: 100%;
+      grid-template-rows: 100%;
+  height: inherit;
+}
+
+.wrapper__image {
+  width: inherit;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.wrapper__image__container {
+  background-image: url("../../assets/images/lohp_en_1302x955.png");
+  position: relative;
+}
+
+.wrapper__image__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 20rem !important;
+  height: 20rem !important;
+  fill: #ffffff !important;
+  pointer-events: none;
+}
+
+.wrapper__right {
+  background-color: #0f1419;
+  padding: 1rem;
+}
+
+.wrapper__right__icon {
+  width: 4rem !important;
+  height: 4rem !important;
+  fill: #ffffff !important;
+  pointer-events: none;
+}
+
+.wrapper__text__h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #d9d9d9;
+  margin: 3rem 0;
+}
+
+.wrapper__text__p {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: #d9d9d9;
+}
+
+.wrapper__login__button button {
+  background-color: #d9d9d9;
+  color: #0f1419;
+  gap: 5px;
+}
+
+.wrapper__login__button__icon {
+  color: #1d9bf0;
+}
+/*# sourceMappingURL=Login.module.css.map */

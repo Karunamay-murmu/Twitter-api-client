@@ -7,14 +7,14 @@ import TweetDetailContainer from "core-ui/TweetDetail/TweetDetailContainer";
 import HomeFeed from "core-ui/HomeFeed/HomeFeed.jsx";
 import TweetModal from "core-ui/TweetModal/TweetModal";
 import EditProfileModal from "core-ui/EditProfileModal/EditProfileModal";
-import MainLayout from "core-ui/MainLayout/MainLayout.jsx";
 import SettingLayoutContainer from "core-ui/SettingLayout/SettingLayoutContainer";
 import AccountSettingContainer from "core-ui/AccountSetting/AccountSettingContainer";
 import PrivacySettingContainer from "core-ui/PrivacySetting/PrivacySettingContainer";
-// import ProfileReplyTweetsContainer from "core-ui/ProfileReplyTweets/ProfileReplyTweetsContainer";
 import ProfileTweetsContainer from "core-ui/ProfileTweets/ProfileTweetsContainer";
 import ProfileContainer from "core-ui/Profile/ProfileContainer";
 import FollowerListContainer from "core-ui/FollowerList/FollowerListContainer";
+import MainLayoutContainer from "core-ui/MainLayout/MainLayoutContainer";
+import LoginContainer from "core-ui/Login/LoginContainer";
 
 
 function App() {
@@ -29,7 +29,8 @@ function App() {
 	return (
 		<div className="app" style={style}>
 			<Routes location={background || location} >
-				<Route path="/" element={<MainLayout />}>
+				<Route path="login" element={<LoginContainer />} />
+				<Route path="/" element={<MainLayoutContainer />} protected>
 					<Route index element={<HomeFeed />} />
 					<Route path=":username" element={<ProfileFeedContainer />}>
 						{

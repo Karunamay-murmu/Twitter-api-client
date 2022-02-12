@@ -38,14 +38,8 @@
 html {
   position: relative;
   overflow: auto;
-}
-
-body {
-  max-width: 1300px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0rem 1rem;
-  font-size: 1rem;
+  background-color: #ffffff;
+  font-size: 16px;
 }
 
 code {
@@ -79,6 +73,13 @@ code {
 .app {
   width: 100%;
   height: 100vh;
+}
+
+.app {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0rem 1rem;
 }
 
 ul {

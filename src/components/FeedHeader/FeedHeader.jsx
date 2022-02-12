@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 
-// import DisplayName from "components/DisplayName/DisplayName";
-
 import styles from "./FeedHeader.module.css";
 
 function FeedHeader({ backbtn = true, meta, title, children }) {
