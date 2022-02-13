@@ -11,6 +11,8 @@ const endpoints = {
 	tweetReplies: (id, username) => `tweets/search/recent/${id}/${username}`,
 	userFollowers: (id) => `users/${id}/followers`,
 	userFollowing: (id) => `users/${id}/following`,
+	fetchRequestToken: "oauth2/request_token",
+	authenticateUser: (token, verifier) => `oauth2/login/${token}/${verifier}`,
 
 
 	showUser: () => "users/show.json",

@@ -9,6 +9,8 @@ import tweetsReducer from "redux/slice/userTweetSlice";
 import tweetDetailReducer from "redux/slice/tweetDetailSlice";
 import tweetRepliesReducer from "redux/slice/tweetRepliesSlice";
 import followersReducer from "redux/slice/followerSlice";
+import authenticationReducer from "redux/slice/authenticationSlice";
+
 // import { apiSlice } from "redux/apiSlice";
 import { apiSlice } from "features/api/api-slice";
 
@@ -21,6 +23,7 @@ const reducer = {
 	tweetDetail: tweetDetailReducer,
 	tweetReplies: tweetRepliesReducer,
 	userFollowers: followersReducer,
+	authentication: authenticationReducer,
 	[apiSlice.reducerPath]: apiSlice.reducer,
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import ProfileFeedContainer from "core-ui/ProfileFeed/ProfileFeedContainer.jsx";
 import TweetDetailContainer from "core-ui/TweetDetail/TweetDetailContainer";
@@ -15,17 +16,27 @@ import ProfileContainer from "core-ui/Profile/ProfileContainer";
 import FollowerListContainer from "core-ui/FollowerList/FollowerListContainer";
 import MainLayoutContainer from "core-ui/MainLayout/MainLayoutContainer";
 import LoginContainer from "core-ui/Login/LoginContainer";
+import Spinner from "components/Spinner/Spinner";
 
 
 function App() {
 	const { isOpen } = useSelector(state => state.modal);
 	const location = useLocation();
-	const background = location.state && location.state.background;
 
+	const { user, isAuthenticated, isLoading } = useAuth0();
+
+	const background = location.state && location.state.background;
 	const style = {
 		overflow: isOpen ? "hidden" : "inherit"
 	};
 
+	if (isLoading) {
+		return <Spinner message="Loading..." />;
+	}
+
+	if (isAuthenticated) {
+		console.log(user);
+	}
 	return (
 		<div className="app" style={style}>
 			<Routes location={background || location} >
