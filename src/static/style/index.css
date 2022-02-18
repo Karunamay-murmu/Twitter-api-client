@@ -99,4 +99,47 @@ img.emoji {
   margin: 0 .05rem 0 .1rem;
   vertical-align: -0.25rem;
 }
+
+.icon {
+  width: 1.17188rem !important;
+  height: 1.17188rem !important;
+  fill: #52636f !important;
+  pointer-events: none;
+}
+
+.icon__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 0.5rem;
+  -webkit-transition-duration: 200ms;
+          transition-duration: 200ms;
+  -webkit-transition-property: all;
+  transition-property: all;
+  -webkit-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.icon__wrapper:hover, .icon__wrapper--active {
+  background-color: rgba(29, 155, 240, 0.1);
+}
+
+.icon__wrapper:hover svg, .icon__wrapper--active svg {
+  width: 1.17188rem !important;
+  height: 1.17188rem !important;
+  fill: #1d9bf0 !important;
+  pointer-events: none;
+}
 /*# sourceMappingURL=index.css.map */

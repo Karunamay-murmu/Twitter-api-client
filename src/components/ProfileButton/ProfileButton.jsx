@@ -8,25 +8,38 @@ import BioContainer from "components/Bio/BioContainer.jsx";
 
 import styles from "./profileButton.module.css";
 
-function ProfileButton({ user }) {
+function ProfileButton({ user, showFollowButton, nameProps, bioProps }) {
 	return (
 		<div className={styles.profile__wrapper}>
 			<div className={styles.profile__info}>
 				<Avatar image={user?.profile_image_url} />
-				<div>
-					<Name user={user} className={styles.profile__name__wrapper} />
-					<BioContainer entities={user?.entities?.description} bio={user?.description} />
+				<>
+					<Name user={user} className={styles.profile__name__wrapper} {...nameProps} />
+					{
+						user?.description &&
+						<BioContainer entities={user?.entities?.description} bio={user?.description} {...bioProps} />
+					}
+				</>
+			</div>
+			{
+				showFollowButton &&
+				<div className={styles.profile__btn}>
+					<FollowButtonContainer />
 				</div>
-			</div>
-			<div className={styles.profile__btn}>
-				<FollowButtonContainer />
-			</div>
+			}
 		</div>
 	);
 }
 
 ProfileButton.propTypes = {
 	user: PropTypes.object,
+	showFollowButton: PropTypes.bool,
+	nameProps: PropTypes.object,
+	bioProps: PropTypes.object,
+};
+
+ProfileButton.defaultProps = {
+	showFollowButton: true,
 };
 
 export default ProfileButton;

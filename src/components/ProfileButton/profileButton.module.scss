@@ -6,7 +6,7 @@
         @include flex($justify: space-between);
         width: 100%;
         cursor: pointer;
-        padding: 1rem;
+        padding: .5rem 1rem;
     }
 
     &__name {
@@ -17,7 +17,7 @@
     }
 
     &__info {
-        @include flex();
+        @include flex($align: center);
         gap: .75rem;
     }
 

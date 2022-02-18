@@ -96,3 +96,24 @@ img.emoji {
     margin: 0 .05rem 0 .1rem;
     vertical-align: -0.25rem;
 }
+
+.icon {
+    @include icon($width: 1.171875rem, $color: $gray);
+
+    &__wrapper {
+        @include flex();
+        @include padding($padding: .5rem);
+        @include transition();
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover,
+        &--active {
+            background-color: $primary-blue-alpha-1;
+
+            svg {
+                @include icon($width: 1.171875rem, $color: $primary-blue)
+            }
+        }
+    }
+}

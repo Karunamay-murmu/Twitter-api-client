@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -17,31 +17,56 @@ import FollowerListContainer from "core-ui/FollowerList/FollowerListContainer";
 import MainLayoutContainer from "core-ui/MainLayout/MainLayoutContainer";
 import LoginContainer from "core-ui/Login/LoginContainer";
 import Spinner from "components/Spinner/Spinner";
+import useFetch from "hooks/useFetch";
+import endpoints from "api/endpoints";
+import { selectCsrfToken, fetchCsrfToken } from "redux/slice/tokenSlice";
+import { fetchAuthUser, selectAuthUser } from "redux/slice/authSlice";
 
 
 function App() {
+	const csrfToken = useSelector(state => selectCsrfToken(state));
+	const authUser = useSelector(state => selectAuthUser(state));
 	const { isOpen } = useSelector(state => state.modal);
 	const location = useLocation();
-
 	const { user, isAuthenticated, isLoading } = useAuth0();
+	const dispatch = useDispatch();
+
+	const [makeRequest] = useFetch();
+
+	console.log(authUser);
+	console.log(user);
+	console.log(makeRequest);
+	console.log(endpoints);
+
 
 	const background = location.state && location.state.background;
 	const style = {
 		overflow: isOpen ? "hidden" : "inherit"
 	};
 
+	useEffect(() => {
+		if (!csrfToken) {
+			dispatch(fetchCsrfToken());
+		}
+	}, [csrfToken]);
+
+	useEffect(() => {
+		(async () => {
+			if (isAuthenticated && csrfToken) {
+				dispatch(fetchAuthUser(user.sub));
+			}
+		})();
+	}, [isAuthenticated]);
+
 	if (isLoading) {
 		return <Spinner message="Loading..." />;
 	}
 
-	if (isAuthenticated) {
-		console.log(user);
-	}
 	return (
 		<div className="app" style={style}>
 			<Routes location={background || location} >
 				<Route path="login" element={<LoginContainer />} />
-				<Route path="/" element={<MainLayoutContainer />} protected>
+				<Route path="/" element={<MainLayoutContainer authUser={authUser} />}>
 					<Route index element={<HomeFeed />} />
 					<Route path=":username" element={<ProfileFeedContainer />}>
 						{

@@ -18,8 +18,8 @@ function Widget({ header, children }) {
 }
 
 Widget.propTypes = {
-	header: PropTypes.string.isRequired,
-	children: PropTypes.node.isRequired,
+	header: PropTypes.string,
+	children: PropTypes.node,
 };
 
 export default Widget;

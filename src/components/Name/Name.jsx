@@ -7,20 +7,19 @@ import DisplayName from "components/DisplayName/DisplayName";
 
 import styles from "./Name.module.css";
 
-function Name({ user, className }) {
+function Name({ user, className, allowNavigate }) {
 
 	const { name, username, verified } = user;
 
-	const handleClick = (e) => {
-		e.stopPropagation();
-	};
+	const handleClick = (e) => e.stopPropagation();
+	const Component = allowNavigate ? Link : "div";
 
 	return (
 		<div className={styles.name}>
-			<Link to={`/${username}`} onClick={handleClick} className={`${styles.name__wrapper} ${className}`}>
-				<DisplayName name={name} verified={verified} className={styles.name__displayname} />
+			<Component to={`/${username}`} onClick={handleClick} className={`${styles.name__wrapper}${className ? " " + className : ""}`}>
+				<DisplayName name={name} verified={verified} className={`${styles.name__displayname}`} />
 				<Username name={username} />
-			</Link>
+			</Component>
 			{/* {showCard &&
 				<div className={styles.profile} ref={cardRef}>
 					<ProfileCardContainer mouseLeave={handleMouseLeave} user={user} />
@@ -30,9 +29,15 @@ function Name({ user, className }) {
 	);
 }
 
+Name.defaultProps = {
+	allowNavigate: true,
+};
+
 Name.propTypes = {
 	user: PropTypes.object.isRequired,
-	className: PropTypes.string
+	className: PropTypes.string,
+	allowNavigate: PropTypes.bool,
+	tag: PropTypes.any
 };
 
 export default Name;

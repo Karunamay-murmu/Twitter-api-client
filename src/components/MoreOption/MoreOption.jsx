@@ -6,11 +6,14 @@ import OptionCardContainer from "components/OptionCard/OptionCardContainer";
 
 import styles from "./MoreOption.module.css";
 
-function MoreOption({ moreOptions, cardOpen, showCard, cardId, currentCardId }) {
+function MoreOption({ moreOptions, cardOpen, showCard, cardId, currentCardId, children }) {
 	return (
 		<div className={styles.more__container}>
 			<div onClick={(e) => showCard(e)} data-card-id={cardId} className={`${styles.more__icon__wrapper}${cardOpen && (cardId == currentCardId) ? " " + styles["more__icon__wrapper--active"] : ""}`}>
-				<MoreHorizRoundedIcon className={styles.more__icon} />
+				{
+					children ? children :
+						<MoreHorizRoundedIcon className={styles.more__icon} />
+				}
 			</div>
 			{cardOpen && moreOptions && (cardId === currentCardId) &&
 				<div className={styles.more__options__wrapper} >
@@ -28,7 +31,8 @@ MoreOption.propTypes = {
 	cardOpen: PropTypes.bool.isRequired,
 	showCard: PropTypes.func.isRequired,
 	cardId: PropTypes.string,
-	currentCardId: PropTypes.string
+	currentCardId: PropTypes.string,
+	children: PropTypes.node
 };
 
 export default MoreOption;

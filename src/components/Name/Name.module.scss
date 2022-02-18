@@ -13,6 +13,10 @@
     &__wrapper:hover>&__displayname {
         text-decoration: underline !important;
     }
+    
+    &__displayname__hover {
+        text-decoration: none;
+    }
 
 }
 

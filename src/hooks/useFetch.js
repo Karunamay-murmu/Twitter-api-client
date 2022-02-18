@@ -1,12 +1,10 @@
 import { useState, useEffect, useMemo, } from "react";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 
-import { apiCallStart, apiCallSuccess, apiCallFailure, apiCallFinish } from "redux/slice/apiSlice";
+// axios.defaults.xsrfHeaderName = "X-CSRFToken";
+// axios.defaults.xsrfCookieName = "csrftoken";
 
 const BASE_URL = process.env.REACT_APP_TWITTER_API_BASE_URL;
-
-// const apiSelector = state => state.api;
 
 const useFetch = () => {
 	const cancelToken = useMemo(() => (axios.CancelToken.source()), []);
@@ -17,22 +15,20 @@ const useFetch = () => {
 		mode: "cors",
 		timeout: 10000,
 		cancelToken: cancelToken.token,
+		xsrfCookieName: "csrftoken",
+		xsrfHeaderName: "X-CSRFToken",
+		withCredentials: true,
+		headers: {
+			"Content-Type": "application/json",
+		}
 	});
 
-	// console.log("running");
-
-	// let { data, url, isFetching, error, status } = useSelector(apiSelector, (prev, next) => prev.data == next.data || prev.status === next.status);
-	// console.log(options.url);
-	// console.log(data, status);
-	// console.log(url, status, isFetching, error, data);
-	const dispatch = useDispatch();
-
-
-	const doFetch = (endpoint, extraOption = {}) => {
+	const makeRequest = (endpoint, extraOption = {}) => {
 		setOptions((prev) => ({
 			...prev,
 			...extraOption,
 			url: endpoint,
+			headers: { ...prev.headers, ...extraOption.headers }
 		}));
 	};
 
@@ -40,41 +36,21 @@ const useFetch = () => {
 		if (!options.url) {
 			return;
 		}
-		const fetchData = async () => {
-			dispatch(apiCallStart({
-				url: options.url,
-				method: options.method,
-				body: options.body,
-				params: options.params,
-			}));
+		(async () => {
+			console.log(options);
 			try {
-				const response = await axios.request(options);
-				dispatch(apiCallSuccess(response.data));
+				await axios(options);
 			} catch (error) {
-				if (axios.isCancel(error)) {
-					dispatch(apiCallFailure(error.message));
-				} else {
-					dispatch(apiCallFailure(error.message));
-				}
-			} finally {
-				dispatch(apiCallFinish());
+				console.log(error);
+				cancelToken.cancel();
 			}
-		};
-		fetchData();
+		})();
 		return () => {
 			cancelToken.cancel();
 		};
 	}, [options.url]);
 
-	// const api = {
-	// 	data,
-	// 	url,
-	// 	isFetching,
-	// 	error,
-	// 	status,
-	// };
-
-	return [doFetch];
+	return [makeRequest];
 };
 
 
