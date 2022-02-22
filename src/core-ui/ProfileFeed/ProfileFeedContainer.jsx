@@ -8,8 +8,8 @@ import { selectAuthUser } from "redux/slice/authSlice";
 
 function ProfileFeedContainer() {
 
-	const user = useSelector(state => selectUser(state));
 	const authUser = useSelector(state => selectAuthUser(state));
+	const user = useSelector(state => selectUser(state));
 	const dispatch = useDispatch();
 	const params = useParams();
 

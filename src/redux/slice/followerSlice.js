@@ -16,7 +16,7 @@ const initialState = {
 	error: null,
 };
 
-export const fetchFollowers = createAsyncThunk("[followers/following]/fetch", async ({ id, pathname }, { rejectWithValue, signal }) => {
+export const fetchFollowers = createAsyncThunk("[followers/following]/fetch", async ({ id, pathname }, { rejectWithValue, signal, getState }) => {
 	try {
 		let endpoint;
 		if (pathname === "followers") {
@@ -29,7 +29,9 @@ export const fetchFollowers = createAsyncThunk("[followers/following]/fetch", as
 			cancelToken.cancel();
 		});
 		const response = await Client.get(endpoint, {
-			cancelRequest: signal,
+			headers: {
+				"Authorization": "Bearer " + getState().auth.accessToken
+			}
 		});
 		return {
 			...response,

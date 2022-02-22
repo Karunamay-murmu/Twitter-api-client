@@ -20,19 +20,18 @@ const initialState = {
 
 export const fetchTweetDetail = createAsyncThunk("tweetDetail/fetch", async (id, {
 	rejectWithValue,
-	signal
+	signal,
+	getState
 }) => {
 	try {
-		const endpoint = endpoints.tweetDetail(id);
 		signal.addEventListener("abort", () => {
 			cancelToken.cancel();
 		});
-		const response = await Client.get(endpoint, {
-			cancelRequest: signal,
+		return await Client.get(endpoints.tweetDetail(id), {
+			headers: {
+				"Authorization": "Bearer " + getState().auth.accessToken
+			}
 		});
-		return {
-			...response
-		};
 	} catch (error) {
 		return rejectWithValue(error.message);
 	}

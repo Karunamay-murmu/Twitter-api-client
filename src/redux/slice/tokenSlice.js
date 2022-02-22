@@ -4,7 +4,8 @@ import endpoints from "api/endpoints";
 import Client from "api/client";
 
 const initialState = {
-	csrfToken: null,
+	csrf: null,
+	jwt: null,
 	status: "idle",
 	error: null,
 };
@@ -27,7 +28,8 @@ const tokenSlice = createSlice({
 		});
 		builder.addCase(fetchCsrfToken.fulfilled, (state, { payload }) => {
 			state.status = "succeeded";
-			state.csrfToken = payload.csrf_token;
+			state.csrf = payload.csrf_token;
+			state.jwt = payload.jwt_token;
 		});
 		builder.addCase(fetchCsrfToken.rejected, (state, action) => {
 			state.status = "failed";

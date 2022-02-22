@@ -14,7 +14,13 @@ import "./static/style/index.css";
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<Auth0Provider clientId={process.env.REACT_APP_AUTH0_ID} domain={process.env.REACT_APP_AUTH0_DOMAIN} redirectUri={window.location.origin}>
+			<Auth0Provider 
+				clientId={process.env.REACT_APP_AUTH0_ID} 
+				domain={process.env.REACT_APP_AUTH0_DOMAIN} 
+				redirectUri={window.location.origin}
+				audience="https://django-twitter2.0/api"
+				scope=""
+			>
 				<Provider store={Store}>
 					<App />
 				</Provider>

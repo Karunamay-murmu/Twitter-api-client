@@ -11,12 +11,16 @@ const initialState = {
 	error: null,
 };
 
-export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { rejectWithValue, signal }) => {
+export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { rejectWithValue, signal, getState }) => {
 	try {
 		signal.addEventListener("abort", () => {
 			cancelToken.cancel();
 		});
-		return await Client.get(endpoints.getUserByUsername(username));
+		return await Client.get(endpoints.getUserByUsername(username), {
+			headers: {
+				"Authorization": "Bearer " + getState().auth.accessToken
+			}
+		});
 	} catch (error) {
 		return rejectWithValue(error.message);
 	}

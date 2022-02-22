@@ -15,29 +15,34 @@ import ProfileTweetsContainer from "core-ui/ProfileTweets/ProfileTweetsContainer
 import ProfileContainer from "core-ui/Profile/ProfileContainer";
 import FollowerListContainer from "core-ui/FollowerList/FollowerListContainer";
 import MainLayoutContainer from "core-ui/MainLayout/MainLayoutContainer";
-import LoginContainer from "core-ui/Login/LoginContainer";
+import LoginContainer from "components/Login/LoginContainer";
 import Spinner from "components/Spinner/Spinner";
-import useFetch from "hooks/useFetch";
-import endpoints from "api/endpoints";
-import { selectCsrfToken, fetchCsrfToken } from "redux/slice/tokenSlice";
+// import { fetchAuthUser, selectAuthUser } from "redux/slice/authSlice";
 import { fetchAuthUser, selectAuthUser } from "redux/slice/authSlice";
 
 
 function App() {
-	const csrfToken = useSelector(state => selectCsrfToken(state));
 	const authUser = useSelector(state => selectAuthUser(state));
 	const { isOpen } = useSelector(state => state.modal);
 	const location = useLocation();
-	const { user, isAuthenticated, isLoading } = useAuth0();
+	const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 	const dispatch = useDispatch();
 
-	const [makeRequest] = useFetch();
-
-	console.log(authUser);
-	console.log(user);
-	console.log(makeRequest);
-	console.log(endpoints);
-
+	useEffect(() => {
+		(async () => {
+			if (isAuthenticated) {
+				const token = await getAccessTokenSilently({
+					audience: "https://django-twitter2.0/api",
+					scope: ""
+				});
+				console.log(token);
+				if (token) {
+					dispatch(fetchAuthUser(token));
+					// dispatch(setAccessToken({ token }));
+				}
+			}
+		})();
+	}, [isAuthenticated]);
 
 	const background = location.state && location.state.background;
 	const style = {
@@ -45,15 +50,10 @@ function App() {
 	};
 
 	useEffect(() => {
-		if (!csrfToken) {
-			dispatch(fetchCsrfToken());
-		}
-	}, [csrfToken]);
-
-	useEffect(() => {
 		(async () => {
-			if (isAuthenticated && csrfToken) {
-				dispatch(fetchAuthUser(user.sub));
+			if (isAuthenticated) {
+				console.log(fetchAuthUser);
+				// dispatch(fetchAuthUser(user.sub));
 			}
 		})();
 	}, [isAuthenticated]);
@@ -65,8 +65,8 @@ function App() {
 	return (
 		<div className="app" style={style}>
 			<Routes location={background || location} >
-				<Route path="login" element={<LoginContainer />} />
-				<Route path="/" element={<MainLayoutContainer authUser={authUser} />}>
+				<Route path="login" element={<LoginContainer isAuthenticated={isAuthenticated} />} />
+				<Route path="/" element={<MainLayoutContainer authUser={authUser} isAuthenticated={isAuthenticated} />}>
 					<Route index element={<HomeFeed />} />
 					<Route path=":username" element={<ProfileFeedContainer />}>
 						{

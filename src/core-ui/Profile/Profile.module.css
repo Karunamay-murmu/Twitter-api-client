@@ -65,7 +65,7 @@
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 0 0 .75rem 0;
+  margin: .75rem 0;
   gap: .75rem;
 }
 

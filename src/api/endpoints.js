@@ -13,7 +13,7 @@ const endpoints = {
 	userFollowing: (id) => `users/${id}/following`,
 	fetchRequestToken: "oauth2/request_token",
 	authenticateUser: (token, verifier) => `oauth2/login/${token}/${verifier}`,
-	whoAmI: (id) => `users/whoami/${id}`,
+	whoAmI: () => "users/whoami/",
 	fetchCsrfToken: "users/csrf_token",
 
 

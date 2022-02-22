@@ -22,7 +22,7 @@ const mapData = (dataSet, key) => {
 	return map;
 };
 
-export const fetchTweets = createAsyncThunk("tweet/fetch", async ({ userId, pathname }, { rejectWithValue, signal }) => {
+export const fetchTweets = createAsyncThunk("tweet/fetch", async ({ userId, pathname }, { rejectWithValue, signal, getState }) => {
 	try {
 		let endpoint = endpoints.userTweetTimeline(userId);
 		let path = "";
@@ -34,8 +34,11 @@ export const fetchTweets = createAsyncThunk("tweet/fetch", async ({ userId, path
 			cancelToken.cancel();
 		});
 		const response = await Client.get(endpoint, {
-			cancelRequest: signal
+			headers: {
+				"Authorization": "Bearer " + getState().auth.accessToken
+			}
 		});
+		// print(response);
 		return {
 			...response,
 			pathname: path

@@ -20,6 +20,18 @@ function MainLayout({ authUser }) {
 			</div> :
 			null
 	);
+	// return (
+	// 	authUser ?
+	// 		<div className={styles.main}>
+	// 			<header className={styles.main__header}>
+	// 				<SidebarContainer />
+	// 			</header>
+	// 			<main className={styles.main__content}>
+	// 				<Outlet />
+	// 			</main>
+	// 		</div> :
+	// 		null
+	// );
 }
 
 MainLayout.propTypes = {

@@ -9,7 +9,6 @@ import Button from "components/Button/Button";
 import styles from "./Login.module.css";
 
 function Login({ onLogin, status, isAuthenticated, oauth_token, oauth_verifier }) {
-	console.log(oauth_token, isAuthenticated);
 	return (
 		<main className={styles.wrapper}>
 			{
@@ -36,7 +35,6 @@ function Login({ onLogin, status, isAuthenticated, oauth_token, oauth_verifier }
 												Sign in with Twitter
 											</>
 										}
-
 									</Button>
 								</div>
 							</div>
