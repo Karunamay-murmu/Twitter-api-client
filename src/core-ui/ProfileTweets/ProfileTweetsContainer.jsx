@@ -36,7 +36,7 @@ function ProfileTweetsContainer() {
 		return () => {
 			status === "loading" && promise.abort();
 		};
-	}, [user, params.username, location.pathname]);
+	}, [user.id, params.username, location.pathname]);
 
 	const tweetsData = useMemo(() => {
 		if (location.pathname.includes("likes")) {

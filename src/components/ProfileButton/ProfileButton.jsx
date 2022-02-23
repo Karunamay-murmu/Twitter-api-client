@@ -21,6 +21,7 @@ function ProfileButton({ user, showFollowButton, nameProps, bioProps }) {
 					}
 				</>
 			</div>
+			{/* TODO: implement friendship component */}
 			{
 				showFollowButton &&
 				<div className={styles.profile__btn}>

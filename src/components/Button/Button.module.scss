@@ -6,7 +6,7 @@
 .button {
     @include flex($justify: center, $align: center);
     @include noBorder();
-    @include text($size: .875rem, $color: $white);
+    @include text($size: .9375rem, $color: $white);
     @include buttonBackground();
     @include textBold();
     border-radius: 10rem;
@@ -14,4 +14,17 @@
     padding: 0 1rem;
     height: 2rem;
     line-height: 1;
+    
+    &__dangerousHover:hover {
+        background-color: $primary-red-alpha-1;
+        color: $primary-red;
+        border-color: $primary-red-light;
+    }
+
+    &__reverse {
+        background-color: $white;
+        color: $primary-dark;
+        border: 1px solid $primary-light;
+    }
+
 }

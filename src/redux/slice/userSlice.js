@@ -11,6 +11,32 @@ const initialState = {
 	error: null,
 };
 
+
+export const fetchFriendshipStatus = createAsyncThunk("user/fetchFriendshipStatus", async ({ sourceUser, targetUser, meta }, { rejectWithValue, signal, getState }) => {
+	try {
+		signal.addEventListener("abort", () => {
+			cancelToken.cancel();
+		});
+
+		const endpoint = meta?.action ?
+			(endpoints.manageFriendship(sourceUser, targetUser) + `?action=${meta?.action}`) :
+			endpoints.getFriendshipStatus(sourceUser, targetUser);
+		console.log(endpoint);
+		console.log(getState);
+		return await Client.get(endpoint, {
+			headers: {
+				"Authorization": "Bearer " + getState().auth.accessToken
+			}
+		});
+	} catch (error) {
+		return rejectWithValue(error.message);
+	}
+
+});
+
+export const createFriendship = (args) => fetchFriendshipStatus(args);
+
+
 export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { rejectWithValue, signal, getState }) => {
 	try {
 		signal.addEventListener("abort", () => {
@@ -31,7 +57,7 @@ const userProfileSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addCase(fetchUser.pending, (state) => {
+		builder.addCase(fetchUser.pending || fetchFriendshipStatus.pending, (state) => {
 			state.status = "loading";
 		});
 		builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
@@ -58,6 +84,10 @@ const userProfileSlice = createSlice({
 		builder.addCase(fetchUser.rejected, (state, action) => {
 			state.status = "failed";
 			state.error = action.payload;
+		});
+		builder.addCase(fetchFriendshipStatus.fulfilled, (state, action) => {
+			console.log(action);
+			state.user.relationship = action.payload.relationship;
 		});
 	}
 });

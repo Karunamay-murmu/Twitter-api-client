@@ -3,7 +3,7 @@ import { Outlet, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import MainFeedContainer from "core-ui/MainFeed/MainFeedContainer";
-import { selectUser, fetchUser } from "redux/slice/userSlice";
+import { selectUser, fetchUser, fetchFriendshipStatus } from "redux/slice/userSlice";
 import { selectAuthUser } from "redux/slice/authSlice";
 
 function ProfileFeedContainer() {
@@ -14,9 +14,17 @@ function ProfileFeedContainer() {
 	const params = useParams();
 
 	React.useEffect(() => {
+		let promise;
 		if ((!user || params.username !== user.username) && authUser) {
-			dispatch(fetchUser(params.username));
+			promise = dispatch(fetchUser(params.username)).unwrap();
+			promise.then(({ data }) => {
+				dispatch(fetchFriendshipStatus({
+					sourceUser: authUser.username,
+					targetUser: data.username,
+				}));
+			});
 		}
+		return () => promise.abort();
 	}, [params.username, authUser]);
 
 	return (

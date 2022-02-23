@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAKK,AAAD,iBAAU,CAAC;EACP,KAAK,EAAE,IAAI;CACd;;AAEA,AAAD,cAAO,CAAC;ECwFR,SAAS,EDvFqB,SAAQ;ECwFtC,KAAK,ECvFF,OAAkB;EFAjB,OAAO,EAAE,WAAW;CACvB",
+    "mappings": "AAKK,AAAD,iBAAU,CAAC;EACP,KAAK,EAAE,IAAI;CACd;;AAEA,AAAD,cAAO,CAAC;ECwFR,SAAS,EDvFqB,SAAQ;ECwFtC,KAAK,ECpFF,OAAkB;EFHjB,OAAO,EAAE,WAAW;CACvB",
     "sources": [
         "SettingDetail.module.scss",
         "../../static/style/mixin.scss",

@@ -14,13 +14,16 @@ import Username from "components/Username/Username";
 import BioContainer from "components/Bio/BioContainer.jsx";
 import FollowInfo from "components/FollowInfo/FollowInfo.jsx";
 import FeedHeader from "components/FeedHeader/FeedHeader";
+import Button from "components/Button/Button";
 import TweetMenuBarContainer from "components/TweetMenuBar/TweetMenuBarContainer";
+import Spinner from "components/Spinner/Spinner";
+import FriendshipContainer from "components/Friendship/FriendshipContainer";
 import { EDIT_PROFILE } from "routes/routes";
 import { short } from "utils/number";
 
 import styles from "./Profile.module.css";
 
-function Profile({ profile, routeLocation }) {
+function Profile({ authUser, profile, routeLocation }) {
 	let {
 		created_at,
 		name,
@@ -37,8 +40,11 @@ function Profile({ profile, routeLocation }) {
 		profile_image_url,
 		profile_banner_url,
 		profile_display_url,
-		profile_url
+		profile_url,
+		relationship = undefined,
 	} = profile;
+
+	console.log(relationship);
 
 	const menuItems = [
 		{
@@ -78,12 +84,32 @@ function Profile({ profile, routeLocation }) {
 						</div>
 					</div>
 					<div className={styles.profile__edit__wrapper}>
-						<Link to={EDIT_PROFILE} state={{ background: routeLocation }} className={styles.profile__edit} attributes={{
-							title: "Edit Profile",
-							"aira-label": "Edit Profile",
-						}}>
-							Edit Profile
-						</Link>
+						{
+							authUser?.username === username ?
+								<Link to={EDIT_PROFILE} state={{ background: routeLocation }} className={styles.profile__edit} attributes={{
+									title: "Edit Profile",
+									"aira-label": "Edit Profile",
+								}}>
+									Edit Profile
+								</Link> :
+
+								relationship ?
+									<div>
+										<FriendshipContainer relationship={relationship}>
+											<Button
+												reverseColor={relationship?.source?.following}
+												allowDangerousActionHoverStyle={relationship?.source?.following}
+												style={{ height: "2.125rem" }}
+											>
+												{relationship?.source.following ? <span>Following</span> : "Follow"}
+											</Button>
+										</FriendshipContainer>
+									</div>
+									:
+									<Button>
+										<Spinner hideMessage />
+									</Button>
+						}
 					</div>
 					<div className={styles.profile__info__wrapper}>
 						<div className={styles.profile__info}>
@@ -124,6 +150,7 @@ function Profile({ profile, routeLocation }) {
 Profile.propTypes = {
 	routeLocation: PropTypes.object,
 	profile: PropTypes.object,
+	authUser: PropTypes.object,
 };
 
 

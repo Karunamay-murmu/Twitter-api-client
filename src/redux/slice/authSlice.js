@@ -11,9 +11,7 @@ const initialState = {
 	error: null,
 };
 
-const token ="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Il9uSWQzZXVkWWRmVEtaUzJGWFMxSCJ9.eyJpc3MiOiJodHRwczovL2Rldi11NThmOHh5ay5hdS5hdXRoMC5jb20vIiwic3ViIjoidHdpdHRlcnw4NzU5MDUzMDMyNDU3Mjk3OTMiLCJhdWQiOlsiaHR0cHM6Ly9kamFuZ28tdHdpdHRlcjIuMC9hcGkiLCJodHRwczovL2Rldi11NThmOHh5ay5hdS5hdXRoMC5jb20vdXNlcmluZm8iXSwiaWF0IjoxNjQ1NTAyNjY0LCJleHAiOjE2NDU1ODkwNjQsImF6cCI6InpjYlhhbTVxY2RGSGVBdEZSbzlsYWx4eTdsYm9FdTJwIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCJ9.LX_pIpOCOvjX_w2mZvc6wgKPLrizmYmwZ2VnwEjDhVkcWihIohcMNP2HmAk8eHWqeHUTyWEkeFL6NJq2v28FQiMQMHfpb8CSiTYOftJT3bjyGLPKIoIZjbrMK5UzHzum7XG7zg9KTvP8ZTix6s7DZO394nEmL3zXRHAfqhvN2zV0-XCi6xI5SP_a521GJjIU4lbwQHxck4DCUKg2CVz7YknXBNfVaxZ4qIbRqMcNTTftkukvPX0UdfsMoJhgL055SEgA8pJC4azVdFRdgZ-9Wnp0D4woQFI73L_zOPNbIJmwWQSUMjxF14mJhGsr4UI99f2odAjlIX-0ez3nW98_ng";
-
-export const fetchAuthUser = createAsyncThunk("auth/fetchAuthUser", async (arg, { rejectWithValue, signal, dispatch }) => {
+export const fetchAuthUser = createAsyncThunk("auth/fetchAuthUser", async (token, { rejectWithValue, signal, dispatch }) => {
 	try {
 		signal.addEventListener("abort", () => {
 			cancelToken.cancel();

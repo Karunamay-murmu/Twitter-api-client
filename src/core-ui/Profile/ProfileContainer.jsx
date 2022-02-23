@@ -6,10 +6,12 @@ import Profile from "core-ui/Profile/Profile.jsx";
 import Spinner from "components/Spinner/Spinner";
 import { getOriginalImage } from "utils/image";
 import { selectUser } from "redux/slice/userSlice";
+import { selectAuthUser } from "redux/slice/authSlice";
 
 function ProfileContainer(props) {
 	const location = useLocation();
 	const user = useSelector(state => selectUser(state));
+	const authUser = useSelector(state => selectAuthUser(state));
 	const userStatus = useSelector(state => state.userProfile.status);
 
 	const normalizeData = useMemo(() => {
@@ -61,7 +63,7 @@ function ProfileContainer(props) {
 			{(userStatus === "loading" || userStatus === "idle") && <Spinner message="Loading profile..." />}
 			{userStatus === "failed" && <div>Couldn&#39;t Load Profile</div>}
 			{userStatus === "succeeded" &&
-				<Profile profile={{ ...normalizeData, profile_image_url: originalImageVariant }} routeLocation={location} {...props} />
+				<Profile authUser={authUser} profile={{ ...normalizeData, profile_image_url: originalImageVariant }} routeLocation={location} {...props} />
 			}
 		</>
 	);

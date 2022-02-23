@@ -1,6 +1,9 @@
 $primary-dark: rgb(15, 20, 25);
 $primary-light: rgb(217, 217, 217);
 $primary-blue: rgb(29, 155, 240);
+$primary-red: rgb(244, 33, 46);
+$primary-red-alpha-1: rgba(244, 33, 46, 0.1);
+$primary-red-light: rgb(253, 201, 206);
 $primary-blue-alpha-1: rgba(29, 155, 240, .1);
 $primary-blue-alpha-2: rgba(29, 155, 240, .2);
 
@@ -16,7 +19,7 @@ $gray-2-alpha-15: rgba(101, 119, 134, .15);
 $black-alpha-33: rgba(0, 0, 0, 0.03);
 
 
-$error: rgb(244,33,46);
+$error: rgb(244, 33, 46);
 
 
 $font-lg-1: 1.0625rem;
