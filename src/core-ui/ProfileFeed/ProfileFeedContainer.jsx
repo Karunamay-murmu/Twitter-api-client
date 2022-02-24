@@ -3,7 +3,7 @@ import { Outlet, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import MainFeedContainer from "core-ui/MainFeed/MainFeedContainer";
-import { selectUser, fetchUser, fetchFriendshipStatus } from "redux/slice/userSlice";
+import { selectUser, fetchUser, showFriendship } from "redux/slice/userSlice";
 import { selectAuthUser } from "redux/slice/authSlice";
 
 function ProfileFeedContainer() {
@@ -18,9 +18,9 @@ function ProfileFeedContainer() {
 		if ((!user || params.username !== user.username) && authUser) {
 			promise = dispatch(fetchUser(params.username)).unwrap();
 			promise.then(({ data }) => {
-				dispatch(fetchFriendshipStatus({
-					sourceUser: authUser.username,
-					targetUser: data.username,
+				dispatch(showFriendship({
+					sourceUser: authUser.twitter_id,
+					targetUser: data.id,
 				}));
 			});
 		}

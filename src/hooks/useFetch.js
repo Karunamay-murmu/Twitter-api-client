@@ -1,9 +1,6 @@
 import { useState, useEffect, useMemo, } from "react";
 import axios from "axios";
 
-// axios.defaults.xsrfHeaderName = "X-CSRFToken";
-// axios.defaults.xsrfCookieName = "csrftoken";
-
 const BASE_URL = process.env.REACT_APP_TWITTER_API_BASE_URL;
 
 const useFetch = () => {
@@ -37,11 +34,9 @@ const useFetch = () => {
 			return;
 		}
 		(async () => {
-			console.log(options);
 			try {
 				await axios(options);
 			} catch (error) {
-				console.log(error);
 				cancelToken.cancel();
 			}
 		})();

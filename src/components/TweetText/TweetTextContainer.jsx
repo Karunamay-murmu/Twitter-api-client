@@ -46,7 +46,6 @@ function TweetTextContainer({ tweet, ...props }) {
 	const handleClickOnAnchor = (e) => {
 		const element = textRef.current;
 		if (element && element.contains(e.target) && e.target.tagName === "A" || e.target.tagName === "SPAN") {
-			console.log("click on anchor");
 			e.stopPropagation();
 		}
 	};

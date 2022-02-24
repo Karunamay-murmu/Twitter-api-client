@@ -12,7 +12,7 @@ import MediaContainer from "components/Media/MediaContainer";
 
 import styles from "./TweetDetail.module.css";
 
-function TweetDetail({ tweet, moreOptions, user, media, location }) {
+function TweetDetail({ tweet, moreOptions, user, media }) {
 	const { username, name, profile_image_url } = user;
 	const { created_at, public_metrics: { retweet_count, like_count, quote_count }, source } = tweet;
 
@@ -28,8 +28,6 @@ function TweetDetail({ tweet, moreOptions, user, media, location }) {
 		day: "numeric",
 	}));
 
-	console.log(location);
-
 	return (
 		<div>
 			<FeedHeader title="Tweet" />
@@ -38,12 +36,10 @@ function TweetDetail({ tweet, moreOptions, user, media, location }) {
 					<ProfileBasicInfo displayName={name} username={username} image={profile_image_url} />
 					<MoreOptionContainer moreOptions={moreOptions} />
 				</div>
-				{/* <div className={styles.tweet__content__wrapper}> */}
 				<div className={styles.tweet__content}>
 					<TweetTextContainer className={styles.tweet__post} tweet={tweet} />
 					{media && media.length > 0 && <MediaContainer media={media} />}
 				</div>
-				{/* </div> */}
 				<div className={styles.tweet__date}>
 					<span>{time}</span> <span className={styles.dot}>&middot;</span>
 					<span>{date}</span> <span className={styles.dot}>&middot;</span>

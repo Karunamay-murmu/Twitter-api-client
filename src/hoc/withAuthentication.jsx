@@ -7,7 +7,6 @@ export default (WrappedComponent) => {
 		const location = useLocation();
 		const query = queryString.parse(location.search);
 		const { oauth_token = "", oauth_verifier = "" } = query;
-		console.log(query);
 		return <WrappedComponent {...props} oauth_token={oauth_token} oauth_verifier={oauth_verifier} />;
 	};
 

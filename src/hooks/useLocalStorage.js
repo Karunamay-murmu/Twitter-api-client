@@ -9,7 +9,6 @@ function useLocalStorage() {
 		} catch (e) {
 			setValue(null);
 		}
-		console.log(value);
 	};
 	const setItem = (key, value) => {
 		try {

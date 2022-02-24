@@ -12,7 +12,6 @@ class ProfileButtonContainer extends React.PureComponent {
 	}
 
 	onShowProfileCard(e){
-		console.log(e);
 		e.stopPropagation();
 		this.setState(prevState => ({ showCard: !prevState.showCard }));
 	}

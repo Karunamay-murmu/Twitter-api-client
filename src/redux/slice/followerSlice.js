@@ -61,19 +61,6 @@ export const followersSlice = createSlice({
 			state[meta.arg.pathname].userId = meta.arg.id;
 			state.status = "succeeded";
 		});
-		// builder.addCase(fetchFollowers.fulfilled, (state, action) => {
-		// 	console.log(action);
-		// 	const pathname = action.meta.arg.pathname;
-		// 	if (pathname.includes("followers")) {
-		// 		state.followers.data = action.payload.data;
-		// 		state.followers.userId = action.meta.arg.id;
-		// 	}
-		// 	if (pathname.includes("following")) {
-		// 		state.following.data = action.payload.data;
-		// 		state.following.userId = action.meta.arg.id;
-		// 	}
-		// 	state.status = "succeeded";
-		// });
 		builder.addCase(fetchFollowers.rejected, (state, action) => {
 			state.error = action.payload;
 			state.status = "failed";
@@ -81,12 +68,6 @@ export const followersSlice = createSlice({
 	}
 });
 
-// builder.addCase(fetchFollowers.fulfilled, (state, action) => {
-// 	const { payload: { data, pathname }, meta } = action;
-// 	state[pathname].data = data;
-// 	state[pathname].userId = meta.arg.id;
-// 	state.status = "succeeded";
-// });
 
 export const { clearFollowerList } = followersSlice.actions;
 

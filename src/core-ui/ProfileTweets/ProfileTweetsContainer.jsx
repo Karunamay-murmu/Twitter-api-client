@@ -21,8 +21,6 @@ function ProfileTweetsContainer() {
 	const dispatch = useDispatch();
 	const location = useLocation();
 
-	console.log(authUser);
-
 
 	useEffect(() => {
 		let promise;

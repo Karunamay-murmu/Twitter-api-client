@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, Outlet } from "react-router-dom";
-// import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
@@ -43,8 +42,6 @@ function Profile({ authUser, profile, routeLocation }) {
 		profile_url,
 		relationship = undefined,
 	} = profile;
-
-	console.log(relationship);
 
 	const menuItems = [
 		{
@@ -95,15 +92,7 @@ function Profile({ authUser, profile, routeLocation }) {
 
 								relationship ?
 									<div>
-										<FriendshipContainer relationship={relationship}>
-											<Button
-												reverseColor={relationship?.source?.following}
-												allowDangerousActionHoverStyle={relationship?.source?.following}
-												style={{ height: "2.125rem" }}
-											>
-												{relationship?.source.following ? <span>Following</span> : "Follow"}
-											</Button>
-										</FriendshipContainer>
+										<FriendshipContainer relationship={relationship} />
 									</div>
 									:
 									<Button>

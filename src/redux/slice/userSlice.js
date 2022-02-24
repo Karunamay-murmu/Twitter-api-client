@@ -12,29 +12,27 @@ const initialState = {
 };
 
 
-export const fetchFriendshipStatus = createAsyncThunk("user/fetchFriendshipStatus", async ({ sourceUser, targetUser, meta }, { rejectWithValue, signal, getState }) => {
-	try {
-		signal.addEventListener("abort", () => {
-			cancelToken.cancel();
-		});
+const manageFriendship = (friendship) => {
+	return createAsyncThunk(`user/magageFriendship[${friendship}]`, async ({ sourceUser, targetUser }, { rejectWithValue, signal, getState }) => {
+		try {
+			signal.addEventListener("abort", () => {
+				cancelToken.cancel();
+			});
+			const endpoint = endpoints.manageFriendship(sourceUser, targetUser) + `?friendship=${friendship}`;
+			return await Client.get(endpoint, {
+				headers: {
+					"Authorization": "Bearer " + getState().auth.accessToken
+				}
+			});
+		} catch (error) {
+			return rejectWithValue(error.message);
+		}
+	});
+};
 
-		const endpoint = meta?.action ?
-			(endpoints.manageFriendship(sourceUser, targetUser) + `?action=${meta?.action}`) :
-			endpoints.getFriendshipStatus(sourceUser, targetUser);
-		console.log(endpoint);
-		console.log(getState);
-		return await Client.get(endpoint, {
-			headers: {
-				"Authorization": "Bearer " + getState().auth.accessToken
-			}
-		});
-	} catch (error) {
-		return rejectWithValue(error.message);
-	}
-
-});
-
-export const createFriendship = (args) => fetchFriendshipStatus(args);
+export const showFriendship = manageFriendship("show");
+export const createFriendship = manageFriendship("create");
+export const destroyFriendship = manageFriendship("destroy");
 
 
 export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { rejectWithValue, signal, getState }) => {
@@ -57,7 +55,7 @@ const userProfileSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addCase(fetchUser.pending || fetchFriendshipStatus.pending, (state) => {
+		builder.addCase(fetchUser.pending || showFriendship.pending, (state) => {
 			state.status = "loading";
 		});
 		builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
@@ -85,9 +83,14 @@ const userProfileSlice = createSlice({
 			state.status = "failed";
 			state.error = action.payload;
 		});
-		builder.addCase(fetchFriendshipStatus.fulfilled, (state, action) => {
-			console.log(action);
-			state.user.relationship = action.payload.relationship;
+		builder.addCase(showFriendship.fulfilled, (state, action) => {
+			state.user.relationship = action.payload?.relationship;
+		});
+		builder.addCase(createFriendship.fulfilled, (state, action) => {
+			state.user.relationship.source.following = action.payload?.data.following;
+		});
+		builder.addCase(destroyFriendship.fulfilled, (state, action) => {
+			state.user.relationship.source.following = action.payload?.data.following;
 		});
 	}
 });

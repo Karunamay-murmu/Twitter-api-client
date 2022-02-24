@@ -17,12 +17,10 @@ function FollowerListContainer({ path, ...props }) {
 
 	useEffect(() => {
 		let promise;
-		console.log(user);
 		if (user && user.id && (!followers.data || !following.data)) {
 			promise = dispatch(fetchFollowers({ id: user.id, pathname: path }));
 		}
 		return () => {
-			console.log("clear");
 			dispatch(clearFollowerList({ pathname: path }));
 			if (status === "loading") {
 				promise.abort();

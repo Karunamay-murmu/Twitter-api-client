@@ -6,11 +6,8 @@ function ProfileEditFormContainer(props) {
 	const [profile_image, setProfileImage] = useState(null);
 
 	const getInputDetails = (element) => {
-		console.log(element);
 		setProfileImage(element.value);
 	};
-
-
 	return (
 		<ProfileEditForm getInputDetails={getInputDetails} profile_image={profile_image} {...props} />
 	);

@@ -17,31 +17,21 @@ import FollowerListContainer from "core-ui/FollowerList/FollowerListContainer";
 import MainLayoutContainer from "core-ui/MainLayout/MainLayoutContainer";
 import LoginContainer from "components/Login/LoginContainer";
 import Spinner from "components/Spinner/Spinner";
-// import { fetchAuthUser, selectAuthUser } from "redux/slice/authSlice";
 import { fetchAuthUser, selectAuthUser } from "redux/slice/authSlice";
-
-// TODO: inform the user if the token is expired then re-authenticate 
 
 function App() {
 	const authUser = useSelector(state => selectAuthUser(state));
 	const { isOpen } = useSelector(state => state.modal);
 	const location = useLocation();
-	const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+	const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		(async () => {
 			if (isAuthenticated) {
-				console.log(isAuthenticated);
-				console.log(user);
-				const token = await getAccessTokenSilently({
-					audience: "https://django-twitter2.0/api",
-					scope: ""
-				});
-				console.log(token);
+				const token = await getAccessTokenSilently();
 				if (token) {
 					dispatch(fetchAuthUser(token));
-					// dispatch(setAccessToken({ token }));
 				}
 			}
 		})();
@@ -51,15 +41,6 @@ function App() {
 	const style = {
 		overflow: isOpen ? "hidden" : "inherit"
 	};
-
-	useEffect(() => {
-		(async () => {
-			if (isAuthenticated) {
-				console.log(fetchAuthUser);
-				// dispatch(fetchAuthUser(user.sub));
-			}
-		})();
-	}, [isAuthenticated]);
 
 	if (isLoading) {
 		return <Spinner message="Loading..." />;
