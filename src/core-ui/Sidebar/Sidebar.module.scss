@@ -20,11 +20,18 @@
 
     &--tweet-btn {
         @include padding($left: 2rem, $right: 2rem);
+        @include flex($justify: center, $align: center);
         width: 90%;
         height: 3.25rem;
         background-color: $primary-blue;
         font-size: 1.0625rem;
+        font-weight: 700;
         margin-top: 1.5rem;
+        color: $white;
+        border-radius: 10rem;
+        &:hover {
+            background-color: $primary-blue-hover;
+        }
     }
     
     &__options {
@@ -53,6 +60,8 @@
 
     &__top {
         &__wrapper {
+            @include flex($direction: column);
+            gap: .25rem;
             width: 100%;
         }
     }

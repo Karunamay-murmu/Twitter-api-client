@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -12,14 +12,14 @@ import ListAltRoundedIcon from "@mui/icons-material/ListAltRounded";
 import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 
 import MenuItemContainer from "components/MenuItem/MenuItemContainer.jsx";
-import Button from "components/Button/Button.jsx";
+// import Button from "components/Button/Button.jsx";
 import OptionCardContainer from "components/OptionCard/OptionCardContainer";
 import ProfileButtonContainer from "components/ProfileButton/ProfileButtonContainer";
 
 import styles from "./Sidebar.module.css";
 import LogoutContainer from "components/Logout/LogoutContainer";
 
-const Sidebar = React.forwardRef(({ options, showMoreOption, showCard, user }, ref) => {
+const Sidebar = ({ options, showMoreOption, showCard, user, routeLocation }) => {
 	return (
 		<div className={styles.sidebar}>
 			<div className={styles.sidebar__wrapper}>
@@ -52,13 +52,11 @@ const Sidebar = React.forwardRef(({ options, showMoreOption, showCard, user }, r
 						<div onClick={showCard} className={`${styles.sidebar__options} ${showMoreOption && styles.sidebar__options__active}`}>
 							<MenuItemContainer Icon={MoreHorizRoundedIcon} text="More" active={showMoreOption} />
 							<div className={styles.sidebar__options__wrapper}>
-								{showMoreOption && <OptionCardContainer options={options} ref={ref} />}
+								{showMoreOption && <OptionCardContainer options={options} />}
 							</div>
 						</div>
 					</>
-					<Button className={styles["sidebar--tweet-btn"]} attributes={{
-						title: "Tweet"
-					}} text="Tweet">Tweet</Button>
+					<Link to="/compose/tweet" state={{ background: routeLocation }} className={styles["sidebar--tweet-btn"]}>Tweet</Link>
 				</div>
 				<div>
 					<div className={styles.sidebar__user__wrapper}>
@@ -71,7 +69,7 @@ const Sidebar = React.forwardRef(({ options, showMoreOption, showCard, user }, r
 			</div>
 		</div>
 	);
-});
+};
 
 
 Sidebar.displayName = "Sidebar";
@@ -80,7 +78,8 @@ Sidebar.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.object),
 	showMoreOption: PropTypes.bool,
 	showCard: PropTypes.func,
-	user: PropTypes.object
+	user: PropTypes.object,
+	routeLocation: PropTypes.object
 };
 
 export default Sidebar;

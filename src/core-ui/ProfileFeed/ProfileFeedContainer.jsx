@@ -24,7 +24,8 @@ function ProfileFeedContainer() {
 				}));
 			});
 		}
-		return () => promise.abort();
+		// TODO: Fix promise abort 
+		// return () => promise.abort();
 	}, [params.username, authUser]);
 
 	return (

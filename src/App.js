@@ -73,10 +73,11 @@ function App() {
 						<Route path="account" element={<AccountSettingContainer />} />
 						<Route path="privacy_and_safety" element={<PrivacySettingContainer />} />
 					</Route>
+					<Route path="compose/tweet" element={<TweetModal />} />
 				</Route>
 			</Routes>
 			{
-				background &&
+				authUser && background &&
 				<Routes>
 					<Route path="compose/tweet" element={<TweetModal />} />
 					<Route path="settings/edit_profile" element={<EditProfileModal />} />

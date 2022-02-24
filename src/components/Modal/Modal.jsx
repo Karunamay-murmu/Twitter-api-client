@@ -8,7 +8,7 @@ import Button from "components/Button/Button";
 
 import styles from "./Modal.module.css";
 
-function Modal({ className="", children, title = "MODAL_TITLE", btnText = "BUTTON_TEXT", closeModal, emptyHeaderText = false, emptyHeaderBtn = false }) {
+function Modal({ className, children, title, btnText, closeModal, emptyHeaderText, emptyHeaderBtn }) {
 	const { isOpen } = useSelector(state => state.modal);
 	const style = isOpen ? {
 		position: "absolute",
@@ -58,6 +58,14 @@ Modal.propTypes = {
 	emptyHeaderBtn: PropTypes.bool,
 	className: PropTypes.string
 
+};
+
+Modal.defaultProps = {
+	className: "",
+	title: "MODAL_TITLE",
+	btnText: "BUTTON_TEXT",
+	emptyHeaderText: false,
+	emptyHeaderBtn: false
 };
 
 export default Modal;

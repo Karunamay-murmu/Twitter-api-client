@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import Button from "components/Button/Button";
 
-function Friendship({ relationship, manageFriendship, text, handleMouseEnter, handleMouseLeave, children }) {
+function Friendship({ relationship, manageFriendship, text, handleMouseOver, handleMouseOut, children }) {
 	return (
-		<div onClick={() => manageFriendship()} onMouseEnter={() => handleMouseEnter()} onMouseLeave={() => handleMouseLeave()}>
+		<div onClick={() => manageFriendship()} onMouseOver={() => handleMouseOver()} onMouseOut={() => handleMouseOut()}>
 			{
 				children ?
 					children :
@@ -24,8 +24,8 @@ function Friendship({ relationship, manageFriendship, text, handleMouseEnter, ha
 Friendship.propTypes = {
 	children: PropTypes.node,
 	manageFriendship: PropTypes.func,
-	handleMouseEnter: PropTypes.func,
-	handleMouseLeave: PropTypes.func,
+	handleMouseOver: PropTypes.func,
+	handleMouseOut: PropTypes.func,
 	relationship: PropTypes.object,
 	text: PropTypes.string,
 };

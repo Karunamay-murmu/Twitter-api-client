@@ -9,10 +9,11 @@ import { createFriendship, destroyFriendship } from "redux/slice/userSlice";
 function FriendshipContainer({ relationship, ...props }) {
 	const [text, setText] = useState(relationship.source.following ? "Following" : "Follow");
 
+	// TODO: Fix follow button hover issue
 	const dispatch = useDispatch();
 
-	const handleMouseEnter = useCallback(() => setText("Unfollow"));
-	const handleMouseLeave = useCallback(() => setText("Following"));
+	const handleMouseOver = useCallback(() => relationship.source.following && setText("Unfollow"));
+	const handleMouseOut = useCallback(() => relationship.source.following && setText("Following"));
 
 	const handleFriendShip = useCallback(() => {
 		dispatch(relationship.source.following ? destroyFriendship({
@@ -29,8 +30,8 @@ function FriendshipContainer({ relationship, ...props }) {
 			{...props} 
 			manageFriendship={handleFriendShip} 
 			relationship={relationship} 
-			handleMouseEnter={handleMouseEnter}
-			handleMouseLeave={handleMouseLeave}
+			handleMouseOver={handleMouseOver}
+			handleMouseOut={handleMouseOut}
 			text={text}
 		/>
 	);

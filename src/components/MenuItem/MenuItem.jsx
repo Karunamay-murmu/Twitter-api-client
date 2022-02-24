@@ -5,7 +5,7 @@ import styles from "./MenuItem.module.css";
 
 function MenuItem({ active, Icon, text }) {
 	return (
-		<div className={`${active && styles["menu--active"]} ${styles.menu__wrapper}`}>
+		<div className={`${active ? styles["menu--active"] + " " : ""}${styles.menu__wrapper}`}>
 			<Icon className={styles.menu__icon} />
 			<p className={styles.menu__text}>{text}</p>
 		</div>

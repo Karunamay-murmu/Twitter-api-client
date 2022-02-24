@@ -91,9 +91,7 @@ function Profile({ authUser, profile, routeLocation }) {
 								</Link> :
 
 								relationship ?
-									<div>
-										<FriendshipContainer relationship={relationship} />
-									</div>
+									<FriendshipContainer relationship={relationship} />
 									:
 									<Button>
 										<Spinner hideMessage />

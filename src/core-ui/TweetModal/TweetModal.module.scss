@@ -1,0 +1,9 @@
+@import "../../static/style/mixin.scss";
+
+
+.modal {
+    position: absolute;
+    top: 4rem;
+    left: 50%;
+    transform: translate(-50%);
+}

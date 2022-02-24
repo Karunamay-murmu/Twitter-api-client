@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import OfflineBoltOutlinedIcon from "@mui/icons-material/OfflineBoltOutlined";
@@ -11,6 +12,8 @@ import { SETTINGS_ROUTE } from "routes/routes";
 
 const SidebarContainer = () => {
 	const [open, setOpen] = React.useState(false);
+	const location = useLocation();
+
 	const authUser = useSelector(state => selectAuthUser(state));
 
 	const options = [
@@ -54,6 +57,7 @@ const SidebarContainer = () => {
 			showCard={showCard}
 			showMoreOption={open}
 			user={authUser}
+			routeLocation={location}
 		/>
 	);
 };
