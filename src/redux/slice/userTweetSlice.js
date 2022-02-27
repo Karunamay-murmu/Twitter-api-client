@@ -22,6 +22,25 @@ const mapData = (dataSet, key) => {
 	return map;
 };
 
+export const postTweet = createAsyncThunk("tweet/post", async (data, { rejectWithValue, signal, getState }) => {
+	try {
+		signal.addEventListener("abort", () => {
+			cancelToken.cancel();
+		});
+		const endpoint = endpoints.manageTweet();
+		return await Client.post(endpoint, {
+			headers: {
+				"Authorization": "Bearer " + getState().auth.accessToken,
+				"X-CSRFToken": getState().auth.csrf,
+			},
+			withCredentials: true,
+			data,
+		});
+	} catch (e) {
+		return rejectWithValue(e.message);
+	}
+});
+
 export const fetchTweets = createAsyncThunk("tweet/fetch", async ({ userId, pathname }, { rejectWithValue, signal, getState }) => {
 	try {
 		let endpoint = endpoints.userTweetTimeline(userId);
@@ -38,7 +57,6 @@ export const fetchTweets = createAsyncThunk("tweet/fetch", async ({ userId, path
 				"Authorization": "Bearer " + getState().auth.accessToken
 			}
 		});
-		// print(response);
 		return {
 			...response,
 			pathname: path

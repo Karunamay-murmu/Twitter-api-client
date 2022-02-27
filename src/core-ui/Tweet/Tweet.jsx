@@ -13,14 +13,14 @@ import Avatar from "components/Avatar/Avatar.jsx";
 
 import styles from "./Tweet.module.css";
 
-function Tweet({ inputPlaceholder, inputRow, user, value, handleInputData }) {
+function Tweet({ inputPlaceholder, inputRow, user, value, handleInputData, handleFormSubmit }) {
 	return (
 		<div className={styles.tweet}>
 			<div className={styles.tweet__avatar}>
 				<Avatar image={user.profile_image_url} />
 			</div>
 			<div className={styles.tweet__wrapper}>
-				<form method="post" encType="multipart/form-data" id="id_tweetForm">
+				<form method="post" encType="multipart/form-data" id="id_tweetForm" onSubmit={handleFormSubmit}>
 					<InputContainer
 						className={styles.tweet__input}
 						tag="textarea"
@@ -68,6 +68,7 @@ Tweet.propTypes = {
 	user: PropTypes.object,
 	value: PropTypes.string,
 	handleInputData: PropTypes.func,
+	handleFormSubmit: PropTypes.func
 };
 
 Tweet.defaultProps = {

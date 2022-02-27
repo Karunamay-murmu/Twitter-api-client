@@ -1,27 +1,27 @@
-"use strict";
-
 const endpoints = {
-	getUserByUsername: (username) => {
-		return "users/by/username/" + username;
-	},
+	// users endpoints
+	getUserByUsername: (username) => "users/by/username/" + username,
 	userTweetTimeline: (id) => `users/${id}/tweets`,
 	userLikedTweets: (id) => `users/${id}/liked_tweets`,
+	userFollowers: (id) => `users/${id}/followers`,
+	userFollowing: (id) => `users/${id}/following`,
+	whoAmI: () => "users/whoami/",
+	manageFriendship: (source_user, target_user) => `users/friendships/manage/${source_user}/${target_user}`,
+	fetchCsrfToken: "users/csrf_token",
+
+	// Tweets endpoints
+	manageTweet: () => "tweets/",
+	showUserTimeline: () => "tweets/user_timeline",
 	recentTweetSearch: () => "tweets/search/recent",
 	tweetDetail: (id) => `tweets/${id}`,
 	tweetReplies: (id, username) => `tweets/search/recent/${id}/${username}`,
-	userFollowers: (id) => `users/${id}/followers`,
-	userFollowing: (id) => `users/${id}/following`,
+
+	// Authentication endpoints
 	fetchRequestToken: "oauth2/request_token",
 	authenticateUser: (token, verifier) => `oauth2/login/${token}/${verifier}`,
-	whoAmI: () => "users/whoami/",
-	fetchCsrfToken: "users/csrf_token",
 
 	
-	getFriendshipStatus: (source_user, target_user) => `users/friendships/show/${source_user}/${target_user}`,
-	manageFriendship: (source_user, target_user) => `users/friendships/manage/${source_user}/${target_user}`,
 	
-	showUser: () => "users/show.json",
-	showUserTimeline: () => "tweets/user_timeline",
 
 };
 

@@ -50,12 +50,14 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { r
 	}
 });
 
+// TODO: pending actions for manageFriendship actions
+
 const userProfileSlice = createSlice({
 	name: "userProfile",
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addCase(fetchUser.pending || showFriendship.pending, (state) => {
+		builder.addCase(fetchUser.pending, (state) => {
 			state.status = "loading";
 		});
 		builder.addCase(fetchUser.fulfilled, (state, { payload }) => {

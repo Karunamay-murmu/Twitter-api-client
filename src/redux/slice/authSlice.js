@@ -19,7 +19,8 @@ export const fetchAuthUser = createAsyncThunk("auth/fetchAuthUser", async (token
 		const response = await Client.get(endpoints.whoAmI(), {
 			headers: {
 				"Authorization": "Bearer " + token
-			}
+			},
+			withCredentials: true
 		});
 		dispatch(setAccessToken({ token }));
 		return response;
