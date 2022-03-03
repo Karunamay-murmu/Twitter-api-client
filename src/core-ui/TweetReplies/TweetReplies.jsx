@@ -1,17 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
+import FeedPostListContainer from "core-ui/FeedPostList/FeedPostListContainer";
 
 function TweetReplies({ replies }) {
 	return (
-		<div>
-			{replies.map((reply, idx) =>
-				<div key={idx}>
-					<FeedPostContainer tweet={reply} />
-				</div>
-			)}
-		</div>
+		<FeedPostListContainer tweets={replies} />
 	);
 }
 

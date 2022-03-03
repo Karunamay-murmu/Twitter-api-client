@@ -15,7 +15,7 @@ function AccountSetting() {
 			header="Your Account"
 			desc="See information about your account, download an archive of your data, or learn about your account deactivation options"
 		>
-			<Link to="your_twitter_data/account" title="Account information" info="See your account information like your phone number and email address." Icon={PersonOutlineRoundedIcon} />
+			<Link to="/settings/your_twitter_data/account" title="Account information" info="See your account information like your phone number and email address." Icon={PersonOutlineRoundedIcon} />
 			<Link to="your_twitter_data/account" title="Change your password" info="Change your password at any time." Icon={LockOutlinedIcon} />
 			<Link to="your_twitter_data/account" title="Download an archive of your data" info="Get insights into the type of information stored for your account." Icon={FileDownloadOutlinedIcon} />
 			<Link to="your_twitter_data/account" title="TweetDeck Team" info="Invite anyone to Tweet from this account using the Teams feature in TweetDeck." Icon={GroupOutlinedIcon} />

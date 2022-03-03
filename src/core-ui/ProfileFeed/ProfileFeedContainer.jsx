@@ -1,5 +1,5 @@
-import React from "react";
-import { Outlet, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useParams, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import MainFeedContainer from "core-ui/MainFeed/MainFeedContainer";
@@ -12,10 +12,11 @@ function ProfileFeedContainer() {
 	const user = useSelector(state => selectUser(state));
 	const dispatch = useDispatch();
 	const params = useParams();
+	const location = useLocation();
 
-	React.useEffect(() => {
+	useEffect(() => {
 		let promise;
-		if ((!user || params.username !== user.username) && authUser) {
+		if ((!user || params.username !== user.username) && authUser && location.pathname === `/${params.username}`) {
 			promise = dispatch(fetchUser(params.username)).unwrap();
 			promise.then(({ data }) => {
 				dispatch(showFriendship({

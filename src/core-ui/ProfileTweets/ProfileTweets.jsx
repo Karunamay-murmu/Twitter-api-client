@@ -1,64 +1,41 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
+import FeedPostContainer from "core-ui/FeedPostList/FeedPostListContainer";
 
 import styles from "./ProfileTweets.module.css";
-// import { Link } from "react-router-dom";
 
-function ProfileTweets({ tweets, pathname, user, ...props }) {
-	const mapTweets = (tweets) => {
-		if (!tweets.length) {
-			return (
-				<div className={styles.message__wrapper}>
-					<div className={styles.message}>
-						{pathname.includes("/") && (
-							<div className={styles.message__main}>@{user.username} hasn&#39;t post any Tweets</div>
-						)}
-						{pathname.includes("likes") && (
-							<div className={styles.message__main}>@{user.username} hasn&#39;t liked any Tweets</div>
-						)}
-						{pathname.includes("media") && (
-							<div className={styles.message__main}>@{user.username} hasn&#39;t Tweeted any photos or videos</div>
-						)}
-						<div className={styles.message__meta}>When they do, those Tweets will show up here.</div>
-					</div>
+function ProfileTweets({ tweets, pathname, user, status, ...props }) {
+	if (status === "successed" || tweets.length === 0 || !tweets) {
+		return (
+			<div className={styles.message__wrapper}>
+				<div className={styles.message}>
+					{pathname.includes("/") && (
+						<div className={styles.message__main}>@{user.username} hasn&#39;t post any Tweets</div>
+					)}
+					{pathname.includes("likes") && (
+						<div className={styles.message__main}>@{user.username} hasn&#39;t liked any Tweets</div>
+					)}
+					{pathname.includes("media") && (
+						<div className={styles.message__main}>@{user.username} hasn&#39;t Tweeted any photos or videos</div>
+					)}
+					<div className={styles.message__meta}>When they do, those Tweets will show up here.</div>
 				</div>
-			);
-		}
-		return tweets.map((tweet, idx) => (
-			<FeedPostContainer
-				tweet={tweet}
-				key={idx}
-				{...props}
-			/>
-			// <div key={idx} className={!tweet?.isReply ? styles.profile__tweet__wrapper : ""}>
-			// 	{tweet?.replies && mapTweets(tweet.replies)}
-			// </div>
-		));
-		// return tweets.map((tweet, idx) => (
-		// 	<div key={idx} className={!tweet?.isReply ? styles.profile__tweet__wrapper : ""}>
-		// 		<FeedPostContainer
-		// 			tweet={tweet}
-		// 			user={tweet.user}
-		// 			media={tweet.media}
-		// 			{...props}
-		// 		/>
-		// 		{tweet?.replies && mapTweets(tweet.replies)}
-		// 	</div>
-		// ));
-	};
-	return (
-		<>
-			{mapTweets(tweets)}
-		</>
-	);
+			</div>
+		);
+	}
+
+	return (<FeedPostContainer
+		tweets={tweets}
+		{...props}
+	/>);
 }
 
 ProfileTweets.propTypes = {
 	tweets: PropTypes.array,
 	pathname: PropTypes.string,
 	user: PropTypes.object,
+	status: PropTypes.string,
 };
 
 ProfileTweets.defaultProps = {

@@ -7,7 +7,7 @@ const endpoints = {
 	userFollowing: (id) => `users/${id}/following`,
 	whoAmI: () => "users/whoami/",
 	manageFriendship: (source_user, target_user) => `users/friendships/manage/${source_user}/${target_user}`,
-	fetchCsrfToken: "users/csrf_token",
+	homeTimeline: () => "users/home_timeline",
 
 	// Tweets endpoints
 	manageTweet: () => "tweets/",
@@ -24,10 +24,5 @@ const endpoints = {
 	
 
 };
-
-
-// const getEndpoint = (endpoint) => {
-// 	return endpoints[endpoint];
-// };
 
 export default endpoints;

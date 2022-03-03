@@ -1,4 +1,31 @@
 .tweet {
+  padding: 0 1rem;
+  position: relative;
+}
+
+.tweet__loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+}
+
+.tweet__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #eff3f4;
+  opacity: .1;
+  cursor: not-allowed;
+  z-index: 1;
+}
+
+.tweet__container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12,7 +39,6 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  padding: 0 1rem;
 }
 
 .tweet__wrapper {

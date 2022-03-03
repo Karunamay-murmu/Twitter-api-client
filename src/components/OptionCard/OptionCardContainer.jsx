@@ -11,8 +11,8 @@ const OptionCardContainer = React.forwardRef(({ options }, ref) => {
 		<div className={styles.card__wrapper} ref={ref} >
 			{options.map((item, idx) =>
 				Object.prototype.hasOwnProperty.call(item, "href")
-					? <Link to={`${item.href}`}>
-						<OptionCardItem key={idx} {...item} />
+					? <Link key={idx} to={`${item.href}`}>
+						<OptionCardItem {...item} />
 					</Link>
 					: <OptionCardItem key={idx} {...item} />
 			)}

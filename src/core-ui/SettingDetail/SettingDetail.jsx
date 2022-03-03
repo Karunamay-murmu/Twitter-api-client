@@ -11,11 +11,15 @@ function SettingDetail({ backbtn, desc, header, children }) {
 			<FeedHeader backbtn={backbtn}>
 				<h3>{header}</h3>
 			</FeedHeader>
-			<div className={styles.setting__desc}>
-				<span>
-					{desc}
-				</span>
-			</div>
+			{
+				desc && (
+					<div className={styles.setting__desc}>
+						<span>
+							{desc}
+						</span>
+					</div>
+				)
+			}
 			<div className={styles.setting__link__wrapper}>
 				{children}
 			</div>
@@ -24,7 +28,7 @@ function SettingDetail({ backbtn, desc, header, children }) {
 }
 
 SettingDetail.propTypes = {
-	desc: PropTypes.string.isRequired,
+	desc: PropTypes.string,
 	header: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired,
 	backbtn: PropTypes.bool,

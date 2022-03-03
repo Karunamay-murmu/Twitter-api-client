@@ -47,16 +47,6 @@ function FeedTweetActionBar({
 					<span>5</span>
 				</div>
 			</div>
-			{/* {
-				isModalOpen && (modalId === tweetId) &&
-				<Routes>
-					<Route path="/compose/tweet" element={
-						<ModalContainer emptyHeaderBtn emptyHeaderText>
-							<TweetContainer inputPlaceholder="Tweet your reply" inputRow="5" />
-						</ModalContainer>
-					} />
-				</Routes>
-			} */}
 		</>
 	);
 }

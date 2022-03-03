@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 // import { Link } from "react-router-dom";
 // import DOMPurify from "dompurify";
@@ -17,30 +17,30 @@ import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
 import TweetTextContainer from "components/TweetText/TweetTextContainer";
 import Name from "components/Name/Name";
 import { getPostDate } from "utils/convertDate";
-import { short } from "utils/number";
 
-import styles from "./FeedPost.module.css";
+import styles from "./FeedPostList.module.css";
+import MediaContainer from "components/Media/MediaContainer";
 
-const FeedPost = ({ user, tweet, media, navigateToTweetDetail }) => {
-	const { profile_image_url } = user;
-	let { id, created_at, public_metrics: { reply_count, like_count, retweet_count } = {}, isPinned = false, isRetweet = false, replies = [] } = tweet;
+const FeedPost = ({ tweet, media, navigateToTweetDetail }) => {
+	const { username, screen_name, profile_image_url } = tweet.user;
+	let { id, id_str, created_at, public_metrics, retweet_count = 0, favorite_count = 0, reply_count = 0, isPinned = false, isRetweet = false, replies = [] } = tweet;
 
 	const moreOptions = [
 		{
-			"text": `follow ${user.username}`,
+			"text": `follow ${username}`,
 			"Icon": PersonAddAltOutlinedIcon,
 		}, {
 			"text": "Add/remove from Lists",
 			"Icon": ListAltOutlinedIcon,
 		}, {
-			"text": `Mute @${user?.username}`,
+			"text": `Mute @${username}`,
 			"Icon": VolumeOffOutlinedIcon,
 		}, {
 			"text": "Mute this conversation",
 			"Icon": VolumeOffOutlinedIcon,
 		}
 		, {
-			"text": `Block @${user?.username}`,
+			"text": `Block @${username}`,
 			"Icon": BlockIcon,
 		}
 		, {
@@ -53,55 +53,12 @@ const FeedPost = ({ user, tweet, media, navigateToTweetDetail }) => {
 		}
 	];
 
-	const imageGrid = useCallback(() => {
-		if (tweet?.media) {
-			const style = {
-				display: "grid",
-				gridTemplateColumns: "repeat(2, 1fr)",
-				gridTemplateRows: `repeat(${Math.floor(media.length / 2)}, 283.5px)`,
-				gridGap: "1px"
-			};
-			switch (media.length) {
-			case 1: {
-				const { width, height } = tweet?.media[0];
-				if (width > height) {
-					style.gridTemplateColumns = "repeat(1, 1fr)";
-					style.gridTemplateRows = "repeat(1, 1fr)";
-				}
-				return {
-					display: "flex",
-					width: `${width >= height ? "100%" : "385px"}`,
-					height: `${height > width ? "510px" : "auto"}`,
-				};
-			}
-			case 2:
-				style.gridTemplateAreas = `
-"image_1 image_2"
-`;
-				break;
-			case 3:
-				style.gridTemplateRows = "repeat(2, 140px)";
-				style.gridTemplateAreas = `
-"image_1 image_2"
-"image_1 image_3"
-`;
-				break;
-			case 4:
-				style.gridTemplateRows = "repeat(2, 140px)";
-				style.gridTemplateAreas = `
-"image_1 image_2"
-"image_3 image_4"
-`;
-				break;
-			default:
-				break;
-			}
-			return style;
-		}
-	});
 
 	return (
-		<div className={styles.post__wrapper} onClick={navigateToTweetDetail}>
+		<div className={styles.post__wrapper} onClick={(e) => navigateToTweetDetail(e, {
+			id: id_str ?? id,
+			username: username ?? screen_name,
+		})} data-id={id_str ?? id}>
 			{
 				isPinned && (
 					<div className={styles.post__pin}>
@@ -114,7 +71,7 @@ const FeedPost = ({ user, tweet, media, navigateToTweetDetail }) => {
 				isRetweet && (
 					<div className={styles.post__pin}>
 						<RepeatRoundedIcon className={styles.post__pin__icon} />
-						<div className={styles.post__pin__text}>Retweeted</div>
+						<div className={styles.post__pin__text}>{tweet?.retweeted_status?.user?.screen_name ?? tweet?.retweeted_by?.username} Retweeted</div>
 					</div>
 				)
 			}
@@ -132,7 +89,7 @@ const FeedPost = ({ user, tweet, media, navigateToTweetDetail }) => {
 				<div className={styles.post__body}>
 					<div className={styles.post__header}>
 						<div className={styles.post__header__info}>
-							<Name user={user} />
+							<Name user={tweet.user} />
 							<span className={styles.post__header__info__date__separator}>
 								&bull;
 							</span>
@@ -146,24 +103,16 @@ const FeedPost = ({ user, tweet, media, navigateToTweetDetail }) => {
 						<div className={styles.post__text__wrapper}>
 							<TweetTextContainer tweet={tweet} />
 						</div>
-						{media && <div className={`${tweet?.media ? styles.post__media__wrapper : ""}`} style={imageGrid()}>
-							{
-								media?.map((media, index) => {
-									const views = media?.public_metrics?.view_count;
-									return (<div key={index} className={styles.post__media} style={{ gridArea: `image_${index + 1}` }}>
-										<img className={styles.post__image} src={media.url ?? media.preview_image_url} width={`${media.width}px`} height={`${media.height}px`} />
-										{media.type === "video" && <span className={styles.post__image__metrics}>{short(views)} views</span>}
-									</div>);
-								})
-							}
-						</div>}
+						{
+							media && <MediaContainer media={media} />
+						}
 					</div>
 					<div className={styles.post__footer}>
 						<FeedTweetActionBarContainer
 							id={id}
-							replyCount={reply_count}
-							likeCount={like_count}
-							retweetCount={retweet_count}
+							replyCount={public_metrics?.reply_count ?? reply_count}
+							likeCount={public_metrics?.like_count ?? favorite_count}
+							retweetCount={public_metrics?.retweet_count ?? retweet_count}
 						/>
 					</div>
 				</div>

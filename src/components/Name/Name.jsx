@@ -20,11 +20,6 @@ function Name({ user, className, allowNavigate }) {
 				<DisplayName name={name} verified={verified} className={`${styles.name__displayname}`} />
 				<Username name={username} />
 			</Component>
-			{/* {showCard &&
-				<div className={styles.profile} ref={cardRef}>
-					<ProfileCardContainer mouseLeave={handleMouseLeave} user={user} />
-				</div>
-			} */}
 		</div>
 	);
 }

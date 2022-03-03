@@ -4,44 +4,44 @@ import PropTypes from "prop-types";
 import TweetText from "components/TweetText/TweetText";
 
 import styles from "./TweetText.module.css";
-import FeedPost from "core-ui/FeedPost/FeedPost";
+import FeedPostListContainer from "core-ui/FeedPostList/FeedPostListContainer";
 
 function TweetTextContainer({ tweet, ...props }) {
 
 	const textRef = useRef();
 
-	let { text, entities } = tweet;
+	const { entities } = tweet;
+	let text = tweet?.text ?? tweet?.full_text;
+	const mentions = tweet?.entities?.mentions;
 
 	if (entities) {
 		for (const [key, value] of Object.entries(entities)) {
 			if (value.length) {
 				value.forEach(val => {
 					if (key === "hashtags") {
-						const hashTag = new RegExp(`#${val.tag}`, "ig");
-						text = text.replace(hashTag, `<span><a href="/hashtags/${val.tag}" target="_blank" rel="noopener noreferrer">#${val.tag}</a></span>`);
+						const hashTag = new RegExp(`#\\b${val?.tag ?? val?.text}\\b`, "g");
+						text = text.replace(hashTag, `<span><a href="/hashtags/${val?.tag ?? val?.text}" target="_blank" rel="noopener noreferrer">#${val?.tag ?? val?.text}</a></span>`);
 					}
 					if (key === "urls") {
-						const url = new RegExp(val.url, "ig");
+						const url = new RegExp(`\\b${val.url}\\b`, "g");
 						if (!val?.display_url.includes("twitter.com")) {
 							text = text.replace(url, `<span><a href="${val.url}" target="_blank" rel="noopener noreferrer">${val.display_url}</a></span>`);
 						} else {
 							text = text.replace(url, "");
 						}
 					}
-					if (key === "mentions") {
-						const username = new RegExp(`@${val.username}`, "ig");
+					if (key === "mentions" || key === "user_mentions") {
+						const username = new RegExp(`@\\b${val?.username ?? val?.screen_name}\\b`, "g");
 						if (tweet?.in_reply_to_user_id) {
 							text = text.replace(username, "");
 						} else {
-							text = text.replace(username, `<span><a href="/${val.username}" target="_blank" rel="noopener noreferrer">@${val.username.toLowerCase()}</a></span>`);
+							text = text.replace(username, `<span><a href="/${val?.username ?? val?.screen_name}" target="_blank" rel="noopener noreferrer">@${val?.username ?? val?.screen_name.toLowerCase()}</a></span>`);
 						}
 					}
 				});
 			}
 		}
 	}
-
-	const mentions = tweet?.entities?.mentions;
 
 	const handleClickOnAnchor = (e) => {
 		const element = textRef.current;
@@ -74,7 +74,7 @@ function TweetTextContainer({ tweet, ...props }) {
 					</div>
 				</div>
 			)}
-			<TweetText text={text} ref={textRef} handleClickOnAnchor={handleClickOnAnchor} {...props}/>
+			<TweetText text={text} ref={textRef} handleClickOnAnchor={handleClickOnAnchor} {...props} />
 			{
 				tweet?.entities?.urls?.map((url, idx) => {
 					if (url?.title) {
@@ -96,13 +96,9 @@ function TweetTextContainer({ tweet, ...props }) {
 				})
 			}
 			{
-				tweet?.quotedTweet && (
+				(tweet?.quotedTweet || tweet?.is_quote_status) && (
 					<div className={styles.quotedTweet__wrapper}>
-						<FeedPost
-							user={tweet.quotedTweet.user}
-							tweet={tweet.quotedTweet}
-							media={tweet.quotedTweet?.media}
-						/>
+						<FeedPostListContainer tweets={[tweet?.quoted_status ?? tweet?.quotedTweet]} />
 					</div>
 				)
 			}

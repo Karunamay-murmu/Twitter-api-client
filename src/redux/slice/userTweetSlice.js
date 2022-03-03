@@ -10,7 +10,8 @@ const initialState = {
 	media: null,
 	refTweets: null,
 	users: null,
-	status: "idle",
+	tweetFetchingStatus: "idle",
+	tweetManageStatus: "idle",
 	error: null,
 };
 
@@ -22,7 +23,7 @@ const mapData = (dataSet, key) => {
 	return map;
 };
 
-export const postTweet = createAsyncThunk("tweet/post", async (data, { rejectWithValue, signal, getState }) => {
+export const manageTweet = createAsyncThunk("tweet/post", async (data, { rejectWithValue, signal, getState }) => {
 	try {
 		signal.addEventListener("abort", () => {
 			cancelToken.cancel();
@@ -67,6 +68,21 @@ export const fetchTweets = createAsyncThunk("tweet/fetch", async ({ userId, path
 	}
 });
 
+export const fetchHomeTimeline = createAsyncThunk("tweet/fetchHomeTimeline", async (_, { rejectWithValue, signal, getState }) => {
+	try {
+		signal.addEventListener("abort", () => {
+			cancelToken.cancel();
+		});
+		return await Client.get(endpoints.homeTimeline(), {
+			headers: {
+				"Authorization": "Bearer " + getState().auth.accessToken
+			}
+		});
+	} catch (error) {
+		return rejectWithValue(error.message);
+	}
+});
+
 export const tweetSlice = createSlice({
 	name: "userTweet",
 	initialState,
@@ -84,12 +100,10 @@ export const tweetSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchTweets.pending, (state) => {
-			state.status = "loading";
-		});
-		builder.addCase(fetchTweets.fulfilled, (state, action) => {
+			state.tweetFetchingStatus = "loading";
+		}).addCase(fetchTweets.fulfilled, (state, action) => {
 			let { payload: { pathname, data, includes: { users = [], media = [], tweets = [] } = {}, meta = {} } } = action;
-			state.status = "succeeded";
-
+			state.tweetFetchingStatus = "succeeded";
 			if (meta.result_count >= 1) {
 				const tweetsMap = mapData(data);
 				const refTweetsMap = mapData(tweets, "id");
@@ -123,7 +137,7 @@ export const tweetSlice = createSlice({
 										replyStack.pop();
 									}
 									if (type === "retweeted") {
-										reply && (reply.isRetweet = true);
+										reply && (reply.isRetweet = true) && (reply.retweeted_by = tweet.user);
 									}
 									if (type === "quoted") {
 										reply && (reply.isQuoted = true);
@@ -170,9 +184,16 @@ export const tweetSlice = createSlice({
 				state.media = { ...state.media, ...mediaMap };
 			}
 
+		}).addCase(fetchTweets.rejected, (state, action) => {
+			state.tweetFetchingStatus = "failed";
+			state.error = action.payload;
 		});
-		builder.addCase(fetchTweets.rejected, (state, action) => {
-			state.status = "failed";
+		builder.addCase(manageTweet.pending, state => {
+			state.tweetManageStatus = "loading";
+		}).addCase(manageTweet.fulfilled, state => {
+			state.tweetManageStatus = "succeeded";
+		}).addCase(manageTweet.rejected, (state, action) => {
+			state.tweetManageStatus = "failed";
 			state.error = action.payload;
 		});
 	}
@@ -183,5 +204,6 @@ export default tweetSlice.reducer;
 
 export const selectTweets = (state) => state.userTweets.tweets;
 export const selectLikes = (state) => state.userTweets.likes;
-export const tweetStatus = (state) => state.userTweets.status;
+export const selectTweetFetchingStatus = (state) => state.userTweets.tweetFetchingStatus;
+export const selectTweetManageStatus = (state) => state.userTweets.tweetManageStatus;
 

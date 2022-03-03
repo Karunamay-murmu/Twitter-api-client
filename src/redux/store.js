@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import logger from "redux-logger";
 
 import moreReducer from "redux/slice/moreSlice";
 import modalReducer from "redux/slice/modalSlice";
@@ -10,8 +9,9 @@ import tweetDetailReducer from "redux/slice/tweetDetailSlice";
 import tweetRepliesReducer from "redux/slice/tweetRepliesSlice";
 import followersReducer from "redux/slice/followerSlice";
 import authenticationReducer from "redux/slice/authSlice";
+import messageReducer from "redux/slice/messageSlice";
+import homeTimeline from "redux/slice/homeTimelineSlice";
 
-// import { apiSlice } from "features/api/api-slice";
 
 const reducer = {
 	more: moreReducer,
@@ -23,11 +23,12 @@ const reducer = {
 	tweetReplies: tweetRepliesReducer,
 	userFollowers: followersReducer,
 	auth: authenticationReducer,
+	message: messageReducer,
+	homeTimeline: homeTimeline,
 };
 
 const store = configureStore({
 	reducer,
-	// middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 export default store;

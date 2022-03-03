@@ -3,14 +3,14 @@ import { Outlet } from "react-router";
 
 import FeedHeader from "components/FeedHeader/FeedHeader.jsx";
 import Link from "components/Link/Link.jsx";
-import {
-	ACCOUNT_ROUTE,
-	SECURITY_AND_ACCOUNT_ACCESS_ROUTE,
-	PRIVACY_AND_SAFETY_ROUTE,
-	NOTIFICATIONS_ROUTE,
-	ACCESSIBILITY_DISPLAY_AND_LANGUAGE_ROUTE,
-	ADDITIONAL_RESOURCES_ROUTE
-} from "routes/routes";
+// import {
+// 	ACCOUNT_ROUTE,
+// 	SECURITY_AND_ACCOUNT_ACCESS_ROUTE,
+// 	PRIVACY_AND_SAFETY_ROUTE,
+// 	NOTIFICATIONS_ROUTE,
+// 	ACCESSIBILITY_DISPLAY_AND_LANGUAGE_ROUTE,
+// 	ADDITIONAL_RESOURCES_ROUTE
+// } from "routes/routes";
 
 import styles from "./SettingLayout.module.css";
 
@@ -24,22 +24,22 @@ function SettingLayout() {
 				<div className={styles.setting__body}>
 					<ul className={styles.setting__link__wrapper}>
 						<li className={styles.setting__link__itel}>
-							<Link to={ACCOUNT_ROUTE} title="Your account" />
+							<Link to="/settings/account" title="Your account" />
 						</li>
 						<li className={styles.setting__link__itel}>
-							<Link to={SECURITY_AND_ACCOUNT_ACCESS_ROUTE} title="Security and account access" />
+							<Link to="/settings/security_and_account_access" title="Security and account access" />
 						</li>
 						<li className={styles.setting__link__itel}>
-							<Link to={PRIVACY_AND_SAFETY_ROUTE} title="Privacy and safety" />
+							<Link to="/settings/privacy_and_safety" title="Privacy and safety" />
 						</li>
 						<li className={styles.setting__link__itel}>
-							<Link to={NOTIFICATIONS_ROUTE} title="Notifications" />
+							<Link to="/settings/notifications" title="Notifications" />
 						</li>
 						<li className={styles.setting__link__itel}>
-							<Link to={ACCESSIBILITY_DISPLAY_AND_LANGUAGE_ROUTE} title="Accessibility, display, and languages" />
+							<Link to="/settings/accessibility_display_and_language" title="Accessibility, display, and languages" />
 						</li>
 						<li className={styles.setting__link__itel}>
-							<Link to={ADDITIONAL_RESOURCES_ROUTE} title="Additional resources" />
+							<Link to="/settings/additional_resources" title="Additional resources" />
 						</li>
 					</ul>
 				</div>

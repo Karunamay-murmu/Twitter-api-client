@@ -34,9 +34,9 @@ function MediaContainer({ media, ...props }) {
 			case 3:
 				style.gridTemplateRows = "repeat(2, 157.63px)";
 				style.gridTemplateAreas = `
-		"image_1 image_2"
-		"image_1 image_3"
-	`;
+"image_1 image_2"
+"image_1 image_3"
+`;
 				break;
 			case 4:
 				style.gridTemplateRows = "repeat(2, 157.63px)";
@@ -51,7 +51,6 @@ function MediaContainer({ media, ...props }) {
 			return style;
 		}
 	};
-
 	return <Media {...props} media={media} gridStyle={imageGrid}/>;
 }
 

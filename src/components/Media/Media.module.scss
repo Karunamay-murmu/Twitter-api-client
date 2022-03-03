@@ -2,6 +2,7 @@
 
 .post {
     &__media {
+        @include flex();
         position: relative;
         width: 100%;
 

@@ -1,20 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { short } from "utils/number";
-
 import styles from "./Media.module.css";
 
 function Media({ media, gridStyle }) {
 	return (
-		media && <div className={`${media.length ? styles.post__media__wrapper : ""}`} style={gridStyle()}>
+		<div className={`${media.length ? styles.post__media__wrapper : ""}`} style={gridStyle()}>
 			{
 				media?.map((media, index) => {
-					const views = media?.public_metrics?.view_count;
-					return (<div key={index} className={styles.post__media} style={{ gridArea: `image_${index + 1}` }}>
-						<img className={styles.post__image} src={media.url ?? media.preview_image_url} width={`${media.width}px`} height={`${media.height}px`} />
-						{media.type === "video" && <span className={styles.post__image__metrics}>{short(views)} views</span>}
-					</div>);
+					return (
+						<React.Fragment key={index}>
+							{media.type === "photo" && <div className={styles.post__media} style={{ gridArea: `image_${index + 1}` }}>
+								<img className={styles.post__image} src={media?.media_url_https ?? media?.url} />
+							</div>}
+							{media.type === "video" && <div className={styles.post__media} >
+								<video style={{ backgroundColor: "#000" }} width="100%" height={`${media?.video_info?.aspect_ratio[0] < media?.video_info?.aspect_ratio[1] ? "500px" : "100%"}`} poster={media.media_url_https} autoPlay controls muted>
+									{media?.video_info?.variants?.map((variant, idx) =>
+										variant?.content_type === "video/mp4" && <source key={idx} src={variant?.url} type={variant?.content_type} />
+									)}
+								</video>
+							</div>}
+						</React.Fragment>
+					);
 				})
 			}
 		</div>

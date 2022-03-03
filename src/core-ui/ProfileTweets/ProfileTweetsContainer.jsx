@@ -4,7 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 import Spinner from "components/Spinner/Spinner";
 import ProfileTweets from "core-ui/ProfileTweets/ProfileTweets";
-import { fetchTweets, selectLikes, selectTweets, tweetStatus, clearTweetState } from "redux/slice/userTweetSlice";
+import { fetchTweets, selectLikes, selectTweets, selectTweetFetchingStatus, clearTweetState } from "redux/slice/userTweetSlice";
 import { selectPinnedTweet } from "redux/slice/userSlice";
 import { selectUser } from "redux/slice/userSlice";
 import { selectAuthUser } from "redux/slice/authSlice";
@@ -15,12 +15,11 @@ function ProfileTweetsContainer() {
 	const tweets = useSelector(state => selectTweets(state));
 	const likes = useSelector(state => selectLikes(state));
 	const userPinnedTweet = useSelector(state => selectPinnedTweet(state));
-	const status = useSelector(state => tweetStatus(state));
+	const status = useSelector(state => selectTweetFetchingStatus(state));
 	const params = useParams();
 
 	const dispatch = useDispatch();
 	const location = useLocation();
-
 
 	useEffect(() => {
 		let promise;
@@ -54,6 +53,7 @@ function ProfileTweetsContainer() {
 						pathname={location.pathname}
 						tweets={tweetsData}
 						user={user}
+						status={status}
 					/>
 			}
 		</>

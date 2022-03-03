@@ -1,0 +1,46 @@
+@import "../../static/style/mixin.scss";
+
+.message {
+    @include flex($direction: column);
+    width: fit-content;
+    border: 1px solid $light-gray;
+    border-radius: .25rem;
+    overflow: hidden;
+
+    &__wrapper {
+        @include flex($align: center);
+        padding: .5rem .45rem .5rem .8rem;
+        gap: 1rem;
+    }
+
+    &__text {
+        @include meta();
+    }
+
+    &__close {
+        @include icon($color: $gray);
+
+        &__wrapper {
+            @include flex($justify: center, $align: center);
+            padding: .35rem;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $primary-blue-alpha-1;
+                transition: 150ms;
+
+                svg {
+                    @include icon($color: $primary-blue);
+                }
+            }
+        }
+    }
+
+    &__bar {
+        height: 4px;
+        background: $primary-blue;
+    }
+
+
+}
