@@ -138,7 +138,7 @@
 }
 
 @mixin boxShadow () {
-    box-shadow: 0px 0px 15px rgba(101, 119, 134, .2), 0px 0px 3px 1px rgba(101, 119, 134, .15);
+    box-shadow: 0px 0px 15px $gray-2-alpha-20, 0px 0px 3px 1px $gray-2-alpha-15;
 }
 
 @mixin card($direction: column) {
@@ -181,4 +181,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+@mixin cardWrapper () {
+    @include background($background-color: $white);
+    @include borderRadius();
+    @include padding($top: .25rem, $bottom: .25rem);
+    @include boxShadow();
+    width: max-content;
 }

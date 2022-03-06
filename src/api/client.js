@@ -13,8 +13,8 @@ const request = async (options) => {
 		const response = await axios.request(options);
 		return response.data;
 	} catch (e) {
-		const error = e.response.data.error;
-		throw new Error(error.message);
+		const error = e.response.data;
+		throw error;
 	}
 };
 

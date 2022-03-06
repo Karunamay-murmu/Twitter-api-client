@@ -2,30 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Avatar from "components/Avatar/Avatar.jsx";
-import FollowButtonContainer from "components/FollowButton/FollowButtonContainer.jsx";
+// import FollowButtonContainer from "components/FollowButton/FollowButtonContainer.jsx";
 import Name from "components/Name/Name";
 import BioContainer from "components/Bio/BioContainer.jsx";
 
 import styles from "./profileButton.module.css";
+import FriendshipContainer from "components/Friendship/FriendshipContainer";
 
-function ProfileButton({ user, showFollowButton, nameProps, bioProps }) {
+function ProfileButton({ user, showFollowButton, nameProps, bioProps, pathname }) {
 	return (
 		<div className={styles.profile__wrapper}>
+			<Avatar image={user?.profile_image_url} />
 			<div className={styles.profile__info}>
-				<Avatar image={user?.profile_image_url} />
-				<>
-					<Name user={user} className={styles.profile__name__wrapper} {...nameProps} />
-					{
-						user?.description &&
-						<BioContainer entities={user?.entities?.description} bio={user?.description} {...bioProps} />
-					}
-				</>
+				{/* <div className={styles.profile__info__wrapper}> */}
+				<Name user={user} className={styles.profile__name__wrapper} {...nameProps} />
+				{/* </div> */}
+				{
+					user?.description &&
+					<BioContainer entities={user?.entities?.description} bio={user?.description} {...bioProps} />
+				}
 			</div>
-			{/* TODO: implement friendship component */}
 			{
 				showFollowButton &&
 				<div className={styles.profile__btn}>
-					<FollowButtonContainer />
+					<FriendshipContainer userProfile={user} needFetchingRelationship={false} isFollowing={pathname === "following" ? true : false} />
 				</div>
 			}
 		</div>
@@ -37,6 +37,7 @@ ProfileButton.propTypes = {
 	showFollowButton: PropTypes.bool,
 	nameProps: PropTypes.object,
 	bioProps: PropTypes.object,
+	pathname: PropTypes.string
 };
 
 ProfileButton.defaultProps = {

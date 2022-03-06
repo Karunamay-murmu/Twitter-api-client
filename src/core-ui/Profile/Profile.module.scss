@@ -30,12 +30,12 @@
     &__info {
         @include flex($direction: column);
         flex: 1;
+        gap: .75rem;
     }
 
     &__extra {
         @include flex($align: center);
         flex-wrap: wrap;
-        margin: .75rem 0;
         gap: .75rem;
 
         &__container {

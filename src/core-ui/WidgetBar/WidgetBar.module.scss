@@ -2,8 +2,9 @@
 
 
 .widgetBar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    width: 348px;
 
 
     &__header {

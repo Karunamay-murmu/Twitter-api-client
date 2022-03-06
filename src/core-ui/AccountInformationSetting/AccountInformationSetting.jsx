@@ -6,8 +6,7 @@ import SettingDetailContainer from "core-ui/SettingDetail/SettingDetailContainer
 
 import styles from "./AccountInformationSetting.module.css";
 
-function AccountInformationSetting({ user }) {
-	console.log(user);
+function AccountInformationSetting() {
 	return (
 		<SettingDetailContainer
 			backbtn

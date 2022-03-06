@@ -12,7 +12,7 @@ function TweetTextContainer({ tweet, ...props }) {
 
 	const { entities } = tweet;
 	let text = tweet?.text ?? tweet?.full_text;
-	const mentions = tweet?.entities?.mentions;
+	const mentions = tweet?.entities?.mentions ?? tweet?.entities?.user_mentions;
 
 	if (entities) {
 		for (const [key, value] of Object.entries(entities)) {
@@ -59,12 +59,13 @@ function TweetTextContainer({ tweet, ...props }) {
 					</span>
 					<div className={styles.post__mentions}>
 						{
-							mentions.slice(0, 2)?.map((user, idx) => (
-								<div className={styles.post__mentions__people} key={user.id}>
+							mentions?.slice(0, 2)?.map((user, idx) => {
+								const username = user?.username ?? user?.screen_name;
+								return <div className={styles.post__mentions__people} key={idx}>
 									{mentions.length >= 2 && mentions.length - idx === 1 && "and"}
-									<a onClick={(e) => e.stopPropagation()} href={`/${user.username}`} target="_blank" rel="noopener noreferrer">@{user.username}</a>
-								</div>
-							))
+									<a onClick={(e) => e.stopPropagation()} href={`/${username}`} target="_blank" rel="noopener noreferrer">@{username}</a>
+								</div>;
+							})
 						}
 						{mentions.length > 3 && (
 							<span className={styles.post__mentions__people}>
@@ -96,7 +97,7 @@ function TweetTextContainer({ tweet, ...props }) {
 				})
 			}
 			{
-				(tweet?.quotedTweet || tweet?.is_quote_status) && (
+				(tweet?.quotedTweet || tweet?.quoted_status) && (
 					<div className={styles.quotedTweet__wrapper}>
 						<FeedPostListContainer tweets={[tweet?.quoted_status ?? tweet?.quotedTweet]} />
 					</div>

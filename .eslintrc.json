@@ -22,7 +22,8 @@
             "error",
             "tab",
             {
-                "ignoredNodes": ["TemplateLiteral"]
+                "ignoredNodes": ["TemplateLiteral"],
+                "SwitchCase": 1
             }
         ],
         "linebreak-style": [

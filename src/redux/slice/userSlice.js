@@ -12,29 +12,6 @@ const initialState = {
 };
 
 
-const manageFriendship = (friendship) => {
-	return createAsyncThunk(`user/magageFriendship[${friendship}]`, async ({ sourceUser, targetUser }, { rejectWithValue, signal, getState }) => {
-		try {
-			signal.addEventListener("abort", () => {
-				cancelToken.cancel();
-			});
-			const endpoint = endpoints.manageFriendship(sourceUser, targetUser) + `?friendship=${friendship}`;
-			return await Client.get(endpoint, {
-				headers: {
-					"Authorization": "Bearer " + getState().auth.accessToken
-				}
-			});
-		} catch (error) {
-			return rejectWithValue(error.message);
-		}
-	});
-};
-
-export const showFriendship = manageFriendship("show");
-export const createFriendship = manageFriendship("create");
-export const destroyFriendship = manageFriendship("destroy");
-
-
 export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { rejectWithValue, signal, getState }) => {
 	try {
 		signal.addEventListener("abort", () => {
@@ -50,12 +27,17 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { r
 	}
 });
 
-// TODO: pending actions for manageFriendship actions
-
 const userProfileSlice = createSlice({
 	name: "userProfile",
 	initialState,
-	reducers: {},
+	reducers: {
+		setRelationship: (state, action) => {
+			state.user.relationship = action.payload.relationship;
+		},
+		updateRelationship: (state, action) => {
+			state.user.relationship.source[action.payload.relationshipType] = action.payload.data;
+		}
+	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchUser.pending, (state) => {
 			state.status = "loading";
@@ -85,19 +67,11 @@ const userProfileSlice = createSlice({
 			state.status = "failed";
 			state.error = action.payload;
 		});
-		builder.addCase(showFriendship.fulfilled, (state, action) => {
-			state.user.relationship = action.payload?.relationship;
-		});
-		builder.addCase(createFriendship.fulfilled, (state, action) => {
-			state.user.relationship.source.following = action.payload?.data.following;
-		});
-		builder.addCase(destroyFriendship.fulfilled, (state, action) => {
-			state.user.relationship.source.following = action.payload?.data.following;
-		});
 	}
 });
 
 export default userProfileSlice.reducer;
+export const { setRelationship, updateRelationship } = userProfileSlice.actions;
 
 export const selectUser = state => state.userProfile.user;
 export const selectPinnedTweet = state => state.userProfile.pinnedTweet;

@@ -3,31 +3,31 @@ import PropTypes from "prop-types";
 
 import Button from "components/Button/Button";
 
-function Friendship({ relationship, manageFriendship, text, handleMouseOver, handleMouseOut, children }) {
+function Friendship({ isFollowing, handleFollow }) {
 	return (
-		<div onClick={() => manageFriendship()} onMouseOver={() => handleMouseOver()} onMouseOut={() => handleMouseOut()}>
-			{
-				children ?
-					children :
-					<Button
-						reverseColor={relationship?.source?.following}
-						allowDangerousActionHoverStyle={relationship?.source?.following}
-						style={{ height: "2.125rem" }}
-					>
-						{text}
-					</Button>
-			}
-		</div>
+		<>
+			<div onClick={handleFollow} >
+				<Button
+					reverseColor={isFollowing}
+					allowDangerousActionHoverStyle={isFollowing}
+					style={{ height: "2.125rem" }}
+				>
+					{isFollowing ? "Following" : "Follow"}
+				</Button>
+			</div>
+		</>
 	);
 }
 
 Friendship.propTypes = {
 	children: PropTypes.node,
-	manageFriendship: PropTypes.func,
+	handleFollow: PropTypes.func,
 	handleMouseOver: PropTypes.func,
 	handleMouseOut: PropTypes.func,
 	relationship: PropTypes.object,
 	text: PropTypes.string,
+	isFollowing: PropTypes.bool,
+	status: PropTypes.string
 };
 
 export default Friendship;

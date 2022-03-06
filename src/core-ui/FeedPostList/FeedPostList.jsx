@@ -1,15 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import { Link } from "react-router-dom";
-// import DOMPurify from "dompurify";
 import PushPinRoundedIcon from "@mui/icons-material/PushPinRounded";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
-import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
-import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
-import VolumeOffOutlinedIcon from "@mui/icons-material/VolumeOffOutlined";
-import BlockIcon from "@mui/icons-material/Block";
-import CodeIcon from "@mui/icons-material/Code";
-import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 
 import Avatar from "components/Avatar/Avatar";
 import FeedTweetActionBarContainer from "components/FeedTweetActionBar/FeedTweetActionBarContainer";
@@ -20,39 +12,11 @@ import { getPostDate } from "utils/convertDate";
 
 import styles from "./FeedPostList.module.css";
 import MediaContainer from "components/Media/MediaContainer";
+import TweetOptionsContainer from "components/TweetOptions/TweetOptionsContainer";
 
-const FeedPost = ({ tweet, media, navigateToTweetDetail }) => {
+const FeedPost = ({ tweet, media, moreOptions, navigateToTweetDetail }) => {
 	const { username, screen_name, profile_image_url } = tweet.user;
-	let { id, id_str, created_at, public_metrics, retweet_count = 0, favorite_count = 0, reply_count = 0, isPinned = false, isRetweet = false, replies = [] } = tweet;
-
-	const moreOptions = [
-		{
-			"text": `follow ${username}`,
-			"Icon": PersonAddAltOutlinedIcon,
-		}, {
-			"text": "Add/remove from Lists",
-			"Icon": ListAltOutlinedIcon,
-		}, {
-			"text": `Mute @${username}`,
-			"Icon": VolumeOffOutlinedIcon,
-		}, {
-			"text": "Mute this conversation",
-			"Icon": VolumeOffOutlinedIcon,
-		}
-		, {
-			"text": `Block @${username}`,
-			"Icon": BlockIcon,
-		}
-		, {
-			"text": "Embed Tweet",
-			"Icon": CodeIcon,
-		}
-		, {
-			"text": "Report Tweet",
-			"Icon": FlagOutlinedIcon,
-		}
-	];
-
+	const { id, id_str, created_at, public_metrics, retweet_count = 0, favorite_count = 0, reply_count = 0, isPinned = false, is_retweet = false, is_quoted = false, replies = [] } = tweet;
 
 	return (
 		<div className={styles.post__wrapper} onClick={(e) => navigateToTweetDetail(e, {
@@ -68,17 +32,17 @@ const FeedPost = ({ tweet, media, navigateToTweetDetail }) => {
 				)
 			}
 			{
-				isRetweet && (
+				is_retweet && (
 					<div className={styles.post__pin}>
 						<RepeatRoundedIcon className={styles.post__pin__icon} />
 						<div className={styles.post__pin__text}>{tweet?.retweeted_status?.user?.screen_name ?? tweet?.retweeted_by?.username} Retweeted</div>
 					</div>
 				)
 			}
-			<div className={styles.post__main}>
+			<div className={styles.post__main} style={is_quoted ? { gap: ".5rem" } : {}}>
 				<div className={styles.post__avatar__wrapper}>
 					<div className={styles.post__avatar}>
-						<Avatar image={profile_image_url} />
+						<Avatar image={profile_image_url} style={is_quoted ? { width: "1.5rem", height: "1.5rem" } : {}} />
 					</div>
 					{
 						(replies.length !== 0) && (
@@ -97,7 +61,9 @@ const FeedPost = ({ tweet, media, navigateToTweetDetail }) => {
 								<span>{getPostDate(created_at)}</span>
 							</time>
 						</div>
-						{moreOptions && <MoreOptionContainer moreOptions={moreOptions} />}
+						{moreOptions && !is_quoted && <MoreOptionContainer moreOptions={moreOptions}>
+							<TweetOptionsContainer tweet={tweet} />
+						</MoreOptionContainer>}
 					</div>
 					<div className={styles.post__content}>
 						<div className={styles.post__text__wrapper}>
@@ -108,12 +74,12 @@ const FeedPost = ({ tweet, media, navigateToTweetDetail }) => {
 						}
 					</div>
 					<div className={styles.post__footer}>
-						<FeedTweetActionBarContainer
+						{!is_quoted && <FeedTweetActionBarContainer
 							id={id}
 							replyCount={public_metrics?.reply_count ?? reply_count}
 							likeCount={public_metrics?.like_count ?? favorite_count}
 							retweetCount={public_metrics?.retweet_count ?? retweet_count}
-						/>
+						/>}
 					</div>
 				</div>
 			</div>

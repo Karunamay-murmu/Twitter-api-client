@@ -1,45 +1,55 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 
 import Friendship from "components/Friendship/Friendship";
-// import { useState } from "react";
-import { createFriendship, destroyFriendship } from "redux/slice/userSlice";
+import useFriendship from "hooks/useFriendship";
+import { useSelector } from "react-redux";
+// import { selectRelationshipFetchingStatus } from "redux/slice/relationshipSlice";
+import { selectRelationshipFetchingStatus, showFriendship } from "redux/slice/relationshipSlice";
+// import { selectUser } from "redux/slice/userSlice";
+import { selectUser, setRelationship } from "redux/slice/userSlice";
+import { selectAuthUser } from "redux/slice/authSlice";
 
-function FriendshipContainer({ relationship, ...props }) {
-	const [text, setText] = useState(relationship.source.following ? "Following" : "Follow");
 
-	// TODO: Fix follow button hover issue
+
+function FriendshipContainer({ userProfile, needFetchingRelationship, initialFollowing }) {
+	const authUser = useSelector(state => selectAuthUser(state));
+	const relationshipFetchingStatus = useSelector(state => selectRelationshipFetchingStatus(state));
+	const user = userProfile ?? useSelector(state => selectUser(state));
+	const { handleFollow } = useFriendship(user);
+
 	const dispatch = useDispatch();
+	console.log(dispatch);
 
-	const handleMouseOver = useCallback(() => relationship.source.following && setText("Unfollow"));
-	const handleMouseOut = useCallback(() => relationship.source.following && setText("Following"));
-
-	const handleFriendShip = useCallback(() => {
-		dispatch(relationship.source.following ? destroyFriendship({
-			sourceUser: relationship.source.id_str,
-			targetUser: relationship.target.id_str,
-		}) : createFriendship({
-			sourceUser: relationship.source.id_str,
-			targetUser: relationship.target.id_str,
-		}));
-	});
+	useEffect(() => {
+		console.log("ad");
+		// console.log(user)
+		if (needFetchingRelationship) {
+			dispatch(showFriendship({ source: authUser.twitter_id, target: user.id })).unwrap().then(response => {
+				dispatch(setRelationship({ relationship: response.relationship }));
+			});
+		}
+	}, []);
 
 	return (
-		<Friendship 
-			{...props} 
-			manageFriendship={handleFriendShip} 
-			relationship={relationship} 
-			handleMouseOver={handleMouseOver}
-			handleMouseOut={handleMouseOut}
-			text={text}
+		<Friendship
+			handleFollow={handleFollow}
+			isFollowing={initialFollowing || (user?.relationship?.source?.following ?? false)}
+			status={relationshipFetchingStatus}
 		/>
 	);
 }
 
 FriendshipContainer.propTypes = {
-	isFollowing: PropTypes.bool,
-	relationship: PropTypes.object
+	userProfile: PropTypes.object,
+	needFetchingRelationship: PropTypes.bool,
+	initialFollowing: PropTypes.bool
+};
+
+FriendshipContainer.defaultProps = {
+	needFetchingRelationship: true,
+	initialFollowing: false
 };
 
 export default FriendshipContainer;

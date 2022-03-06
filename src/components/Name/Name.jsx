@@ -9,7 +9,8 @@ import styles from "./Name.module.css";
 
 function Name({ user, className, allowNavigate }) {
 
-	const { name, username, verified } = user;
+	const { name, verified } = user;
+	const username = user?.username ?? user?.screen_name;
 
 	const handleClick = (e) => e.stopPropagation();
 	const Component = allowNavigate ? Link : "div";

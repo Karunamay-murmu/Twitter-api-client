@@ -1,0 +1,7 @@
+@import "../../static/style/mixin.scss";
+
+.options {
+    &__wrapper {
+        @include cardWrapper();
+    }
+}

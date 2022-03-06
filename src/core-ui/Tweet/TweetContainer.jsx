@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Tweet from "core-ui/Tweet/Tweet.jsx";
 import { selectAuthUser } from "redux/slice/authSlice";
-import { selectTweetManageStatus, manageTweet } from "redux/slice/userTweetSlice";
+import { selectTweetManageStatus, createTweet } from "redux/slice/userTweetSlice";
 import { addMessage } from "redux/slice/messageSlice";
 
 function TweetContainer(props) {
@@ -17,11 +17,11 @@ function TweetContainer(props) {
 	const handleInputData = e => setTweet(e.target.value);
 
 	const handleFormSubmit = e => {
-		e.preventDefault();		
+		e.preventDefault();
 		const formData = {
 			text: tweet,
 		};
-		const promise = dispatch(manageTweet(formData)).unwrap();
+		const promise = dispatch(createTweet(formData)).unwrap();
 		promise.then(() => {
 			dispatch(addMessage({
 				type: "info",
@@ -30,7 +30,7 @@ function TweetContainer(props) {
 		}).catch(err => {
 			dispatch(addMessage({
 				type: "error",
-				message: err.message,
+				message: err,
 			}));
 		});
 		setTweet("");

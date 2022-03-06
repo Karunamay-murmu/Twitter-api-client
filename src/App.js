@@ -22,7 +22,7 @@ import HomeFeedContainer from "core-ui/HomeFeed/HomeFeedContainer";
 
 function App() {
 	const authUser = useSelector(state => selectAuthUser(state));
-	const { isOpen } = useSelector(state => state.modal);
+	// const { isOpen } = useSelector(state => state.modal);
 	const location = useLocation();
 	const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 	const dispatch = useDispatch();
@@ -39,16 +39,13 @@ function App() {
 	}, [isAuthenticated]);
 
 	const background = location.state && location.state.background;
-	const style = {
-		overflow: isOpen ? "hidden" : "inherit"
-	};
 
 	if (isLoading) {
 		return <Spinner message="Loading..." />;
 	}
 
 	return (
-		<div className="app" style={style}>
+		<div className="app">
 			<Routes location={background || location} >
 				<Route path="login" element={<LoginContainer isAuthenticated={isAuthenticated} />} />
 				<Route path="/" element={<MainLayoutContainer authUser={authUser} isAuthenticated={isAuthenticated} />}>

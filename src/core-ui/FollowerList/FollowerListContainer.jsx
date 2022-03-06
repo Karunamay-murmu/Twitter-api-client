@@ -31,7 +31,7 @@ function FollowerListContainer({ path, ...props }) {
 
 	return (
 		<>
-			{!user ? <Spinner message="Loading..." /> : <FollowerList user={user} followers={path === "followers" && followers.data || path === "following" && following.data || ""} {...props} />}
+			{!user ? <Spinner message="Loading..." /> : <FollowerList user={user} pathname={path} followers={path === "followers" && followers.data || path === "following" && following.data || ""} {...props} />}
 		</>
 	);
 

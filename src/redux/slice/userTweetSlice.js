@@ -23,24 +23,32 @@ const mapData = (dataSet, key) => {
 	return map;
 };
 
-export const manageTweet = createAsyncThunk("tweet/post", async (data, { rejectWithValue, signal, getState }) => {
-	try {
-		signal.addEventListener("abort", () => {
-			cancelToken.cancel();
-		});
-		const endpoint = endpoints.manageTweet();
-		return await Client.post(endpoint, {
-			headers: {
-				"Authorization": "Bearer " + getState().auth.accessToken,
-				"X-CSRFToken": getState().auth.csrf,
-			},
-			withCredentials: true,
-			data,
-		});
-	} catch (e) {
-		return rejectWithValue(e.message);
-	}
-});
+
+const manageTweet = (tweet) => {
+	return createAsyncThunk(`tweet/[${tweet}]`, async (data, { rejectWithValue, signal, getState }) => {
+		try {
+			signal.addEventListener("abort", () => {
+				cancelToken.cancel();
+			});
+			const endpoint = endpoints.manageTweet() + `?tweet=${tweet}`;
+			return await Client.post(endpoint, {
+				headers: {
+					"Authorization": "Bearer " + getState().auth.accessToken,
+					"X-CSRFToken": getState().auth.csrf,
+				},
+				withCredentials: true,
+				data,
+			});
+		} catch (error) {
+			const errorMessage = error.errors[0].message;
+			return rejectWithValue(errorMessage);
+		}
+	});
+};
+
+export const createTweet = manageTweet("create");
+export const destroyTweet = manageTweet("destroy");
+
 
 export const fetchTweets = createAsyncThunk("tweet/fetch", async ({ userId, pathname }, { rejectWithValue, signal, getState }) => {
 	try {
@@ -96,6 +104,11 @@ export const tweetSlice = createSlice({
 			state.users = null;
 			state.status = "idle";
 			state.error = null;
+		},
+		setTweetUsersRelationship: (state, action) => {
+			const { id, relationship } = action.payload;
+			const user = state.users.filter(user => user.id === id);
+			user.relationship = relationship;
 		}
 	},
 	extraReducers: (builder) => {
@@ -137,10 +150,10 @@ export const tweetSlice = createSlice({
 										replyStack.pop();
 									}
 									if (type === "retweeted") {
-										reply && (reply.isRetweet = true) && (reply.retweeted_by = tweet.user);
+										reply && (reply.is_retweet = true) && (reply.retweeted_by = tweet.user);
 									}
 									if (type === "quoted") {
-										reply && (reply.isQuoted = true);
+										reply && (reply.is_quoted = true);
 									}
 								}
 								parent.length && mapTweet(parent);
@@ -155,8 +168,8 @@ export const tweetSlice = createSlice({
 						}
 						if (replyStack.length) {
 							const reply = replyStack.pop();
-							if (!tweet.isRetweet) {
-								if (tweet?.isQuoted) {
+							if (!tweet.is_retweet) {
+								if (tweet?.is_quoted) {
 									tweetsOnly.set(reply.id, reply);
 									reply.quotedTweet = tweet;
 								} else {
@@ -188,18 +201,18 @@ export const tweetSlice = createSlice({
 			state.tweetFetchingStatus = "failed";
 			state.error = action.payload;
 		});
-		builder.addCase(manageTweet.pending, state => {
+		builder.addCase(createTweet.pending, state => {
 			state.tweetManageStatus = "loading";
-		}).addCase(manageTweet.fulfilled, state => {
+		}).addCase(createTweet.fulfilled, state => {
 			state.tweetManageStatus = "succeeded";
-		}).addCase(manageTweet.rejected, (state, action) => {
+		}).addCase(createTweet.rejected, (state, action) => {
 			state.tweetManageStatus = "failed";
 			state.error = action.payload;
 		});
 	}
 });
 
-export const { clearTweetState } = tweetSlice.actions;
+export const { clearTweetState, setTweetUsersRelationship } = tweetSlice.actions;
 export default tweetSlice.reducer;
 
 export const selectTweets = (state) => state.userTweets.tweets;

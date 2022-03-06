@@ -44,7 +44,6 @@ function ProfileTweetsContainer() {
 
 	return (
 		<>
-
 			{
 				!tweetsData || status === "loading" ? <div>
 					<Spinner message="Loading tweets..." />

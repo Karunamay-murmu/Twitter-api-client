@@ -3,7 +3,8 @@
 .profile {
 
     &__wrapper {
-        @include flex($justify: space-between);
+        @include flex();
+        gap: 1rem;
         width: 100%;
         cursor: pointer;
         padding: .5rem 1rem;
@@ -16,8 +17,12 @@
         }
     }
 
+    &__btn {
+        margin-left: auto;
+    }
+
     &__info {
-        @include flex($align: center);
+        @include flex($direction: column);
         gap: .75rem;
     }
 

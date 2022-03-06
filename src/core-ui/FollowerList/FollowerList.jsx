@@ -10,7 +10,7 @@ import ProfileButtonContainer from "components/ProfileButton/ProfileButtonContai
 import Spinner from "components/Spinner/Spinner";
 import { selectStatus } from "redux/slice/followerSlice";
 
-function FollowerList({ user, followers }) {
+function FollowerList({ user, followers, ...props }) {
 
 	const status = useSelector(state => selectStatus(state));
 
@@ -34,7 +34,7 @@ function FollowerList({ user, followers }) {
 				<div>
 					{
 						followers?.map(follower => (
-							<ProfileButtonContainer key={follower.id} user={follower} />
+							<ProfileButtonContainer key={follower.id} user={follower} {...props} />
 						))
 					}
 				</div> :

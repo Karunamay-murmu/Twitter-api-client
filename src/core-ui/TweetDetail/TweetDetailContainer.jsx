@@ -66,7 +66,7 @@ function TweetDetailContainer({ isFollowing }) {
 					tweetStatus === "loading" ? <Spinner message="Loading tweet..." /> :
 						tweets?.map(tweet =>
 							<TweetDetail
-								key={tweet.id}
+								key={tweet?.id_str ?? tweet.id}
 								tweet={tweet}
 								moreOptions={moreOptions}
 								user={user[0]}

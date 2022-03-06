@@ -11,6 +11,7 @@ import followersReducer from "redux/slice/followerSlice";
 import authenticationReducer from "redux/slice/authSlice";
 import messageReducer from "redux/slice/messageSlice";
 import homeTimeline from "redux/slice/homeTimelineSlice";
+import relationshipSlice from "./slice/relationshipSlice";
 
 
 const reducer = {
@@ -25,6 +26,7 @@ const reducer = {
 	auth: authenticationReducer,
 	message: messageReducer,
 	homeTimeline: homeTimeline,
+	relationship: relationshipSlice
 };
 
 const store = configureStore({
