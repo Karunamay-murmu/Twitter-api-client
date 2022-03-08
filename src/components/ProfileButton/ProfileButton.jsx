@@ -9,7 +9,7 @@ import BioContainer from "components/Bio/BioContainer.jsx";
 import styles from "./profileButton.module.css";
 import FriendshipContainer from "components/Friendship/FriendshipContainer";
 
-function ProfileButton({ user, showFollowButton, nameProps, bioProps, pathname }) {
+function ProfileButton({ user, showFollowButton, nameProps, bioProps, isFollowing }) {
 	return (
 		<div className={styles.profile__wrapper}>
 			<Avatar image={user?.profile_image_url} />
@@ -25,7 +25,7 @@ function ProfileButton({ user, showFollowButton, nameProps, bioProps, pathname }
 			{
 				showFollowButton &&
 				<div className={styles.profile__btn}>
-					<FriendshipContainer userProfile={user} needFetchingRelationship={false} isFollowing={pathname === "following" ? true : false} />
+					<FriendshipContainer userProfile={user} needFetchingRelationship={false} initialFollowing={isFollowing} />
 				</div>
 			}
 		</div>
@@ -37,7 +37,7 @@ ProfileButton.propTypes = {
 	showFollowButton: PropTypes.bool,
 	nameProps: PropTypes.object,
 	bioProps: PropTypes.object,
-	pathname: PropTypes.string
+	isFollowing: PropTypes.bool
 };
 
 ProfileButton.defaultProps = {

@@ -4,10 +4,6 @@
 .profile {
 
     &__feed {
-        &__displayName {
-            font-size: 1.25rem;
-        }
-
         &__meta {
             @include meta($font-size: .8125rem);
         }
@@ -43,6 +39,11 @@
             @include flex($align: center);
         }
 
+    }
+
+    &__name__wrapper {
+        @include flex($direction: column);
+        width: 100%;
     }
 
     &__displayName {

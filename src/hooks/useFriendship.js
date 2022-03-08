@@ -1,45 +1,40 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAuthUser } from "redux/slice/authSlice";
-import { blockFriendship, createFriendship, destroyFriendship, muteFriendship, selectRelationship, unblockFriendship, unmuteFriendship } from "redux/slice/relationshipSlice";
-import { updateRelationship } from "redux/slice/userSlice";
+import { blockFriendship, createFriendship, destroyFriendship, muteFriendship, unblockFriendship, unmuteFriendship } from "redux/slice/relationshipSlice";
 
 function useFriendship(user) {
 
-	const relationship = useSelector(state => selectRelationship(state));
 	const authUser = useSelector(state => selectAuthUser(state));
 	const dispatch = useDispatch();
 
 	const payload = useMemo(() => {
 		return { source: authUser.twitter_id, target: user?.id_str ?? user?.id };
-	}, [relationship]);
+	}, [user]);
 
-	const userId = useMemo(() => user?.id_str ?? user?.id, [user]);
-
+	const isFollowing = user?.connections?.includes("following") || user?.relationship?.source?.following;
+	const isMuting = user?.connections?.includes("muting") ?? user?.relationship?.source?.following;
+	const isBlocking = user?.connections?.includes("blocking") ?? user?.relationship?.source?.following;
+	
 	const handleFollow = (event) => {
 		event.stopPropagation();
-		dispatch(relationship[userId].source.following ? destroyFriendship(payload) : createFriendship(payload)).unwrap().then(response => {
-			dispatch(updateRelationship({
-				relationshipType: "following",
-				data: response.data.following
-			}));
-		});
+		dispatch(isFollowing ? destroyFriendship(payload) : createFriendship(payload));
 	};
 
-	const handleMute = useCallback((event) => {
+	const handleMute = (event) => {
 		event.stopPropagation();
-		dispatch(relationship[userId].source.muting ? unmuteFriendship(payload) : muteFriendship(payload));
-	}, [relationship]);
+		dispatch(isMuting ? unmuteFriendship(payload) : muteFriendship(payload));
+	};
 
-	const handleBlock = useCallback((event) => {
+	const handleBlock = (event) => {
 		event.stopPropagation();
-		dispatch(relationship[userId].source.blocking ? unblockFriendship(payload) : blockFriendship(payload));
-	}, [relationship]);
+		dispatch(isBlocking ? unblockFriendship(payload) : blockFriendship(payload));
+	};
 
 	return {
-		isFollowing: relationship[userId]?.source?.following,
-		isMuted: relationship[userId]?.source?.muting,
-		isBlocked: relationship[userId]?.source?.blocking,
+		isFollowing,
+		isMuting,
+		isBlocking,
 		handleMute,
 		handleBlock,
 		handleFollow,

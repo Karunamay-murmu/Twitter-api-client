@@ -9,7 +9,7 @@ import twemoji from "twemoji";
 
 import Avatar from "components/Avatar/Avatar";
 import DisplayName from "components/DisplayName/DisplayName";
-// import Username from "components/Username/Username";
+import Username from "components/Username/Username";
 import BioContainer from "components/Bio/BioContainer.jsx";
 import FollowInfo from "components/FollowInfo/FollowInfo.jsx";
 import FeedHeader from "components/FeedHeader/FeedHeader";
@@ -19,7 +19,7 @@ import { EDIT_PROFILE } from "routes/routes";
 import { short } from "utils/number";
 
 import styles from "./Profile.module.css";
-import Name from "components/Name/Name";
+// import Name from "components/Name/Name";
 
 function Profile({ authUser, profile, routeLocation }) {
 	let {
@@ -87,16 +87,17 @@ function Profile({ authUser, profile, routeLocation }) {
 								}}>
 									Edit Profile
 								</Link> :
-								<FriendshipContainer />
+								<FriendshipContainer user={profile} />
 						}
 					</div>
 					<div className={styles.profile__info__wrapper}>
 						<div className={styles.profile__info}>
-							<Name user={profile} />
-							{/* <DisplayName name={name} verified={verified} className={styles.profile__displayName}>
-								{name}
-							</DisplayName>
-							<Username name={username} /> */}
+							<div className={styles.profile__name__wrapper}>
+								<DisplayName name={name} verified={verified} className={styles.profile__displayName}>
+									{name}
+								</DisplayName>
+								<Username name={username} />
+							</div>
 							{description && <BioContainer entities={entities?.description} bio={description} />}
 							<div className={styles.profile__extra}>
 								{location && <div className={styles.profile__extra__container}>
@@ -134,4 +135,5 @@ Profile.propTypes = {
 };
 
 
-export default React.memo(Profile, (prev, next) => prev.profile.id === next.profile.id);
+// export default React.memo(Profile, (prev, next) => prev.profile.id === next.profile.id);
+export default Profile;

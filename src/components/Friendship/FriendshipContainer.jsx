@@ -8,24 +8,19 @@ import { useSelector } from "react-redux";
 // import { selectRelationshipFetchingStatus } from "redux/slice/relationshipSlice";
 import { selectRelationshipFetchingStatus, showFriendship } from "redux/slice/relationshipSlice";
 // import { selectUser } from "redux/slice/userSlice";
-import { selectUser, setRelationship } from "redux/slice/userSlice";
+import { setRelationship } from "redux/slice/userSlice";
 import { selectAuthUser } from "redux/slice/authSlice";
 
 
-
-function FriendshipContainer({ userProfile, needFetchingRelationship, initialFollowing }) {
+function FriendshipContainer({ user }) {
 	const authUser = useSelector(state => selectAuthUser(state));
 	const relationshipFetchingStatus = useSelector(state => selectRelationshipFetchingStatus(state));
-	const user = userProfile ?? useSelector(state => selectUser(state));
-	const { handleFollow } = useFriendship(user);
+	const { isFollowing, handleFollow } = useFriendship(user);
 
 	const dispatch = useDispatch();
-	console.log(dispatch);
 
 	useEffect(() => {
-		console.log("ad");
-		// console.log(user)
-		if (needFetchingRelationship) {
+		if (!user?.connections) {
 			dispatch(showFriendship({ source: authUser.twitter_id, target: user.id })).unwrap().then(response => {
 				dispatch(setRelationship({ relationship: response.relationship }));
 			});
@@ -35,16 +30,14 @@ function FriendshipContainer({ userProfile, needFetchingRelationship, initialFol
 	return (
 		<Friendship
 			handleFollow={handleFollow}
-			isFollowing={initialFollowing || (user?.relationship?.source?.following ?? false)}
+			isFollowing={isFollowing}
 			status={relationshipFetchingStatus}
 		/>
 	);
 }
 
 FriendshipContainer.propTypes = {
-	userProfile: PropTypes.object,
-	needFetchingRelationship: PropTypes.bool,
-	initialFollowing: PropTypes.bool
+	user: PropTypes.object,
 };
 
 FriendshipContainer.defaultProps = {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
@@ -15,28 +15,24 @@ import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 
 import TweetOptions from "components/TweetOptions/TweetOptions";
 import useFriendship from "hooks/useFriendship";
-import { destroyTweet } from "redux/slice/userTweetSlice";
+import { destroyTweet, selectTweetsUser } from "redux/slice/userTweetSlice";
 import { addMessage } from "redux/slice/messageSlice";
 import { selectAuthUser } from "redux/slice/authSlice";
-import { selectRelationship, selectRelationshipFetchingStatus, showFriendship } from "redux/slice/relationshipSlice";
+import { selectRelationshipFetchingStatus, showFriendship } from "redux/slice/relationshipSlice";
 
 function TweetOptionsCntainer({ tweet }) {
 	const authUser = useSelector(state => selectAuthUser(state));
-	const relationship = useSelector(state => selectRelationship(state));
+	const users = useSelector(state => selectTweetsUser(state));
 	const relationshipFetchingStatus = useSelector(state => selectRelationshipFetchingStatus(state));
-	const { isFollowing, isMuted, isBlocked, handleMute, handleBlock, handleFollow } = useFriendship(tweet.user);
+
+	console.log(users);
+
+	const user = useMemo(() => users[tweet.user?.id_str ?? tweet.user?.id], [tweet, users]);
+	const { isFollowing, isMuting, isBlocking, handleMute, handleBlock, handleFollow } = useFriendship(user);
 
 	const dispatch = useDispatch();
 
 	const username = tweet?.user?.username ?? tweet?.user?.screen_name;
-
-	useEffect(() => {
-		const userId = tweet.user?.id_str ?? tweet.user?.id;
-		if (!(userId in relationship)) {
-			dispatch(showFriendship({ source: authUser.twitter_id, target: userId }));
-		}
-	}, [tweet.user]);
-
 
 	const handleTweetDelete = useCallback((e) => {
 		e.stopPropagation();
@@ -66,13 +62,13 @@ function TweetOptionsCntainer({ tweet }) {
 			"text": `Add/remove @${username} from Lists`,
 			"Icon": ListAltOutlinedIcon,
 		}, {
-			"text": `${isMuted ? "Unmute" : "Mute"} @${username}`,
+			"text": `${isMuting ? "Unmute" : "Mute"} @${username}`,
 			"Icon": VolumeOffOutlinedIcon,
 			"eventHandlers": {
 				"onClick": handleMute,
 			},
 		}, {
-			"text": `${isBlocked ? "Unblock" : "Block"} @${username}`,
+			"text": `${isBlocking ? "Unblock" : "Block"} @${username}`,
 			"Icon": BlockIcon,
 			"eventHandlers": {
 				"onClick": handleBlock,
@@ -119,10 +115,10 @@ function TweetOptionsCntainer({ tweet }) {
 	];
 
 	return (
-		<TweetOptions 
-			options={authUser.username !== username ? options : authUserTweetOption} 
-			status={relationshipFetchingStatus} 
-			user={tweet.user} 
+		<TweetOptions
+			options={authUser.username !== username ? options : authUserTweetOption}
+			status={relationshipFetchingStatus}
+			user={tweet.user}
 			actionType={showFriendship}
 		/>
 	);

@@ -27,6 +27,12 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async (username, { r
 	}
 });
 
+const updateRelationship = (action) => {
+	return action.type.startsWith("user/manageFriendship")
+		&& action.type.endsWith("fulfilled")
+		&& !action.type.includes("show");
+};
+
 const userProfileSlice = createSlice({
 	name: "userProfile",
 	initialState,
@@ -67,11 +73,23 @@ const userProfileSlice = createSlice({
 			state.status = "failed";
 			state.error = action.payload;
 		});
+		builder.addMatcher(updateRelationship, (state, action) => {
+			const friendship = action.payload.data;
+			if ("following" in friendship) {
+				state.user.relationship.source.following = action.payload.data.following;
+			}
+			if ("mutin" in friendship) {
+				state.user.relationship.source.following = action.payload.data.muting;
+			}
+			if ("blocking" in friendship) {
+				state.user.relationship.source.following = action.payload.data.blocking;
+			}
+		});
 	}
 });
 
 export default userProfileSlice.reducer;
-export const { setRelationship, updateRelationship } = userProfileSlice.actions;
+export const { setRelationship } = userProfileSlice.actions;
 
 export const selectUser = state => state.userProfile.user;
 export const selectPinnedTweet = state => state.userProfile.pinnedTweet;

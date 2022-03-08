@@ -11,8 +11,6 @@ function TweetOptions({ options, ...props }) {
 
 TweetOptions.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.object).isRequired,
-	status: PropTypes.bool,
-	actionType: PropTypes.object
 };
 
 export default TweetOptions;

@@ -91,6 +91,12 @@ export const fetchHomeTimeline = createAsyncThunk("tweet/fetchHomeTimeline", asy
 	}
 });
 
+
+const checkFriendshipActions = action => {
+	return action.type.startsWith("user/manageFriendship") && action.type.endsWith("fulfilled") && !action.type.includes("show");
+};
+
+
 export const tweetSlice = createSlice({
 	name: "userTweet",
 	initialState,
@@ -209,6 +215,29 @@ export const tweetSlice = createSlice({
 			state.tweetManageStatus = "failed";
 			state.error = action.payload;
 		});
+		builder.addMatcher(checkFriendshipActions, (state, action) => {
+			if (state.users) {
+				const user = state.users[action.meta.arg.target];
+				let userConnections = user.connections.filter(connection => connection !== "none");
+				const friendship = action.payload.data;
+				if ("following" in friendship) {
+					if (friendship.following) {
+						userConnections.push("following");
+					} else userConnections = userConnections.filter(connection => connection !== "following");
+				}
+				if ("muting" in friendship) {
+					if (friendship.muting) {
+						userConnections.push("muting");
+					} else userConnections = userConnections.filter(connection => connection !== "muting");
+				}
+				if ("blocking" in friendship) {
+					if (friendship.blocking) {
+						userConnections.push("blocking");
+					} else userConnections = userConnections.filter(connection => connection !== "blocking");
+				}
+				user.connections = userConnections;
+			}
+		});
 	}
 });
 
@@ -217,6 +246,7 @@ export default tweetSlice.reducer;
 
 export const selectTweets = (state) => state.userTweets.tweets;
 export const selectLikes = (state) => state.userTweets.likes;
+export const selectTweetsUser = state => state.userTweets.users;
 export const selectTweetFetchingStatus = (state) => state.userTweets.tweetFetchingStatus;
 export const selectTweetManageStatus = (state) => state.userTweets.tweetManageStatus;
 

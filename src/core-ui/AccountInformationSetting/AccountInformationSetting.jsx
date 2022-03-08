@@ -28,7 +28,7 @@ function AccountInformationSetting() {
 }
 
 AccountInformationSetting.propTypes = {
-	user: PropTypes.object.isRequired,
+	user: PropTypes.object,
 };
 
 // AccountInformationSetting.defaultProps = {
