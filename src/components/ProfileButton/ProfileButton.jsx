@@ -14,9 +14,7 @@ function ProfileButton({ user, showFollowButton, nameProps, bioProps, isFollowin
 		<div className={styles.profile__wrapper}>
 			<Avatar image={user?.profile_image_url} />
 			<div className={styles.profile__info}>
-				{/* <div className={styles.profile__info__wrapper}> */}
 				<Name user={user} className={styles.profile__name__wrapper} {...nameProps} />
-				{/* </div> */}
 				{
 					user?.description &&
 					<BioContainer entities={user?.entities?.description} bio={user?.description} {...bioProps} />
@@ -25,7 +23,7 @@ function ProfileButton({ user, showFollowButton, nameProps, bioProps, isFollowin
 			{
 				showFollowButton &&
 				<div className={styles.profile__btn}>
-					<FriendshipContainer userProfile={user} needFetchingRelationship={false} initialFollowing={isFollowing} />
+					<FriendshipContainer user={user} needFetchingRelationship={false} initialFollowing={isFollowing} />
 				</div>
 			}
 		</div>

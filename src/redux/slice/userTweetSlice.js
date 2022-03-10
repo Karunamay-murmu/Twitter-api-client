@@ -6,10 +6,10 @@ import Client, { cancelToken } from "api/client";
 const initialState = {
 	likes: [],
 	tweets: [],
-	tweetsMap: null,
-	media: null,
-	refTweets: null,
-	users: null,
+	tweetsMap: {},
+	media: {},
+	refTweets: {},
+	users: {},
 	tweetFetchingStatus: "idle",
 	tweetManageStatus: "idle",
 	error: null,
@@ -97,6 +97,14 @@ const checkFriendshipActions = action => {
 };
 
 
+const isPendingAction = action => {
+	return action.type.startsWith("tweet/fetch") && action.type.endsWith("pending");
+};
+
+const isRejectedAction = action => {
+	return action.type.startsWith("tweet/fetch") && action.type.endsWith("rejected");
+};
+
 export const tweetSlice = createSlice({
 	name: "userTweet",
 	initialState,
@@ -118,9 +126,34 @@ export const tweetSlice = createSlice({
 		}
 	},
 	extraReducers: (builder) => {
-		builder.addCase(fetchTweets.pending, (state) => {
-			state.tweetFetchingStatus = "loading";
-		}).addCase(fetchTweets.fulfilled, (state, action) => {
+
+		builder.addCase(createTweet.pending, state => {
+			state.tweetManageStatus = "loading";
+		}).addCase(createTweet.fulfilled, (state, { payload: { data } }) => {
+			state.tweetManageStatus = "succeeded";
+
+			const tweet = data.data;
+			const users = data.includes.users;
+
+			state.users = users.reduce((acc, user) => {
+				acc[user.id] = user;
+				return acc;
+			}, state.users);
+			tweet.user = state.users[tweet.author_id];
+			state.tweetsMap[tweet.id] = tweet;
+			state.tweets.unshift(tweet);
+
+		}).addCase(createTweet.rejected, (state, action) => {
+			state.tweetManageStatus = "failed";
+			state.error = action.payload;
+		});
+		builder.addCase(destroyTweet.pending, state => {
+			state.tweetManageStatus = "loading";
+		}).addCase(destroyTweet.fulfilled, (state) => {
+			state.tweetManageStatus = "succeeded";
+			state.tweets.shift();
+		});
+		builder.addCase(fetchTweets.fulfilled, (state, action) => {
 			let { payload: { pathname, data, includes: { users = [], media = [], tweets = [] } = {}, meta = {} } } = action;
 			state.tweetFetchingStatus = "succeeded";
 			if (meta.result_count >= 1) {
@@ -203,39 +236,35 @@ export const tweetSlice = createSlice({
 				state.media = { ...state.media, ...mediaMap };
 			}
 
-		}).addCase(fetchTweets.rejected, (state, action) => {
+		}).addMatcher(isPendingAction, state => {
+			state.tweetFetchingStatus = "loading";
+		}).addMatcher(isRejectedAction, (state, action) => {
 			state.tweetFetchingStatus = "failed";
-			state.error = action.payload;
-		});
-		builder.addCase(createTweet.pending, state => {
-			state.tweetManageStatus = "loading";
-		}).addCase(createTweet.fulfilled, state => {
-			state.tweetManageStatus = "succeeded";
-		}).addCase(createTweet.rejected, (state, action) => {
-			state.tweetManageStatus = "failed";
 			state.error = action.payload;
 		});
 		builder.addMatcher(checkFriendshipActions, (state, action) => {
 			if (state.users) {
 				const user = state.users[action.meta.arg.target];
-				let userConnections = user.connections.filter(connection => connection !== "none");
-				const friendship = action.payload.data;
-				if ("following" in friendship) {
-					if (friendship.following) {
-						userConnections.push("following");
-					} else userConnections = userConnections.filter(connection => connection !== "following");
+				if (user) {
+					let userConnections = user.connections.filter(connection => connection !== "none");
+					const friendship = action.payload.data;
+					if ("following" in friendship) {
+						if (friendship.following) {
+							userConnections.push("following");
+						} else userConnections = userConnections.filter(connection => connection !== "following");
+					}
+					if ("muting" in friendship) {
+						if (friendship.muting) {
+							userConnections.push("muting");
+						} else userConnections = userConnections.filter(connection => connection !== "muting");
+					}
+					if ("blocking" in friendship) {
+						if (friendship.blocking) {
+							userConnections.push("blocking");
+						} else userConnections = userConnections.filter(connection => connection !== "blocking");
+					}
+					user.connections = userConnections;
 				}
-				if ("muting" in friendship) {
-					if (friendship.muting) {
-						userConnections.push("muting");
-					} else userConnections = userConnections.filter(connection => connection !== "muting");
-				}
-				if ("blocking" in friendship) {
-					if (friendship.blocking) {
-						userConnections.push("blocking");
-					} else userConnections = userConnections.filter(connection => connection !== "blocking");
-				}
-				user.connections = userConnections;
 			}
 		});
 	}

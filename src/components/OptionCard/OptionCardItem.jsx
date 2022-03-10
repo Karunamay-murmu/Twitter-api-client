@@ -18,7 +18,7 @@ function OptionCardItem({ Icon, text, eventHandlers }) {
 OptionCardItem.propTypes = {
 	Icon: PropTypes.elementType,
 	text: PropTypes.string.isRequired,
-	eventHandlers: PropTypes.func
+	eventHandlers: PropTypes.object
 };
 
 OptionCardItem.defaultProps = {

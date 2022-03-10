@@ -74,15 +74,18 @@ const userProfileSlice = createSlice({
 			state.error = action.payload;
 		});
 		builder.addMatcher(updateRelationship, (state, action) => {
-			const friendship = action.payload.data;
-			if ("following" in friendship) {
-				state.user.relationship.source.following = action.payload.data.following;
-			}
-			if ("mutin" in friendship) {
-				state.user.relationship.source.following = action.payload.data.muting;
-			}
-			if ("blocking" in friendship) {
-				state.user.relationship.source.following = action.payload.data.blocking;
+			const userId = action.meta?.arg?.target;
+			if (userId === state.user.id) {
+				const friendship = action.payload.data;
+				if ("following" in friendship) {
+					state.user.relationship.source.following = action.payload.data.following;
+				}
+				if ("mutin" in friendship) {
+					state.user.relationship.source.following = action.payload.data.muting;
+				}
+				if ("blocking" in friendship) {
+					state.user.relationship.source.following = action.payload.data.blocking;
+				}
 			}
 		});
 	}

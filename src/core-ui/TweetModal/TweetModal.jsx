@@ -2,7 +2,6 @@ import React from "react";
 
 import ModalContainer from "components/Modal/ModalContainer";
 import TweetContainer from "core-ui/Tweet/TweetContainer";
-import withModal from "hoc/withModal";
 
 import styles from "./TweetModal.module.css";
 
@@ -15,4 +14,4 @@ function TweetModal() {
 }
 
 
-export default withModal(TweetModal);
+export default TweetModal;

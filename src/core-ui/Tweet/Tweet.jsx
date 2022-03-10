@@ -14,7 +14,8 @@ import Avatar from "components/Avatar/Avatar.jsx";
 import styles from "./Tweet.module.css";
 import Spinner from "components/Spinner/Spinner";
 
-function Tweet({ inputPlaceholder, inputRow, user, value, status, handleInputData, handleFormSubmit }) {
+
+function Tweet({ inputPlaceholder, inputRow, user, tweet, status, handleInputData, handleFormSubmit }) {
 	return (
 		<div className={styles.tweet}>
 			{status === "loading" &&
@@ -29,16 +30,16 @@ function Tweet({ inputPlaceholder, inputRow, user, value, status, handleInputDat
 					<Avatar image={user.profile_image_url} />
 				</div>
 				<div className={styles.tweet__wrapper}>
-					<form method="post" encType="multipart/form-data" id="id_tweetForm" onSubmit={handleFormSubmit}>
+					<form id="id_tweetForm">
 						<InputContainer
 							className={styles.tweet__input}
 							tag="textarea"
 							attributes={{
 								placeholder: inputPlaceholder,
 								rows: inputRow,
-								name: "tweet"
+								name: "text",
 							}}
-							value={value}
+							value={tweet.text}
 							handleInputData={handleInputData}
 						/>
 					</form>
@@ -64,7 +65,7 @@ function Tweet({ inputPlaceholder, inputRow, user, value, status, handleInputDat
 								<ScheduleOutlinedIcon className={styles["tweet__options--icon"]} />
 							</div>
 						</div>
-						<Button attributes={{ "type": "submit", "form": "id_tweetForm" }} className={styles.tweet__btn}>Tweet</Button>
+						<Button onClick={handleFormSubmit} className={styles.tweet__btn}>Tweet</Button>
 					</div>
 				</div>
 			</div>
@@ -76,7 +77,7 @@ Tweet.propTypes = {
 	inputPlaceholder: PropTypes.string,
 	inputRow: PropTypes.string,
 	user: PropTypes.object,
-	value: PropTypes.string,
+	tweet: PropTypes.object,
 	status: PropTypes.string,
 	handleInputData: PropTypes.func,
 	handleFormSubmit: PropTypes.func

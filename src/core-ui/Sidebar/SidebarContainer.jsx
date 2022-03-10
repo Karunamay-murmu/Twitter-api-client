@@ -33,23 +33,6 @@ const SidebarContainer = () => {
 		}
 	];
 
-	// const authUserOptions = useMemo(() => [
-	// 	{
-	// 		"text": "Topics",
-	// 		"Icon": TopicOutlinedIcon,
-	// 	}, {
-	// 		"text": "Moments",
-	// 		"Icon": OfflineBoltOutlinedIcon,
-	// 	}, {
-	// 		"text": "Settings and privacy",
-	// 		"Icon": SettingsOutlinedIcon,
-	// 		"href": SETTINGS_ROUTE,
-	// 	}, {
-	// 		"text": "Help Center",
-	// 		"Icon": HelpOutlineOutlinedIcon,
-	// 	}
-	// ])
-
 	const showCard = () => setOpen(prev => !prev);
 	return (
 		<Sidebar

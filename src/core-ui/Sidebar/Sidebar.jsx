@@ -18,6 +18,7 @@ import ProfileButtonContainer from "components/ProfileButton/ProfileButtonContai
 
 import styles from "./Sidebar.module.css";
 import LogoutContainer from "components/Logout/LogoutContainer";
+import { nanoid } from "@reduxjs/toolkit";
 
 const Sidebar = ({ options, showMoreOption, showCard, user, routeLocation }) => {
 	return (
@@ -56,7 +57,7 @@ const Sidebar = ({ options, showMoreOption, showCard, user, routeLocation }) => 
 							</div>
 						</div>
 					</>
-					<Link to="/compose/tweet" state={{ background: routeLocation }} className={styles["sidebar--tweet-btn"]}>Tweet</Link>
+					<Link to="/compose/tweet" state={{ background: routeLocation, modalId: nanoid() }} className={styles["sidebar--tweet-btn"]}>Tweet</Link>
 				</div>
 				<div>
 					<div className={styles.sidebar__user__wrapper}>

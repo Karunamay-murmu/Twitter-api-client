@@ -92,11 +92,12 @@ code {
       -ms-flex-align: center;
           align-items: center;
   gap: 1rem;
-  position: absolute;
+  position: fixed;
   bottom: 3rem;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+  z-index: 100;
 }
 
 #root,

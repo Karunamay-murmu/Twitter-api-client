@@ -41,6 +41,10 @@ export const fetchFollowers = createAsyncThunk("[followers/following]/fetch", as
 	}
 });
 
+const checkFriendshipActions = (action) => {
+	return action.type.startsWith("user/manageFriendship") && action.type.endsWith("fulfilled") && !action.type.includes("show");
+};
+
 export const followersSlice = createSlice({
 	name: "followers/following",
 	initialState,
@@ -64,6 +68,32 @@ export const followersSlice = createSlice({
 		builder.addCase(fetchFollowers.rejected, (state, action) => {
 			state.error = action.payload;
 			state.status = "failed";
+		});
+		builder.addMatcher(checkFriendshipActions, (state, action) => {
+			const userId = action.meta.arg.target;
+			const users = [].concat(state.following.data, state.followers.data).filter(user => user?.id === userId);
+			if (users) {
+				users.forEach(user => {
+					let userConnections = user.connections.filter(connection => connection !== "none");
+					const friendship = action.payload.data;
+					if ("following" in friendship) {
+						if (friendship.following) {
+							userConnections.push("following");
+						} else userConnections = userConnections.filter(connection => connection !== "following");
+					}
+					if ("muting" in friendship) {
+						if (friendship.muting) {
+							userConnections.push("muting");
+						} else userConnections = userConnections.filter(connection => connection !== "muting");
+					}
+					if ("blocking" in friendship) {
+						if (friendship.blocking) {
+							userConnections.push("blocking");
+						} else userConnections = userConnections.filter(connection => connection !== "blocking");
+					}
+					user.connections = userConnections;
+				});
+			}
 		});
 	}
 });

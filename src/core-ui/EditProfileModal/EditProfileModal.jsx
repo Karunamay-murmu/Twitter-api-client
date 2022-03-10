@@ -1,6 +1,5 @@
 import React from "react";
 
-import withModal from "hoc/withModal";
 import ModalContainer from "components/Modal/ModalContainer";
 import ProfileEditFormContainer from "core-ui/Form/ProfileEditForm/ProfileEditFormContainer";
 
@@ -14,4 +13,4 @@ function EditProfileModal() {
 	);
 }
 
-export default withModal(EditProfileModal);
+export default EditProfileModal;

@@ -5,9 +5,7 @@ import { useDispatch } from "react-redux";
 import Friendship from "components/Friendship/Friendship";
 import useFriendship from "hooks/useFriendship";
 import { useSelector } from "react-redux";
-// import { selectRelationshipFetchingStatus } from "redux/slice/relationshipSlice";
 import { selectRelationshipFetchingStatus, showFriendship } from "redux/slice/relationshipSlice";
-// import { selectUser } from "redux/slice/userSlice";
 import { setRelationship } from "redux/slice/userSlice";
 import { selectAuthUser } from "redux/slice/authSlice";
 

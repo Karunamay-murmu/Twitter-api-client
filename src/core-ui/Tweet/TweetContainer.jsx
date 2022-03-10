@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Tweet from "core-ui/Tweet/Tweet.jsx";
@@ -7,39 +8,47 @@ import { selectTweetManageStatus, createTweet } from "redux/slice/userTweetSlice
 import { addMessage } from "redux/slice/messageSlice";
 
 function TweetContainer(props) {
-	const [tweet, setTweet] = useState("");
+	const [tweet, setTweet] = useState({
+		text: "",
+	});
 
 	const authUser = useSelector(state => selectAuthUser(state));
 	const manageTweetStatus = useSelector(state => selectTweetManageStatus(state));
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	const handleInputData = e => setTweet(e.target.value);
+	const handleInputData = e => {
+		return setTweet({
+			...tweet,
+			[e.target.name]: e.target.value,
+		});
+	};
 
-	const handleFormSubmit = e => {
-		e.preventDefault();
+	const handleFormSubmit = () => {
 		const formData = {
-			text: tweet,
+			text: tweet.text,
 		};
 		const promise = dispatch(createTweet(formData)).unwrap();
 		promise.then(() => {
 			dispatch(addMessage({
 				type: "info",
-				message: "Tweet has been created",
+				message: "Tweet was created",
 			}));
+			navigate(-1);
 		}).catch(err => {
 			dispatch(addMessage({
 				type: "error",
 				message: err,
 			}));
 		});
-		setTweet("");
+		setTweet({ ...tweet, text: "" });
 	};
 
 	return (
 		<Tweet
 			user={authUser}
-			value={tweet}
+			tweet={tweet}
 			status={manageTweetStatus}
 			handleInputData={handleInputData}
 			handleFormSubmit={handleFormSubmit}

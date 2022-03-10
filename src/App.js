@@ -5,8 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import ProfileFeedContainer from "core-ui/ProfileFeed/ProfileFeedContainer.jsx";
 import TweetDetailContainer from "core-ui/TweetDetail/TweetDetailContainer";
-import TweetModal from "core-ui/TweetModal/TweetModal";
-import EditProfileModal from "core-ui/EditProfileModal/EditProfileModal";
+import TweetModalContainer from "core-ui/TweetModal/TweetModalContainer";
+import EditProfileModalContainer from "core-ui/EditProfileModal/EditProfileModalContainer";
 import SettingLayoutContainer from "core-ui/SettingLayout/SettingLayoutContainer";
 import AccountSettingContainer from "core-ui/AccountSetting/AccountSettingContainer";
 import PrivacySettingContainer from "core-ui/PrivacySetting/PrivacySettingContainer";
@@ -72,14 +72,14 @@ function App() {
 						<Route path="your_twitter_data/account" element={<AccountInformationSetting />} />
 						<Route path="privacy_and_safety" element={<PrivacySettingContainer />} />
 					</Route>
-					<Route path="compose/tweet" element={<TweetModal />} />
+					{/* <Route path="compose/tweet" element={<TweetModal />} /> */}
 				</Route>
 			</Routes>
 			{
 				authUser && background &&
 				<Routes>
-					<Route path="compose/tweet" element={<TweetModal />} />
-					<Route path="settings/edit_profile" element={<EditProfileModal />} />
+					<Route path="compose/tweet" element={<TweetModalContainer />} />
+					<Route path="settings/edit_profile" element={<EditProfileModalContainer />} />
 				</Routes>
 			}
 		</div>

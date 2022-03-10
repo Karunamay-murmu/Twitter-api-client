@@ -23,7 +23,6 @@ function ProfileTweetsContainer() {
 
 	useEffect(() => {
 		let promise;
-
 		if (params.username.toLowerCase() !== user.username.toLowerCase()) {
 			dispatch(clearTweetState());
 		}

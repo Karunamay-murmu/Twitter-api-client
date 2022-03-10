@@ -19,6 +19,7 @@ import { EDIT_PROFILE } from "routes/routes";
 import { short } from "utils/number";
 
 import styles from "./Profile.module.css";
+import { nanoid } from "@reduxjs/toolkit";
 // import Name from "components/Name/Name";
 
 function Profile({ authUser, profile, routeLocation }) {
@@ -81,7 +82,7 @@ function Profile({ authUser, profile, routeLocation }) {
 					<div className={styles.profile__edit__wrapper}>
 						{
 							authUser?.username === username ?
-								<Link to={EDIT_PROFILE} state={{ background: routeLocation }} className={styles.profile__edit} attributes={{
+								<Link to={EDIT_PROFILE} state={{ background: routeLocation, modalId: nanoid() }} className={styles.profile__edit} attributes={{
 									title: "Edit Profile",
 									"aira-label": "Edit Profile",
 								}}>

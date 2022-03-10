@@ -1,22 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { openModal, closeModal } from "redux/slice/modalSlice";
+import { openModal } from "redux/slice/modalSlice";
 
 function withModal(WrappedComponent) {
 	function NewComponent() {
-		const { isOpen } = useSelector(state => state.modal);
+
 		const dispatch = useDispatch();
 		const location = useLocation();
+		const id = location.state.modalId;
 
-		React.useEffect(() => {
-			if (!isOpen) {
-				dispatch(openModal({ id: 1, location: location.pathname }));
-			}
-			return () => {
-				dispatch(closeModal());
-			};
+		useEffect(() => {
+			dispatch(openModal({ id, location: location.pathname }));
 		}, []);
 
 		return <WrappedComponent />;

@@ -6,6 +6,8 @@
     border: 1px solid $light-gray;
     border-radius: .25rem;
     overflow: hidden;
+    background-color: $white;
+
 
     &__wrapper {
         @include flex($align: center);

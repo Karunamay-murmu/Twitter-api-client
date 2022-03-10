@@ -25,8 +25,6 @@ function TweetOptionsCntainer({ tweet }) {
 	const users = useSelector(state => selectTweetsUser(state));
 	const relationshipFetchingStatus = useSelector(state => selectRelationshipFetchingStatus(state));
 
-	console.log(users);
-
 	const user = useMemo(() => users[tweet.user?.id_str ?? tweet.user?.id], [tweet, users]);
 	const { isFollowing, isMuting, isBlocking, handleMute, handleBlock, handleFollow } = useFriendship(user);
 
@@ -41,7 +39,7 @@ function TweetOptionsCntainer({ tweet }) {
 		promise.then(() => {
 			dispatch(addMessage({
 				type: "info",
-				message: "Tweet has been deleted",
+				message: "Tweet was deleted",
 			}));
 		}).catch(err => {
 			dispatch(addMessage({

@@ -1,16 +1,5 @@
 @import "./variable.scss";
 
-@mixin button($bg: $primary-dark, $font-size: 14px, $width: 4.8125rem, $height: 2rem, $padding: 0 1rem) {
-    min-width: min-content;
-    width: $width;
-    height: $height;
-    background-color: $bg;
-    border: none;
-    outline: none;
-    padding: $padding;
-    border-radius: 10rem;
-}
-
 @mixin input($background-color: transparent, $font-size: 1rem, $padding: 0, $margin: 0) {
     outline: none;
     border: none;
