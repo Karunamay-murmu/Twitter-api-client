@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import endpoints from "api/endpoints";
 import Client, { cancelToken } from "api/client";
-// import { updateRelationship } from "redux/slice/userSlice";
 
 const initialState = {
 	data: {},
@@ -42,13 +41,6 @@ const isPendingAction = action => action.type.endsWith("pending") && action.type
 const isRejectedAction = action => action.type.endsWith("rejected");
 const isFulfilledAction = action => action.type.endsWith("fulfilled");
 
-// const checkFulfilledFollowActions = (action, friendship) => {
-// 	const actionType = action.type;
-// 	if (actionType.endsWith("fulfilled")) {
-// 		return friendship.some(action => actionType.includes(action));
-// 	}
-// };
-
 const checkFriendshipActions = (action) => {
 	return action.type.startsWith("user/manageFriendship")
 		&& action.type.endsWith("fulfilled")
@@ -68,20 +60,12 @@ const relationshipSlice = createSlice({
 			state.status = "succeeded";
 		}).addMatcher(checkFriendshipActions, (state, action) => {
 			state.data = action.payload;
-		})
-			// .addMatcher(action => checkFulfilledFollowActions(action, ["mute", "unmute"]), (state, action) => {
-			// 	const userId = action.meta.arg.target;
-			// 	state.relationship[userId].source.muting = action.payload.data.muting;
-			// }).addMatcher(action => checkFulfilledFollowActions(action, ["mute", "unmute"]), (state, action) => {
-			// 	const userId = action.meta.arg.target;
-			// 	state.relationship[userId].source.blocking = action.payload.data.blocking;
-			// })
-			.addMatcher(isPendingAction, state => {
-				state.status = "loading";
-			}).addMatcher(isRejectedAction, (state, action) => {
-				state.status = "failed";
-				state.error = action.payload;
-			});
+		}).addMatcher(isPendingAction, state => {
+			state.status = "loading";
+		}).addMatcher(isRejectedAction, (state, action) => {
+			state.status = "failed";
+			state.error = action.payload;
+		});
 	}
 });
 

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// import FeedPostContainer from "core-ui/FeedPost/FeedPostContainer";
 import { Outlet } from "react-router-dom";
 import ProfileContainer from "core-ui/Profile/ProfileContainer.jsx";
 import DisplayName from "components/DisplayName/DisplayName";
@@ -10,7 +9,6 @@ import FeedHeader from "components/FeedHeader/FeedHeader";
 import styles from "./ProfileFeed.module.css";
 import TweetMenuBarContainer from "components/TweetMenuBar/TweetMenuBarContainer";
 import { short } from "utils/number";
-// import Spinner from "components/Spinner/Spinner";
 
 
 function ProfileFeed({ user, ...props }) {
@@ -59,7 +57,6 @@ function ProfileFeed({ user, ...props }) {
 
 ProfileFeed.propTypes = {
 	user: PropTypes.object,
-	tweets: PropTypes.object,
 };
 
 export default React.memo(ProfileFeed, (prev, next) => {

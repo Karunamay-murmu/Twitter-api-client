@@ -22,7 +22,6 @@ import HomeFeedContainer from "core-ui/HomeFeed/HomeFeedContainer";
 
 function App() {
 	const authUser = useSelector(state => selectAuthUser(state));
-	// const { isOpen } = useSelector(state => state.modal);
 	const location = useLocation();
 	const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 	const dispatch = useDispatch();
@@ -72,7 +71,6 @@ function App() {
 						<Route path="your_twitter_data/account" element={<AccountInformationSetting />} />
 						<Route path="privacy_and_safety" element={<PrivacySettingContainer />} />
 					</Route>
-					{/* <Route path="compose/tweet" element={<TweetModal />} /> */}
 				</Route>
 			</Routes>
 			{

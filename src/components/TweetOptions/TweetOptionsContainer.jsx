@@ -18,14 +18,23 @@ import useFriendship from "hooks/useFriendship";
 import { destroyTweet, selectTweetsUser } from "redux/slice/userTweetSlice";
 import { addMessage } from "redux/slice/messageSlice";
 import { selectAuthUser } from "redux/slice/authSlice";
-import { selectRelationshipFetchingStatus, showFriendship } from "redux/slice/relationshipSlice";
+import { showFriendship } from "redux/slice/relationshipSlice";
+import { selectHomeTimelineUsers } from "redux/slice/homeTimelineSlice";
+import { selectTweetDetailsUsers } from "redux/slice/tweetDetailSlice";
 
 function TweetOptionsCntainer({ tweet }) {
 	const authUser = useSelector(state => selectAuthUser(state));
-	const users = useSelector(state => selectTweetsUser(state));
-	const relationshipFetchingStatus = useSelector(state => selectRelationshipFetchingStatus(state));
+	const tweetUsers = useSelector(state => selectTweetsUser(state));
+	const timelineUsers = useSelector(state => selectHomeTimelineUsers(state));
+	const tweetDetailsUsers = useSelector(state => selectTweetDetailsUsers(state));
 
-	const user = useMemo(() => users[tweet.user?.id_str ?? tweet.user?.id], [tweet, users]);
+	const user = useMemo(() => {
+		const userId = tweet.user?.id_str ?? tweet.user?.id;
+		return tweetDetailsUsers[userId] ?? tweetUsers[userId] ?? timelineUsers[userId];
+	}, [tweet, tweetUsers, timelineUsers, tweetDetailsUsers]);
+
+	console.log("TweetOptionsCntainer", tweet, user);
+
 	const { isFollowing, isMuting, isBlocking, handleMute, handleBlock, handleFollow } = useFriendship(user);
 
 	const dispatch = useDispatch();
@@ -111,11 +120,9 @@ function TweetOptionsCntainer({ tweet }) {
 			"Icon": BarChartRoundedIcon
 		}
 	];
-
 	return (
 		<TweetOptions
 			options={authUser.username !== username ? options : authUserTweetOption}
-			status={relationshipFetchingStatus}
 			user={tweet.user}
 			actionType={showFriendship}
 		/>

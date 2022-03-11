@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import HomeFeed from "core-ui/HomeFeed/HomeFeed.jsx";
 
-import { selectTweets, selectStatus } from "redux/slice/homeTimelineSlice";
-// import { fetchHomeTimeline, selectTweets, selectStatus } from "redux/slice/homeTimelineSlice";
+import { fetchHomeTimeline, selectTweets, selectStatus } from "redux/slice/homeTimelineSlice";
 
 function HomeFeedContainer(props) {
 	const tweets = useSelector(state => selectTweets(state));
 	const status = useSelector(state => selectStatus(state));
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (!tweets.length) {
-			// dispatch(fetchHomeTimeline());
+			dispatch(fetchHomeTimeline());
 		}
 	}, [tweets]);
 

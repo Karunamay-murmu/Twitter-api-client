@@ -11,56 +11,72 @@ import TweetTextContainer from "components/TweetText/TweetTextContainer";
 import MediaContainer from "components/Media/MediaContainer";
 
 import styles from "./TweetDetail.module.css";
+import TweetOptionsCntainer from "components/TweetOptions/TweetOptionsContainer";
+import FeedPostListContainer from "core-ui/FeedPostList/FeedPostListContainer";
 
-function TweetDetail({ tweet, moreOptions, user, media }) {
-	const { username, name, profile_image_url } = user;
-	const { created_at, public_metrics: { retweet_count, like_count, quote_count }, source } = tweet;
+function TweetDetail({ tweets, media }) {
+	const render = (data) => {
+		return data.map(tweet => {
+			const { username, name, profile_image_url } = tweet.user;
+			const { created_at, public_metrics: { retweet_count, like_count, quote_count }, source } = tweet;
 
-	const time = useMemo(() => new Date(created_at).toLocaleString("en-us", {
-		hour: "numeric",
-		minute: "numeric",
-		hour12: true,
-	}));
+			const time = useMemo(() => new Date(created_at).toLocaleString("en-us", {
+				hour: "numeric",
+				minute: "numeric",
+				hour12: true,
+			}));
 
-	const date = useMemo(() => new Date(created_at).toLocaleString("en-us", {
-		month: "short",
-		year: "numeric",
-		day: "numeric",
-	}));
+			const date = useMemo(() => new Date(created_at).toLocaleString("en-us", {
+				month: "short",
+				year: "numeric",
+				day: "numeric",
+			}));
+
+			return !tweet?.replies ?
+				(<>
+					<div className={styles.tweet__wrapper}>
+						<div className={styles.tweet__profile}>
+							<ProfileBasicInfo displayName={name} username={username} image={profile_image_url} />
+							<MoreOptionContainer>
+								<TweetOptionsCntainer tweet={tweet} />
+							</MoreOptionContainer>
+						</div>
+						<div className={styles.tweet__content}>
+							<TweetTextContainer className={styles.tweet__post} tweet={tweet} />
+							{media?.length && <MediaContainer media={media} />}
+						</div>
+						<div className={styles.tweet__date}>
+							<span>{time}</span> <span className={styles.dot}>&middot;</span>
+							<span>{date}</span> <span className={styles.dot}>&middot;</span>
+							<span>{source}</span>
+						</div>
+						<div className={styles.tweet__stats__wrapper}>
+							<TweetStats reTweets={retweet_count} quoteTweets={quote_count} likes={like_count} />
+						</div>
+						<TweetActionBarContainer />
+					</div>
+					<TweetRepliesContainer />
+				</>)
+				:
+				<>
+					<FeedPostListContainer tweets={tweets} />
+					{render(tweet.replies)}
+				</>;
+		});
+	};
+
 
 	return (
 		<div>
 			<FeedHeader title="Tweet" />
-			<div className={styles.tweet__wrapper}>
-				<div className={styles.tweet__profile}>
-					<ProfileBasicInfo displayName={name} username={username} image={profile_image_url} />
-					<MoreOptionContainer moreOptions={moreOptions} />
-				</div>
-				<div className={styles.tweet__content}>
-					<TweetTextContainer className={styles.tweet__post} tweet={tweet} />
-					{media && media.length > 0 && <MediaContainer media={media} />}
-				</div>
-				<div className={styles.tweet__date}>
-					<span>{time}</span> <span className={styles.dot}>&middot;</span>
-					<span>{date}</span> <span className={styles.dot}>&middot;</span>
-					<span>{source}</span>
-				</div>
-				<div className={styles.tweet__stats__wrapper}>
-					<TweetStats reTweets={retweet_count} quoteTweets={quote_count} likes={like_count} />
-				</div>
-				<TweetActionBarContainer />
-			</div>
-			<TweetRepliesContainer />
+			{render(tweets)}
 		</div>
 	);
 }
 
 TweetDetail.propTypes = {
-	tweet: PropTypes.object.isRequired,
-	moreOptions: PropTypes.array.isRequired,
-	user: PropTypes.object.isRequired,
-	media: PropTypes.array.isRequired,
-	location: PropTypes.object,
+	tweets: PropTypes.array.isRequired,
+	media: PropTypes.array,
 };
 
 export default TweetDetail;

@@ -4,7 +4,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 
 import InputContainer from "components/Input/InputContainer";
-// import OptionCardContainer from "components/OptionCard/OptionCardContainer";
 
 import styles from "./Search.module.css";
 

@@ -31,9 +31,4 @@ AccountInformationSetting.propTypes = {
 	user: PropTypes.object,
 };
 
-// AccountInformationSetting.defaultProps = {
-// 	user: {},
-// };
-
-
 export default AccountInformationSetting;

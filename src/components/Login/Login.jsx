@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
-// import background from "assets/images/lohp_en_1302x955.png";
 import Spinner from "components/Spinner/Spinner";
 import Button from "components/Button/Button";
 

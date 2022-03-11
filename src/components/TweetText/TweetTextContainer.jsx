@@ -67,7 +67,7 @@ function TweetTextContainer({ tweet, ...props }) {
 								</div>;
 							})
 						}
-						{mentions.length > 3 && (
+						{mentions?.length > 3 && (
 							<span className={styles.post__mentions__people}>
 								and {mentions.length - 2} others
 							</span>

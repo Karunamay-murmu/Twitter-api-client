@@ -4,7 +4,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import Login from "components/Login/Login";
 import { useNavigate } from "react-router-dom";
-// import withAuthentication from "hoc/withAuthentication";
 
 function LoginContainer({ isAuthenticated, ...props }) {
 
@@ -23,8 +22,6 @@ function LoginContainer({ isAuthenticated, ...props }) {
 }
 
 LoginContainer.propTypes = {
-	oauth_token: PropTypes.string,
-	oauth_verifier: PropTypes.string,
 	isAuthenticated: PropTypes.bool
 };
 

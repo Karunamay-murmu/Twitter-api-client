@@ -38,10 +38,10 @@ const userProfileSlice = createSlice({
 	initialState,
 	reducers: {
 		setRelationship: (state, action) => {
-			state.user.relationship = action.payload.relationship;
+			state.user.connections = action.payload.relationship;
 		},
 		updateRelationship: (state, action) => {
-			state.user.relationship.source[action.payload.relationshipType] = action.payload.data;
+			state.user.connections.source[action.payload.relationshipType] = action.payload.data;
 		}
 	},
 	extraReducers: (builder) => {
@@ -74,17 +74,19 @@ const userProfileSlice = createSlice({
 			state.error = action.payload;
 		});
 		builder.addMatcher(updateRelationship, (state, action) => {
-			const userId = action.meta?.arg?.target;
-			if (userId === state.user.id) {
-				const friendship = action.payload.data;
-				if ("following" in friendship) {
-					state.user.relationship.source.following = action.payload.data.following;
-				}
-				if ("mutin" in friendship) {
-					state.user.relationship.source.following = action.payload.data.muting;
-				}
-				if ("blocking" in friendship) {
-					state.user.relationship.source.following = action.payload.data.blocking;
+			if (state.user?.connections) {
+				const userId = action.meta?.arg?.target;
+				if (userId === state.user.id) {
+					const friendship = action.payload.data;
+					if ("following" in friendship) {
+						state.user.connections.source.following = action.payload.data.following;
+					}
+					if ("mutin" in friendship) {
+						state.user.connections.source.following = action.payload.data.muting;
+					}
+					if ("blocking" in friendship) {
+						state.user.connections.source.following = action.payload.data.blocking;
+					}
 				}
 			}
 		});

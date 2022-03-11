@@ -14,11 +14,11 @@ import styles from "./FeedPostList.module.css";
 import MediaContainer from "components/Media/MediaContainer";
 import TweetOptionsContainer from "components/TweetOptions/TweetOptionsContainer";
 
-const FeedPost = ({ tweet, media, moreOptions, navigateToTweetDetail }) => {
+const FeedPost = ({ tweet, media, navigateToTweetDetail, isTweetDetail }) => {
 	const { username, screen_name, profile_image_url } = tweet.user;
 	const { id, id_str, created_at, public_metrics, retweet_count = 0, favorite_count = 0, reply_count = 0, isPinned = false, is_retweet = false, is_quoted = false, replies = [] } = tweet;
 
-	return (
+	return !isTweetDetail && (
 		<div className={styles.post__wrapper} onClick={(e) => navigateToTweetDetail(e, {
 			id: id_str ?? id,
 			username: username ?? screen_name,
@@ -61,7 +61,7 @@ const FeedPost = ({ tweet, media, moreOptions, navigateToTweetDetail }) => {
 								<span>{getPostDate(created_at)}</span>
 							</time>
 						</div>
-						{moreOptions && !is_quoted && <MoreOptionContainer moreOptions={moreOptions}>
+						{!is_quoted && <MoreOptionContainer>
 							<TweetOptionsContainer tweet={tweet} />
 						</MoreOptionContainer>}
 					</div>
@@ -91,12 +91,10 @@ const FeedPost = ({ tweet, media, moreOptions, navigateToTweetDetail }) => {
 FeedPost.displayName = "FeedPost";
 
 FeedPost.propTypes = {
-	moreOptions: PropTypes.array,
-	user: PropTypes.object,
 	tweet: PropTypes.object,
 	media: PropTypes.array,
-	media_keys: PropTypes.array,
 	navigateToTweetDetail: PropTypes.func,
+	isTweetDetail: PropTypes.bool,
 };
 
 export default FeedPost;

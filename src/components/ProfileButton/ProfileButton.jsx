@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Avatar from "components/Avatar/Avatar.jsx";
-// import FollowButtonContainer from "components/FollowButton/FollowButtonContainer.jsx";
 import Name from "components/Name/Name";
 import BioContainer from "components/Bio/BioContainer.jsx";
 

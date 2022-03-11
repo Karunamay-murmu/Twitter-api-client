@@ -22,16 +22,12 @@ function ProfileTweetsContainer() {
 	const location = useLocation();
 
 	useEffect(() => {
-		let promise;
 		if (params.username.toLowerCase() !== user.username.toLowerCase()) {
 			dispatch(clearTweetState());
 		}
 		if (((!likes.length && location.pathname.includes("likes")) || !tweets.length) && user?.username.toLowerCase() === params.username.toLowerCase() && authUser) {
-			promise = dispatch(fetchTweets({ userId: user.id, pathname: location.pathname }));
+			dispatch(fetchTweets({ userId: user.id, pathname: location.pathname }));
 		}
-		return () => {
-			status === "loading" && promise.abort();
-		};
 	}, [user.id, params.username, location.pathname]);
 
 	const tweetsData = useMemo(() => {

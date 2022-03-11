@@ -20,7 +20,6 @@ import { short } from "utils/number";
 
 import styles from "./Profile.module.css";
 import { nanoid } from "@reduxjs/toolkit";
-// import Name from "components/Name/Name";
 
 function Profile({ authUser, profile, routeLocation }) {
 	let {
@@ -135,6 +134,4 @@ Profile.propTypes = {
 	authUser: PropTypes.object,
 };
 
-
-// export default React.memo(Profile, (prev, next) => prev.profile.id === next.profile.id);
 export default Profile;

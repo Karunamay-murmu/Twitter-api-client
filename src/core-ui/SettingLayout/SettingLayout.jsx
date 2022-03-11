@@ -3,15 +3,6 @@ import { Outlet } from "react-router";
 
 import FeedHeader from "components/FeedHeader/FeedHeader.jsx";
 import Link from "components/Link/Link.jsx";
-// import {
-// 	ACCOUNT_ROUTE,
-// 	SECURITY_AND_ACCOUNT_ACCESS_ROUTE,
-// 	PRIVACY_AND_SAFETY_ROUTE,
-// 	NOTIFICATIONS_ROUTE,
-// 	ACCESSIBILITY_DISPLAY_AND_LANGUAGE_ROUTE,
-// 	ADDITIONAL_RESOURCES_ROUTE
-// } from "routes/routes";
-
 import styles from "./SettingLayout.module.css";
 
 function SettingLayout() {

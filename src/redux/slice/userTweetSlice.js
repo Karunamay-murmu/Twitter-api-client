@@ -116,7 +116,8 @@ export const tweetSlice = createSlice({
 			state.media = null;
 			state.refTweets = null;
 			state.users = null;
-			state.status = "idle";
+			state.tweetFetchingStatus = "idle",
+			state.tweetManageStatus = "idle",
 			state.error = null;
 		},
 		setTweetUsersRelationship: (state, action) => {
@@ -149,9 +150,11 @@ export const tweetSlice = createSlice({
 		});
 		builder.addCase(destroyTweet.pending, state => {
 			state.tweetManageStatus = "loading";
-		}).addCase(destroyTweet.fulfilled, (state) => {
+		}).addCase(destroyTweet.fulfilled, (state, action) => {
 			state.tweetManageStatus = "succeeded";
-			state.tweets.shift();
+			const tweetId = action.meta.arg.id;
+			state.tweets = state.tweets.filter(tweet => tweet.id !== tweetId);
+			delete state.tweetsMap[tweetId];
 		});
 		builder.addCase(fetchTweets.fulfilled, (state, action) => {
 			let { payload: { pathname, data, includes: { users = [], media = [], tweets = [] } = {}, meta = {} } } = action;
@@ -276,6 +279,7 @@ export default tweetSlice.reducer;
 export const selectTweets = (state) => state.userTweets.tweets;
 export const selectLikes = (state) => state.userTweets.likes;
 export const selectTweetsUser = state => state.userTweets.users;
+export const selectUserTweetsMap = state => state.userTweets.tweetMap;
 export const selectTweetFetchingStatus = (state) => state.userTweets.tweetFetchingStatus;
 export const selectTweetManageStatus = (state) => state.userTweets.tweetManageStatus;
 

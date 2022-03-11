@@ -5,7 +5,6 @@ import Avatar from "components/Avatar/Avatar.jsx";
 import FollowButtonContainer from "components/FollowButton/FollowButtonContainer.jsx";
 import DisplayName from "components/DisplayName/DisplayName.jsx";
 import Username from "components/Username/Username.jsx";
-// import Name from "components/Name/Name.jsx";
 import FollowInfo from "components/FollowInfo/FollowInfo.jsx";
 import BioContainer from "components/Bio/BioContainer.jsx";
 
@@ -26,8 +25,6 @@ const ProfileCard = React.forwardRef(({ user, className, mouseLeave }, ref) => {
 			<BioContainer entities={entities?.description} bio={description} />
 			<FollowInfo following={following_count} followers={followers_count} />
 		</div>
-		// 		<div className={styles.profile}>
-		// </div>
 	);
 });
 

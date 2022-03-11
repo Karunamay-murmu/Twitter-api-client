@@ -115,22 +115,3 @@ textarea.input__field {
     height: 100%;
     resize: none;
 }
-
-// .input__field[type="file"] {
-//     height: 12rem;
-//     visibility: hidden;
-// }
-
-// .input__field[id="id_profile_photo"] {
-//     height: 100%;
-// }
-
-// .input__field[id="id_cover_photo"]~.input__label__wrapper>.input__label,
-// .input__field[id="id_profile_photo"]~.input__label__wrapper>.input__label {
-//     @include flex($justify: center, $align: center);
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     cursor: pointer;
-// }

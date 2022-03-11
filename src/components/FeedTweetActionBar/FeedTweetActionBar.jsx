@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
-// import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
 import RepeatRoundedIcon from "@mui/icons-material/RepeatRounded";
@@ -22,9 +21,6 @@ function FeedTweetActionBar({
 		<>
 			<div className={styles.actionbar__wrapper}>
 				<Link to="/compose/tweet" state={{ background: location, id }} className={`${styles.actionbar__analytics} ${styles["actionbar__analytics--reply"]}`} title="Reply">
-					{/* <div className={`${styles.actionbar__icon__wrapper}`}>
-						<ChatBubbleOutlineRoundedIcon className={styles.actionbar__icon} />
-					</div> */}
 					<LikeContainer />
 					<span>{short(replyCount)}</span>
 				</Link>
@@ -56,7 +52,6 @@ FeedTweetActionBar.propTypes = {
 	replyCount: PropTypes.number,
 	likeCount: PropTypes.number,
 	retweetCount: PropTypes.number,
-	isModalOpen: PropTypes.bool,
 };
 
 export default FeedTweetActionBar;

@@ -1,5 +1,4 @@
 const endpoints = {
-	// users endpoints
 	getUserByUsername: (username) => "users/by/username/" + username,
 	userTweetTimeline: (id) => `users/${id}/tweets`,
 	userLikedTweets: (id) => `users/${id}/liked_tweets`,
@@ -9,14 +8,12 @@ const endpoints = {
 	manageFriendship: (source_user, target_user) => `users/friendships/manage/${source_user}/${target_user}`,
 	homeTimeline: () => "users/home_timeline",
 
-	// Tweets endpoints
 	manageTweet: () => "tweets/",
 	showUserTimeline: () => "tweets/user_timeline",
 	recentTweetSearch: () => "tweets/search/recent",
 	tweetDetail: (id) => `tweets/${id}`,
 	tweetReplies: (id, username) => `tweets/search/recent/${id}/${username}`,
 
-	// Authentication endpoints
 	fetchRequestToken: "oauth2/request_token",
 	authenticateUser: (token, verifier) => `oauth2/login/${token}/${verifier}`,
 
