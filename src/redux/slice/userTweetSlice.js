@@ -116,8 +116,8 @@ export const tweetSlice = createSlice({
 			state.media = null;
 			state.refTweets = null;
 			state.users = null;
-			state.tweetFetchingStatus = "idle",
-			state.tweetManageStatus = "idle",
+			state.tweetFetchingStatus = "idle";
+			state.tweetManageStatus = "idle";
 			state.error = null;
 		},
 		setTweetUsersRelationship: (state, action) => {
@@ -153,6 +153,16 @@ export const tweetSlice = createSlice({
 		}).addCase(destroyTweet.fulfilled, (state, action) => {
 			state.tweetManageStatus = "succeeded";
 			const tweetId = action.meta.arg.id;
+			const tweet = state.tweetsMap[tweetId];
+			if (tweet?.isReply) {
+				const parentTweetId = tweet.referenced_tweets[0].id;
+				state.tweets.map(tweet => {
+					if (tweet.id === parentTweetId) {
+						delete tweet.replies;
+						return tweet;
+					}
+				});
+			}
 			state.tweets = state.tweets.filter(tweet => tweet.id !== tweetId);
 			delete state.tweetsMap[tweetId];
 		});

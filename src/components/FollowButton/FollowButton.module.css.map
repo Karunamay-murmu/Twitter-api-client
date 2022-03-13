@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAUK,AAAD,SAAM,CAAC;ECoEH,aAAa,EDnEyB,IAAI;ECoE1C,YAAY,EDpEY,IAAI;EAC5B,MAAM,EAAE,IAAI;EACZ,SAAS,EAAE,OAAO;EAClB,WAAW,EAAE,OAAO;CACvB",
+    "mappings": "AAUK,AAAD,SAAM,CAAC;ECyDH,aAAa,EDxDyB,IAAI;ECyD1C,YAAY,EDzDY,IAAI;EAC5B,MAAM,EAAE,IAAI;EACZ,SAAS,EAAE,OAAO;EAClB,WAAW,EAAE,OAAO;CACvB",
     "sources": [
         "FollowButton.module.scss",
         "../../static/style/mixin.scss",

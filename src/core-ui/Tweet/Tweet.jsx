@@ -10,12 +10,14 @@ import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 import InputContainer from "components/Input/InputContainer.jsx";
 import Button from "components/Button/Button.jsx";
 import Avatar from "components/Avatar/Avatar.jsx";
+import Name from "components/Name/Name";
 
 import styles from "./Tweet.module.css";
 import Spinner from "components/Spinner/Spinner";
+import TweetTextContainer from "components/TweetText/TweetTextContainer";
 
 
-function Tweet({ inputPlaceholder, inputRow, user, tweet, status, handleInputData, handleFormSubmit }) {
+function Tweet({ replyingTweet, inputPlaceholder, inputRow, user, tweet, status, handleInputData, handleFormSubmit }) {
 	return (
 		<div className={styles.tweet}>
 			{status === "loading" &&
@@ -24,6 +26,26 @@ function Tweet({ inputPlaceholder, inputRow, user, tweet, status, handleInputDat
 					<div className={styles.tweet__overlay}>
 					</div>
 				</>
+			}
+			{/* {replyingTweets && <FeedPostListContainer tweets={replyingTweets} />}
+			 */}
+			{
+				replyingTweet &&
+				<div className={styles.tweet__container} style={status === "loading" ? { filter: "blur(1px)" } : {}}>
+					<div className={styles.tweet__avatar}>
+						<Avatar image={replyingTweet?.user.profile_image_url} />
+					</div>
+					<div className={styles.tweet__wrapper} style={{ paddingLeft: "1rem" }}>
+						<Name user={replyingTweet.user} allowNavigate={false} />
+						<TweetTextContainer tweet={replyingTweet} className={styles.tweet__wrapper__text} />
+						<div className={styles.tweet__wrapper__people}>
+							<span>Replying to</span>
+							<a href={`/${replyingTweet.user?.username ?? replyingTweet.user?.screen_name}`} target="_blank" rel="noopener noreferrer">
+								@{replyingTweet.user?.username ?? replyingTweet.user?.screen_name}
+							</a>
+						</div>
+					</div>
+				</div>
 			}
 			<div className={styles.tweet__container} style={status === "loading" ? { filter: "blur(1px)" } : {}}>
 				<div className={styles.tweet__avatar}>
@@ -74,6 +96,7 @@ function Tweet({ inputPlaceholder, inputRow, user, tweet, status, handleInputDat
 }
 
 Tweet.propTypes = {
+	replyingTweet: PropTypes.array,
 	inputPlaceholder: PropTypes.string,
 	inputRow: PropTypes.string,
 	user: PropTypes.object,

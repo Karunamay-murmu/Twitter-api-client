@@ -1,7 +1,7 @@
 import React from "react";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 
-function Like() {
+function Reply() {
 	return (
 		<div className="icon__wrapper" title="Reply">
 			<ChatBubbleOutlineRoundedIcon className="icon" />
@@ -9,4 +9,4 @@ function Like() {
 	);
 }
 
-export default Like;
+export default Reply;

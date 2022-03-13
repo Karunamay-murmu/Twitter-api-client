@@ -1,11 +1,11 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import React, { useMemo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
 
 import Profile from "core-ui/Profile/Profile.jsx";
 import Spinner from "components/Spinner/Spinner";
 import { getOriginalImage } from "utils/image";
-import { selectUser } from "redux/slice/userSlice";
+import { fetchUser, selectUser } from "redux/slice/userSlice";
 import { selectAuthUser } from "redux/slice/authSlice";
 
 function ProfileContainer(props) {
@@ -13,6 +13,15 @@ function ProfileContainer(props) {
 	const user = useSelector(state => selectUser(state));
 	const authUser = useSelector(state => selectAuthUser(state));
 	const userStatus = useSelector(state => state.userProfile.status);
+
+	const dispatch = useDispatch();
+	const params = useParams();
+
+	useEffect(() => {
+		if ((!user || params.username !== user.username) && authUser) {
+			dispatch(fetchUser(params.username));
+		}
+	}, [params.username, authUser]);
 
 	const normalizeData = useMemo(() => {
 		if (!user) {

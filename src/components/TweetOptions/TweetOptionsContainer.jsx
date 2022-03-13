@@ -33,8 +33,6 @@ function TweetOptionsCntainer({ tweet }) {
 		return tweetDetailsUsers[userId] ?? tweetUsers[userId] ?? timelineUsers[userId];
 	}, [tweet, tweetUsers, timelineUsers, tweetDetailsUsers]);
 
-	console.log("TweetOptionsCntainer", tweet, user);
-
 	const { isFollowing, isMuting, isBlocking, handleMute, handleBlock, handleFollow } = useFriendship(user);
 
 	const dispatch = useDispatch();

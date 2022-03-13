@@ -33,7 +33,7 @@ function TweetDetail({ tweets, media }) {
 			}));
 
 			return !tweet?.replies ?
-				(<>
+				(<React.Fragment key={tweet.id}>
 					<div className={styles.tweet__wrapper}>
 						<div className={styles.tweet__profile}>
 							<ProfileBasicInfo displayName={name} username={username} image={profile_image_url} />
@@ -56,7 +56,7 @@ function TweetDetail({ tweets, media }) {
 						<TweetActionBarContainer />
 					</div>
 					<TweetRepliesContainer />
-				</>)
+				</React.Fragment>)
 				:
 				<>
 					<FeedPostListContainer tweets={tweets} />

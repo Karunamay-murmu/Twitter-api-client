@@ -28,20 +28,29 @@
 
     &__container {
         @include flex();
+        @include padding($top: 1rem);
     }
 
     &__wrapper {
         @include flex($direction: column);
         flex-grow: 1;
 
-        form {
-            width: 100%;
+        &__text {
+            margin: .25rem 0;
         }
 
-    }
+        &__people {
+            @include meta();
+            @include flex();
+            gap: .25rem;
+            margin: 1rem 0;
+        }
 
-    &__avatar {
-        @include margin($top: 1rem)
+        form {
+            width: 100%;
+            padding: .75rem 0 0 1rem;
+        }
+
     }
 
     &__options {
@@ -83,7 +92,6 @@
     }
 
     &__input {
-        padding: 1.75rem 0 0 1rem;
         font-size: 1.25rem;
         min-height: 3.125rem;
         height: auto;

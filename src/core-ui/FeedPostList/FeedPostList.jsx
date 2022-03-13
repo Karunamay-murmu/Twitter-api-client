@@ -75,7 +75,7 @@ const FeedPost = ({ tweet, media, navigateToTweetDetail, isTweetDetail }) => {
 					</div>
 					<div className={styles.post__footer}>
 						{!is_quoted && <FeedTweetActionBarContainer
-							id={id}
+							tweet={tweet}
 							replyCount={public_metrics?.reply_count ?? reply_count}
 							likeCount={public_metrics?.like_count ?? favorite_count}
 							retweetCount={public_metrics?.retweet_count ?? retweet_count}

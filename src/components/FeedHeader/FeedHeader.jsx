@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
@@ -7,14 +7,12 @@ import styles from "./FeedHeader.module.css";
 
 function FeedHeader({ backbtn = true, meta, title, children }) {
 
-	const [back, setBack] = React.useState(false);
+	const [back, setBack] = useState(false);
 	const navigate = useNavigate();
+	
+	const goBack = () => setBack(true);
 
-	const goBack = () => {
-		setBack(true);
-	};
-
-	React.useEffect(() => {
+	useEffect(() => {
 		if (back) {
 			navigate(-1);
 		}

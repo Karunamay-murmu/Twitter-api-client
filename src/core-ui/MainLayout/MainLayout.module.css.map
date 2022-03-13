@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAGA,AAAA,KAAK,CAAC;ECyGF,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,WAAW;EAClC,QAAQ,EAAE,QAAQ;EDzGlB,MAAM,EAAE,OAAO;EACf,KAAK,EAAE,OAAO;CACjB",
+    "mappings": "AAGA,AAAA,KAAK,CAAC;EC8FF,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,WAAW;EAClC,QAAQ,EAAE,QAAQ;ED9FlB,MAAM,EAAE,OAAO;EACf,KAAK,EAAE,OAAO;CACjB",
     "sources": [
         "MainLayout.module.scss",
         "../../static/style/mixin.scss",

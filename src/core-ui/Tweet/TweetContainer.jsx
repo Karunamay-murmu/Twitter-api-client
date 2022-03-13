@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Tweet from "core-ui/Tweet/Tweet.jsx";
@@ -17,6 +17,19 @@ function TweetContainer(props) {
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
+
+	const replyingTweet = location.state?.tweet;
+
+	useEffect(() => {
+		if (replyingTweet) {
+			setTweet({
+				"reply": {
+					"in_reply_to_tweet_id": replyingTweet?.id ?? replyingTweet?.id_str,
+				}
+			});
+		}
+	}, []);
 
 	const handleInputData = e => {
 		return setTweet({
@@ -26,10 +39,7 @@ function TweetContainer(props) {
 	};
 
 	const handleFormSubmit = () => {
-		const formData = {
-			text: tweet.text,
-		};
-		const promise = dispatch(createTweet(formData)).unwrap();
+		const promise = dispatch(createTweet(tweet)).unwrap();
 		promise.then(() => {
 			dispatch(addMessage({
 				type: "info",
@@ -48,6 +58,7 @@ function TweetContainer(props) {
 	return (
 		<Tweet
 			user={authUser}
+			replyingTweet={replyingTweet}
 			tweet={tweet}
 			status={manageTweetStatus}
 			handleInputData={handleInputData}

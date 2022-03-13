@@ -6,8 +6,6 @@ import { setRelationship } from "redux/slice/userSlice";
 
 function useFriendship(user) {
 
-	console.log("useFriendship", user);
-
 	const authUser = useSelector(state => selectAuthUser(state));
 	const dispatch = useDispatch();
 

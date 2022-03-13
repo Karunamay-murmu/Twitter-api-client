@@ -1,19 +1,13 @@
-import {
-	createSlice,
-	createAsyncThunk
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import endpoints from "api/endpoints";
-import Client, {
-	cancelToken
-} from "api/client";
+import Client, { cancelToken } from "api/client";
 
 const initialState = {
 	replies: [],
 	repliesMap: null,
 	refTweetsMap: null,
 	users: null,
-	meta: null,
 	status: "idle",
 	error: null,
 };
@@ -116,9 +110,6 @@ export const tweetRepliesSlice = createSlice({
 				state.replies = replies;
 				state.users = userMap;
 			}
-
-			state.meta = action.meta;
-
 		});
 		builder.addCase(fetchTweetReplies.rejected, (state, action) => {
 			state.error = action.payload;
@@ -127,7 +118,6 @@ export const tweetRepliesSlice = createSlice({
 	},
 });
 
-export const selectMetaData = state => state.tweetReplies.meta;
 export const selectReplies = state => state.tweetReplies.replies;
 export const selectStatus = state => state.tweetReplies.status;
 
