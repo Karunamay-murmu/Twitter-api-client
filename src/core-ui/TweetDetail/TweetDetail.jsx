@@ -5,7 +5,6 @@ import FeedHeader from "components/FeedHeader/FeedHeader";
 import ProfileBasicInfo from "components/ProfileBasicInfo/ProfileBasicInfo";
 import MoreOptionContainer from "components/MoreOption/MoreOptionContainer";
 import TweetStats from "components/TweetStats/TweetStats";
-import TweetActionBarContainer from "components/TweetActionBar/TweetActionBarContainer";
 import TweetRepliesContainer from "core-ui/TweetReplies/TweetRepliesContainer";
 import TweetTextContainer from "components/TweetText/TweetTextContainer";
 import MediaContainer from "components/Media/MediaContainer";
@@ -13,6 +12,7 @@ import MediaContainer from "components/Media/MediaContainer";
 import styles from "./TweetDetail.module.css";
 import TweetOptionsCntainer from "components/TweetOptions/TweetOptionsContainer";
 import FeedPostListContainer from "core-ui/FeedPostList/FeedPostListContainer";
+import FeedTweetActionBarContainer from "components/FeedTweetActionBar/FeedTweetActionBarContainer";
 
 function TweetDetail({ tweets, media }) {
 	const render = (data) => {
@@ -53,7 +53,7 @@ function TweetDetail({ tweets, media }) {
 						<div className={styles.tweet__stats__wrapper}>
 							<TweetStats reTweets={retweet_count} quoteTweets={quote_count} likes={like_count} />
 						</div>
-						<TweetActionBarContainer />
+						<FeedTweetActionBarContainer />
 					</div>
 					<TweetRepliesContainer />
 				</React.Fragment>)

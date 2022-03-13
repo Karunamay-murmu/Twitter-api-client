@@ -6,6 +6,9 @@
   -ms-grid-rows: 100%;
       grid-template-rows: 100%;
   height: inherit;
+  position: absolute;
+  inset: 0;
+  width: inherit;
 }
 
 .wrapper__image {
@@ -62,7 +65,7 @@
   background-color: #d9d9d9;
   color: #0f1419;
   gap: 5px;
-  width: 11.8rem;
+  width: 12.8rem;
 }
 
 .wrapper__login__button__icon {

@@ -6,6 +6,9 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: 100%;
     height: inherit;
+    position: absolute;
+    inset: 0;
+    width: inherit;
 
     &__image {
         width: inherit;
@@ -58,7 +61,7 @@
                 background-color: $primary-light;
                 color: $primary-dark;
                 gap: 5px;
-                width: 11.8rem;
+                width: 12.8rem;
             }
 
             &__icon {
