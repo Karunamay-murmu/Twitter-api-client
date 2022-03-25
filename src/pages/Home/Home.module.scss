@@ -1,0 +1,12 @@
+@import "../../static/style/mixin.scss";
+
+.home {
+    @include mainGridWrapper();
+
+    &__outlet {
+        border-width: 0 1px;
+        border-color: $light-gray;
+        border-style: solid;
+    }
+
+}

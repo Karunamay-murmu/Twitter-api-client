@@ -18,7 +18,7 @@ ReactDOM.render(
 				clientId={process.env.REACT_APP_AUTH0_ID}
 				domain={process.env.REACT_APP_AUTH0_DOMAIN}
 				redirectUri={window.location.origin}
-				audience="https://django-twitter2.0/api"
+				audience={process.env.REACT_APP_AUDIENCE}
 				scope=""
 			>
 				<Provider store={Store}>
